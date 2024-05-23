@@ -1,3 +1,4 @@
+
 import mongoose from 'mongoose'
 
 const User = new mongoose.Schema({
@@ -15,18 +16,24 @@ const User = new mongoose.Schema({
     },
     avatar : {
         type : String ,
-
+        default : null
     },
     age : {
         type : Number ,
+        default : null
     },
     birthday : {
-        type : Date
+        type : Date,
+        default : null
     },
     gender : {
-        type : String
+        type : String,
+        default : null
     },
     description : {
-        type : String
+        type : String,
+        default : null
     }
-})
+} , {timestamps : true})
+
+export default mongoose.model('users' , User)
