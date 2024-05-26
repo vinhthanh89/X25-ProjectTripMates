@@ -9,10 +9,10 @@ const LandingPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   return (
     <>
-      <div className="w-screen h-screen px-28 py-5">
+      <div className="w-screen h-screen px-28 py-5 bg-white">
         <Header />
-        <section className="flex items-center gap-[10rem] pt-[3rem]">
-          <div className="flex flex-col gap-[1rem] text-6xl text-black font-bold poppins">
+        <section className="grid grid-cols-2 gap-[10rem] pt-[3rem]">
+          <div className="col-span-1 flex flex-col gap-[1rem] text-6xl text-black font-bold poppins">
             <h1>Welcome travelers!</h1>
             <p className="text-xl text-[#717171] font-normal">
               Are you ready to dive into our community?
@@ -44,7 +44,9 @@ const LandingPage = () => {
               </Link>
             </div> */}
           </div>
-          <img src="./Travel-Black.jpg" className="w-[40%]" />
+          <div className="col-span-1">
+            <img src="./Travel-Black.jpg" className="w-[90%]" />
+          </div>
         </section>
       </div>
     </>
