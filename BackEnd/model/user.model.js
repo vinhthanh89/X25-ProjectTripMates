@@ -36,7 +36,8 @@ const User = new mongoose.Schema({
     },
     follower : [
         {
-            type : mongoose.Schema.Types.ObjectId
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'users'
         }
     ]
 } , {timestamps : true})
