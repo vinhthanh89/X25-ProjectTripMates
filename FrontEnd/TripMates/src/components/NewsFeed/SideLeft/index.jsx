@@ -1,13 +1,7 @@
-// import { useState } from "react";
-import { BiSolidUserCircle } from "react-icons/bi";
-import { FaCompass } from "react-icons/fa";
+import { BiSolidUserCircle, BiSolidMoviePlay } from "react-icons/bi";
+import { FaCompass, FaUser } from "react-icons/fa";
 import { IoIosMail, IoIosSettings } from "react-icons/io";
 const LeftSideBar = () => {
-  // const [selected, setSelected] = useState(0);
-  // const handleButtonClick = (index) => {
-  //   setSelected(index === selected ? null : index);
-  // };
-
   const iconSize = 25;
   const iconStyle = { background: "transparent" };
   return (
@@ -26,9 +20,15 @@ const LeftSideBar = () => {
             </p>
           </div>
           <div className="flex flex-col gap-5 navigation-btn">
-            <button
-              className={`group flex justify-start items-center btn_all gap-2 w-full focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out`}
-            >
+            <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out">
+              <FaUser
+                className="group-hover:bg-black"
+                size={iconSize}
+                style={iconStyle}
+              />
+              My profile
+            </button>
+            <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out">
               <FaCompass
                 className="group-hover:bg-black"
                 size={iconSize}
@@ -36,9 +36,15 @@ const LeftSideBar = () => {
               />
               Feeds
             </button>
-            <button
-              className={`group flex justify-start items-center btn_all gap-2 w-full  focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out`}
-            >
+            <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out">
+              <BiSolidMoviePlay
+                className="group-hover:bg-black"
+                size={iconSize}
+                style={iconStyle}
+              />
+              Shorts
+            </button>
+            <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out">
               <IoIosMail
                 className="group-hover:bg-black"
                 size={iconSize}
@@ -46,15 +52,18 @@ const LeftSideBar = () => {
               />
               Messages
             </button>
-            <button
-              className={`group flex justify-start items-center btn_all gap-2 w-full  focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out`}
-            >
+            <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out">
               <IoIosSettings
                 className="group-hover:bg-black"
                 size={iconSize}
                 style={iconStyle}
               />
               Settings
+            </button>
+          </div>
+          <div className="flex justify-center pt-8">
+            <button className="text-white btn_all w-[70%] hover:bg-red-700">
+              Sign out
             </button>
           </div>
         </div>
