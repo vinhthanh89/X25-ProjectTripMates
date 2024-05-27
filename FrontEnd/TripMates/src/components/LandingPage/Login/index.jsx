@@ -8,8 +8,11 @@ import {
   saveRefreshTokenToLocal,
   saveUserToLocal,
 } from "../../../utils/localstorage";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+  const navigate = useNavigate()
+
   const onFinish = async (values) => {
     try {
       const response = await login(values);
@@ -18,6 +21,7 @@ const Login = () => {
       saveRefreshTokenToLocal(response.data.refreshToken);
       saveUserToLocal(response.data.user)
       toast.success(response.data.message);
+      navigate('/news-feed')
     } catch (error) {
       console.log(error.response.data);
       toast.error(error.response.data.message);

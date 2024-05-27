@@ -1,12 +1,12 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { BiSolidUserCircle } from "react-icons/bi";
 import { FaCompass } from "react-icons/fa";
 import { IoIosMail, IoIosSettings } from "react-icons/io";
 const LeftSideBar = () => {
-  const [selected, setSelected] = useState(0);
-  const handleButtonClick = (index) => {
-    setSelected(index === selected ? null : index);
-  };
+  // const [selected, setSelected] = useState(0);
+  // const handleButtonClick = (index) => {
+  //   setSelected(index === selected ? null : index);
+  // };
 
   const iconSize = 25;
   const iconStyle = { background: "transparent" };
@@ -27,10 +27,7 @@ const LeftSideBar = () => {
           </div>
           <div className="flex flex-col gap-5 navigation-btn">
             <button
-              className={`group flex justify-start items-center btn_all gap-2 w-full ${
-                selected === 0 ? "bg-black text-white" : ""
-              } hover:bg-black hover:text-white transition duration-300 ease-in-out`}
-              onClick={() => handleButtonClick(0)}
+              className={`group flex justify-start items-center btn_all gap-2 w-full focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out`}
             >
               <FaCompass
                 className="group-hover:bg-black"
@@ -40,10 +37,7 @@ const LeftSideBar = () => {
               Feeds
             </button>
             <button
-              className={`group flex justify-start items-center btn_all gap-2 w-full ${
-                selected === 1 ? "bg-black text-white" : ""
-              } hover:bg-black hover:text-white transition duration-300 ease-in-out`}
-              onClick={() => handleButtonClick(1)}
+              className={`group flex justify-start items-center btn_all gap-2 w-full  focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out`}
             >
               <IoIosMail
                 className="group-hover:bg-black"
@@ -53,10 +47,7 @@ const LeftSideBar = () => {
               Messages
             </button>
             <button
-              className={`group flex justify-start items-center btn_all gap-2 w-full ${
-                selected === 2 ? "bg-black text-white" : ""
-              } hover:bg-black hover:text-white transition duration-300 ease-in-out`}
-              onClick={() => handleButtonClick(2)}
+              className={`group flex justify-start items-center btn_all gap-2 w-full  focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out`}
             >
               <IoIosSettings
                 className="group-hover:bg-black"
