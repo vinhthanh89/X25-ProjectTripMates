@@ -1,27 +1,31 @@
 import { Form, Input } from "antd";
 import toast from "react-hot-toast";
+// import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
 
 import { login } from "../../../services/user";
+import {loginAction} from "../../../features/user/userSlices.js"
 import {
   saveAccessTokenToLocal,
   saveRefreshTokenToLocal,
   saveUserToLocal,
 } from "../../../utils/localstorage";
-import { useNavigate } from "react-router";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  // const navigate = useNavigate()
+  // eslint-disable-next-line no-unused-vars
+  const user = useSelector(state => state.user.user)
 
   const onFinish = async (values) => {
     try {
       const response = await login(values);
-      console.log(response);
+      dispatch(loginAction({user : response.data.user}))
       saveAccessTokenToLocal(response.data.accessToken);
       saveRefreshTokenToLocal(response.data.refreshToken);
       saveUserToLocal(response.data.user)
       toast.success(response.data.message);
-      navigate('/news-feed')
     } catch (error) {
       console.log(error.response.data);
       toast.error(error.response.data.message);
