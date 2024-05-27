@@ -33,7 +33,12 @@ const User = new mongoose.Schema({
     description : {
         type : String,
         default : null
-    }
+    },
+    follower : [
+        {
+            type : mongoose.Schema.Types.ObjectId
+        }
+    ]
 } , {timestamps : true})
 
 export default mongoose.model('users' , User)
