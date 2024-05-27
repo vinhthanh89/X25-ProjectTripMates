@@ -6,21 +6,21 @@ import {
   FaGlobe,
 } from "react-icons/fa";
 import { FaEarthOceania } from "react-icons/fa6";
-import { RiArrowDropDownLine } from "react-icons/ri";
 const Continents = () => {
   const iconSize = 50;
   const iconColor = { color: "#e6e6e64d" };
   return (
     <>
       <div className="continents flex justify-between">
-        <div className="dropdown dropdown-hover dm-sans text-black">
+        <div className="dropdown dropdown-hover dropdown-end dm-sans">
           <div tabIndex={0} className="flex items-center hover:cursor-pointer">
-            <p className="text-lg">Continents</p>
-            <RiArrowDropDownLine size={iconSize} />
+            <p className="font-bold p-2 rounded-lg hover:bg-black hover:text-white transition duration-300 ease-in-out">
+              Continents
+            </p>
           </div>
           <div
             tabIndex={0}
-            className="dropdown-content z-[1] menu p-4 bg-white shadow-xl rounded-xl border-[1px] border-[#cccccc]"
+            className="menu dropdown-content z-[1] p-4 bg-white shadow-xl rounded-xl border-[1px] border-[#cccccc]"
           >
             <div className="grid grid-rows-2 grid-cols-3 w-[40rem] gap-[2rem]">
               <button className="p-5 flex flex-col items-center gap-[5px] bg-black rounded-lg hover_trans hover:scale-105">
