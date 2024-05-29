@@ -2,6 +2,7 @@ import LeftSideBar from "../../components/NewsFeed/SideLeft";
 import RightSideBar from "../../components/NewsFeed/SideRight";
 import Content from "../../components/NewsFeed/Content";
 import "./index.css";
+import { Outlet } from "react-router";
 
 const NewsFeed = () => {
   return (
@@ -11,7 +12,8 @@ const NewsFeed = () => {
           <LeftSideBar />
         </div>
         <div className="col-span-3 flex flex-col poppins px-[15px] overflow-hidden shadow-xl">
-          <Content />          
+          <Outlet />
+      
         </div>
         <div className="col-span-1 sideBars poppins px-[15px] shadow-xl">
           <RightSideBar />
