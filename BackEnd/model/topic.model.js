@@ -2,11 +2,16 @@ import mongoose from "mongoose";
 
 const Topic = new mongoose.Schema({
     userCreated : {
-        type : mongoose.Schema.Types.ObjectId
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'users',
+        required : true
     },
     title : {
         type : String,
         required : true
+    },
+    thumbnail: {
+        type : String ,
     },
     reaction : [
         {
@@ -24,12 +29,12 @@ const Topic = new mongoose.Schema({
         }
     ],
     continent : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : 'continents'
+        type : String,
+        required : true
     },
     country : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : 'countries'
+        type : String,
+        required : true
     },
     userJoinTrip : [
         {
@@ -45,6 +50,6 @@ const Topic = new mongoose.Schema({
         type : Date,
         required : true
     }
-})
+} , {timestamps : true})
 
 export default mongoose.model('topics' , Topic)

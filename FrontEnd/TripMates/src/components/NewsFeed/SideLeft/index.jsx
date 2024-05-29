@@ -1,9 +1,17 @@
-import { BiSolidUserCircle, BiSolidMoviePlay } from "react-icons/bi";
+
+import { BiSolidMoviePlay } from "react-icons/bi";
 import { FaCompass, FaUser } from "react-icons/fa";
 import { IoIosMail, IoIosSettings } from "react-icons/io";
+import { useSelector } from "react-redux";
+
+
+
 const LeftSideBar = () => {
   const iconSize = 25;
   const iconStyle = { background: "transparent" };
+  const user = useSelector((state) => state.user.user);
+
+
   return (
     <>
       <div className="flex flex-col text-black font-bold gap-[1rem] w-[85%] h-[40rem] pt-[2rem]">
@@ -13,10 +21,13 @@ const LeftSideBar = () => {
         </div>
         <div className="flex flex-col gap-8">
           <div className="flex flex-col items-center">
-            <BiSolidUserCircle size={100} />
-            <h1 className="text-2xl text-black font-bold">Quoc Chau</h1>
-            <p className="text-[#717171] text-sm font-normal">
-              quocchau@gmail.com
+          <img
+          className="w-[100px] h-[100px] object-cover rounded-full"
+           src={user.avatar} alt="" />
+            {/* <BiSolidUserCircle size={100} /> */}
+            <h1 className="text-2xl text-center text-black font-bold">{user.fullName}</h1>
+            <p className="text-[#717171] text-center text-sm font-normal">
+              {user.email}
             </p>
           </div>
           <div className="flex flex-col gap-5 navigation-btn">

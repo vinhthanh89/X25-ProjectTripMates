@@ -1,9 +1,10 @@
-import { signAccessToken } from "../utils/jsonwebtoken";
+import { signAccessToken, verifyToken } from "../utils/jsonwebtoken.js";
 
 export const authentication = async (req, res, next) => {
   const accessToken = req.headers.accesstoken;
   const refreshToken = req.headers.refreshtoken;
   try {
+
     if (!accessToken) {
       return res.status(401).json({
         message: "Bạn chưa đăng nhập",
