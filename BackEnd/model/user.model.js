@@ -16,23 +16,19 @@ const User = new mongoose.Schema({
     },
     avatar : {
         type : String ,
-        default : null
+        default : "https://res.cloudinary.com/du6uinlwy/image/upload/v1716912737/TripMates/profile-user_w32qio.png"
     },
     age : {
         type : Number ,
-        default : null
     },
     birthday : {
         type : Date,
-        default : null
     },
     gender : {
         type : String,
-        default : null
     },
     description : {
         type : String,
-        default : null
     },
     follower : [
         {

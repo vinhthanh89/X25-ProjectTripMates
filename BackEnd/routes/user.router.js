@@ -1,5 +1,5 @@
 
-import Router from 'express'
+import {Router} from 'express'
 
 
 import { login, signup } from '../controller/user.controller.js'
