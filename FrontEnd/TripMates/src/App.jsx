@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import LandingPage from "./pages/LandingPage";
 import NewsFeed from "./pages/NewsFeed";
 import isObjectEmpty from "./utils/isObjectyEmty";
+import Content from "./components/NewsFeed/Content";
+import TopicPage from "./components/NewsFeed/TopicPage";
 
 const App = () => {
   const user = useSelector((state) => state.user.user);
@@ -17,7 +19,12 @@ const App = () => {
         {isObjectEmpty(user) ? (
             <Route path="/" element={<LandingPage />} />
         ) : (
-          <Route path="/" element={<NewsFeed />} />
+          <Route path="/" element={<NewsFeed />}>
+              <Route path="" element={<Content />} />
+              <Route path="/topic-detail" element={<TopicPage />} />
+          </Route>
+
+
         )}
       </Routes>
     </>
