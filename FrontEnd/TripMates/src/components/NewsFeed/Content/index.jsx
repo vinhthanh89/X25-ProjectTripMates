@@ -28,7 +28,7 @@ const Content = () => {
   })
 
   return (
-    <div className="flex flex-col gap-5 pt-[2rem] h-full overflow-y-scroll">
+    <div className="flex flex-col gap-2 pt-[1rem] px-[2rem] h-full overflow-y-scroll">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-black">Recent posts</h1>
         <div className="flex gap-6 text-black">
