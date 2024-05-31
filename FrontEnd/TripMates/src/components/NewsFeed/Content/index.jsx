@@ -19,10 +19,10 @@ const Content = () => {
     fetchData()
   }, [])
 
-  const renderTopicData = topicData.map((item) => {
+  const renderTopicData = topicData.map((topic) => {
     return (
-      <div key={item._id}>
-        <Post item={item} />
+      <div key={topic._id}>
+        <Post topic={topic} />
       </div>
     )
   })
