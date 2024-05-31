@@ -1,14 +1,30 @@
 /* eslint-disable react/prop-types */
-
 import { MdPlace } from "react-icons/md";
+import {Modal} from 'antd'
+import { useState } from "react";
 
-const Post = ({ item }) => {
+
+import TopicDetail from "../TopicDetail";
+
+const Post = ({ topic }) => {
   const { thumbnail, description, country, continent, title, userCreated } =
-    item;
+    topic;
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+      setIsModalOpen(true);
+    };
+    const handleOk = () => {
+      setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+      setIsModalOpen(false);
+    };
 
   return (
-    <div className="flex flex-col gap-y-[1.2rem] rounded-lg shadow-xl p-4 cursor-pointer">
-      <div className="relative">
+    <div
+     className="flex flex-col gap-y-[1.2rem] rounded-lg shadow-xl p-4 cursor-pointer">
+      <div className="relative" onClick={showModal}>
         <div className="absolute top-[5px] right-[5px] flex items-center gap-2">
           <div className="w-[4rem] h-[4rem]">
             <img
@@ -37,6 +53,16 @@ const Post = ({ item }) => {
           <p className="text-sm font-medium">{description}</p>
         </div>
       </div>
+      <Modal
+      width={760}
+      cancelButtonProps={{style :  {display : 'none'}}}
+      okButtonProps={{style : {display : 'none'}}}
+      // footer={null}
+      open={isModalOpen} onCancel={handleCancel}>
+          <TopicDetail
+          topic={topic}
+           />
+      </Modal>
     </div>
   );
 };
