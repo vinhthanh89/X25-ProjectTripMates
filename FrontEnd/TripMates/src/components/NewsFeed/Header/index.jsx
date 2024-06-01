@@ -6,7 +6,7 @@ const Header = () => {
     <>
       <div className="grid grid-cols-5 bg-[#5143d9] p-[1rem] w-full">
         <div className="col-span-1 flex items-center gap-[5px]">
-          <img src="./tripmates-favicon-black.png" className="w-[3rem]" />
+          <img src="../../../../public/tripmates-favicon-black.png" className="w-[3rem]" />
           <h1 className="text-2xl text-white font-semibold">TripMates</h1>
         </div>
         <div className="col-span-3 flex justify-center">
