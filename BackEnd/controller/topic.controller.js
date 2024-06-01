@@ -48,3 +48,23 @@ export const getTopics = async (req , res) => {
         })
     }
 }
+
+export const getTopicById = async (req , res) => {
+    try {
+        const topicId = req.params.topicId
+
+        const findTopic = await Topic.findById(topicId).populate('userCreated')
+
+        return res.status(200).json({
+            message : "Get Topic Detail Successfully",
+            findTopic
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message : error
+        })
+    }
+}

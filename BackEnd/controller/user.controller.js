@@ -98,3 +98,60 @@ export const login = async (req , res) => {
     });
   }
 };
+
+export const getUserById = async (req , res) => {
+  try {
+    const userId = req.params.userId
+
+    const findUser = await User.findById(userId).select('-password')
+    if(!findUser){
+      return res.status(404).json({
+        message : "User Not Found"
+      })
+    }
+
+    return res.status(200).json({
+      message : "Get User Successfully",
+      findUser
+    })
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message : error
+    })
+  }
+}
+
+export const editUser = async ( req , res) => {
+  try {
+    const userId = req.params.userId
+    const {fullName , birthday , age , gender , description} = req.body
+
+    const findUser = await User.findById(userId)
+    if(!findUser){
+      return res.status(404).json({
+        message : "User Not Found"
+      })
+    }
+
+    const userUpdated = await User.findByIdAndUpdate(userId , {
+      fullName,
+      birthday,
+      age,
+      gender,
+      description
+    }, {new : true})
+
+    return res.status(200).json({
+      message : "User Update Successfully",
+      userUpdated
+    })
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message : error
+    })
+  }
+}

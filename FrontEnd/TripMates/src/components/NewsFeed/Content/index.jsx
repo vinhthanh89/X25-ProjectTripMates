@@ -10,7 +10,6 @@ const Content = () => {
     const fetchData = async () => {
       try {
         const response = await fetchTopicData()
-        console.log(response.data.dataTopic);
         setTopicData(response.data.dataTopic)
       } catch (error) {
         console.log(error);

@@ -7,7 +7,7 @@ import LandingPage from "./pages/LandingPage";
 import NewsFeed from "./pages/NewsFeed";
 import isObjectEmpty from "./utils/isObjectyEmty";
 import Content from "./components/NewsFeed/Content";
-import TopicPage from "./components/NewsFeed/TopicPage";
+import TopicDetail from "./components/NewsFeed/TopicDetail";
 
 const App = () => {
   const user = useSelector((state) => state.user.user);
@@ -21,7 +21,7 @@ const App = () => {
         ) : (
           <Route path="/" element={<NewsFeed />}>
               <Route path="" element={<Content />} />
-              <Route path="/topic-detail" element={<TopicPage />} />
+              <Route path="/topic/:topicId" element={<TopicDetail />}/>
           </Route>
 
 

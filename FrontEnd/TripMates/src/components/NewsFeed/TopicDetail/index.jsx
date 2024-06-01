@@ -1,8 +1,36 @@
 /* eslint-disable react/prop-types */
 import moment from "moment";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+
+import { getTopicById } from "../../../services/topic";
 
 // eslint-disable-next-line no-unused-vars
-const TopicDetail = ({ topic }) => {
+const TopicDetail = () => {
+  const [topicDetail , setTopicDetail] = useState({
+    title: '',
+    thumbnail: '',
+    userCreated: null,
+    description: '',
+    startDate: '',
+    endDate: '',
+    continent: '',
+    country: '',
+  })
+  const urlParam = useParams()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getTopicById(urlParam.topicId)
+        setTopicDetail(response.data.findTopic)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData()
+  }, [urlParam.topicId])
+  
   const {
     title,
     thumbnail,
@@ -12,7 +40,7 @@ const TopicDetail = ({ topic }) => {
     endDate,
     continent,
     country,
-  } = topic;
+  } = topicDetail;
   const convertedStartDate = moment(startDate).format("MMMM Do, YYYY");
   const convertedEndDate = moment(endDate).format("MMMM Do, YYYY");
   return (
@@ -27,7 +55,7 @@ const TopicDetail = ({ topic }) => {
           <p>
             a trip by{" "}
             <span>
-              <a>{userCreated.fullName}</a>
+            {userCreated ? <a className="cursor-pointer text-[#7bc1d8] hover:opacity-70">{userCreated.fullName}</a> : " "}
             </span>
           </p>
           <p>
