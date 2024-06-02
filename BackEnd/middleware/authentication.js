@@ -11,6 +11,7 @@ export const authentication = async (req, res, next) => {
       });
     }
 
+
     const verify = verifyToken(accessToken, process.env.AT);
     if (!verify) {
       return res.status(401).json({
@@ -31,7 +32,9 @@ export const authentication = async (req, res, next) => {
       }
 
       const newAccessToken = signAccessToken(verify);
+
       return res.status(200).json({
+        message : error.message,
         newAccessToken,
       });
     }

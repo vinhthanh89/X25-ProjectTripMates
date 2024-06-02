@@ -7,5 +7,5 @@ export const fetchTopicData = () => {
 }
 
 export const getTopicById = (topicId) => {
-    return axiosAuthInstance.get(`/api/topic/${topicId}`)
+    return axiosAuthInstance.get(`/api/topic/topic-detail/${topicId}`)
 }

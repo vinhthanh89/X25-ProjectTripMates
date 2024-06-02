@@ -128,6 +128,8 @@ export const editUser = async ( req , res) => {
     const userId = req.params.userId
     const {fullName , birthday , age , gender , description} = req.body
 
+
+
     const findUser = await User.findById(userId)
     if(!findUser){
       return res.status(404).json({
@@ -146,6 +148,48 @@ export const editUser = async ( req , res) => {
     return res.status(200).json({
       message : "User Update Successfully",
       userUpdated
+    })
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message : error
+    })
+  }
+}
+
+export const changeUserPassword = async (req , res) => {
+  try {
+    const userId = req.params.userId
+    const {oldPassword , newPassword , confirmNewPassword} = req.body
+
+    const findUser = await User.findById(userId)
+    if(!findUser){
+      return res.status(404).json({
+        message : "User Not Found"
+      })
+    }
+
+    const checkPassword = comparePassword(oldPassword , findUser.password)
+    if(!checkPassword){
+      return res.status(401).json({
+        message : "Password is wrong"
+      })
+    }
+
+    if(!(newPassword === confirmNewPassword)){
+      return res.status(401).json({
+        message : "The new password does not match"
+      })
+    }
+
+    const hashedPassword = hashPassword(newPassword)
+
+    const userUpdatedPassword = await User.findByIdAndUpdate(userId , {password : hashedPassword}).select('-password')
+
+    return res.status(200).json({
+      message : "Change Password Successfully",
+      userUpdatedPassword
     })
 
   } catch (error) {
