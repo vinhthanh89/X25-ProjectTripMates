@@ -27,14 +27,14 @@ const Content = () => {
   })
 
   return (
-    <div className="flex flex-col gap-2 pt-[1rem] px-[2rem] h-full overflow-y-scroll">
+    <div className="flex flex-col gap-2 pt-[1rem] px-[2rem] h-full overflow-y-scroll text-[#303030]">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-black">Recent posts</h1>
-        <div className="flex gap-6 text-black">
-          <button className="font-bold p-2 rounded-lg focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out">
+        <h1 className="text-2xl font-semibold">Recent posts</h1>
+        <div className="flex gap-6">
+          <button className="font-bold p-2 rounded-lg focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
             Recents
           </button>
-          <button className="font-bold p-2 rounded-lg focus:bg-black focus:text-white hover:bg-black hover:text-white transition duration-300 ease-in-out">
+          <button className="font-bold p-2 rounded-lg focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
             Popular
           </button>
           <Continents />

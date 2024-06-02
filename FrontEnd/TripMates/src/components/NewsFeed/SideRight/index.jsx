@@ -43,7 +43,7 @@ const RightSideBar = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-[2rem] text-black font-bold pt-[1rem] w-full">
+    <div className="flex flex-col gap-[2rem] font-bold pt-[1rem] w-full">
       <ul className="friend-list flex flex-col gap-[1rem]">
         <h1 className="text-lg font-bold">Recently</h1>
         {friends.map((friend, index) => (
@@ -60,7 +60,7 @@ const RightSideBar = () => {
             </div>
             <div>
               <button className="hover:scale-110">
-                <AiFillMessage className="text-black" />
+                <AiFillMessage className="text-[#303030]" />
               </button>
             </div>
           </li>
@@ -79,7 +79,7 @@ const RightSideBar = () => {
                 alt={`Traveler Story ${index + 1}`}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 flex items-end px-4 pb-4 bg-black bg-opacity-50 text-white">
+              <div className="absolute inset-0 flex items-end px-4 pb-4 bg-[#303030] bg-opacity-50 text-white">
                 <p className="text-sm font-semibold">{`  ${story.name}`}</p>
               </div>
             </div>
