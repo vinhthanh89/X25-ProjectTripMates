@@ -68,3 +68,22 @@ export const getTopicById = async (req , res) => {
         })
     }
 }
+
+export const getTopicByUserCreated = async (req , res) => {
+    try {
+        const userId = req.params.userId
+
+        const findTopicByUserId = await Topic.find({userCreated : userId})
+
+        return res.status(200).json({
+            message : "Get Topic By User Success",
+            findTopicByUserId
+        })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message : error
+        })
+    }
+}

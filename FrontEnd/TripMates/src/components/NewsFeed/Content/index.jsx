@@ -4,7 +4,7 @@ import Post from "../Post";
 import { fetchTopicData } from "../../../services/topic";
 
 const Content = () => {
-  const [topicData , setTopicData] = useState([]);
+  const [topicData , setTopicData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,13 +18,13 @@ const Content = () => {
     fetchData()
   }, [])
 
-  const renderTopicData = topicData.map((topic) => {
+  const renderTopicData = topicData ? topicData.map((topic) => {
     return (
       <div key={topic._id}>
         <Post topic={topic} />
       </div>
     )
-  })
+  }) : <p>Data Loading ...</p>
 
   return (
     <div className="flex flex-col gap-2 pt-[1rem] px-[2rem] h-full overflow-y-scroll text-[#303030]">
