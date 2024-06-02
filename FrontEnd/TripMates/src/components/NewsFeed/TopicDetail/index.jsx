@@ -2,7 +2,6 @@
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-
 import { getTopicById } from "../../../services/topic";
 
 // eslint-disable-next-line no-unused-vars
@@ -46,16 +45,22 @@ const TopicDetail = () => {
   return (
     <div>
       <p className="text-[30px]">{title}</p>
-      <div className="w-full h-[2px] bg-[lightgray] mb-[10px]"></div>
+      <div className="w-full h-[2px] bg-[lightgray]"></div>
       <div className="flex gap-[15px]">
         <div className="w-[50%] h-[220px]">
           <img className="w-full h-full object-fill" src={thumbnail} alt="" />
         </div>
-        <div className="flex-1">
+        <div className="flex-1 text-[#303030]">
           <p>
             a trip by{" "}
             <span>
-            {userCreated ? <a className="cursor-pointer text-[#7bc1d8] hover:opacity-70">{userCreated.fullName}</a> : " "}
+              {userCreated ? (
+                <a className="cursor-pointer text-[blue] hover:opacity-70">
+                  {userCreated.fullName}
+                </a>
+              ) : (
+                " "
+              )}
             </span>
           </p>
           <p>
@@ -82,10 +87,10 @@ const TopicDetail = () => {
           </p>
         </div>
       </div>
-      <div className="mt-[10px]">
+      <div className="text-[#303030]">
         <div className="text-[28px] text-[gray]">Milestone</div>
         <table className="w-full [&>tbody>*:nth-child(odd)]:bg-[#f2f2f2] [&>tbody>*:nth-child(even)]:bg-[#ddd]">
-          <tr className="bg-[#04AA6D] h-[40px] text-[20px] text-left text-white ">
+          <tr className="bg-[#04AA6D] h-[40px] text-[20px] text-left text-white">
             <th className="w-[20%] pl-[5px]">Date</th>
             <th className="w-[55%]">Blog Title</th>
             <th className="w-[25%]">Location</th>
@@ -100,7 +105,9 @@ const TopicDetail = () => {
             </tr>
             <tr className="h-[40px] text-[17px] border-y-[1px] border-[gray]">
               <td className="pl-[5px]">{convertedEndDate}</td>
-              <td>Day 1 : Tokyo Night Tokyo NightTokyo NightTokyo NightTokyo Night</td>
+              <td>
+                Day 1 : Tokyo Night Tokyo NightTokyo NightTokyo NightTokyo Night
+              </td>
               <td>
                 {continent} &gt;&gt; {country}
               </td>
