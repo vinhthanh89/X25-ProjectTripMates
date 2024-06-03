@@ -1,31 +1,42 @@
 import { BiSolidMoviePlay } from "react-icons/bi";
 import { FaCompass, FaSignOutAlt } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
-import { RiLockPasswordFill } from "react-icons/ri";
-
-import { useDispatch, useSelector } from "react-redux";
-import { logoutAction } from "../../../features/user/userSlices";
-import { useNavigate } from "react-router";
+import User from "./User";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { getUserById } from "../../../services/user";
 
 const LeftSideBar = () => {
   const iconSize = 20;
   const iconStyle = { background: "transparent" };
+ 
+  const [userProfile, setUserProfile] = useState({
+    email: "",
+    fullName: "",
+    avatar: "",
+    age: null,
+    birthday: "",
+    gender: "",
+    description: "",
+  });
+  const urlParam = useParams();
 
-
-  const user = useSelector((state) => state.user.user);
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const handleLogOut = () => {
-    dispatch(logoutAction())
-    navigate('/')
-  }
-
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await getUserById(urlParam.userId);
+        setUserProfile(response.data.findUser);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUserData();
+  }, [urlParam.userId, userProfile]);
   return (
     <>
       <div className="flex flex-col font-bold gap-[3rem] pt-[2rem] w-[85%]">
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-5">
-
             <div className="dropdown dropdown-right dropdown-hover">
               <div
                 tabIndex={0}

@@ -20,3 +20,7 @@ export const getUserById = (userId) => {
 export const editUser = (userId , formData ) => {
   return axiosAuthInstance.put(`/api/user/edit/${userId}` , formData )
 }
+
+export const changeUserPassword = (userId, formData) => {
+  return axiosAuthInstance.put(`/api/user/changePassword/${userId}`, formData)
+}
