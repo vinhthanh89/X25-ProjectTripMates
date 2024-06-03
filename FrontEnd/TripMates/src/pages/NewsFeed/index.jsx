@@ -1,7 +1,6 @@
 import Header from "../../components/NewsFeed/Header";
 import LeftSideBar from "../../components/NewsFeed/SideLeft";
 import RightSideBar from "../../components/NewsFeed/SideRight";
-import UserProfile from "../../components/NewsFeed/UserProfile";
 import "./index.css";
 import { Outlet } from "react-router";
 
@@ -15,7 +14,6 @@ const NewsFeed = () => {
         </div>
         <div className="col-span-4 flex flex-col poppins px-[1.5rem] overflow-hidden shadow-2xl">
           <Outlet />
-          {/* <UserProfile /> */}
         </div>
         <div className="col-span-1 sideBars poppins px-[15px] shadow-lg ring-1">
           <RightSideBar />

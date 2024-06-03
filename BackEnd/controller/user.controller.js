@@ -65,7 +65,7 @@ export const login = async (req , res) => {
   try {
     const { email, password } = req.body;
 
-    const findUser = await User.findOne({ email }).lean();
+    const findUser = await User.findOne({ email }).lean()
     if (!findUser) {
       return res.status(403).json({
         message: "Email does not exist",
@@ -103,7 +103,7 @@ export const getUserById = async (req , res) => {
   try {
     const userId = req.params.userId
 
-    const findUser = await User.findById(userId).select('-password')
+    const findUser = await User.findById(userId).populate('follower').select('-password')
     if(!findUser){
       return res.status(404).json({
         message : "User Not Found"

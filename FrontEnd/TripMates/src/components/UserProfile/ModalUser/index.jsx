@@ -10,7 +10,7 @@ import { saveUserToLocal } from "../../../utils/localstorage.js";
 import { useDispatch } from "react-redux";
 import { editUserAction } from "../../../features/user/userSlices.js";
 
-const ModalUser = ({ isModalOpen, handleCancel, userProfile }) => {
+const ModalUser = ({ isModalOpen, handleCancel, userProfile  , handleEditUser}) => {
   const { fullName, birthday, gender, description } = userProfile;
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -34,6 +34,7 @@ const ModalUser = ({ isModalOpen, handleCancel, userProfile }) => {
       };
       const response = await editUser(userProfile._id, formData);
       console.log(response);
+      handleEditUser(response.data.userUpdated)
       dispatch(editUserAction({ user: response.data.userUpdated }));
       saveUserToLocal(response.data.userUpdated);
       handleCancel();
