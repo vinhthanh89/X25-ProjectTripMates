@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-
-import { FaBirthdayCake, FaUserEdit } from "react-icons/fa";
+import { FaUserEdit, FaCalendar } from "react-icons/fa";
 import { IoIosMail, IoMdTransgender } from "react-icons/io";
 import { useState } from "react";
 import ModalUser from "../ModalUser";
@@ -12,7 +11,6 @@ const AboutMe = ({ userProfile }) => {
   const userLogin = useSelector((state) => state.user.user);
   const { email, gender, description, birthday } = userProfile;
 
-
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -23,13 +21,14 @@ const AboutMe = ({ userProfile }) => {
 
   const iconSize = 20;
   return (
-    <div className="flex flex-col gap-2 border-b-[1.5px] px-[0.5rem]">
+    <div className="flex flex-col gap-2 border-b-[1.5px] px-[0.5rem] text-base">
       <div className="flex items-center">
         <ModalUser
-        userProfile={userProfile}
-         isModalOpen={isModalOpen}
-          handleCancel={handleCancel} />
-        <h1 className="text-lg font-bold mr-[20px]">About me</h1>
+          userProfile={userProfile}
+          isModalOpen={isModalOpen}
+          handleCancel={handleCancel}
+        />
+        <h1 className="font-bold mr-[20px]">About me</h1>
         {userLogin._id === userProfile._id ? (
           <div>
             <FaUserEdit
@@ -41,7 +40,7 @@ const AboutMe = ({ userProfile }) => {
           <></>
         )}
       </div>
-      <ul className="flex flex-col gap-2 py-[5px]">
+      <ul className="flex flex-col gap-4 py-[5px] text-sm">
         <li className="flex items-center gap-2">
           <div>
             <IoIosMail size={iconSize} />
@@ -50,7 +49,7 @@ const AboutMe = ({ userProfile }) => {
         </li>
         <li className="flex items-center gap-2">
           <div>
-            <FaBirthdayCake size={iconSize} />
+            <FaCalendar size={iconSize} />
           </div>
           <span>{dayjs(birthday).format("DD-MMMM-YYYY")}</span>
         </li>
@@ -62,9 +61,7 @@ const AboutMe = ({ userProfile }) => {
         </li>
       </ul>
       <div>
-        <p className="text-sm text-[#717171]">
-          {description}
-        </p>
+        <p className="text-sm text-[#717171]">{description}</p>
       </div>
     </div>
   );

@@ -6,8 +6,8 @@
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { getUserById } from "../../../services/user";
-import UserCreatedTopic from "../../UserCreatedTopic";
-import AboutMe from "../../AboutMe";
+import UserCreatedTopic from "../../UserProfile/UserCreatedTopic";
+import AboutMe from "../../UserProfile/AboutMe";
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState({
@@ -34,22 +34,22 @@ const UserProfile = () => {
   }, [urlParam.userId, userProfile]);
   return (
     <>
-      <div className="userProfile">
-        <div className="flex flex-col items-center gap-3">
+      <div className="userProfile h-full">
+        <div className="flex flex-col items-center gap-3 pt-[15px]">
           <img
-            className="w-[100px] h-[100px] object-cover rounded-full"
+            className="w-[70px] h-[70px] object-cover rounded-full"
             src={userProfile.avatar}
             alt=""
           />
           <div>
-            <h1 className="text-xl font-bold">{userProfile.fullName}</h1>
+            <h1 className="text-lg font-bold">{userProfile.fullName}</h1>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-[20px] pt-[30px]">
-          <div className="col-span-1 flex flex-col gap-2 px-[10px] border rounded-xl py-[1rem]">
+          <div className="col-span-1 flex flex-col gap-[20px] px-[15px] border rounded-xl py-[1rem]">
             <AboutMe userProfile={userProfile} />
             <div className="flex flex-col gap-4">
-              <h1 className="text-lg font-bold">Topics</h1>
+              <h1 className="text-base font-bold">Topics</h1>
               <button className="flex btn_all gap-2 w-full transition duration-300 ease-in-out">
                 <div className="flex items-start gap-2 w-full">
                   <img
@@ -82,17 +82,19 @@ const UserProfile = () => {
               </button>
             </div>
           </div>
-          <div className="col-span-2 gap-[10px]">
-            <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full ring-1">
-              Post
-            </button>
-            <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
-              Followers
-            </button>
-            <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
-              Following
-            </button>
-            <div className="px-[5px] border rounded-xl h-auto">
+          <div className="col-span-2 flex flex-col text-sm font-semibold gap-[20px] px-[10px]">
+            <div>
+              <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
+                Topics
+              </button>
+              <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
+                Followers
+              </button>
+              <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
+                Following
+              </button>
+            </div>
+            <div className="px-[15px] pt-[5px] border rounded-xl overflow-hidden max-h-[500px] overflow-y-auto">
               <UserCreatedTopic userId={urlParam.userId} />
             </div>
           </div>
