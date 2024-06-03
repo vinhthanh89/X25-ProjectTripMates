@@ -11,6 +11,7 @@ import AboutMe from "../../UserProfile/AboutMe";
 import Followers from "../../UserProfile/Followers";
 
 const UserProfile = () => {
+  const urlParam = useParams();
   const [userProfile, setUserProfile] = useState({
     email: "",
     fullName: "",
@@ -19,8 +20,10 @@ const UserProfile = () => {
     birthday: "",
     gender: "",
     description: "",
+    follower : []
   });
-  const urlParam = useParams();
+  const [showComponent , setShowComponent] = useState('topic')
+  
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -32,7 +35,12 @@ const UserProfile = () => {
       }
     };
     fetchUserData();
-  }, [urlParam.userId, userProfile]);
+  }, [urlParam.userId]);
+
+  const handleEditUser = (newUserProfile) => {
+    setUserProfile(newUserProfile)
+  }
+
   return (
     <>
       <div className="userProfile h-full">
@@ -53,7 +61,7 @@ const UserProfile = () => {
         </div>
         <div className="grid grid-cols-3 gap-[20px] pt-[30px]">
           <div className="col-span-1 flex flex-col gap-[20px] px-[15px] border rounded-xl py-[1rem]">
-            <AboutMe userProfile={userProfile} />
+            <AboutMe userProfile={userProfile} handleEditUser={handleEditUser} />
             <div className="flex flex-col gap-4">
               <h1 className="text-base font-bold">Topics</h1>
               <button className="flex btn_all gap-2 w-full transition duration-300 ease-in-out">
@@ -90,10 +98,10 @@ const UserProfile = () => {
           </div>
           <div className="col-span-2 flex flex-col text-sm font-semibold gap-[20px] px-[10px]">
             <div>
-              <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
+              <button onClick={() => setShowComponent('topic')} className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
                 Topics
               </button>
-              <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
+              <button onClick={() => setShowComponent('follower')} className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
                 Followers
               </button>
               <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
@@ -101,8 +109,12 @@ const UserProfile = () => {
               </button>
             </div>
             <div className="px-[15px] pt-[5px] border rounded-xl overflow-hidden max-h-[500px] overflow-y-auto">
-              {/* <UserCreatedTopic userId={urlParam.userId} /> */}
-              <Followers />
+            {
+              (showComponent === "topic" &&  <UserCreatedTopic userId={urlParam.userId} />) ||
+              (showComponent === "follower" && <Followers userProfile={userProfile} />)
+            }
+             
+    
             </div>
           </div>
         </div>
