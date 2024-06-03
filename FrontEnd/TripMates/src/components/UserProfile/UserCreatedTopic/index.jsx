@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { getTopicByUserCreated } from "../../services/topic";
-import Post from "../NewsFeed/Post";
+import { getTopicByUserCreated } from "../../../services/topic";
+import Post from "../../NewsFeed/Post";
 
 const UserCreatedTopic = ({ userId }) => {
   const [userCreatedTopic, setUserCreatedTopic] = useState(null);

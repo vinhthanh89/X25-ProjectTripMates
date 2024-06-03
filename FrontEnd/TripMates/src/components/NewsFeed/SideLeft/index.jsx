@@ -1,6 +1,7 @@
 import { BiSolidMoviePlay } from "react-icons/bi";
 import { FaCompass, FaSignOutAlt } from "react-icons/fa";
-import { IoIosMail } from "react-icons/io";
+import { AiFillMessage } from "react-icons/ai";
+
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../../features/user/userSlices";
 import { useNavigate } from "react-router";
@@ -22,7 +23,7 @@ const LeftSideBar = () => {
     <>
       <div className="flex flex-col font-bold gap-[3rem] pt-[2rem] w-[85%]">
         <div className="flex flex-col gap-12">
-          <div className="flex flex-col gap-5 navigation-btn">
+          <div className="flex flex-col gap-5">
             <div className="flex items-center btn_all gap-2 w-full hover:bg-[#f2f2f2] cursor-pointer transition duration-300 ease-in-out">
               <div className="w-[25px] h-[25px]">
                 <img
@@ -32,7 +33,7 @@ const LeftSideBar = () => {
                 />
               </div>
               <div className="flex-1">
-                <p> {user.fullName} sdsadsaddsad</p>
+                <p> {user.fullName}</p>
                 {/* <p className="text-xs text-[#717171]">{user.email}</p> */}
               </div>
             </div>
@@ -42,7 +43,7 @@ const LeftSideBar = () => {
                 size={iconSize}
                 style={iconStyle}
               />
-              <p className="text-base">Feeds</p>
+              <p className="">Feeds</p>
             </button>
             <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
               <BiSolidMoviePlay
@@ -50,23 +51,26 @@ const LeftSideBar = () => {
                 size={iconSize}
                 style={iconStyle}
               />
-              <p className="text-base">Shorts</p>
+              <p className="">Shorts</p>
             </button>
             <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
-              <IoIosMail
+              <AiFillMessage
                 className="group-hover:bg-[#303030]"
                 size={iconSize}
                 style={iconStyle}
               />
-              <p className="text-base">Messages</p>
+              <p className="">Messages</p>
             </button>
-            <button className="flex justify-start items-center btn_all gap-2 w-full hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out" onClick={handleLogOut}>
+            <button
+              className="flex justify-start items-center btn_all gap-2 w-full hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out"
+              onClick={handleLogOut}
+            >
               <FaSignOutAlt
                 className="group-hover:bg-[#303030]"
                 size={iconSize}
                 style={iconStyle}
               />
-              <p className="text-base">Sign out</p>
+              <p className="">Sign out</p>
             </button>
           </div>
           <div className="flex flex-col gap-3">

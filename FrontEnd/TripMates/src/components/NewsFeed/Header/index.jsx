@@ -5,13 +5,13 @@ const Header = () => {
   return (
     <>
       <div className="grid grid-cols-5 p-[0.8rem] w-full border-b-[1.5px]">
-        <div className="col-span-1 flex items-center gap-[5px]">
+        <button className="col-span-1 flex items-center gap-[5px]">
           <img
             src="../../../../public/tripmates-favicon-black.png"
             className="w-[3rem]"
           />
           <h1 className="text-2xl font-semibold text-[#5143d9]">TripMates</h1>
-        </div>
+        </button>
         <div className="col-span-3 flex justify-center">
           <label className="input input-bordered flex items-center gap-2 bg-white w-[60%]">
             <input
