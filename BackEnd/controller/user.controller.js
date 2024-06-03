@@ -126,10 +126,7 @@ export const getUserById = async (req , res) => {
 export const editUser = async ( req , res) => {
   try {
     const userId = req.params.userId
-    const {fullName , birthday , age , gender , description} = req.body
-
-
-
+    const {fullName , birthday , gender , description} = req.body
     const findUser = await User.findById(userId)
     if(!findUser){
       return res.status(404).json({
@@ -140,10 +137,9 @@ export const editUser = async ( req , res) => {
     const userUpdated = await User.findByIdAndUpdate(userId , {
       fullName,
       birthday,
-      age,
       gender,
       description
-    }, {new : true})
+    }, {new : true}).select('-password')
 
     return res.status(200).json({
       message : "User Update Successfully",

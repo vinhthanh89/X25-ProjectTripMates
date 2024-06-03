@@ -7,3 +7,7 @@ export const fetchTopicData = () => {
 export const getTopicById = (topicId) => {
     return axiosAuthInstance.get(`/api/topic/topic-detail/${topicId}`)
 }
+
+export const getTopicByUserCreated = (userId) => {
+    return axiosAuthInstance.get(`/api/topic/topic-by-user-created/${userId}`)
+}

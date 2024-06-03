@@ -73,7 +73,7 @@ export const getTopicByUserCreated = async (req , res) => {
     try {
         const userId = req.params.userId
 
-        const findTopicByUserId = await Topic.find({userCreated : userId})
+        const findTopicByUserId = await Topic.find({userCreated : userId}).populate('userCreated')
 
         return res.status(200).json({
             message : "Get Topic By User Success",
