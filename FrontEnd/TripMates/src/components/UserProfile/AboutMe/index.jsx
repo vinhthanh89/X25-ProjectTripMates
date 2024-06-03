@@ -6,7 +6,7 @@ import ModalUser from "../ModalUser";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 
-const AboutMe = ({ userProfile }) => {
+const AboutMe = ({ userProfile , handleEditUser }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const userLogin = useSelector((state) => state.user.user);
   const { email, gender, description, birthday } = userProfile;
@@ -27,6 +27,7 @@ const AboutMe = ({ userProfile }) => {
           userProfile={userProfile}
           isModalOpen={isModalOpen}
           handleCancel={handleCancel}
+          handleEditUser={handleEditUser}
         />
         <h1 className="font-bold mr-[20px]">About me</h1>
         {userLogin._id === userProfile._id ? (
