@@ -1,45 +1,53 @@
-import { useSelector } from "react-redux";
-import { IoIosMail } from "react-icons/io";
-import { MdPlace } from "react-icons/md";
-import Post from "../Post";
+// import { useSelector } from "react-redux";
+// import { IoIosMail, IoMdTransgender } from "react-icons/io";
+// import { FaBirthdayCake } from "react-icons/fa";
+// import { MdPlace } from "react-icons/md";
+// import Post from "../Post";
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+import { getUserById } from "../../../services/user";
+import UserCreatedTopic from "../../UserCreatedTopic";
+import AboutMe from "../../AboutMe";
 
 const UserProfile = () => {
-  const user = useSelector((state) => state.user.user);
-  const iconSize = 20;
+  const [userProfile, setUserProfile] = useState({
+    email: "",
+    fullName: "",
+    avatar: "",
+    age: null,
+    birthday: "",
+    gender: "",
+    description: "",
+  });
+  const urlParam = useParams();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await getUserById(urlParam.userId);
+        setUserProfile(response.data.findUser);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUserData();
+  }, [urlParam.userId, userProfile]);
   return (
     <>
       <div className="userProfile">
         <div className="flex flex-col items-center gap-3">
           <img
-            className="w-[70px] h-[70px] object-cover rounded-full"
-            src={user.avatar}
+            className="w-[100px] h-[100px] object-cover rounded-full"
+            src={userProfile.avatar}
             alt=""
           />
           <div>
-            <h1 className="text-xl font-bold">{user.fullName }</h1>
+            <h1 className="text-xl font-bold">{userProfile.fullName}</h1>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-[20px] pt-[30px]">
           <div className="col-span-1 flex flex-col gap-2 px-[10px] border rounded-xl py-[1rem]">
-            <div className="flex flex-col gap-2 border-b-[1.5px] px-[0.5rem]">
-              <h1 className="text-lg font-bold">About me</h1>
-              <div>
-                <p className="text-sm text-[#717171]">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Beatae praesentium vel, excepturi, soluta dignissimos fuga
-                </p>
-              </div>
-              <ul className="flex flex-col gap-2 py-[15px]">
-                <li className="flex items-center gap-2">
-                  <MdPlace size={iconSize} />
-                  Ho Chi Minh
-                </li>
-                <li className="flex items-center gap-2">
-                  <IoIosMail size={iconSize} />
-                  {user.email}
-                </li>
-              </ul>
-            </div>
+            <AboutMe userProfile={userProfile} />
             <div className="flex flex-col gap-4">
               <h1 className="text-lg font-bold">Topics</h1>
               <button className="flex btn_all gap-2 w-full transition duration-300 ease-in-out">
@@ -74,20 +82,18 @@ const UserProfile = () => {
               </button>
             </div>
           </div>
-          <div className="col-span-2 flex flex-col gap-[10px]">
-            <ul className="menu menu-vertical lg:menu-horizontal bg-white border h-[10%] rounded-box gap-10 px-[20px] w-[45%]">
-              <button className="relative pb-2 before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
-                Post
-              </button>
-              <button className="relative pb-2 before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
-                Followers
-              </button>
-              <button className="relative pb-2 before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
-                Following
-              </button>
-            </ul>
-            <div className="border rounded-xl h-[400px]">
-              <h1>Post Component here</h1>
+          <div className="col-span-2 gap-[10px]">
+            <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full ring-1">
+              Post
+            </button>
+            <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
+              Followers
+            </button>
+            <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
+              Following
+            </button>
+            <div className="px-[5px] border rounded-xl h-auto">
+              <UserCreatedTopic userId={urlParam.userId} />
             </div>
           </div>
         </div>

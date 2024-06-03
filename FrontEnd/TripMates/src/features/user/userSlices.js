@@ -17,11 +17,15 @@ export const userSlice = createSlice({
             removeUserFromLocal()
             removeAccessTokenFromLocal()
             removeRefreshTokenFromLocal()
+        },
+        editUserAction: (state , action) => {
+            state.user = action.payload.user
+            console.log(state , action.payload);
         }
     }
 })
 
-export const {loginAction , logoutAction} = userSlice.actions
+export const {loginAction , logoutAction , editUserAction} = userSlice.actions
 
 
 export default userSlice.reducer
