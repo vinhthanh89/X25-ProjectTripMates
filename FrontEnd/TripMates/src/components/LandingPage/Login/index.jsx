@@ -21,10 +21,10 @@ const Login = () => {
   const onFinish = async (values) => {
     try {
       const response = await login(values);
-      dispatch(loginAction({user : response.data.user}))
       saveAccessTokenToLocal(response.data.accessToken);
       saveRefreshTokenToLocal(response.data.refreshToken);
       saveUserToLocal(response.data.user)
+      dispatch(loginAction({user : response.data.user}))
       toast.success(response.data.message);
     } catch (error) {
       console.log(error.response.data);

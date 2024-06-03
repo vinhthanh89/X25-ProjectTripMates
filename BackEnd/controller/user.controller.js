@@ -65,7 +65,7 @@ export const login = async (req , res) => {
   try {
     const { email, password } = req.body;
 
-    const findUser = await User.findOne({ email }).lean();
+    const findUser = await User.findOne({ email }).lean().populate('follower')
     if (!findUser) {
       return res.status(403).json({
         message: "Email does not exist",
