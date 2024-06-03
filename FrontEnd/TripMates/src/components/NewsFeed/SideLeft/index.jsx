@@ -25,6 +25,7 @@ const LeftSideBar = () => {
       <div className="flex flex-col font-bold gap-[3rem] pt-[2rem] w-[85%]">
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-5">
+
             <div className="dropdown dropdown-right dropdown-hover">
               <div
                 tabIndex={0}
@@ -96,7 +97,7 @@ const LeftSideBar = () => {
           <div className="flex flex-col gap-3">
             <h1 className="text-[grey]">Pages you like</h1>
             <button className="flex btn_all gap-2 w-full transition duration-300 ease-in-out">
-              <div className="flex items-start gap-2 w-full">
+              <div className="flex items-start gap-[5px] w-full">
                 <img
                   className="w-[20px] h-[20px] object-cover rounded-lg"
                   src="https://images.unsplash.com/photo-1707343848552-893e05dba6ac?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

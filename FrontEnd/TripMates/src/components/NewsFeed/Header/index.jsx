@@ -1,11 +1,17 @@
 // import { IoIosNotificationsOutline } from "react-icons/io";
+
+import { useNavigate } from "react-router";
+
 // import { FaUserFriends } from "react-icons/fa";
 const Header = () => {
+  const navigate = useNavigate()
+
+
   // const iconSize = 30;
   return (
     <>
       <div className="grid grid-cols-5 p-[0.8rem] w-full border-b-[1.5px]">
-        <button className="col-span-1 flex items-center gap-[5px]">
+        <button onClick={() => navigate('/')} className="col-span-1 flex items-center gap-[5px]">
           <img
             src="../../../../public/tripmates-favicon-black.png"
             className="w-[3rem]"
