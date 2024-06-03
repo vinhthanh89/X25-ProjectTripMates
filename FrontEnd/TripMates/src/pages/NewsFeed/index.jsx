@@ -6,16 +6,16 @@ import { Outlet } from "react-router";
 
 const NewsFeed = () => {
   return (
-    <div className="bg-white text-[#303030]">
+    <div className="bg-white text-[#303030] ">
       <Header />
       <div className="grid grid-cols-6 gap-[1.2rem] h-screen">
-        <div className="col-span-1 sideBars poppins px-[10px] shadow-lg">
+        <div className="col-span-1 sideBars poppins px-[10px] shadow-lg ring-1">
           <LeftSideBar />
         </div>
         <div className="col-span-4 flex flex-col poppins px-[1.5rem] overflow-hidden shadow-2xl">
           <Outlet />
         </div>
-        <div className="col-span-1 sideBars poppins px-[15px] shadow-lg">
+        <div className="col-span-1 sideBars poppins px-[15px] shadow-lg ring-1">
           <RightSideBar />
         </div>
       </div>
