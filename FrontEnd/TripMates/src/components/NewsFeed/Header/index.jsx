@@ -4,7 +4,7 @@ const Header = () => {
   const iconSize = 30;
   return (
     <>
-      <div className="grid grid-cols-5 p-[1rem] w-full border-b-[1.5px]">
+      <div className="grid grid-cols-5 p-[0.8rem] w-full border-b-[1.5px]">
         <div className="col-span-1 flex items-center gap-[5px]">
           <img
             src="../../../../public/tripmates-favicon-black.png"
