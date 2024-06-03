@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { getUserById } from "../../../services/user";
 import UserCreatedTopic from "../../UserProfile/UserCreatedTopic";
 import AboutMe from "../../UserProfile/AboutMe";
+import Followers from "../../UserProfile/Followers";
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState({
@@ -43,6 +44,11 @@ const UserProfile = () => {
           />
           <div>
             <h1 className="text-lg font-bold">{userProfile.fullName}</h1>
+          </div>
+          <div>
+            <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold rounded-lg p-2">
+              + Follow
+            </button>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-[20px] pt-[30px]">
@@ -95,7 +101,8 @@ const UserProfile = () => {
               </button>
             </div>
             <div className="px-[15px] pt-[5px] border rounded-xl overflow-hidden max-h-[500px] overflow-y-auto">
-              <UserCreatedTopic userId={urlParam.userId} />
+              {/* <UserCreatedTopic userId={urlParam.userId} /> */}
+              <Followers />
             </div>
           </div>
         </div>
