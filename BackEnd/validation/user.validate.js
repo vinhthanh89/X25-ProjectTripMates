@@ -17,8 +17,21 @@ const fullNameValidate = joi.string().required().messages({
     "any.required": "Full name is required",
 })
 
+ const birthdayValidate = joi.date().messages({
+    'date.base' : "Birthday must be a date"
+ })
+
+ const ageValiadte = joi.number().min(1).messages({
+    'number.base' : "Age must be a number"
+ })
+
+ const description = joi.string().messages({
+    'string.base' : "Description muse be string"
+ })
+
 export const signupValidate = joi.object({
     email : emailValidate,
     password : passwordValidate,
     fullName : fullNameValidate
 })
+

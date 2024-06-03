@@ -1,7 +1,7 @@
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { FaUserFriends } from "react-icons/fa";
+// import { IoIosNotificationsOutline } from "react-icons/io";
+// import { FaUserFriends } from "react-icons/fa";
 const Header = () => {
-  const iconSize = 30;
+  // const iconSize = 30;
   return (
     <>
       <div className="grid grid-cols-5 p-[0.8rem] w-full border-b-[1.5px]">
