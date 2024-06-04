@@ -20,10 +20,9 @@ const UserProfile = () => {
     birthday: "",
     gender: "",
     description: "",
-    follower : []
+    follower: [],
   });
-  const [showComponent , setShowComponent] = useState('topic')
-  
+  const [showComponent, setShowComponent] = useState("topic");
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -38,30 +37,63 @@ const UserProfile = () => {
   }, [urlParam.userId]);
 
   const handleEditUser = (newUserProfile) => {
-    setUserProfile(newUserProfile)
-  }
+    setUserProfile(newUserProfile);
+  };
 
   return (
     <>
-      <div className="userProfile h-full">
-        <div className="flex flex-col items-center gap-3 pt-[15px]">
-          <img
-            className="w-[70px] h-[70px] object-cover rounded-full"
-            src={userProfile.avatar}
-            alt=""
-          />
-          <div>
-            <h1 className="text-lg font-bold">{userProfile.fullName}</h1>
+      <div className="userProfile h-full bg-[#f2f2f2] text-black px-[6rem] pt-[1rem]">
+        {/* <div className="py-[2rem] px-[2.5rem] bg-white rounded">
+          <div className="flex justify-center gap-[5rem]">
+            <div className="flex flex-col gap-2">
+              <img
+                className="w-[90px] h-[90px] object-cover rounded-full"
+                src={userProfile.avatar}
+                alt=""
+              />
+              <h1 className="text-lg font-bold">{userProfile.fullName}</h1>
+              <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold btn_all">
+                + Follow
+              </button>
+            </div>
+            <div className="flex items-center gap-[5rem] text-xl font-bold">
+              <div className="flex flex-col">
+                Followers
+                <span>0</span>
+              </div>
+              <div className="flex flex-col">
+                Following<span>0</span>
+              </div>
+            </div>
           </div>
-          <div>
-            <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold rounded-lg p-2">
+
+          <div className="col-span-1 flex items-center justify-end ">
+            <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold btn_all">
               + Follow
             </button>
           </div>
-        </div>
-        <div className="grid grid-cols-3 gap-[20px] pt-[30px]">
-          <div className="col-span-1 flex flex-col gap-[20px] px-[15px] border rounded-xl py-[1rem]">
-            <AboutMe userProfile={userProfile} handleEditUser={handleEditUser} />
+
+        </div> */}
+        <div className="grid grid-cols-4 gap-[20px] pt-[1rem]">
+          <div className="col-span-1 flex flex-col gap-[20px] p-[2rem] bg-white rounded">
+            <div className="flex flex-col items-center gap-2">
+              <img
+                className="w-[90px] h-[90px] object-cover rounded-full"
+                src={userProfile.avatar}
+                alt=""
+              />
+              <h1 className="w-full flex justify-center text-lg font-bold truncate">
+                {userProfile.fullName}
+              </h1>
+
+              <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold btn_all">
+                + Follow
+              </button>
+            </div>
+            <AboutMe
+              userProfile={userProfile}
+              handleEditUser={handleEditUser}
+            />
             <div className="flex flex-col gap-4">
               <h1 className="text-base font-bold">Topics</h1>
               <button className="flex btn_all gap-2 w-full transition duration-300 ease-in-out">
@@ -96,24 +128,31 @@ const UserProfile = () => {
               </button>
             </div>
           </div>
-          <div className="col-span-2 flex flex-col text-sm font-semibold gap-[10px] px-[10px]">
+          <div className="col-span-3 flex flex-col text-sm font-semibold gap-[10px] p-[2rem] bg-white rounded">
             <div>
-              <button onClick={() => setShowComponent('topic')} className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
+              <button
+                onClick={() => setShowComponent("topic")}
+                className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full"
+              >
                 Topics
               </button>
-              <button onClick={() => setShowComponent('follower')} className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
+              <button
+                onClick={() => setShowComponent("follower")}
+                className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full"
+              >
                 Followers
               </button>
               <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
                 Following
               </button>
             </div>
-            <div className="px-[15px] pt-[5px] border rounded-xl overflow-hidden max-h-[500px] overflow-y-auto">
-            {
-              (showComponent === "topic" &&  <UserCreatedTopic userId={urlParam.userId} />) ||
-              (showComponent === "follower" && <Followers userProfile={userProfile} />)
-            }
-
+            <div className="px-[15px] pt-[5px] overflow-hidden max-h-[600px] overflow-y-auto">
+              {(showComponent === "topic" && (
+                <UserCreatedTopic userId={urlParam.userId} />
+              )) ||
+                (showComponent === "follower" && (
+                  <Followers userProfile={userProfile} />
+                ))}
             </div>
           </div>
         </div>

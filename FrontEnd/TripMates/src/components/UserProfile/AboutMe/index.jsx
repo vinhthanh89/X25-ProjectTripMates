@@ -1,6 +1,10 @@
 /* eslint-disable react/prop-types */
-import { FaUserEdit, FaCalendar } from "react-icons/fa";
-import { IoIosMail, IoMdTransgender } from "react-icons/io";
+import { FaUserEdit } from "react-icons/fa";
+import { IoMdTransgender } from "react-icons/io";
+import { CiMail, CiCalendar } from "react-icons/ci";
+import { BsGenderMale } from "react-icons/bs";
+
+
 import { useState } from "react";
 import ModalUser from "../ModalUser";
 import { useSelector } from "react-redux";
@@ -44,19 +48,19 @@ const AboutMe = ({ userProfile , handleEditUser }) => {
       <ul className="flex flex-col gap-4 py-[5px] text-sm">
         <li className="flex items-center gap-2">
           <div>
-            <IoIosMail size={iconSize} />
+            <CiMail size={iconSize} />
           </div>
           <span>{email}</span>
         </li>
         <li className="flex items-center gap-2">
           <div>
-            <FaCalendar size={iconSize} />
+            <CiCalendar size={iconSize} />
           </div>
           <span>{dayjs(birthday).format("DD-MMMM-YYYY")}</span>
         </li>
         <li className="flex items-center gap-2">
           <div>
-            <IoMdTransgender size={iconSize} />
+            <BsGenderMale size={iconSize} />
           </div>
           <span>{gender}</span>
         </li>

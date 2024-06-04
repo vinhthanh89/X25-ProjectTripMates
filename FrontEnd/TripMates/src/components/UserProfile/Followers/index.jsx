@@ -1,8 +1,5 @@
 /* eslint-disable react/prop-types */
-
 import AvatarFollower from "../AvatarFollower";
-
-
 const Followers = ({userProfile}) => {
 
   const renderFollower = userProfile.follower.map((user) => {
@@ -15,7 +12,7 @@ const Followers = ({userProfile}) => {
 
   return (
     <div>
-      <div className="followers grid grid-cols-4 gap-4">
+      <div className="followers grid grid-cols-6 ring-1">
       {renderFollower}
       </div>      
     </div>
