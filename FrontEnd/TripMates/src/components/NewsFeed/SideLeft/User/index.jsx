@@ -39,7 +39,7 @@ const User = () => {
             tabIndex={0}
             className="dropdown-content z-[1] menu p-4 shadow bg-white rounded-box w-52 gap-3 ring-1"
           >
-            <ModalChangePassword></ModalChangePassword>
+            <ModalChangePassword user={user} />
             <button
               className="flex justify-start items-center btn_all gap-2 w-full transition duration-300 ease-in-out bg-red-600 hover:bg-red-500 text-white text-sm"
               onClick={handleLogOut}

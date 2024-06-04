@@ -1,7 +1,15 @@
+/* eslint-disable react/prop-types */
+
 import { Button, Form, Input, Modal } from "antd";
 import { useState } from "react";
+import toast from 'react-hot-toast';
 import { RiLockPasswordFill } from "react-icons/ri";
-const ModalChangePassword = () => {
+
+
+import { changeUserPassword } from "../../../services/user";
+
+
+const ModalChangePassword = ({user}) => {
   const iconSize = 20;
   const iconStyle = { background: "transparent" };
   // Handle Modal
@@ -11,13 +19,22 @@ const ModalChangePassword = () => {
   };
 
   const handleCancel = () => {
+    form.resetFields()
     setIsModalOpen(false);
   };
-
+  const [form] = Form.useForm()
   // Handle Form
-  const [form] = Form.useForm();
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const onFinish = async (values) => {
+    try {
+      const response = await changeUserPassword(user._id , values)
+      form.resetFields()
+      setIsModalOpen(false)
+      toast.success(response.data.message)
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message)
+    }
   };
 
   return (
@@ -33,16 +50,16 @@ const ModalChangePassword = () => {
           cancelButtonProps={{ style: { display: "none" } }}
         >
           <Form form={form} name="basic" onFinish={onFinish} labelAlign="left">
-            <Form.Item label="Current password" name="oldPassword">
-              <Input />
+            <Form.Item label="Current Password" name="oldPassword">
+              <Input.Password />
             </Form.Item>
 
-            <Form.Item label="New password" name="newPassword">
-              <Input />
+            <Form.Item label="New Password" name="newPassword">
+              <Input.Password />
             </Form.Item>
 
-            <Form.Item label="Current password" name="confirmPassword">
-              <Input />
+            <Form.Item label="Confirm Password" name="confirmPassword">
+              <Input.Password />
             </Form.Item>
             <Form.Item>
               <div className="flex items-center justify-end">
