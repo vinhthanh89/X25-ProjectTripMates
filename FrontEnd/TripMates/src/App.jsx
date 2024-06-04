@@ -18,15 +18,13 @@ const App = () => {
       <Toaster />
       <Routes>
         {isObjectEmpty(user) ? (
-            <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage />} />
         ) : (
           <Route path="/" element={<NewsFeed />}>
-              <Route path="" element={<Content />} />
-              <Route path="/topic/:topicId" element={<TopicDetail />}/>
-              <Route path="/user/:userId" element={<UserProfile />}/>
+            <Route path="" element={<Content />} />
+            <Route path="/topic/:topicId" element={<TopicDetail />} />
+            <Route path="/user/:userId" element={<UserProfile />} />
           </Route>
-
-
         )}
       </Routes>
     </>
