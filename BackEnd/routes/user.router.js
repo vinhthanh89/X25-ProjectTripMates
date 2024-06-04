@@ -10,7 +10,7 @@ const router = Router()
 
 router.post('/signup' , signup)
 router.post('/login' , login)
-router.get('/:userId', getUserById)
+router.get('/:userId', getUserById);
 router.put('/edit/:userId' , authentication , authorization , editUser)
 router.put('/changePassword/:userId' , authentication , authorization , changeUserPassword)
 

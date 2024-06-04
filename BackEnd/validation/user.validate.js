@@ -35,3 +35,6 @@ export const signupValidate = joi.object({
     fullName : fullNameValidate
 })
 
+export const changePasswordValidate = joi.object({
+    password : passwordValidate
+})

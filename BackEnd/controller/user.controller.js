@@ -4,7 +4,7 @@ import User from "../model/user.model.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 import { signAccessToken, signRefreshToken } from "../utils/jsonwebtoken.js";
 import { validateData } from "../utils/validation.js";
-import { signupValidate } from "../validation/user.validate.js";
+import { changePasswordValidate, signupValidate } from "../validation/user.validate.js";
 
 export const signup = async (req, res) => {
   try {
@@ -102,8 +102,10 @@ export const login = async (req , res) => {
 export const getUserById = async (req , res) => {
   try {
     const userId = req.params.userId
-
+    console.log("params" , req.params);
+    console.log("getUserById" , userId); 
     const findUser = await User.findById(userId).populate('follower').select('-password')
+    console.log("findUser ::: ");
     if(!findUser){
       return res.status(404).json({
         message : "User Not Found"
@@ -157,7 +159,7 @@ export const editUser = async ( req , res) => {
 export const changeUserPassword = async (req , res) => {
   try {
     const userId = req.params.userId
-    const {oldPassword , newPassword , confirmNewPassword} = req.body
+    const {oldPassword , newPassword , confirmPassword} = req.body
 
     const findUser = await User.findById(userId)
     if(!findUser){
@@ -167,13 +169,22 @@ export const changeUserPassword = async (req , res) => {
     }
 
     const checkPassword = comparePassword(oldPassword , findUser.password)
+
     if(!checkPassword){
       return res.status(401).json({
         message : "Password is wrong"
       })
     }
 
-    if(!(newPassword === confirmNewPassword)){
+    const validate = validateData(changePasswordValidate , {password : newPassword})
+
+    if(validate){
+      return res.status(403).json({
+        message : validate
+      })
+    }
+
+    if(!(newPassword === confirmPassword)){
       return res.status(401).json({
         message : "The new password does not match"
       })
@@ -181,11 +192,10 @@ export const changeUserPassword = async (req , res) => {
 
     const hashedPassword = hashPassword(newPassword)
 
-    const userUpdatedPassword = await User.findByIdAndUpdate(userId , {password : hashedPassword}).select('-password')
+    await User.findByIdAndUpdate(userId , {password : hashedPassword})
 
     return res.status(200).json({
       message : "Change Password Successfully",
-      userUpdatedPassword
     })
 
   } catch (error) {

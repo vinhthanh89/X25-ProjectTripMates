@@ -1,37 +1,42 @@
 import { BiSolidMoviePlay } from "react-icons/bi";
-import { FaCompass, FaSignOutAlt } from "react-icons/fa";
+import { FaCompass } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
+
+
+
 import User from "./User";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { getUserById } from "../../../services/user";
+// import { useEffect, useState } from "react";
+// import { useParams } from "react-router";
+// import { getUserById } from "../../../services/user";
 
 const LeftSideBar = () => {
   const iconSize = 20;
   const iconStyle = { background: "transparent" };
  
-  const [userProfile, setUserProfile] = useState({
-    email: "",
-    fullName: "",
-    avatar: "",
-    age: null,
-    birthday: "",
-    gender: "",
-    description: "",
-  });
-  const urlParam = useParams();
+    // const [userProfile, setUserProfile] = useState({
+    //   email: "",
+    //   fullName: "",
+    //   avatar: "",
+    //   age: null,
+    //   birthday: "",
+    //   gender: "",
+    //   description: "",
+    // });
+    // const urlParam = useParams();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await getUserById(urlParam.userId);
-        setUserProfile(response.data.findUser);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchUserData();
-  }, [urlParam.userId, userProfile]);
+    // useEffect(() => {
+    //   const fetchUserData = async () => {
+    //     try {
+    //       console.log('abc' , urlParam);
+    //       const response = await getUserById(urlParam.userId);
+    //       console.log(response);
+    //       setUserProfile(response.data.findUser);
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   };
+    //   fetchUserData();
+    // }, [urlParam.userId, userProfile]);
   return (
     <>
       <div className="flex flex-col font-bold gap-[3rem] pt-[2rem] w-[85%]">
