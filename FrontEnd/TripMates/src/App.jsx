@@ -18,6 +18,7 @@ const App = () => {
     <div>
       <Toaster />
 
+
       {isObjectEmpty(user) ? (
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -35,6 +36,7 @@ const App = () => {
         </>
       )}
     </div>
+
   );
 };
 
