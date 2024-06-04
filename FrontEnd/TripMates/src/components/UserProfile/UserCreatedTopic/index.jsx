@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { getTopicByUserCreated } from "../../../services/topic";
-import Post from "../../NewsFeed/Post";
-
+import Topic from "../Topic";
 const UserCreatedTopic = ({ userId }) => {
   const [userCreatedTopic, setUserCreatedTopic] = useState(null);
 
@@ -21,8 +20,8 @@ const UserCreatedTopic = ({ userId }) => {
   const renderTopicData = userCreatedTopic ? (
     userCreatedTopic.map((topic) => {
       return (
-        <div key={topic._id}>
-          <Post topic={topic} />
+        <div key={topic._id} >
+          <Topic topic={topic} />
         </div>
       );
     })
@@ -30,7 +29,7 @@ const UserCreatedTopic = ({ userId }) => {
     <p>Data Loading ...</p>
   );
 
-  return <div>{renderTopicData}</div>;
+  return <div className="flex flex-col gap-4">{renderTopicData}</div>;
 };
 
 export default UserCreatedTopic;

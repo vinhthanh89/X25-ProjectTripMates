@@ -55,21 +55,14 @@ const LeftSideBar = () => {
               </div>
             </div>
 
+           
             <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
               <FaCompass
                 className="group-hover:bg-[#303030]"
                 size={iconSize}
                 style={iconStyle}
               />
-              <p className="">Feeds</p>
-            </button>
-            <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
-              <FaCompass
-                className="group-hover:bg-[#303030]"
-                size={iconSize}
-                style={iconStyle}
-              />
-              <p className="">Feeds</p>
+              <p >Feeds</p>
             </button>
             <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
               <BiSolidMoviePlay
@@ -77,7 +70,7 @@ const LeftSideBar = () => {
                 size={iconSize}
                 style={iconStyle}
               />
-              <p className="">Shorts</p>
+              <p >Shorts</p>
             </button>
             <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
               <AiFillMessage
@@ -85,7 +78,7 @@ const LeftSideBar = () => {
                 size={iconSize}
                 style={iconStyle}
               />
-              <p className="">Messages</p>
+              <p >Messages</p>
             </button>
           </div>
           <div className="flex flex-col gap-3">

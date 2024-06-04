@@ -4,8 +4,7 @@ import { useNavigate } from "react-router";
 
 const Post = ({ topic }) => {
   const navigate = useNavigate()
-  const {_id, thumbnail, description, country, continent, title, userCreated } =
-    topic;
+  const {_id, thumbnail, description, country, continent, title, userCreated } = topic;
 
   return (
     <div
