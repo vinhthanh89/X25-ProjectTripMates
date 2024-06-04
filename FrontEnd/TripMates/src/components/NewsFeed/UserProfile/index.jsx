@@ -96,7 +96,7 @@ const UserProfile = () => {
               </button>
             </div>
           </div>
-          <div className="col-span-2 flex flex-col text-sm font-semibold gap-[20px] px-[10px]">
+          <div className="col-span-2 flex flex-col text-sm font-semibold gap-[10px] px-[10px]">
             <div>
               <button onClick={() => setShowComponent('topic')} className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
                 Topics
@@ -113,8 +113,7 @@ const UserProfile = () => {
               (showComponent === "topic" &&  <UserCreatedTopic userId={urlParam.userId} />) ||
               (showComponent === "follower" && <Followers userProfile={userProfile} />)
             }
-             
-    
+
             </div>
           </div>
         </div>
