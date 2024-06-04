@@ -102,10 +102,9 @@ export const login = async (req , res) => {
 export const getUserById = async (req , res) => {
   try {
     const userId = req.params.userId
-    console.log("params" , req.params);
-    console.log("getUserById" , userId); 
+
     const findUser = await User.findById(userId).populate('follower').select('-password')
-    console.log("findUser ::: ");
+
     if(!findUser){
       return res.status(404).json({
         message : "User Not Found"
