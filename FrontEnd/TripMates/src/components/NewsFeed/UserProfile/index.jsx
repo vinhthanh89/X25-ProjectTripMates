@@ -22,6 +22,7 @@ const UserProfile = () => {
     description: "",
     follower: [],
   });
+
   const [showComponent, setShowComponent] = useState("topic");
 
   useEffect(() => {
@@ -29,6 +30,7 @@ const UserProfile = () => {
       try {
         const response = await getUserById(urlParam.userId);
         setUserProfile(response.data.findUser);
+        setShowComponent('topic')
       } catch (error) {
         console.log(error);
       }
