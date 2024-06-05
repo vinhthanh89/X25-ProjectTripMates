@@ -1,23 +1,27 @@
 /* eslint-disable react/prop-types */
+import { Table } from "antd";
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+
+
 import { getTopicById } from "../../../services/topic";
-import { useSelector } from "react-redux";
-import { Table } from "antd";
 // eslint-disable-next-line no-unused-vars
+
 const TopicDetail = () => {
+  const urlParam = useParams();
+  const navigate = useNavigate();
+
   const [topicDetail, setTopicDetail] = useState({
     title: "",
     thumbnail: "",
-    userCreated: null,
+    userCreated: {},
     description: "",
     startDate: "",
     endDate: "",
     continent: "",
     country: "",
   });
-  const urlParam = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,9 +45,9 @@ const TopicDetail = () => {
     continent,
     country,
   } = topicDetail;
+  
   const convertedStartDate = moment(startDate).format("MMMM Do, YYYY");
   const convertedEndDate = moment(endDate).format("MMMM Do, YYYY");
-  const user = useSelector((state) => state.user.user);
 
   // Testing
   const columns = [
@@ -168,23 +172,17 @@ const TopicDetail = () => {
       <div className="flex flex-col gap-[1rem] px-[1.5rem] pt-[1rem]">
         <p className="text-3xl font-bold">{title}</p>
         <div className="flex items-end justify-between">
-          <div className="flex items-center text-sm gap-[8px]">
+          <div
+            onClick={() => navigate(`/user/${userCreated._id}`)}
+            className="flex items-center text-sm gap-[8px] cursor-pointer hover:opacity-80"
+          >
             <img
-              src={user.avatar}
+              src={userCreated.avatar}
               alt=""
               className="w-[25px] h-[25px] object-cover rounded-full"
             />
             <div className="flex flex-col text-xs">
-              <p>
-                {" "}
-                <span className="text-sm font-semibold">
-                  {userCreated ? (
-                    <a className="cursor-pointer ">{userCreated.fullName}</a>
-                  ) : (
-                    " "
-                  )}
-                </span>
-              </p>
+              <p className="text-sm font-semibold">{userCreated.fullName}</p>
               <p>1 month ago</p>
             </div>
           </div>

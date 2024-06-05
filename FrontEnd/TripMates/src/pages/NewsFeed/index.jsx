@@ -1,4 +1,4 @@
-import Header from "../../components/NewsFeed/Header";
+
 import LeftSideBar from "../../components/NewsFeed/SideLeft";
 import RightSideBar from "../../components/NewsFeed/SideRight";
 import "./index.css";
