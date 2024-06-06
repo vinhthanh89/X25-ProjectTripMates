@@ -2,7 +2,6 @@ import "./App.css";
 import { Routes, Route } from "react-router";
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
-
 import LandingPage from "./pages/LandingPage";
 import NewsFeed from "./pages/NewsFeed";
 import isObjectEmpty from "./utils/isObjectyEmty";
@@ -17,8 +16,6 @@ const App = () => {
   return (
     <div>
       <Toaster />
-
-
       {isObjectEmpty(user) ? (
         <Routes>
           <Route path="/" element={<LandingPage />} />

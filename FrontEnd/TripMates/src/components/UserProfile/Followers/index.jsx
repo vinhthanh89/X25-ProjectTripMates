@@ -12,7 +12,7 @@ const Followers = ({userProfile}) => {
 
   return (
     <div>
-      <div className="followers grid grid-cols-6 ring-1">
+      <div className="followers grid grid-cols-6">
       {renderFollower}
       </div>      
     </div>
