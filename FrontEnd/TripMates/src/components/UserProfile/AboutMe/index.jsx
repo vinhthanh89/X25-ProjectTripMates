@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { FaUserEdit } from "react-icons/fa";
-import { IoMdTransgender } from "react-icons/io";
 import { CiMail, CiCalendar } from "react-icons/ci";
 import { BsGenderMale } from "react-icons/bs";
 
