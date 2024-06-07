@@ -25,6 +25,7 @@ export const removeRefreshTokenFromLocal = () => {
 }
 
 export const saveUserToLocal = (user) => {
+  console.log(user);
   localStorage.setItem("user", JSON.stringify(user));
 }
 

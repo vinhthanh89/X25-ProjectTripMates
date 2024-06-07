@@ -6,17 +6,16 @@ import { uploadAvatar } from "../../../services/user";
 import { editUserAction } from "../../../features/user/userSlices.js";
 import { FaCamera } from "react-icons/fa";
 import toast from "react-hot-toast";
-
-
+import { saveUserToLocal } from "../../../utils/localstorage.js";
 
 const MoadlChangeAvatar = ({ userProfile, handleEditUser }) => {
-  const iconSize = 15
+  const iconSize = 15;
   const userLogin = useSelector((state) => state.user.user);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editAvatar, setEditAvatar] = useState(userLogin.avatar);
   const [uploadFile, setUploadFile] = useState(null);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -35,24 +34,21 @@ const MoadlChangeAvatar = ({ userProfile, handleEditUser }) => {
 
   const handlePreviewAvatar = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     setUploadFile(file);
-    console.log(uploadFile);
     file.preview = URL.createObjectURL(file);
     setEditAvatar(file.preview);
   };
 
   const handleOk = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const formData = new FormData();
       formData.append("avatar", uploadFile);
-      formData.append('userId' , userLogin._id);
-      const response = await uploadAvatar(formData)
-      handleEditUser(response.data.userUploaded)
-      dispatch(editUserAction({user : response.data.userUploaded}))
-      console.log(response);
-
+      formData.append("userId", userLogin._id);
+      const response = await uploadAvatar(formData);
+      handleEditUser(response.data.userUploaded);
+      saveUserToLocal(response.data.userUploaded);
+      dispatch(editUserAction({ user: response.data.userUploaded }));
       setIsModalOpen(false);
       toast.success("Updated successfully!");
     } catch (error) {
@@ -71,9 +67,7 @@ const MoadlChangeAvatar = ({ userProfile, handleEditUser }) => {
           className="w-[25px] h-[25px] flex items-center justify-center bg-[#cecece] rounded-full text-[25px] absolute right-[-10px] bottom-[-5px] hover:scale-105"
         >
           <label htmlFor="file" className="cursor-pointer">
-
             <FaCamera size={iconSize} />
-
           </label>
         </div>
       )}
