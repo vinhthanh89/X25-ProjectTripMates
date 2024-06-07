@@ -11,6 +11,7 @@ const LeftSideBar = () => {
   const iconSize = 20;
   const iconStyle = { background: "transparent" };
   const user = useSelector((state) => state.user.user);
+  console.log(user);
   const navigate = useNavigate();
   // const [userProfile, setUserProfile] = useState({
   //   email: "",

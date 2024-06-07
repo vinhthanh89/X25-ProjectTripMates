@@ -47,8 +47,8 @@ const MoadlChangeAvatar = ({ userProfile , handleEditUser }) => {
       formData.append("avatar", uploadFile);
       formData.append('userId' , userLogin._id);
       const response = await uploadAvatar(formData)
-      dispatch(editUserAction({user : response.data.userUploaded}))
       handleEditUser(response.data.userUploaded)
+      dispatch(editUserAction({user : response.data.userUploaded}))
       console.log(response);
       setIsModalOpen(false);
     } catch (error) {
@@ -64,7 +64,7 @@ const MoadlChangeAvatar = ({ userProfile , handleEditUser }) => {
           className="w-[35px] h-[35px] flex items-center justify-center bg-[gray] rounded-full text-[25px] absolute right-[-10px] bottom-[-5px]"
         >
           <label htmlFor="file" className="cursor-pointer">
-            📷
+            📷  
           </label>
         </div>
       )}
