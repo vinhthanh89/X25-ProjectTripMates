@@ -48,7 +48,7 @@ const UserProfile = () => {
 
   return (
     <>
-      <div className="userProfile h-full bg-[#f2f2f2] text-black px-[6rem] pt-[1rem]">
+      <div className="userProfile h-full bg-[#f2f2f2] text-black px-[6rem] pt-[0.1rem]">
         {/* <div className="py-[2rem] px-[2.5rem] bg-white rounded">
           <div className="flex justify-center gap-[5rem]">
             <div className="flex flex-col gap-2">
@@ -89,14 +89,17 @@ const UserProfile = () => {
                   src={userProfile.avatar}
                   alt=""
                 />
-                <MoadlChangeAvatar userProfile={userProfile} handleEditUser={handleEditUser} />
+                <MoadlChangeAvatar
+                  userProfile={userProfile}
+                  handleEditUser={handleEditUser}
+                />
               </div>
 
               <h1 className="w-full flex justify-center text-lg font-bold truncate">
                 {userProfile.fullName}
               </h1>
 
-              <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold btn_all">
+              <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold rounded-md px-2 py-1">
                 + Follow
               </button>
             </div>

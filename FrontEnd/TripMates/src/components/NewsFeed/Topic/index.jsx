@@ -2,16 +2,16 @@
 import { MdPlace } from "react-icons/md";
 import { useNavigate } from "react-router";
 
-const Post = ({ topic }) => {
+const Topic = ({ topic }) => {
   const navigate = useNavigate()
   const {_id, thumbnail, description, country, continent, title, userCreated } = topic;
 
   return (
     <div
-     className="flex flex-col gap-y-[1.2rem] rounded-lg shadow-xl p-4 cursor-pointer">
+     className="flex flex-col gap-y-[1.2rem] rounded-lg shadow-xl cursor-pointer p-[2rem]">
       <div className="relative" onClick={() => navigate(`/topic/${_id}`)}>
         <div className="absolute top-[5px] right-[5px] flex items-center gap-2">
-          <div className="w-[4rem] h-[4rem]">
+          <div className="w-[3rem] h-[3rem]">
             <img
               src={userCreated.avatar}
               className="w-full h-full object-cover rounded-full border"
@@ -21,7 +21,7 @@ const Post = ({ topic }) => {
         <img
           src={thumbnail}
           alt={country}
-          className="rounded-[12px] cursor-pointer w-full h-[220px] object-fill"
+          className="rounded-[12px] cursor-pointer w-full h-[270px] object-fill"
         />
       </div>
       <div className="flex flex-col gap-[10px] text-black">
@@ -42,4 +42,4 @@ const Post = ({ topic }) => {
   );
 };
 
-export default Post;
+export default Topic;
