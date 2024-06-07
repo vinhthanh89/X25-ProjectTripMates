@@ -1,5 +1,8 @@
 
 
+import cloudinary from "../configs/cloudinary.js";
+import { getAvatarPublicId, handleUpload } from "../utils/handleUpload.js";
+
 import User from "../model/user.model.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 import { signAccessToken, signRefreshToken } from "../utils/jsonwebtoken.js";
@@ -195,6 +198,50 @@ export const changeUserPassword = async (req , res) => {
 
     return res.status(200).json({
       message : "Change Password Successfully",
+    })
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message : error
+    })
+  }
+}
+
+export const uploadUserAvatar = async (req , res) => {
+  try {
+    const userId = req.user
+    const file = req.file
+
+    console.log("file ::" , file);
+    console.log("userId ::" , userId);
+
+    const b64 = Buffer.from(req.file.buffer).toString("base64");
+    let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+
+    const [result , findUser] = await Promise.all([handleUpload(dataURI) , User.findById(userId.payload).select("-password")])
+
+    if(!findUser){
+      if(result){
+        cloudinary.uploader.destroy(result.public_id)
+      }
+
+      return res.status(403).json({
+        message : "User Id isn't exits"
+      })
+    }
+
+    const oldAvatarPublicId = getAvatarPublicId(findUser.avatar)
+
+    const userUploaded = await User.findByIdAndUpdate(findUser._id , {avatar : result.secure_url} , {new : true}).select("-password")
+
+    if(oldAvatarPublicId !== "TripMates/profile-user_w32qio"){
+      cloudinary.uploader.destroy(oldAvatarPublicId)
+    }
+
+    return res.status(200).json({
+      message : "Upload Avatar Successfully",
+      userUploaded
     })
 
   } catch (error) {
