@@ -1,4 +1,3 @@
-
 import LeftSideBar from "../../components/NewsFeed/SideLeft";
 import RightSideBar from "../../components/NewsFeed/SideRight";
 import "./index.css";
@@ -6,12 +5,12 @@ import { Outlet } from "react-router";
 
 const NewsFeed = () => {
   return (
-    <div className="bg-white text-[#303030] ">
-      <div className="grid grid-cols-6 gap-[1.2rem] h-screen">
-        <div className="col-span-1 sideBars poppins px-[10px] shadow-lg ">
+    <div className="bg-[#f2f2f2] text-[#303030]">
+      <div className="grid grid-cols-6 gap-[1.2rem] h-screen p-5">
+        <div className="col-span-1 sideBars poppins px-[10px] bg-white rounded">
           <LeftSideBar />
         </div>
-        <div className="col-span-5 flex flex-col poppins px-[1.5rem] overflow-hidden shadow-2xl">
+        <div className="col-span-5 flex flex-col poppins px-[1.5rem] overflow-hidden bg-white rounded">
           <Outlet />
         </div>
         {/* <div className="col-span-1 sideBars poppins px-[15px] shadow-lg ">

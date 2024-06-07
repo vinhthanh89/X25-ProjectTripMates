@@ -2,52 +2,76 @@ import { useEffect, useState } from "react";
 import Continents from "../Continents";
 import { fetchTopicData } from "../../../services/topic";
 import Topic from "../Topic";
+import { PiClockCounterClockwiseBold } from "react-icons/pi";
+import { MdStars } from "react-icons/md";
 
 const Content = () => {
-  const [topicData , setTopicData] = useState(null);
+  const iconSize = 20;
+
+  const [topicData, setTopicData] = useState(null);
+  const [feedType, setFeedType] = useState("Recents");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchTopicData()
-        setTopicData(response.data.dataTopic)
+        const response = await fetchTopicData(feedType);
+        setTopicData(response.data.dataTopic);
       } catch (error) {
         console.log(error);
       }
-    }
-    fetchData()
-  }, [])
+    };
+    fetchData();
+  }, [feedType]);
 
-  const renderTopicData = topicData ? topicData.map((topic) => {
-    return (
+  const handleFeedTypeChange = (type) => {
+    setFeedType(type);
+  };
+
+  const renderTopicData = topicData ? (
+    topicData.map((topic) => (
       <div key={topic._id}>
         <Topic topic={topic} />
       </div>
-    )
-  }) : <p>Data Loading ...</p>
+    ))
+  ) : (
+    <p>Loading ...</p>
+  );
 
   return (
-    <div className="flex flex-col gap-2 pt-[1rem] px-[2rem] h-full overflow-y-scroll text-[#303030]">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Recent posts</h1>
+    <div className="flex flex-col gap-2 h-full overflow-y-scroll text-[#303030]">
+      <div className="flex items-center justify-between sticky top-0 bg-white z-10 py-[1rem] w-full">
+        <h1 className="text-2xl font-semibold">{feedType} Feeds</h1>
         <div className="flex gap-6">
-          <button className="font-bold p-2 rounded-lg focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
-            Recents
+          <button
+            className={`flex items-center gap-2 font-bold p-2 rounded-lg transition duration-300 ease-in-out ${
+              feedType === "Recents"
+                ? "bg-[#303030] text-white"
+                : "hover:bg-[#303030] hover:text-white"
+            }`}
+            onClick={() => handleFeedTypeChange("Recents")}
+          >
+            <PiClockCounterClockwiseBold size={iconSize} />
+            <p>Recents</p>
           </button>
-          <button className="font-bold p-2 rounded-lg focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
-            Popular
+          <button
+            className={`flex items-center gap-2 font-bold p-2 rounded-lg transition duration-300 ease-in-out ${
+              feedType === "Popular"
+                ? "bg-[#303030] text-white"
+                : "hover:bg-[#303030] hover:text-white"
+            }`}
+            onClick={() => handleFeedTypeChange("Popular")}
+          >
+            <MdStars size={iconSize} />
+            <p>Popular</p>
           </button>
           <Continents />
         </div>
       </div>
       <div
-        className="grid grid-cols-2 gap-[10px]"
+        className="grid grid-cols-3 gap-[1rem] px-[2rem] "
         style={{ "-ms-overflow-style": "none" }}
       >
         {renderTopicData}
-        {/* {[0, 1, 2, 3, 4, 5].map((index) => (
-          <Post key={index} />
-        ))} */}
       </div>
     </div>
   );

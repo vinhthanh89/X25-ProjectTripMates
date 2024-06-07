@@ -108,7 +108,28 @@ const LeftSideBar = () => {
             </button>
           </div>
           <div className="flex flex-col gap-3">
-            {/* <h1 className="text-[grey]">Pages you like</h1>
+            <div className="recommend-list">
+              <h1 className="text-lg font-bold">Top travelers</h1>
+              <div className="grid grid-cols-2 gap-4 pt-[1rem]">
+                {ImageStories.slice(0, 4).map((story, index) => (
+                  <div
+                    key={index}
+                    className="relative overflow-hidden rounded-md transition-transform duration-300 hover:scale-105"
+                  >
+                    <img
+                      src={story.imageUrl}
+                      alt={`Traveler Story ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 flex items-end px-4 pb-4 bg-[#303030] bg-opacity-50 text-white">
+                      <p className="text-sm font-semibold">{`  ${story.name}`}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/* <h1 className="text-[grey]">Pages you like</h1>
             <button className="flex btn_all gap-2 w-full transition duration-300 ease-in-out">
               <div className="flex items-start gap-[5px] w-full">
                 <img
@@ -139,27 +160,6 @@ const LeftSideBar = () => {
                 <p className="text-sm">Travel with Ethan</p>
               </div>
             </button> */}
-            <div className="recommend-list">
-              <h1 className="text-lg font-bold">Top travelers</h1>
-              <div className="grid grid-cols-2 gap-4 pt-[1rem]">
-                {ImageStories.slice(0, 4).map((story, index) => (
-                  <div
-                    key={index}
-                    className="relative overflow-hidden rounded-md transition-transform duration-300 hover:scale-105"
-                  >
-                    <img
-                      src={story.imageUrl}
-                      alt={`Traveler Story ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 flex items-end px-4 pb-4 bg-[#303030] bg-opacity-50 text-white">
-                      <p className="text-sm font-semibold">{`  ${story.name}`}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </>
