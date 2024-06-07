@@ -33,6 +33,7 @@ const ModalUser = ({ isModalOpen, handleCancel, userProfile  , handleEditUser}) 
         birthday: dayjs(values.birthday, "YYYY-MM-DD").format("DD-MMMM-YYYY"),
       };
       const response = await editUser(userProfile._id, formData);
+      console.log(response);
       handleEditUser(response.data.userUpdated)
       dispatch(editUserAction({ user: response.data.userUpdated }));
       saveUserToLocal(response.data.userUpdated);

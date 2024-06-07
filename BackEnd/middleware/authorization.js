@@ -3,7 +3,10 @@ export const authorization = async (req , res , next) => {
         const userId = req.user
         const userParams = req.params.userId
 
-        if(!(userId === userParams)){
+        console.log("userId :::" , userId);
+        console.log("userParams :::" , userParams);
+
+        if(!(userId.payload === userParams)){
             return res.status(403).json({
                 message : "User does not have permissions for this function"
             })
