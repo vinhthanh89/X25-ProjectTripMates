@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { IoIosNotificationsOutline, IoIosSettings } from "react-icons/io";
-import { FaSignOutAlt } from "react-icons/fa";
+import { IoIosSettings, IoMdSettings } from "react-icons/io";
+import { FaSignOutAlt, FaBell, FaUserCircle } from "react-icons/fa";
 import { logoutAction } from "../../../features/user/userSlices.js";
 import { useNavigate } from "react-router";
 import ModalChangePassword from "../../UserProfile/ModalChangePassword";
 import { useDispatch, useSelector } from "react-redux";
 import TopicForm from "../TopicForm/index.jsx";
 import SearchBar from "../SearchBar/index.jsx";
+import { AiFillMessage } from "react-icons/ai";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -26,8 +27,8 @@ const Header = () => {
     setOpen(false);
   };
 
-  const iconSize = 30;
-  const iconStyle = { background: "transparent" };
+  const iconSize = 20;
+  const iconStyle = { background: "transparent"};
   return (
     <>
       <div className="grid grid-cols-5 p-[0.8rem] w-full border-b-[1.5px] bg-white">
@@ -44,31 +45,50 @@ const Header = () => {
         <div className="col-span-3 flex justify-center gap-[25px]">
           <SearchBar />
           <button
-            className="font-bold bg-[#5143d9] text-white p-3 rounded-xl"
+            className="font-bold bg-[#5143d9] text-white p-3 rounded-xl ring-1"
             onClick={showDrawer}
           >
-            Start a new trip
+            <p>Start a new trip</p>
           </button>
           {open && <TopicForm onClose={onClose} open={open} />}
         </div>
-        <div className="col-span-1 flex justify-end gap-[0.5rem]">
-          <button className="btn_all  text-[#545454] hover:scale-105">
-            <IoIosNotificationsOutline
-              size={iconSize}
-              className="bg-transparent"
-            />
+        <div className="col-span-1 flex justify-end items-center gap-[0.5rem] pr-5">
+          <button className="btn_all hover:scale-105 text-[#545454]">
+            <AiFillMessage size={iconSize} style={iconStyle} />
           </button>
-
+          <button className="btn_all hover:scale-105 text-[#545454]">
+            <FaBell size={iconSize} style={iconStyle} />
+          </button>
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button">
-              <button className="btn_all text-[#545454] hover:scale-105">
-                <IoIosSettings size={iconSize} className="bg-transparent" />
-              </button>
+              <div>
+                <button className="btn_all hover:scale-105 text-[#545454]">
+                  <IoMdSettings size={iconSize} style={iconStyle} />
+                </button>
+                {/* <div className="w-[40px] h-[40px] rounded-full border-2">
+                  <img
+                    className="w-full h-full object-cover rounded-full"
+                    src={user.avatar}
+                    alt=""
+                  />
+                </div> */}
+                {/* <div className="flex-1 overflow-hidden">
+                  <p className="truncate">{user.fullName}</p>
+                  <p className="text-xs text-[#717171]">{user.email}</p>
+                </div> */}
+              </div>
             </div>
             <ul
               tabIndex={0}
               className="dropdown-content z-[1] menu p-4 shadow bg-white rounded-box w-52 gap-3"
             >
+              {/* <button
+                className="flex justify-start items-center btn_all gap-2 w-full transition duration-300 ease-in-out bg-[#5143d9] hover:bg-[#6e5eff] text-white text-sm"
+                onClick={() => navigate(`/user/${user._id}`)}
+              >
+                <FaUserCircle size={20} style={iconStyle} />
+                My profile
+              </button> */}
               <ModalChangePassword user={user} />
               <button
                 className="flex justify-start items-center btn_all gap-2 w-full transition duration-300 ease-in-out bg-red-600 hover:bg-red-500 text-white text-sm"
