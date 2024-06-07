@@ -1,19 +1,22 @@
 /* eslint-disable react/prop-types */
 import { Button, Form, Modal } from "antd";
 import { useEffect, useState } from "react";
-
-
 import { useDispatch, useSelector } from "react-redux";
 import { uploadAvatar } from "../../../services/user";
 import { editUserAction } from "../../../features/user/userSlices.js";
+import { FaCamera } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 
-const MoadlChangeAvatar = ({ userProfile , handleEditUser }) => {
+
+const MoadlChangeAvatar = ({ userProfile, handleEditUser }) => {
+  const iconSize = 15
   const userLogin = useSelector((state) => state.user.user);
   const dispatch = useDispatch()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editAvatar, setEditAvatar] = useState(userLogin.avatar);
   const [uploadFile, setUploadFile] = useState(null);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     return () => {
@@ -24,8 +27,6 @@ const MoadlChangeAvatar = ({ userProfile , handleEditUser }) => {
   const showModal = () => {
     setIsModalOpen(true);
   };
-
-
 
   const handleCancel = () => {
     setEditAvatar(userLogin.avatar);
@@ -43,16 +44,21 @@ const MoadlChangeAvatar = ({ userProfile , handleEditUser }) => {
 
   const handleOk = async () => {
     try {
+      setLoading(true)
       const formData = new FormData();
       formData.append("avatar", uploadFile);
       formData.append('userId' , userLogin._id);
       const response = await uploadAvatar(formData)
       dispatch(editUserAction({user : response.data.userUploaded}))
       handleEditUser(response.data.userUploaded)
-      console.log(response);
+      console.log(response);      
       setIsModalOpen(false);
+      toast.success("Updated successfully!");
     } catch (error) {
+      toast.error("Update failed!");
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -61,10 +67,10 @@ const MoadlChangeAvatar = ({ userProfile , handleEditUser }) => {
       {userLogin._id === userProfile._id && (
         <div
           onClick={showModal}
-          className="w-[35px] h-[35px] flex items-center justify-center bg-[gray] rounded-full text-[25px] absolute right-[-10px] bottom-[-5px]"
+          className="w-[25px] h-[25px] flex items-center justify-center bg-[#cecece] rounded-full text-[25px] absolute right-[-10px] bottom-[-5px] hover:scale-105"
         >
           <label htmlFor="file" className="cursor-pointer">
-            📷
+            <FaCamera size={iconSize} />
           </label>
         </div>
       )}
@@ -85,7 +91,7 @@ const MoadlChangeAvatar = ({ userProfile , handleEditUser }) => {
             />
           </div>
           <div className="mt-[10px] flex justify-center items-center ">
-            <div >
+            <div>
               <div className="hidden">
                 <input
                   onChange={handlePreviewAvatar}
@@ -96,13 +102,16 @@ const MoadlChangeAvatar = ({ userProfile , handleEditUser }) => {
               </div>
 
               <label htmlFor="upload">
-                <div className="px-[15px] py-[5px]  cursor-pointer rounded-[8px] bg-sky-400 text-[white] mr-[10px]">
+                <div className="px-[15px] py-[5px]  cursor-pointer rounded-[8px] bg-[#5143d9] text-[white] mr-[10px]">
                   Upload
                 </div>
               </label>
             </div>
-
-            <Button type="primary" htmlType="submit">
+            <Button
+              htmlType="submit"
+              style={{ background: "black" }}
+              loading={loading}
+            >
               <p className="text-white">Save changes</p>
             </Button>
           </div>
