@@ -212,14 +212,12 @@ export const uploadUserAvatar = async (req , res) => {
   try {
     const userId = req.user
     const file = req.file
-
-    console.log("file ::" , file);
-    console.log("userId ::" , userId);
-
+    console.log(userId);
+    console.log("file :::" , file);
     const b64 = Buffer.from(req.file.buffer).toString("base64");
     let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
 
-    const [result , findUser] = await Promise.all([handleUpload(dataURI) , User.findById(userId.payload).select("-password")])
+    const [result , findUser] = await Promise.all([handleUpload(dataURI) , User.findById(userId).select("-password")])
 
     if(!findUser){
       if(result){

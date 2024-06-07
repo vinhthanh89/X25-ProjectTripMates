@@ -10,8 +10,12 @@ import AboutMe from "../../UserProfile/AboutMe";
 import Followers from "../../UserProfile/Followers";
 import UserCreatedTopic from "../../UserProfile/UserCreatedTopic";
 import MoadlChangeAvatar from "../../UserProfile/ModalChangeAvatar";
+import { saveUserToLocal } from "../../../utils/localstorage";
+import { useDispatch } from "react-redux";
+import { editUserAction } from "../../../features/user/userSlices";
 
 const UserProfile = () => {
+  const dispatch = useDispatch()
   const urlParam = useParams();
   const [userProfile, setUserProfile] = useState({
     email: "",
@@ -41,6 +45,8 @@ const UserProfile = () => {
 
   const handleEditUser = (newUserProfile) => {
     setUserProfile(newUserProfile);
+    // saveUserToLocal(userProfile)
+    // dispatch(editUserAction({user : userProfile}))
   };
 
 
