@@ -12,7 +12,7 @@ const router = Router()
 router.post('/signup' , signup)
 router.post('/login' , login)
 router.get('/:userId', getUserById);
-router.put('/upload-avatar' , authentication , upload.single('avatar') , uploadUserAvatar)
+router.put('/upload-avatar/:userId' , authentication , upload.single('avatar') , uploadUserAvatar)
 router.put('/edit/:userId' , authentication , authorization , editUser)
 router.put('/changePassword/:userId' , authentication , authorization , changeUserPassword)
 

@@ -130,6 +130,7 @@ export const getUserById = async (req , res) => {
 export const editUser = async ( req , res) => {
   try {
     const userId = req.params.userId
+    console.log(userId);
     const {fullName , birthday , gender , description} = req.body
     const findUser = await User.findById(userId)
     if(!findUser){
@@ -210,7 +211,7 @@ export const changeUserPassword = async (req , res) => {
 
 export const uploadUserAvatar = async (req , res) => {
   try {
-    const userId = req.user
+    const userId = req.params.userId
     const file = req.file
     console.log(userId);
     console.log("file :::" , file);
