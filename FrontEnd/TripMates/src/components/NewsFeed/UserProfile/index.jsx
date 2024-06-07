@@ -1,14 +1,15 @@
-// import { useSelector } from "react-redux";
 // import { IoIosMail, IoMdTransgender } from "react-icons/io";
 // import { FaBirthdayCake } from "react-icons/fa";
 // import { MdPlace } from "react-icons/md";
 // import Post from "../Post";
-import { useParams } from "react-router";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+
 import { getUserById } from "../../../services/user";
-import UserCreatedTopic from "../../UserProfile/UserCreatedTopic";
 import AboutMe from "../../UserProfile/AboutMe";
 import Followers from "../../UserProfile/Followers";
+import UserCreatedTopic from "../../UserProfile/UserCreatedTopic";
+import MoadlChangeAvatar from "../../UserProfile/ModalChangeAvatar";
 
 const UserProfile = () => {
   const urlParam = useParams();
@@ -30,7 +31,7 @@ const UserProfile = () => {
       try {
         const response = await getUserById(urlParam.userId);
         setUserProfile(response.data.findUser);
-        setShowComponent('topic')
+        setShowComponent("topic");
       } catch (error) {
         console.log(error);
       }
@@ -41,6 +42,9 @@ const UserProfile = () => {
   const handleEditUser = (newUserProfile) => {
     setUserProfile(newUserProfile);
   };
+
+
+
 
   return (
     <>
@@ -79,11 +83,15 @@ const UserProfile = () => {
         <div className="grid grid-cols-4 gap-[20px] pt-[1rem]">
           <div className="col-span-1 flex flex-col gap-[20px] p-[2rem] bg-white rounded">
             <div className="flex flex-col items-center gap-2">
-              <img
-                className="w-[90px] h-[90px] object-cover rounded-full"
-                src={userProfile.avatar}
-                alt=""
-              />
+              <div className="relative">
+                <img
+                  className="w-[90px] h-[90px] object-cover rounded-full"
+                  src={userProfile.avatar}
+                  alt=""
+                />
+                <MoadlChangeAvatar userProfile={userProfile} handleEditUser={handleEditUser} />
+              </div>
+
               <h1 className="w-full flex justify-center text-lg font-bold truncate">
                 {userProfile.fullName}
               </h1>

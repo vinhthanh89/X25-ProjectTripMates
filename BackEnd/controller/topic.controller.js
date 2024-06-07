@@ -3,8 +3,8 @@ import Topic from '../model/topic.model.js'
 export const createTopic = async (req , res) => {
     try {
         const {title , description , startDate , endDate , continent , country} = req.body
-        const userId = req.user
-        console.log(userId);
+        
+        const userId = req.user;
 
         const newTopic = await Topic.create({
             userCreated : userId,
@@ -22,6 +22,33 @@ export const createTopic = async (req , res) => {
         })
 
 
+
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message : error
+        })
+    }
+}
+
+export const editTopic = async (req , res) => {
+    try {
+        const topicId = req.params.topicId
+        const {title , description , endDate , continent , country} = req.body
+
+        const updatedTopic = await Topic.findByIdAndUpdate(topicId , {
+            title ,
+            description ,
+            continent,
+            country ,
+            endDate
+        } , {new : true})
+
+        return res.status(200).json({
+            message : "Edit Topic Successfully" ,
+            updatedTopic
+        })
 
 
     } catch (error) {

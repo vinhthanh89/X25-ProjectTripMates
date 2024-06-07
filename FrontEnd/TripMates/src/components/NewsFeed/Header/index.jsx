@@ -68,7 +68,7 @@ const Header = () => {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-4 shadow bg-white rounded-box w-52 gap-3 "
+              className="dropdown-content z-[1] menu p-4 shadow bg-white rounded-box w-52 gap-3"
             >
               <ModalChangePassword user={user} />
               <button

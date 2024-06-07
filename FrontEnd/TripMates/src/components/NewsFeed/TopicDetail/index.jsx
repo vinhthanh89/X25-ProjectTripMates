@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router";
 
 
 import { getTopicById } from "../../../services/topic";
+import dayjs from "dayjs";
 // eslint-disable-next-line no-unused-vars
 
 const TopicDetail = () => {
@@ -46,8 +47,8 @@ const TopicDetail = () => {
     country,
   } = topicDetail;
   
-  const convertedStartDate = moment(startDate).format("MMMM Do, YYYY");
-  const convertedEndDate = moment(endDate).format("MMMM Do, YYYY");
+  const convertedStartDate = dayjs(startDate , 'YYYY-DD-MM').format("MMMM Do, YYYY");
+  const convertedEndDate = dayjs(endDate , "YYYY-DD-MM").format("MMMM Do, YYYY");
 
   // Testing
   const columns = [
