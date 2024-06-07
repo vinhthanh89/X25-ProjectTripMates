@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Continents from "../Continents";
-import Post from "../Post";
 import { fetchTopicData } from "../../../services/topic";
+import Topic from "../Topic";
 
 const Content = () => {
   const [topicData , setTopicData] = useState(null);
@@ -21,7 +21,7 @@ const Content = () => {
   const renderTopicData = topicData ? topicData.map((topic) => {
     return (
       <div key={topic._id}>
-        <Post topic={topic} />
+        <Topic topic={topic} />
       </div>
     )
   }) : <p>Data Loading ...</p>

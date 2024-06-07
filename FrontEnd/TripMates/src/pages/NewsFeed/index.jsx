@@ -11,12 +11,12 @@ const NewsFeed = () => {
         <div className="col-span-1 sideBars poppins px-[10px] shadow-lg ">
           <LeftSideBar />
         </div>
-        <div className="col-span-4 flex flex-col poppins px-[1.5rem] overflow-hidden shadow-2xl">
+        <div className="col-span-5 flex flex-col poppins px-[1.5rem] overflow-hidden shadow-2xl">
           <Outlet />
         </div>
-        <div className="col-span-1 sideBars poppins px-[15px] shadow-lg ">
+        {/* <div className="col-span-1 sideBars poppins px-[15px] shadow-lg ">
           <RightSideBar />
-        </div>
+        </div> */}
       </div>
     </div>
   );
