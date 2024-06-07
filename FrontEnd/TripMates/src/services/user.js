@@ -25,6 +25,6 @@ export const changeUserPassword = (userId, formData) => {
   return axiosAuthInstance.put(`/api/user/changePassword/${userId}`, formData)
 }
 
-export const uploadAvatar = (formData) => {
-  return axiosAuthInstance.put('/api/user/upload-avatar' , formData)
+export const uploadAvatar = (userId , formData) => {
+  return axiosAuthInstance.put(`/api/user/upload-avatar/${userId}`, formData)
 }

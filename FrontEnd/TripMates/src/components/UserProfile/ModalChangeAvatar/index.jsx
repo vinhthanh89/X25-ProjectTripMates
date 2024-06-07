@@ -45,7 +45,7 @@ const MoadlChangeAvatar = ({ userProfile, handleEditUser }) => {
       const formData = new FormData();
       formData.append("avatar", uploadFile);
       formData.append("userId", userLogin._id);
-      const response = await uploadAvatar(formData);
+      const response = await uploadAvatar(userProfile._id , formData);
       handleEditUser(response.data.userUploaded);
       saveUserToLocal(response.data.userUploaded);
       dispatch(editUserAction({ user: response.data.userUploaded }));
