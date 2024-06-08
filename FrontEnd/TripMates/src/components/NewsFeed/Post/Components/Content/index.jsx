@@ -1,3 +1,5 @@
+import { MdPlace } from "react-icons/md";
+
 const Content = () => {
   const content = [
     {
@@ -11,13 +13,24 @@ const Content = () => {
   return (
     <div className="container mx-auto px-4">
       <div className="flex flex-col gap-4">
-        <span className="flex items-center gap-2 font-bold">
-          <img src="../../../../../../public/vietnam.png" alt="" className="w-[2rem] h-[2rem]"/>
+        {/* <span className="flex items-center gap-2 font-bold">
+          <MdPlace />
+          <img
+            src="../../../../../../public/vietnam.png"
+            alt=""
+            className="w-[2rem] h-[2rem]"
+          />
           Vietnam
-        </span>
-        <h1 className="text-4xl font-bold">
+        </span> */}
+        {/* <h1 className="text-4xl font-bold">
           Top 10 places you should visit in Vietnam and make sure to take photos
-        </h1>
+          <div className="text-base">
+            <span className="flex items-center gap-2 font-bold">
+              <MdPlace />
+              Vietnam
+            </span>
+          </div>
+        </h1> */}
         <div className="flex flex-col items-center gap-2 p-[1.5rem]">
           <img src={thumbnail} alt="Thumbnail" className="rounded" />
           <span className="text-gray-400">A picture taken in the Village</span>

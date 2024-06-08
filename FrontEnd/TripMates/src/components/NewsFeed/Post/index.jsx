@@ -5,7 +5,7 @@ import Recommend from "./Components/Recommend";
 const Post = () => {
     return (
       //! UI 1
-    <div className="grid grid-cols-5 gap-[3rem] mt-5 px-5 h-full overflow-y-scroll">
+    <div className="grid grid-cols-5 gap-[3rem] mt-5 px-2 h-full overflow-y-scroll">
       <div className="col-span-4 flex flex-col gap-[2rem] overflow-auto">
         <Header />
         <Content />
