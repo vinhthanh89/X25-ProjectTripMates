@@ -80,7 +80,7 @@ const Header = () => {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-4 shadow bg-white rounded-box w-52 gap-3"
+              className="dropdown-content z-20 menu p-4 shadow bg-white rounded-box w-56 gap-3"
             >
               {/* <button
                 className="flex justify-start items-center btn_all gap-2 w-full transition duration-300 ease-in-out bg-[#5143d9] hover:bg-[#6e5eff] text-white text-sm"
@@ -90,13 +90,10 @@ const Header = () => {
                 My profile
               </button> */}
               <ModalChangePassword user={user} />
-              <button
-                className="flex justify-start items-center btn_all gap-2 w-full transition duration-300 ease-in-out bg-red-600 hover:bg-red-500 text-white text-sm"
-                onClick={handleLogOut}
-              >
+              <div className="flex items-center btn_all gap-2 w-full transition duration-300 ease-in-out bg-red-600 hover:bg-red-500 text-white text-base font-bold">
                 <FaSignOutAlt size={20} style={iconStyle} />
-                <p className="">Sign out</p>
-              </button>
+                <button onClick={handleLogOut}>Sign out</button>
+              </div>
             </ul>
           </div>
         </div>

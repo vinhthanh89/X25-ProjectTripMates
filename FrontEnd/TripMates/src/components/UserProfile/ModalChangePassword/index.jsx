@@ -2,14 +2,12 @@
 
 import { Button, Form, Input, Modal } from "antd";
 import { useState } from "react";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import { RiLockPasswordFill } from "react-icons/ri";
-
 
 import { changeUserPassword } from "../../../services/user";
 
-
-const ModalChangePassword = ({user}) => {
+const ModalChangePassword = ({ user }) => {
   const iconSize = 20;
   const iconStyle = { background: "transparent" };
   // Handle Modal
@@ -19,29 +17,29 @@ const ModalChangePassword = ({user}) => {
   };
 
   const handleCancel = () => {
-    form.resetFields()
+    form.resetFields();
     setIsModalOpen(false);
   };
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
   // Handle Form
   const onFinish = async (values) => {
     try {
-      const response = await changeUserPassword(user._id , values)
-      form.resetFields()
-      setIsModalOpen(false)
-      toast.success(response.data.message)
-
+      const response = await changeUserPassword(user._id, values);
+      form.resetFields();
+      setIsModalOpen(false);
+      toast.success(response.data.message);
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message)
+      toast.error(error.response.data.message);
     }
   };
 
   return (
     <>
-      <div className="flex justify-start items-center btn_all gap-2 w-full transition duration-300 ease-in-out bg-gray-700 hover:bg-gray-900 text-white text-sm">
-        <RiLockPasswordFill className="" size={iconSize} style={iconStyle} />
+      <div className="flex items-center btn_all gap-2 w-full transition duration-300 ease-in-out bg-gray-700 hover:bg-gray-900 text-white text-base font-bold">
+        <RiLockPasswordFill size={iconSize} style={iconStyle} />
         <button onClick={showModal}>Change password</button>
+
         <Modal
           title="User Profile"
           open={isModalOpen}
