@@ -1,8 +1,10 @@
 import { Button, DatePicker, Drawer, Form, Input } from "antd";
 import dayjs from "dayjs";
+import { useState } from "react";
 // eslint-disable-next-line react/prop-types
 const TopicForm = ({ onClose, open }) => {
   const { TextArea } = Input;
+  const [searchInput, setSearchInput ] = useState('');
 
   const onFinish = (values) => {
     const formData = {
@@ -14,6 +16,12 @@ const TopicForm = ({ onClose, open }) => {
     };
     console.log(formData);
   };
+
+  const onChangeSearchInput = (e) => {
+    console.log(e.target.value);
+    setSearchInput(e.target.value);
+    };
+
 
   return (
     <>
@@ -31,18 +39,6 @@ const TopicForm = ({ onClose, open }) => {
                   </div>
                   <Input className="input input-bordered border-2 border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300" />
                 </label>
-                {/* <label className="form-control max-w-xs">
-                  <div className="label">
-                    <span className="label-text font-bold text-black text-base">
-                      Topic name
-                    </span>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="e.g., Spring in Hanoi"
-                    className="input input-bordered border-2 border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300"
-                  />
-                </label> */}
               </Form.Item>
               <Form.Item name="description">
                 <label className="form-control max-w-xs">
@@ -72,15 +68,18 @@ const TopicForm = ({ onClose, open }) => {
                       Where to? (countries)
                     </span>
                   </div>
-                  <Input
-                    placeholder="e.g., Asia"
-                    className="input input-bordered border-2 border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300"
-                  />
                   {/* <input
                     type="text"
+                  onChange={onChangeSearchInput}
+
                     placeholder="e.g., Asia"
                     className="input input-bordered border-2 border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300"
                   /> */}
+                  <Input
+                  onChange={onChangeSearchInput}
+                    placeholder="e.g., Asia"
+                    className="input input-bordered border-2 border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300"
+                  />
                 </label>
               </Form.Item>
 

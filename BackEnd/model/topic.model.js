@@ -49,6 +49,10 @@ const Topic = new mongoose.Schema({
     endDate : {
         type : Date,
         required : true
+    },
+    location : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "locations"
     }
 } , {timestamps : true})
 
