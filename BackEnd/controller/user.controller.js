@@ -1,8 +1,5 @@
-
-
 import cloudinary from "../configs/cloudinary.js";
 import { getAvatarPublicId, handleUpload } from "../utils/handleUpload.js";
-
 import User from "../model/user.model.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 import { signAccessToken, signRefreshToken } from "../utils/jsonwebtoken.js";
