@@ -1,3 +1,4 @@
+import Post from "../../components/NewsFeed/Post";
 import LeftSideBar from "../../components/NewsFeed/SideLeft";
 import RightSideBar from "../../components/NewsFeed/SideRight";
 import "./index.css";
@@ -11,7 +12,8 @@ const NewsFeed = () => {
           <LeftSideBar />
         </div>
         <div className="col-span-5 flex flex-col poppins px-[1.5rem] overflow-hidden bg-white rounded">
-          <Outlet />
+          {/* <Outlet /> */}
+          <Post/>
         </div>
         {/* <div className="col-span-1 sideBars poppins px-[15px] shadow-lg ">
           <RightSideBar />
