@@ -2,7 +2,11 @@ import { Button, DatePicker, Drawer, Form, Input, AutoComplete } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
 
+// eslint-disable-next-line react/prop-types
 const TopicForm = ({ onClose, open }) => {
+  const { TextArea } = Input;
+  const [searchInput, setSearchInput ] = useState('');
+
   const [places, setPlaces] = useState([]);
 
   const staticPlaces = [
@@ -27,6 +31,7 @@ const TopicForm = ({ onClose, open }) => {
     appearance: "none",
   };
 
+
   const onFinish = (values) => {
     const formData = {
       title: values.title,
@@ -38,12 +43,18 @@ const TopicForm = ({ onClose, open }) => {
     console.log(formData);
   };
 
+  const onChangeSearchInput = (e) => {
+    console.log(e.target.value);
+    setSearchInput(e.target.value);
+    };
+
   const fetchPlaces = async (inputValue) => {
     const filteredPlaces = staticPlaces.filter((place) =>
       place.toLowerCase().includes(inputValue.toLowerCase())
     );
     setPlaces(filteredPlaces);
   };
+
 
   return (
     <Drawer onClose={onClose} open={open} width={500}>

@@ -12,8 +12,8 @@ const NewsFeed = () => {
           <LeftSideBar />
         </div>
         <div className="col-span-5 flex flex-col poppins px-[1.5rem] overflow-hidden bg-white rounded">
-          {/* <Outlet /> */}
-          <Post/>
+          <Outlet />
+          {/* <Post/> */}
         </div>
         {/* <div className="col-span-1 sideBars poppins px-[15px] shadow-lg ">
           <RightSideBar />
