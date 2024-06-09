@@ -30,11 +30,9 @@ const Topic = new mongoose.Schema({
     ],
     continent : {
         type : String,
-        required : true
     },
     country : {
         type : String,
-        required : true
     },
     userJoinTrip : [
         {
@@ -48,7 +46,6 @@ const Topic = new mongoose.Schema({
     },
     endDate : {
         type : Date,
-        required : true
     },
     location : {
         type : mongoose.Schema.Types.ObjectId,

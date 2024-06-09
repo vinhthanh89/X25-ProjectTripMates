@@ -11,3 +11,7 @@ export const getTopicById = (topicId) => {
 export const getTopicByUserCreated = (userId) => {
     return axiosAuthInstance.get(`/api/topic/topic-by-user-created/${userId}`)
 }
+
+export const createTopic = (formData) => {
+    return axiosAuthInstance.post('/api/topic/create-topic' , formData)
+}
