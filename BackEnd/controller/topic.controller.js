@@ -2,18 +2,21 @@ import Topic from '../model/topic.model.js'
 
 export const createTopic = async (req , res) => {
     try {
-        const {title , description , startDate , endDate , continent , country} = req.body
+        const {title , description , locationId , startDate , endDate } = req.body
         
         const userId = req.user;
 
+        console.log("body :::" , req.body);
+        console.log('title :::' , title);
+        console.log("user id :::" , userId);
+
         const newTopic = await Topic.create({
             userCreated : userId,
-            title,
+            title : req.body.title,
             description,
             startDate,
             endDate,
-            continent,
-            country
+            location : locationId
         })
 
         return res.status(201).json({
@@ -21,11 +24,8 @@ export const createTopic = async (req , res) => {
             newTopic
         })
 
-
-
-
     } catch (error) {
-        console.log(error);
+        console.log("backend error" , error);
         return res.status(500).json({
             message : error
         })
@@ -61,7 +61,7 @@ export const editTopic = async (req , res) => {
 
 export const getTopics = async (req , res) => {
     try {
-        const dataTopic = await Topic.find().populate('userCreated')
+        const dataTopic = await Topic.find().populate('userCreated location')
 
         return res.status(200).json({
             message : "Get Topics Successfully",
@@ -80,7 +80,7 @@ export const getTopicById = async (req , res) => {
     try {
         const topicId = req.params.topicId
 
-        const findTopic = await Topic.findById(topicId).populate('userCreated')
+        const findTopic = await Topic.findById(topicId).populate('userCreated location')
 
         return res.status(200).json({
             message : "Get Topic Detail Successfully",
@@ -100,7 +100,7 @@ export const getTopicByUserCreated = async (req , res) => {
     try {
         const userId = req.params.userId
 
-        const findTopicByUserId = await Topic.find({userCreated : userId}).populate('userCreated')
+        const findTopicByUserId = await Topic.find({userCreated : userId}).populate('userCreated location')
 
         return res.status(200).json({
             message : "Get Topic By User Success",

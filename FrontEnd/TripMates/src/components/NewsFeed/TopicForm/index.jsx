@@ -1,64 +1,98 @@
-import { Button, DatePicker, Drawer, Form, Input, AutoComplete } from "antd";
+import { Button, DatePicker, Drawer, Form, Input } from "antd";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import RenderSearchInput from "../../RenderSearchInput";
+import { createTopic } from "../../../services/topic";
 
 // eslint-disable-next-line react/prop-types
 const TopicForm = ({ onClose, open }) => {
-  const { TextArea } = Input;
-  const [searchInput, setSearchInput ] = useState('');
+  const [searchInput, setSearchInput] = useState(null);
+  const [locationId, setLocationId] = useState(null);
+  const [startDate, setStartDate] = useState(null);
 
-  const [places, setPlaces] = useState([]);
+  const [form] = Form.useForm();
 
-  const staticPlaces = [
-    "China",
-    "Chiangmai",
-    "Japan",
-    "India",
-    "Thailand",
-    "Vietnam",
-  ];
-
-  const inputStyle = {
-    width: "25rem",
-    height: "3rem",
-    borderRadius: "var(--rounded-btn, 0.5rem)",
-    fontSize: "1rem",
-    fontWeight: "700",
-    lineHeight: "1.25rem",
-    borderWidth: "2px",
-    backgroundColor: "var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)))",
-    flexShrink: "1",
-    appearance: "none",
+  const disabledDate = (current) => {
+    return current && current < dayjs().endOf("day");
   };
 
-
-  const onFinish = (values) => {
-    const formData = {
-      title: values.title,
-      description: values.description,
-      location: values.location,
-      startDate: dayjs(values.startDate, "MM-DD-YYYY").format("DD-MM-YYYY"),
-      endDate: dayjs(values.endDate, "MM-DD-YYYY").format("DD-MM-YYYY"),
-    };
-    console.log(formData);
+  const disableStarDate = (current) => {
+    return current && current < dayjs(startDate).endOf("day");
   };
+
+  const onChangeStartDate = (date) => {
+    setStartDate(date);
+    form.setFieldsValue({ endDate: null });
+  };
+  // const [places, setPlaces] = useState([]);
+
+  // const staticPlaces = [
+  //   "China",
+  //   "Chiangmai",
+  //   "Japan",
+  //   "India",
+  //   "Thailand",
+  //   "Vietnam",
+  // ];
+
+  // const inputStyle = {
+  //   width: "25rem",
+  //   height: "3rem",
+  //   borderRadius: "var(--rounded-btn, 0.5rem)",
+  //   fontSize: "1rem",
+  //   fontWeight: "700",
+  //   lineHeight: "1.25rem",
+  //   borderWidth: "2px",
+  //   backgroundColor: "var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)))",
+  //   flexShrink: "1",
+  //   appearance: "none",
+  // };
 
   const onChangeSearchInput = (e) => {
-    console.log(e.target.value);
     setSearchInput(e.target.value);
-    };
-
-  const fetchPlaces = async (inputValue) => {
-    const filteredPlaces = staticPlaces.filter((place) =>
-      place.toLowerCase().includes(inputValue.toLowerCase())
-    );
-    setPlaces(filteredPlaces);
+    // form.setFieldsValue({location : e.target.value})
   };
 
+  const onChangeLocationId = (e) => {
+    setLocationId(e.target.value);
+    // form.setFieldsValue({locationId : locationId})
+  };
+
+  const handleSetLocationId = (location, locationId) => {
+    setLocationId(locationId);
+    setSearchInput(location);
+    form.setFieldsValue({ location });
+    form.setFieldsValue({ locationId: locationId });
+  };
+
+  const onFinish = async (values) => {
+    try {
+      const formData = {
+        title: values.title,
+        description: values.description,
+        locationId: values.locationId,
+        location: values.location,
+        startDate: dayjs(values.startDate),
+        endDate: dayjs(values.endDate),
+      };
+      console.log(formData);
+      const response = await createTopic(values);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const fetchPlaces = async (inputValue) => {
+  //   const filteredPlaces = staticPlaces.filter((place) =>
+  //     place.toLowerCase().includes(inputValue.toLowerCase())
+  //   );
+  //   setPlaces(filteredPlaces);
+  // };
 
   return (
     <Drawer onClose={onClose} open={open} width={500}>
-      <Form name="basic" className="pb-[20px]" onFinish={onFinish}>
+      <Form form={form} name="basic" className="pb-[20px]" onFinish={onFinish}>
         <div className="text-black px-5">
           <h2 className="text-2xl font-semibold mb-4">Start a New Trip</h2>
           <div className="flex flex-col gap-4">
@@ -93,21 +127,40 @@ const TopicForm = ({ onClose, open }) => {
                 />
               </label>
             </Form.Item>
-            <Form.Item name="location">
-              <label className="form-control max-w-xs">
+
+            <Form.Item className="hidden" label="location id" name="locationId">
+              <Input onChange={onChangeLocationId} value={locationId} />
+            </Form.Item>
+
+            <Form.Item name="location" className="h-auto">
+              <label className="form-control max-w-full">
                 <div className="label">
                   <span className="label-text font-bold text-black text-base">
                     Where to? (countries)
                   </span>
                 </div>
-                <AutoComplete
+
+                <Input
+                  onChange={onChangeSearchInput}
+                  value={searchInput}
+                  className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300"
+                />
+                <div>
+                  <RenderSearchInput
+                    searchInput={searchInput}
+                    handleSetLocationId={handleSetLocationId}
+                  />
+                </div>
+
+                {/* <AutoComplete
                   options={places.map((place) => ({ value: place }))}
                   onSearch={fetchPlaces}
                   placeholder="e.g., Asia"
                   style={inputStyle}
-                />
+                /> */}
               </label>
             </Form.Item>
+
             <div className="flex justify-between">
               <div className="form-control max-w-xs">
                 <div className="label">
@@ -117,6 +170,8 @@ const TopicForm = ({ onClose, open }) => {
                 </div>
                 <Form.Item name="startDate">
                   <DatePicker
+                    onChange={onChangeStartDate}
+                    disabledDate={disabledDate}
                     placeholder="e.g., 2024-01-01"
                     className="input border-2 border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-extrabold w-[12rem]"
                     format="DD-MM-YYYY"
@@ -131,6 +186,7 @@ const TopicForm = ({ onClose, open }) => {
                 </div>
                 <Form.Item name="endDate">
                   <DatePicker
+                    disabledDate={disableStarDate}
                     placeholder="e.g., 2024-01-01"
                     className="input border-2 border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-extrabold w-[12rem]"
                     format="DD-MM-YYYY"
