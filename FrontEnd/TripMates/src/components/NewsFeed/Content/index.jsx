@@ -14,14 +14,15 @@ const Content = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchTopicData(feedType);
+        const response = await fetchTopicData();
+        console.log(response);
         setTopicData(response.data.dataTopic);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, [feedType]);
+  }, []);
 
   const handleFeedTypeChange = (type) => {
     setFeedType(type);

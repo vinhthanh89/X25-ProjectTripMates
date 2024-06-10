@@ -5,7 +5,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { getUserById } from "../../../services/user";
 import AboutMe from "../../UserProfile/AboutMe";
 import Followers from "../../UserProfile/Followers";
