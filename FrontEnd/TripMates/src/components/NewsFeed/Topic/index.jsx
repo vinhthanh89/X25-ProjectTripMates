@@ -13,7 +13,7 @@ const Topic = ({ topic }) => {
     location,
   } = topic;
 
-  const {locationName , locationDependent , locationThumbnail} = location
+  const {locationName , continent , country , locationThumbnail} = location
 
   return (
     <div className="flex flex-col gap-y-[1.2rem] rounded-lg shadow-xl cursor-pointer p-[2rem]">
@@ -28,7 +28,7 @@ const Topic = ({ topic }) => {
         </div>
         <img
           src={thumbnail ? thumbnail : locationThumbnail}
-          alt={location.location}
+          alt={locationName}
           className="rounded-[12px] cursor-pointer w-full h-[270px] object-fill"
         />
       </div>
@@ -40,8 +40,9 @@ const Topic = ({ topic }) => {
             <p>{locationName}</p>
           </div>
           <div className="text-sm text-[#5143d9]">
-            {locationDependent.continent ? <span>#{location.locationDependent.continent}</span> : <></>}
-            {locationDependent.country ? <span> - #{locationDependent.country}</span> : <></>}
+            {continent ? <span>#{continent}</span> : <></>}
+
+            {country ? <span> - #{country}</span> : <></>}
             {/* <span>#{continent}</span>
             <span>#{country}</span> */}
           </div>

@@ -8,6 +8,7 @@ const RenderSearchInput = ({ searchInput , handleSetLocationId }) => {
   const fetchDataLocation = async () => {
     try {
       const response = await getLocation();
+      console.log(response);
       setDataLocation(response.data.locationData);
     } catch (error) {
       console.log(error);
@@ -31,7 +32,7 @@ const RenderSearchInput = ({ searchInput , handleSetLocationId }) => {
   });
 
   const renderDataLocation = render.map((item) => {
-    const {_id, locationThumbnail, locationName, locationDependent } = item;
+    const {_id, locationThumbnail, locationName, continent , country } = item;
     return (
       <div
         key={_id}
@@ -48,8 +49,8 @@ const RenderSearchInput = ({ searchInput , handleSetLocationId }) => {
         <div className="ml-[18px]">
           <p className="font-bold text-[16px]">{locationName}</p>
           <p className="text-[#5f5e5e]">
-            {locationDependent.country ? `${locationDependent.country} ,` : ""}{" "}
-            {locationDependent.continent ? locationDependent.continent : ""}
+            {country ? `${country} ,` : ""}{" "}
+            {continent ? continent : ""}
           </p>
         </div>
       </div>
