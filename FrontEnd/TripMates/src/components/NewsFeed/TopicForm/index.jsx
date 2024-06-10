@@ -1,11 +1,17 @@
+
+
 import { Button, DatePicker, Drawer, Form, Input } from "antd";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
-import RenderSearchInput from "../../RenderSearchInput";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+
+
 import { createTopic } from "../../../services/topic";
+import RenderSearchInput from "../../RenderSearchInput";
 
 // eslint-disable-next-line react/prop-types
 const TopicForm = ({ onClose, open }) => {
+
   const [searchInput, setSearchInput] = useState(null);
   const [locationId, setLocationId] = useState(null);
   const [startDate, setStartDate] = useState(null);
@@ -24,6 +30,7 @@ const TopicForm = ({ onClose, open }) => {
     setStartDate(date);
     form.setFieldsValue({ endDate: null });
   };
+
   // const [places, setPlaces] = useState([]);
 
   // const staticPlaces = [
@@ -67,17 +74,10 @@ const TopicForm = ({ onClose, open }) => {
 
   const onFinish = async (values) => {
     try {
-      const formData = {
-        title: values.title,
-        description: values.description,
-        locationId: values.locationId,
-        location: values.location,
-        startDate: dayjs(values.startDate),
-        endDate: dayjs(values.endDate),
-      };
-      console.log(formData);
+      console.log(values);
       const response = await createTopic(values);
       console.log(response);
+      onClose()
     } catch (error) {
       console.log(error);
     }
@@ -96,7 +96,15 @@ const TopicForm = ({ onClose, open }) => {
         <div className="text-black px-5">
           <h2 className="text-2xl font-semibold mb-4">Start a New Trip</h2>
           <div className="flex flex-col gap-4">
-            <Form.Item name="title">
+            <Form.Item
+              name="title"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input title!",
+                },
+              ]}
+            >
               <label className="form-control max-w-xs">
                 <div className="label">
                   <span className="label-text font-bold text-black text-base">
@@ -106,7 +114,15 @@ const TopicForm = ({ onClose, open }) => {
                 <Input className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300" />
               </label>
             </Form.Item>
-            <Form.Item name="description">
+            <Form.Item
+              name="description"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input description!",
+                },
+              ]}
+            >
               <label className="form-control max-w-xs">
                 <div className="label">
                   <span className="label-text font-bold text-black text-base">
@@ -132,7 +148,16 @@ const TopicForm = ({ onClose, open }) => {
               <Input onChange={onChangeLocationId} value={locationId} />
             </Form.Item>
 
-            <Form.Item name="location" className="h-auto">
+            <Form.Item
+              rules={[
+                {
+                  required: true,
+                  message: "Please input location!",
+                },
+              ]}
+              name="location"
+              className="h-auto"
+            >
               <label className="form-control max-w-full">
                 <div className="label">
                   <span className="label-text font-bold text-black text-base">
@@ -168,7 +193,15 @@ const TopicForm = ({ onClose, open }) => {
                     Start date
                   </span>
                 </div>
-                <Form.Item name="startDate">
+                <Form.Item
+                  name="startDate"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please pick start date!",
+                    },
+                  ]}
+                >
                   <DatePicker
                     onChange={onChangeStartDate}
                     disabledDate={disabledDate}

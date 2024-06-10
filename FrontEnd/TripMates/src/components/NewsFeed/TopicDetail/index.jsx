@@ -18,11 +18,8 @@ const TopicDetail = () => {
     description: "",
     startDate: "",
     endDate: "",
-    continent: "",
-    country: "",
+    location: {},
   });
-
-  const [location , setLocation] = useState({})
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +27,6 @@ const TopicDetail = () => {
         const response = await getTopicById(urlParam.topicId);
         console.log(response);
         setTopicDetail(response.data.findTopic);
-        setLocation(response.data.findTopic.location)
       } catch (error) {
         console.log(error);
       }
@@ -45,15 +41,11 @@ const TopicDetail = () => {
     description,
     startDate,
     endDate,
-    continent,
-    country,
+    location
   } = topicDetail;
 
-  console.log(location);
-  // console.log(location);
-  console.log(location.locationDependent);
-  const { locationDependent, locationThumbnail } = location;
-  console.log(locationDependent.continent);
+  const { continent , country, locationThumbnail } = location;
+
   const convertedStartDate = dayjs(startDate, "YYYY-DD-MM").format(
     "MMMM Do, YYYY"
   );
@@ -90,7 +82,6 @@ const TopicDetail = () => {
     });
   }
   return (
-    
     <>
       <div className="flex flex-col gap-[1rem] px-[1.5rem] pt-[1rem]">
         <p className="text-3xl font-bold">{title}</p>
@@ -111,26 +102,25 @@ const TopicDetail = () => {
           </div>
           <p className="text-sm font-bold">
             <span className="text-[#5143d9]">Location : </span>
-            {/* {locationDependent.continent ? (
+            {continent ? (
               <span>
-                <a className="underline">{locationDependent.continent}</a>
-                <span> &gt;&gt; </span>
+                <a className="underline">{continent}</a>
               </span>
             ) : (
               <></>
-            )} */}
-            {/* {locationDependent.country ? (
+            )}
+            {country ? (
               <span>
-                <a className="underline">{locationDependent.country}</a>
                 <span> &gt;&gt; </span>
+                <a className="underline">{country}</a>
               </span>
             ) : (
               <></>
-            )} */}
-              {/* {locationDependent} */}
+            )}
+            {/* {locationDependent} */}
             {/* <a className="underline">{continent}</a> */}
             {/* <span> &gt;&gt; </span> */}
-            <a className="underline">{country}</a>
+            {/* <a className="underline">{country}</a> */}
           </p>
         </div>
         <div className="w-full h-[2px] bg-[lightgray]"></div>
