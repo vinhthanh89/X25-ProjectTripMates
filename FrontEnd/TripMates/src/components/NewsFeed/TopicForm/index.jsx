@@ -1,7 +1,7 @@
 import { Button, DatePicker, Drawer, Form, Input, AutoComplete } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
-
+// eslint-disable-next-line react/prop-types
 const TopicForm = ({ onClose, open }) => {
   const [places, setPlaces] = useState([]);
 
