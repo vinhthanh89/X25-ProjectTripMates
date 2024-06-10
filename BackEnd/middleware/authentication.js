@@ -32,7 +32,7 @@ export const authentication = async (req, res, next) => {
         });
       }
 
-      const newAccessToken = signAccessToken(verify);
+      const newAccessToken = signAccessToken(verify.payload);
 
       return res.status(200).json({
         message : error.message,

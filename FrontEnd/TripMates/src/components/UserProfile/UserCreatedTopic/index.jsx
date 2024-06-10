@@ -9,6 +9,7 @@ const UserCreatedTopic = ({ userId }) => {
     const fetchData = async () => {
       try {
         const response = await getTopicByUserCreated(userId);
+        console.log(response);
         setUserCreatedTopic(response.data.findTopicByUserId);
       } catch (error) {
         console.log(error);

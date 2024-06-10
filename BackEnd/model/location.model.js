@@ -5,27 +5,23 @@ const Location = new mongoose.Schema({
     type: String,
     required: true,
   },
-  locationDependent: {
-    continent : {
-      type : String
-    },
-    country : {
-      type : String
-    }
+  continent : {
+    type : String
+  },
+  country : {
+    type : String
   },
   locationThumbnail: {
     type: String,
     required: true,
   },
-  coordinates: {
-    latitude: {
-      type: String,
-      required: true,
-    },
-    longitude: {
-      type: String,
-      required: true,
-    },
+  latitude: {
+    type: String,
+    required: true,
+  },
+  longitude: {
+    type: String,
+    required: true,
   },
 });
 

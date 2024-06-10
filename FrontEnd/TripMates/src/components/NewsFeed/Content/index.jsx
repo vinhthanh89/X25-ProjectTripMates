@@ -15,8 +15,9 @@ const Content = () => {
     const fetchData = async () => {
       try {
         const response = await fetchTopicData();
-        console.log(response);
-        setTopicData(response.data.dataTopic);
+        const topics = response.data.dataTopic
+        const dataRender = topics.reverse()
+        setTopicData(dataRender);
       } catch (error) {
         console.log(error);
       }

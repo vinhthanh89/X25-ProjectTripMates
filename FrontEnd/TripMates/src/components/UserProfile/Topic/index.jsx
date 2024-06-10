@@ -4,14 +4,17 @@ import { useNavigate } from "react-router";
 
 const Topic = ({ topic }) => {
   const navigate = useNavigate();
+    console.log(topic);
   const {
     _id,
     thumbnail,
     description,
-    country,
-    continent,
     title,
+    location
   } = topic;
+
+  const {continent , country , locationThumbnail} = location
+
 
   return (
     <>
@@ -22,7 +25,7 @@ const Topic = ({ topic }) => {
               
         <div className="bgImage">
           <img
-            src={thumbnail}
+            src={thumbnail ? thumbnail : locationThumbnail}
             alt={country}
             className="rounded-l-[15px] cursor-pointer w-[300px] h-[180px] object-fill"
           />
