@@ -41,7 +41,6 @@ const Topic = ({ topic }) => {
           </div>
           <div className="text-sm text-[#5143d9]">
             {locationDependent.continent ? <span>#{location.locationDependent.continent}</span> : <></>}
-
             {locationDependent.country ? <span> - #{locationDependent.country}</span> : <></>}
             {/* <span>#{continent}</span>
             <span>#{country}</span> */}
