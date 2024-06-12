@@ -16,7 +16,9 @@ const Topic = ({ topic }) => {
   const {locationName , continent , country , locationThumbnail} = location
 
   return (
+
     <div className="flex flex-col gap-y-[1.2rem] rounded-lg shadow-xl cursor-pointer p-[10px]">
+
       <div className="relative" onClick={() => navigate(`/topic/${_id}`)}>
         <div className="absolute top-[5px] right-[5px] flex items-center gap-2">
           <div className="w-[3rem] h-[3rem]">

@@ -32,7 +32,9 @@ const Header = () => {
   const iconStyle = { background: "transparent"};
   return (
     <>
+
       <div className="grid grid-cols-5 p-[0.8rem] w-full border-b-[1.5px] bg-white sticky top-0 z-10">
+
         <button
           onClick={() => navigate("/")}
           className="col-span-1 flex items-center gap-[5px]"
@@ -41,7 +43,7 @@ const Header = () => {
             src="../../../../public/tripmates-favicon-color.png"
             className="w-[3rem]"
           />
-          <h1 className="text-2xl font-semibold text-black">TripMates</h1>
+          <h1 className="text-2xl font-semibold text-[#303030]">TripMates</h1>
         </button>
         <div className="col-span-3 flex justify-center gap-[25px]">
           <SearchBar />
@@ -49,7 +51,7 @@ const Header = () => {
             className="font-bold bg-[#5143d9] text-white p-3 rounded-xl ring-1"
             onClick={showDrawer}
           >
-            <p>Start a new trip</p>
+            Start a new trip
           </button>
           {open && <TopicForm onClose={onClose} open={open} />}
         </div>

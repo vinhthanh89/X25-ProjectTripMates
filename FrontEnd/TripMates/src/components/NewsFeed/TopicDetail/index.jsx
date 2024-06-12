@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router";
 
 import dayjs from "dayjs";
 import { getTopicById } from "../../../services/topic";
+import EmptyMilestone from "../Post/Components/EmptyMilestone";
 // eslint-disable-next-line no-unused-vars
 
 const TopicDetail = () => {
@@ -41,10 +42,10 @@ const TopicDetail = () => {
     description,
     startDate,
     endDate,
-    location
+    location,
   } = topicDetail;
 
-  const { continent , country, locationThumbnail } = location;
+  const { continent, country, locationThumbnail } = location;
 
   const convertedStartDate = dayjs(startDate, "YYYY-MM-DD").format(
     "MMMM Do, YYYY"
@@ -83,9 +84,11 @@ const TopicDetail = () => {
   }
   return (
     <>
-      <div className="ring-1 flex flex-col gap-[1rem] px-[1.5rem] pt-[1rem] pb-[20px]">
+
+      <div className="ring-1 flex flex-col gap-[1rem] px-[1.5rem] pt-[1rem] pb-[20px] overflow-y-scroll">
+
         <p className="text-3xl font-bold">{title}</p>
-        <div className="flex items-end justify-between">
+        <div className="flex items-end justify-between border-b-2 p-4">
           <div
             onClick={() => navigate(`/user/${userCreated._id}`)}
             className="flex items-center text-sm gap-[8px] cursor-pointer hover:opacity-80"
@@ -119,7 +122,6 @@ const TopicDetail = () => {
             )}
           </p>
         </div>
-        <div className="w-full h-[2px] bg-[lightgray]"></div>
         <div className="grid grid-cols-2 gap-5 ">
           <div className="col-span-1">
             <div className="flex justify-center items-center ">
@@ -146,7 +148,7 @@ const TopicDetail = () => {
             </div>
           </div>
         </div>
-        <Table
+        {/* <Table
           columns={columns}
           dataSource={data}
           pagination={{
@@ -155,7 +157,8 @@ const TopicDetail = () => {
           scroll={{
             y: 240,
           }}
-        />
+        /> */}
+        <EmptyMilestone />        
       </div>
     </>
   );

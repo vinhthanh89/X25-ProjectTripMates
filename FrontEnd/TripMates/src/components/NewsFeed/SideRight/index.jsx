@@ -43,7 +43,7 @@ const RightSideBar = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-[2rem] font-bold pt-[1rem] w-full">
+    <div className="flex flex-col gap-[2rem] font-bold pt-[1rem] w-full ">
       <ul className="friend-list flex flex-col gap-[1rem]">
         <h1 className="text-lg font-bold">Recently</h1>
         {friends.map((friend, index) => (

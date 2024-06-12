@@ -19,7 +19,7 @@ const Topic = ({ topic }) => {
   return (
     <>
       <div
-        className="topic flex gap-[10px] rounded-[15px] border-2"
+        className="topic flex gap-[10px] rounded border-2"
         onClick={() => navigate(`/topic/${_id}`)}
           >
               
