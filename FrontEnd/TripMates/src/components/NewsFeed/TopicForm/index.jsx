@@ -111,7 +111,7 @@ const TopicForm = ({ onClose, open }) => {
                     Topic name
                   </span>
                 </div>
-                <Input className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300" />
+                <Input showCount maxLength={80} className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300" />
               </label>
             </Form.Item>
             <Form.Item

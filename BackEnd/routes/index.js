@@ -10,7 +10,7 @@ import { authentication } from '../middleware/authentication.js'
 const router = Router()
 
 router.use('/api/user' , userRouter)
-router.use('/api/topic' , topicRouter)
+router.use('/api/topic' , authentication , topicRouter)
 router.use('/api/location' , locationRouter)
 
 

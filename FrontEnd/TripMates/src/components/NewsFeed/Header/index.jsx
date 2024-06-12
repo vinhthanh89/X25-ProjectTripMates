@@ -32,7 +32,7 @@ const Header = () => {
   const iconStyle = { background: "transparent"};
   return (
     <>
-      <div className="grid grid-cols-5 p-[0.8rem] w-full border-b-[1.5px] bg-white">
+      <div className="grid grid-cols-5 p-[0.8rem] w-full border-b-[1.5px] bg-white sticky top-0 z-10">
         <button
           onClick={() => navigate("/")}
           className="col-span-1 flex items-center gap-[5px]"

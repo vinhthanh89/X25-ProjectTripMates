@@ -21,7 +21,7 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
         </Routes>
       ) : (
-        <>
+        <div className="relative">
           <Header />
           <Routes>
             <Route path="/" element={<NewsFeed />}>
@@ -30,7 +30,7 @@ const App = () => {
             </Route>
             <Route path="/user/:userId" element={<UserProfile />} />
           </Routes>
-        </>
+        </div>
       )}
     </div>
 

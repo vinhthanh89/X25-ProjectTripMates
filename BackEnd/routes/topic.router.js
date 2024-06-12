@@ -2,11 +2,11 @@
 import {Router} from 'express'
 // import { authentication } from '../middleware/authentication.js'
 import { createTopic, getTopicById, getTopicByUserCreated, getTopics } from '../controller/topic.controller.js'
-import { authentication } from '../middleware/authentication.js'
+
 
 const router = Router()
 
-router.post('/create-topic' , authentication , createTopic)
+router.post('/create-topic' , createTopic)
 router.get('/get-topics' , getTopics)
 router.get('/topic-detail/:topicId' , getTopicById)
 router.get('/topic-by-user-created/:userId' , getTopicByUserCreated)

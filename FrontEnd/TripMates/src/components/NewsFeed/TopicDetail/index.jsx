@@ -46,10 +46,10 @@ const TopicDetail = () => {
 
   const { continent , country, locationThumbnail } = location;
 
-  const convertedStartDate = dayjs(startDate, "YYYY-DD-MM").format(
+  const convertedStartDate = dayjs(startDate, "YYYY-MM-DD").format(
     "MMMM Do, YYYY"
   );
-  const convertedEndDate = dayjs(endDate, "YYYY-DD-MM").format("MMMM Do, YYYY");
+  const convertedEndDate = dayjs(endDate, "YYYY-MM-DD").format("MMMM Do, YYYY");
 
   // Testing
   const columns = [
@@ -83,7 +83,7 @@ const TopicDetail = () => {
   }
   return (
     <>
-      <div className="flex flex-col gap-[1rem] px-[1.5rem] pt-[1rem]">
+      <div className="ring-1 flex flex-col gap-[1rem] px-[1.5rem] pt-[1rem] pb-[20px]">
         <p className="text-3xl font-bold">{title}</p>
         <div className="flex items-end justify-between">
           <div
@@ -117,10 +117,6 @@ const TopicDetail = () => {
             ) : (
               <></>
             )}
-            {/* {locationDependent} */}
-            {/* <a className="underline">{continent}</a> */}
-            {/* <span> &gt;&gt; </span> */}
-            {/* <a className="underline">{country}</a> */}
           </p>
         </div>
         <div className="w-full h-[2px] bg-[lightgray]"></div>
@@ -136,12 +132,7 @@ const TopicDetail = () => {
           </div>
           <div className="col-span-1 gap-2 text-[#303030] ">
             <p className="pt-[10px]">
-              {description} Lorem ipsum dolor, sit amet consectetur adipisicing
-              elit. A ab, reiciendis iure incidunt sint suscipit possimus quam
-              voluptatibus doloremque est veniam voluptatum ad corporis ex,
-              minima quisquam cumque totam beatae amet tempore unde, molestias
-              laboriosam. Quaerat eius illum soluta quo ea. Hic officiis, illo
-              sint consectetur ipsum.
+              {description}
             </p>
             <div className="flex justify-between text-sm font-bold pt-[10px]">
               <p>
