@@ -15,8 +15,8 @@ const Content = () => {
     const fetchData = async () => {
       try {
         const response = await fetchTopicData();
-        const topics = response.data.dataTopic
-        const dataRender = topics.reverse()
+        const topics = response.data.dataTopic;
+        const dataRender = topics.reverse();
         setTopicData(dataRender);
       } catch (error) {
         console.log(error);
@@ -40,8 +40,8 @@ const Content = () => {
   );
 
   return (
-    <div className="flex flex-col gap-2 h-full overflow-y-scroll text-[#303030]">
-      <div className="flex items-center justify-between sticky top-0 bg-white z-10 py-[1rem] w-full">
+    <div className="flex flex-col h-full text-[#303030] overflow-y-scroll">
+      <div className="flex items-center justify-between p-[1rem] w-full border-b-2">
         <h1 className="text-2xl font-semibold">{feedType} Feeds</h1>
         <div className="flex gap-6">
           <button
@@ -70,7 +70,7 @@ const Content = () => {
         </div>
       </div>
       <div
-        className="grid grid-cols-3 gap-[1rem] px-[2rem] "
+        className="grid grid-cols-2 gap-[2rem] pt-[1rem] "
         style={{ "-ms-overflow-style": "none" }}
       >
         {renderTopicData}

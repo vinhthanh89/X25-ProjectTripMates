@@ -62,13 +62,13 @@ const LeftSideBar = () => {
   return (
     <>
       <div className="flex flex-col font-bold gap-[3rem] pt-[2rem] w-[85%]">
-        <div className="flex flex-col gap-12">
-          <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8">
             <div
-              className="flex items-center btn_all cursor-pointer gap-2"
+              className="flex items-center btn_all cursor-pointer gap-4 bg-[#5143d9]"
               onClick={() => navigate(`/user/${user._id}`)}
             >
-              <div className="w-[22px] h-[22px]">
+              <div className="w-[35px] h-[35px] rounded-full bg-white">
                 <img
                   className="w-full h-full object-cover rounded-full"
                   src={user.avatar}
@@ -76,35 +76,37 @@ const LeftSideBar = () => {
                 />
               </div>
               <div className="flex-1 overflow-hidden">
-                <p className="truncate">{user.fullName}</p>
+                <p className="truncate text-white">{user.fullName}</p>
                 {/* <p className="text-xs text-[#717171]">{user.email}</p> */}
               </div>
             </div>
 
-            <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
-              <FaCompass
-                className="group-hover:bg-[#303030]"
-                size={iconSize}
-                style={iconStyle}
-              />
-              <p>Feeds</p>
-            </button>
-            <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
-              <BiSolidMoviePlay
-                className="group-hover:bg-[#303030]"
-                size={iconSize}
-                style={iconStyle}
-              />
-              <p>Shorts</p>
-            </button>
-            <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
-              <AiFillMessage
-                className="group-hover:bg-[#303030]"
-                size={iconSize}
-                style={iconStyle}
-              />
-              <p>Messages</p>
-            </button>
+            <div className="flex flex-col gap-5">
+              <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
+                <FaCompass
+                  className="group-hover:bg-[#303030]"
+                  size={iconSize}
+                  style={iconStyle}
+                />
+                <p>Feeds</p>
+              </button>
+              <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
+                <BiSolidMoviePlay
+                  className="group-hover:bg-[#303030]"
+                  size={iconSize}
+                  style={iconStyle}
+                />
+                <p>Shorts</p>
+              </button>
+              <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
+                <AiFillMessage
+                  className="group-hover:bg-[#303030]"
+                  size={iconSize}
+                  style={iconStyle}
+                />
+                <p>Messages</p>
+              </button>
+            </div>
           </div>
           <div className="flex flex-col gap-3">
             <div className="recommend-list">

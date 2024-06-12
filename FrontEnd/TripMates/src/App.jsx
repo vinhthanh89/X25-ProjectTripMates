@@ -21,19 +21,18 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
         </Routes>
       ) : (
-        <>
+        <div className="relative">
           <Header />
           <Routes>
             <Route path="/" element={<NewsFeed />}>
-                <Route path="" element={<Content />} />                
+              <Route path="" element={<Content />} />
               <Route path="/topic/:topicId" element={<TopicDetail />} />
             </Route>
             <Route path="/user/:userId" element={<UserProfile />} />
           </Routes>
-        </>
+        </div>
       )}
     </div>
-
   );
 };
 

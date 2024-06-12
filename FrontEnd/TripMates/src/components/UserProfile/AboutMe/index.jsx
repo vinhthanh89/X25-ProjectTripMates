@@ -24,15 +24,15 @@ const AboutMe = ({ userProfile , handleEditUser }) => {
 
   const iconSize = 20;
   return (
-    <div className="flex flex-col gap-2 border-b-[1.5px] px-[0.5rem] text-base">
-      <div className="flex items-center">
+    <div className="flex flex-col gap-2 border-b-[1.5px] px-[0.5rem] pb-[0.5rem] text-base">
+      <div className="flex items-center gap-2">
         <ModalUser
           userProfile={userProfile}
           isModalOpen={isModalOpen}
           handleCancel={handleCancel}
-          handleEditUser={handleEditUser}
+          handleEditUser={handleEditUser}          
         />
-        <h1 className="font-bold mr-[20px]">About me</h1>
+        <h1 className="font-bold">About me</h1>
         {userLogin._id === userProfile._id ? (
           <div>
             <FaUserEdit

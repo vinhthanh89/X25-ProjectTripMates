@@ -38,14 +38,14 @@ const Recommend = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 border-l-2">
       <h1 className="text-xl font-bold">Other milestones</h1>
       {posts.map((post, index) => (
         <div
           key={index}
           className="flex flex-col gap-2 border border-gray-200 rounded-md p-2"
         >
-          <div className="">
+          <div>
             <img src={post.imgSrc} alt={post.title} className="rounded-md" />
           </div>
           <div>
