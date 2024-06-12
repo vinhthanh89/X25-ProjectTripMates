@@ -49,7 +49,7 @@ const UserProfile = () => {
 
   return (
     <>
-      <div className="userProfile h-full bg-[#f2f2f2] text-black px-[6rem] pt-[0.1rem]">
+      <div className="userProfile bg-[#f2f2f2] text-black px-[3rem]">
         {/* <div className="py-[2rem] px-[2.5rem] bg-white rounded">
           <div className="flex justify-center gap-[5rem]">
             <div className="flex flex-col gap-2">
@@ -81,9 +81,9 @@ const UserProfile = () => {
           </div>
 
         </div> */}
-        <div className="grid grid-cols-4 gap-[20px] pt-[1rem]">
-          <div className="col-span-1 flex flex-col gap-[20px] p-[2rem] bg-white rounded">
-            <div className="flex flex-col items-center gap-2">
+        <div className="grid grid-cols-4 h-screen pt-[1rem] px-[2rem]">
+          <div className="col-span-1 flex flex-col gap-[10px] px-[2rem] ">
+            <div className="flex flex-col items-center gap-3 bg-white rounded p-[1rem] ">
               <div className="relative">
                 <img
                   className="w-[90px] h-[90px] object-cover rounded-full"
@@ -100,15 +100,16 @@ const UserProfile = () => {
                 {userProfile.fullName}
               </h1>
 
-              <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold rounded-md px-2 py-1">
+              <AboutMe
+                userProfile={userProfile}
+                handleEditUser={handleEditUser}
+              />
+              <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold rounded px-2 py-1">
                 + Follow
               </button>
             </div>
-            <AboutMe
-              userProfile={userProfile}
-              handleEditUser={handleEditUser}
-            />
-            <div className="flex flex-col gap-4">
+
+            <div className="flex flex-col gap-2 bg-white rounded p-[1rem]">
               <h1 className="text-base font-bold">Topics</h1>
               <button className="flex btn_all gap-2 w-full transition duration-300 ease-in-out">
                 <div className="flex items-start gap-2 w-full">
@@ -142,6 +143,7 @@ const UserProfile = () => {
               </button>
             </div>
           </div>
+
           <div className="col-span-3 flex flex-col text-sm font-semibold gap-[10px] p-[2rem] bg-white rounded">
             <div>
               <button
