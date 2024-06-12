@@ -6,10 +6,6 @@ export const createTopic = async (req , res) => {
         
         const userId = req.user;
 
-        console.log("body :::" , req.body);
-        console.log('title :::' , title);
-        console.log("user id :::" , userId);
-
         const newTopic = await Topic.create({
             userCreated : userId,
             title : req.body.title,

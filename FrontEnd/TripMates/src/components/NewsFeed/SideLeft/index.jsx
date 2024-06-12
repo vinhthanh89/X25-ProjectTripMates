@@ -61,9 +61,11 @@ const LeftSideBar = () => {
   // }, [urlParam.userId, userProfile]);
   return (
     <>
-      <div className="flex flex-col font-bold gap-[3rem] pt-[2rem] w-[85%]">
-        <div className="flex flex-col gap-8">
-          <div className="flex flex-col gap-8">
+
+      <div className="flex flex-col font-bold gap-[3rem] w-[85%] h-full ring-1 overflow-y-scroll">
+        <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-5">
+
             <div
               className="flex items-center btn_all cursor-pointer gap-4 bg-[#5143d9]"
               onClick={() => navigate(`/user/${user._id}`)}

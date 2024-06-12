@@ -40,8 +40,10 @@ const Content = () => {
   );
 
   return (
-    <div className="flex flex-col h-full text-[#303030] overflow-y-scroll">
-      <div className="flex items-center justify-between p-[1rem] w-full border-b-2">
+
+    <div className="flex flex-col gap-2 h-full overflow-y-scroll text-[#303030] pb-[20px] ring-1">
+      <div className="px-[20px] flex items-center justify-between top-0 bg-white z-2 py-[1rem] w-full">
+
         <h1 className="text-2xl font-semibold">{feedType} Feeds</h1>
         <div className="flex gap-6">
           <button
@@ -70,8 +72,10 @@ const Content = () => {
         </div>
       </div>
       <div
-        className="grid grid-cols-2 gap-[2rem] pt-[1rem] "
-        style={{ "-ms-overflow-style": "none" }}
+
+        className="grid grid-cols-2 gap-[1rem] px-[2rem] "
+        // style={{ "-ms-overflow-style": "none" }}
+
       >
         {renderTopicData}
       </div>

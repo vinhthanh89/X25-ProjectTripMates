@@ -20,7 +20,6 @@ export const authentication = async (req, res, next) => {
     }
 
     req.user = verify.payload;
-    console.log("verify" , verify.payload);
 
     next();
   } catch (error) {
