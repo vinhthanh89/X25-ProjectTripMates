@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Table } from "antd";
+// import { Table } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
@@ -45,7 +45,7 @@ const TopicDetail = () => {
     location,
   } = topicDetail;
 
-  const { continent, country, locationThumbnail } = location;
+  const { continent, country, locationThumbnail, locationName } = location;
 
   const convertedStartDate = dayjs(startDate, "YYYY-MM-DD").format(
     "MMMM Do, YYYY"
@@ -53,41 +53,38 @@ const TopicDetail = () => {
   const convertedEndDate = dayjs(endDate, "YYYY-MM-DD").format("MMMM Do, YYYY");
 
   // Testing
-  const columns = [
-    {
-      title: "Date",
-      dataIndex: "date",
-      width: 200,
-    },
-    {
-      title: "Blog Title",
-      dataIndex: "blog",
-      width: 400,
-    },
-    {
-      title: "Location",
-      dataIndex: "location",
-    },
-  ];
-  const data = [];
-  for (let i = 0; i < 40; i++) {
-    data.push({
-      key: i,
-      date: <p className="font-bold">{convertedStartDate}</p>,
-      blog: "A beautiful day in Japan",
-      location: (
-        <p>
-          {continent} &gt;&gt; {country}
-        </p>
-      ),
-    });
-  }
+  // const columns = [
+  //   {
+  //     title: "Date",
+  //     dataIndex: "date",
+  //     width: 200,
+  //   },
+  //   {
+  //     title: "Blog Title",
+  //     dataIndex: "blog",
+  //     width: 400,
+  //   },
+  //   {
+  //     title: "Location",
+  //     dataIndex: "location",
+  //   },
+  // ];
+  // const data = [];
+  // for (let i = 0; i < 40; i++) {
+  //   data.push({
+  //     key: i,
+  //     date: <p className="font-bold">{convertedStartDate}</p>,
+  //     blog: "A beautiful day in Japan",
+  //     location: (
+  //       <p>
+  //         {continent} &gt;&gt; {country}
+  //       </p>
+  //     ),
+  //   });
+  // }
   return (
     <>
-
       <div className="ring-1 flex flex-col gap-[1rem] px-[1.5rem] pt-[1rem] pb-[20px] overflow-y-scroll">
-
-        <p className="text-3xl font-bold">{title}</p>
         <div className="flex items-end justify-between border-b-2 p-4">
           <div
             onClick={() => navigate(`/user/${userCreated._id}`)}
@@ -103,25 +100,28 @@ const TopicDetail = () => {
               <p>1 month ago</p>
             </div>
           </div>
-          <p className="text-sm font-bold">
+          {/* <p className="text-sm font-bold">
             <span className="text-[#5143d9]">Location : </span>
             {continent ? (
               <span>
                 <a className="underline">{continent}</a>
+                <span> &gt;&gt; </span>
               </span>
             ) : (
               <></>
             )}
             {country ? (
               <span>
-                <span> &gt;&gt; </span>
                 <a className="underline">{country}</a>
+                <span> &gt;&gt; </span>
               </span>
             ) : (
               <></>
             )}
-          </p>
+            <span className="underline">{locationName}</span>
+          </p> */}
         </div>
+        <p className="text-3xl font-bold">{title}</p>
         <div className="grid grid-cols-2 gap-5 ">
           <div className="col-span-1">
             <div className="flex justify-center items-center ">
@@ -133,10 +133,31 @@ const TopicDetail = () => {
             </div>
           </div>
           <div className="col-span-1 gap-2 text-[#303030] ">
-            <p className="pt-[10px]">
+            <p>
+              <span className="text-base text-[#5143d9] font-bold">Description : </span>{" "}
               {description}
             </p>
-            <div className="flex justify-between text-sm font-bold pt-[10px]">
+            <p className="text-base font-bold pt-[10px]">
+              <span className="text-[#5143d9]">Location : </span>
+              {continent ? (
+                <span>
+                  <a className="underline">{continent}</a>
+                  <span> &gt;&gt; </span>
+                </span>
+              ) : (
+                <></>
+              )}
+              {country ? (
+                <span>
+                  <a className="underline">{country}</a>
+                  <span> &gt;&gt; </span>
+                </span>
+              ) : (
+                <></>
+              )}
+              <span className="underline">{locationName}</span>
+            </p>
+            <div className="flex justify-between text-base font-bold pt-[10px]">
               <p>
                 <span className="text-[#5143d9]">From: </span>
                 {convertedStartDate}
@@ -158,7 +179,7 @@ const TopicDetail = () => {
             y: 240,
           }}
         /> */}
-        <EmptyMilestone />        
+        <EmptyMilestone />
       </div>
     </>
   );

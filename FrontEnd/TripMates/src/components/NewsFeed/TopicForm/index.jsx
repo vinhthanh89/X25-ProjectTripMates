@@ -3,7 +3,7 @@
 import { Button, DatePicker, Drawer, Form, Input } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 
 import { createTopic } from "../../../services/topic";
@@ -12,9 +12,10 @@ import RenderSearchInput from "../../RenderSearchInput";
 // eslint-disable-next-line react/prop-types
 const TopicForm = ({ onClose, open }) => {
 
-  const [searchInput, setSearchInput] = useState(null);
+  const [searchInput, setSearchInput] = useState("");
   const [locationId, setLocationId] = useState(null);
   const [startDate, setStartDate] = useState(null);
+  const [thumbnail , setThumbnail] = useState(null)
 
   const [form] = Form.useForm();
 
@@ -31,43 +32,25 @@ const TopicForm = ({ onClose, open }) => {
     form.setFieldsValue({ endDate: null });
   };
 
-  // const [places, setPlaces] = useState([]);
-
-  // const staticPlaces = [
-  //   "China",
-  //   "Chiangmai",
-  //   "Japan",
-  //   "India",
-  //   "Thailand",
-  //   "Vietnam",
-  // ];
-
-  // const inputStyle = {
-  //   width: "25rem",
-  //   height: "3rem",
-  //   borderRadius: "var(--rounded-btn, 0.5rem)",
-  //   fontSize: "1rem",
-  //   fontWeight: "700",
-  //   lineHeight: "1.25rem",
-  //   borderWidth: "2px",
-  //   backgroundColor: "var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)))",
-  //   flexShrink: "1",
-  //   appearance: "none",
-  // };
 
   const onChangeSearchInput = (e) => {
+    const value = e.target.value
+    console.log(value);
     setSearchInput(e.target.value);
     // form.setFieldsValue({location : e.target.value})
   };
 
   const onChangeLocationId = (e) => {
+    const value = e.target.value
+    console.log(value);
     setLocationId(e.target.value);
     // form.setFieldsValue({locationId : locationId})
   };
 
-  const handleSetLocationId = (location, locationId) => {
+  const handleSetLocationId = (location, locationId , thumbnail) => {
     setLocationId(locationId);
     setSearchInput(location);
+    setThumbnail(thumbnail)
     form.setFieldsValue({ location });
     form.setFieldsValue({ locationId: locationId });
   };
@@ -75,13 +58,24 @@ const TopicForm = ({ onClose, open }) => {
   const onFinish = async (values) => {
     try {
       console.log(values);
-      const response = await createTopic(values);
-      console.log(response);
+      const formData = {
+        title : values.title,
+        description : values.description,
+        thumbnail : thumbnail ,
+        locationId ,
+        startDate,
+        endDate : values.endDate
+      }
+
+      await createTopic(formData);
       onClose()
     } catch (error) {
       console.log(error);
     }
   };
+
+  console.log(thumbnail);
+
 
   // const fetchPlaces = async (inputValue) => {
   //   const filteredPlaces = staticPlaces.filter((place) =>

@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { getTopicByUserCreated } from "../../../services/topic";
-import Topic from "../Topic";
+
+import UserTopic from "../UserTopics";
+
+
 const UserCreatedTopic = ({ userId }) => {
   const [userCreatedTopic, setUserCreatedTopic] = useState(null);
 
@@ -9,20 +12,20 @@ const UserCreatedTopic = ({ userId }) => {
     const fetchData = async () => {
       try {
         const response = await getTopicByUserCreated(userId);
-        console.log(response);
-        setUserCreatedTopic(response.data.findTopicByUserId);
+        const renderData = response.data.findTopicByUserId
+        setUserCreatedTopic(renderData.reverse());
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, [userId]);
+  }, [userId , userCreatedTopic]);
 
   const renderTopicData = userCreatedTopic ? (
     userCreatedTopic.map((topic) => {
       return (
         <div key={topic._id} >
-          <Topic topic={topic} />
+          <UserTopic topic={topic} />
         </div>
       );
     })

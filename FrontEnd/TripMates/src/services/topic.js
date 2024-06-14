@@ -15,3 +15,7 @@ export const getTopicByUserCreated = (userId) => {
 export const createTopic = (formData) => {
     return axiosAuthInstance.post('/api/topic/create-topic' , formData)
 }
+
+export const deleteTopic = (topicId) => {
+    return axiosAuthInstance.delete(`/api/topic/delete-topic/${topicId}`)
+}
