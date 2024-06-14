@@ -65,17 +65,6 @@ const CommentModal = ({ iconSize, iconStyle, user }) => {
           </div>
           <div className="comment-container">
             <CommentDisplay />
-            <CommentDisplay />
-            <CommentDisplay />
-            <CommentDisplay />
-            <CommentDisplay />
-            <CommentDisplay />
-            <CommentDisplay />
-            <CommentDisplay />
-            <CommentDisplay />
-            <CommentDisplay />
-            <CommentDisplay />
-            <CommentDisplay />
           </div>
         </div>
       </Modal>
