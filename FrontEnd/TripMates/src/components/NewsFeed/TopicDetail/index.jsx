@@ -87,7 +87,7 @@ const TopicDetail = () => {
 
 
       <div className="flex flex-col gap-[1rem] p-[1.5rem] bg-white overflow-y-scroll">
-        <p className="text-3xl font-bold">{title}</p>
+
         <div className="flex items-end justify-between border-b-2 p-4">
           <div
             onClick={() => navigate(`/user/${userCreated._id}`)}
@@ -103,26 +103,6 @@ const TopicDetail = () => {
               <p className="text-[grey]">1 month ago</p>
             </div>
           </div>
-          {/* <p className="text-sm font-bold">
-            <span className="text-[#5143d9]">Location : </span>
-            {continent ? (
-              <span>
-                <a className="underline">{continent}</a>
-                <span> &gt;&gt; </span>
-              </span>
-            ) : (
-              <></>
-            )}
-            {country ? (
-              <span>
-                <a className="underline">{country}</a>
-                <span> &gt;&gt; </span>
-              </span>
-            ) : (
-              <></>
-            )}
-            <span className="underline">{locationName}</span>
-          </p> */}
         </div>
         <p className="text-3xl font-bold">{title}</p>
         <div className="grid grid-cols-2 gap-5 ">
