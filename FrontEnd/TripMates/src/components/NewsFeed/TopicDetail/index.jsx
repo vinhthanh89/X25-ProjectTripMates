@@ -84,7 +84,10 @@ const TopicDetail = () => {
   // }
   return (
     <>
-      <div className="ring-1 flex flex-col gap-[1rem] px-[1.5rem] pt-[1rem] pb-[20px] overflow-y-scroll">
+
+
+      <div className="flex flex-col gap-[1rem] p-[1.5rem] bg-white overflow-y-scroll">
+        <p className="text-3xl font-bold">{title}</p>
         <div className="flex items-end justify-between border-b-2 p-4">
           <div
             onClick={() => navigate(`/user/${userCreated._id}`)}
@@ -93,11 +96,11 @@ const TopicDetail = () => {
             <img
               src={userCreated.avatar}
               alt=""
-              className="w-[25px] h-[25px] object-cover rounded-full"
+              className="w-[3rem] h-[3rem] object-cover rounded-full"
             />
             <div className="flex flex-col text-xs">
-              <p className="text-sm font-semibold">{userCreated.fullName}</p>
-              <p>1 month ago</p>
+              <p className="text-base font-semibold">{userCreated.fullName}</p>
+              <p className="text-[grey]">1 month ago</p>
             </div>
           </div>
           {/* <p className="text-sm font-bold">

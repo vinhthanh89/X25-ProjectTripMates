@@ -12,7 +12,7 @@ const NewsFeed = () => {
       <div className="col-span-1 flex flex-col items-center gap-[5rem] px-[10px] bg-white rounded ">
         <LeftSideBar />
       </div>
-      <div className="col-span-4 flex flex-col overflow-y-scroll bg-white ring-1">
+      <div className="col-span-4 flex flex-col overflow-y-scroll">
         <Outlet />
         {/* <Post/> */}
       </div>

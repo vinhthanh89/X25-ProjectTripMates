@@ -62,7 +62,9 @@ const LeftSideBar = () => {
   return (
     <>
 
-      <div className="flex flex-col font-bold gap-[3rem] w-[85%] h-full overflow-y-scroll">
+
+      <div className="flex flex-col font-bold gap-[3rem] w-[85%] h-full pt-[10px] overflow-y-scroll">
+
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-5">
 
