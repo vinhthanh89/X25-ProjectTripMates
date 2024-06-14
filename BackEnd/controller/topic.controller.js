@@ -2,17 +2,18 @@ import Topic from '../model/topic.model.js'
 
 export const createTopic = async (req , res) => {
     try {
-        const {title , description , locationId , startDate , endDate } = req.body
+        const {title , description , locationId , startDate , endDate , thumbnail } = req.body
         
         const userId = req.user;
 
         const newTopic = await Topic.create({
             userCreated : userId,
-            title : req.body.title,
+            title ,
             description,
             startDate,
             endDate,
-            location : locationId
+            location : locationId,
+            thumbnail
         })
 
         return res.status(201).json({
@@ -21,7 +22,6 @@ export const createTopic = async (req , res) => {
         })
 
     } catch (error) {
-        console.log("backend error" , error);
         return res.status(500).json({
             message : error
         })
@@ -31,14 +31,13 @@ export const createTopic = async (req , res) => {
 export const editTopic = async (req , res) => {
     try {
         const topicId = req.params.topicId
-        const {title , description , endDate , continent , country} = req.body
+        const {title , description , continent , country} = req.body
 
         const updatedTopic = await Topic.findByIdAndUpdate(topicId , {
             title ,
             description ,
             continent,
             country ,
-            endDate
         } , {new : true})
 
         return res.status(200).json({
@@ -101,6 +100,30 @@ export const getTopicByUserCreated = async (req , res) => {
         return res.status(200).json({
             message : "Get Topic By User Success",
             findTopicByUserId
+        })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message : error
+        })
+    }
+}
+
+export const deleteTopic = async (req , res) => {
+    try {
+        const topicId = req.params.topicId
+        const findTopic = await Topic.findById(topicId)
+        if(!findTopic){
+            return res.status(404).json({
+                message : "Not Found Topic"
+            })
+        }
+
+        await Topic.findByIdAndDelete(topicId)
+
+        return res.status(200).json({
+            message : "Delete Topic Successfully"
         })
 
     } catch (error) {

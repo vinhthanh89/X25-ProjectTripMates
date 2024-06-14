@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 
 const Topic = ({ topic }) => {
   const navigate = useNavigate();
-    console.log(topic);
   const {
     _id,
     thumbnail,

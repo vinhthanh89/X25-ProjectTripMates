@@ -5,22 +5,21 @@ import { getLocation } from "../../services/location";
 const RenderSearchInput = ({ searchInput , handleSetLocationId }) => {
   const [dataLocation, setDataLocation] = useState([]);
 
-  const fetchDataLocation = async () => {
-    try {
-      const response = await getLocation();
-      console.log(response);
-      setDataLocation(response.data.locationData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchDataLocation = async () => {
+      try {
+        const response = await getLocation();
+        console.log(response);
+        setDataLocation(response.data.locationData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchDataLocation();
   }, []);
 
-  const handleClickLocation = (location , locationId) => {
-    handleSetLocationId(location , locationId)
+  const handleClickLocation = (location , locationId , locationThumbnail) => {
+    handleSetLocationId(location , locationId , locationThumbnail)
     setDataLocation([])
   }
 
@@ -36,7 +35,7 @@ const RenderSearchInput = ({ searchInput , handleSetLocationId }) => {
     return (
       <div
         key={_id}
-        onClick={() => handleClickLocation(locationName , _id)}
+        onClick={() => handleClickLocation(locationName , _id , locationThumbnail)}
         className="flex w-full h-[70px] py-[10px] pl-[5px] rounded-[8px]  hover:bg-[#d7d5d5] cursor-pointer"
       >
         <div className="w-[50px] h-full">
@@ -65,7 +64,6 @@ const RenderSearchInput = ({ searchInput , handleSetLocationId }) => {
         <></>
       ) : (
         <>
-          <div className="w-full h-[1px] bg-[lightgray] mt-[10px]"></div>
           {renderDataLocation}
         </>
       )}
