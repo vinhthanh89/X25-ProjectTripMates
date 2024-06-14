@@ -1,4 +1,5 @@
 import { AiFillMessage } from "react-icons/ai";
+import Continents from "../Continents";
 
 const RightSideBar = () => {
   const friends = [
@@ -19,28 +20,28 @@ const RightSideBar = () => {
     },
   ];
 
-  const ImageStories = [
-    {
-      name: "John Smith",
-      imageUrl:
-        "https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "Mary Jane",
-      imageUrl:
-        "https://plus.unsplash.com/premium_photo-1661964344898-c5bfe7b6cb06?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "Jake Paul",
-      imageUrl:
-        "https://plus.unsplash.com/premium_photo-1661964414899-6528336922d9?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "Amanda",
-      imageUrl:
-        "https://images.unsplash.com/photo-1531737212413-667205e1cda7?q=80&w=1934&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ];
+  // const ImageStories = [
+  //   {
+  //     name: "John Smith",
+  //     imageUrl:
+  //       "https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  //   {
+  //     name: "Mary Jane",
+  //     imageUrl:
+  //       "https://plus.unsplash.com/premium_photo-1661964344898-c5bfe7b6cb06?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  //   {
+  //     name: "Jake Paul",
+  //     imageUrl:
+  //       "https://plus.unsplash.com/premium_photo-1661964414899-6528336922d9?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  //   {
+  //     name: "Amanda",
+  //     imageUrl:
+  //       "https://images.unsplash.com/photo-1531737212413-667205e1cda7?q=80&w=1934&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  // ];
 
   return (
     <div className="flex flex-col gap-[2rem] font-bold pt-[1rem] w-full ">
@@ -66,7 +67,7 @@ const RightSideBar = () => {
           </li>
         ))}
       </ul>
-      <div className="recommend-list">
+      {/* <div className="recommend-list">
         <h1 className="text-lg font-bold">Top travelers</h1>
         <div className="grid grid-cols-2 gap-4 pt-[1rem]">
           {ImageStories.slice(0, 4).map((story, index) => (
@@ -85,6 +86,10 @@ const RightSideBar = () => {
             </div>
           ))}
         </div>
+      </div> */}
+      <div className="flex flex-col gap-[1rem]">
+        <h1 className="text-lg font-bold">Explore</h1>
+        <Continents />
       </div>
     </div>
   );

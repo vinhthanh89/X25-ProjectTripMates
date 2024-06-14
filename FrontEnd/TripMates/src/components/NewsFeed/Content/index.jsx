@@ -66,7 +66,7 @@ const Content = () => {
             <MdStars size={iconSize} />
             <p>Popular</p>
           </button>
-          <Continents />
+          {/* <Continents /> */}
         </div>
       </div>
       <div
