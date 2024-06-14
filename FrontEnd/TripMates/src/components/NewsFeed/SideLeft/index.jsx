@@ -62,17 +62,10 @@ const LeftSideBar = () => {
   return (
     <>
 
-<<<<<<< HEAD
-      <div className="flex flex-col font-bold w-[85%] h-full pt-[2rem] overflow-y-scroll">
-        <div className="flex flex-col gap-8">
-=======
 
       <div className="flex flex-col font-bold gap-[3rem] w-[85%] h-full pt-[10px] overflow-y-scroll">
-
         <div className="flex flex-col gap-12">
->>>>>>> 9710f51f2f23f05d04c8b72b83fca92513e465c3
           <div className="flex flex-col gap-5">
-
             <div
               className="flex items-center btn_all cursor-pointer gap-4 bg-[#5143d9]"
               onClick={() => navigate(`/user/${user._id}`)}
