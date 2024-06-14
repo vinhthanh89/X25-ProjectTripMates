@@ -44,9 +44,6 @@ const UserProfile = () => {
     setUserProfile(newUserProfile);
   };
 
-
-
-
   return (
     <>
       <div className="userProfile bg-[#f2f2f2] text-black px-[3rem]">
@@ -164,7 +161,7 @@ const UserProfile = () => {
             </div>
             <div className="px-[15px] pt-[5px] overflow-hidden max-h-[600px] overflow-y-auto">
               {(showComponent === "topic" && (
-                <UserCreatedTopic userId={urlParam.userId} />
+                <UserCreatedTopic userId={urlParam.userId}  />
               )) ||
                 (showComponent === "follower" && (
                   <Followers userProfile={userProfile} />

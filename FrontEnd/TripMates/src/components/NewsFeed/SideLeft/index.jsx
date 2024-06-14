@@ -61,7 +61,6 @@ const LeftSideBar = () => {
   // }, [urlParam.userId, userProfile]);
   return (
     <>
-
       <div className="flex flex-col font-bold w-[85%] h-full pt-[2rem] overflow-y-scroll">
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-5">
