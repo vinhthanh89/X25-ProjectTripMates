@@ -9,6 +9,7 @@ import Content from "./components/NewsFeed/Content";
 import TopicDetail from "./components/NewsFeed/TopicDetail";
 import UserProfile from "./components/NewsFeed/UserProfile";
 import Header from "./components/NewsFeed/Header";
+import Message from "./pages/Message";
 
 const App = () => {
   const user = useSelector((state) => state.user.user);
@@ -29,6 +30,7 @@ const App = () => {
               <Route path="/topic/:topicId" element={<TopicDetail />} />
             </Route>
             <Route path="/user/:userId" element={<UserProfile />} />
+            <Route path="/message" element={<Message />} />
           </Routes>
         </div>
       )}
