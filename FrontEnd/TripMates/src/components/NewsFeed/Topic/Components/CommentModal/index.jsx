@@ -2,7 +2,7 @@ import { Input, Modal, Space, Button } from "antd";
 import { useState } from "react";
 import { BiSolidMessageSquareDetail } from "react-icons/bi";
 import { useNavigate } from "react-router";
-import CommentDisplay from "../../CommentDisplay";
+import CommentDisplay from "../CommentDisplay";
 
 const CommentModal = ({ iconSize, iconStyle, user }) => {
   const navigate = useNavigate();
