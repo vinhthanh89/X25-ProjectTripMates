@@ -1,4 +1,6 @@
+
 import cloudinary from "../configs/cloudinary.js";
+
 import { getAvatarPublicId, handleUpload } from "../utils/handleUpload.js";
 import User from "../model/user.model.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
@@ -222,13 +224,11 @@ export const uploadUserAvatar = async (req , res) => {
       })
     }
 
-    const b64 = Buffer.from(req.file.buffer).toString("base64");
-    let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+    const b64 = Buffer.from(file.buffer).toString("base64");
+    let dataURI = "data:" + file.mimetype + ";base64," + b64;
 
     const result = await handleUpload(dataURI)
     // const [result , findUser] = await Promise.all([handleUpload(dataURI) , User.findById(userId).select("-password")])
-
- 
 
     const oldAvatarPublicId = getAvatarPublicId(findUser.avatar)
 

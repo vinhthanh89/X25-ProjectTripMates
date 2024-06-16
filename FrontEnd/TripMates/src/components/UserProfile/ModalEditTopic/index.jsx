@@ -1,31 +1,50 @@
 /* eslint-disable react/prop-types */
-import { Button, DatePicker, Form, Input, Modal } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import RenderSearchInput from "../../RenderSearchInput";
+import { editTopic } from "../../../services/topic";
 
 const ModalEditTopic = ({ topic }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const { title, description , thumbnail } = topic;
+  const [loading, setLoading] = useState(false);
+  const { title, description, location , thumbnail } = topic;
   const [locationThumbnail , setLocationThumbnail] = useState(thumbnail)
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState(location.locationName);
+  const [locationId, setLocationId] = useState(null);
 
   const [form] = Form.useForm();
-  
+
   useEffect(() => {
     form.setFieldsValue({
       title: title,
       description,
+      location: location.locationName,
+      locationId: location._id,
     });
-  }, [form, title, isModalOpen, description]);
+  }, [form, title, isModalOpen, description, location]);
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
-  const onFinish = (values) => {
-    console.log(values);
+  const onFinish = async (values) => {
+    try {
+      setLoading(true);
+      const {title , locationId ,description } = values
+      const formData = {
+        title,
+        locationId,
+        description,
+        thumbnail : locationThumbnail
+      }
+      await editTopic(topic._id, formData);
+      setIsModalOpen(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCancel = () => {
@@ -33,10 +52,17 @@ const ModalEditTopic = ({ topic }) => {
   };
 
   const onChangeSearchInput = (e) => {
-    const value = e.target.value
-    console.log(value);
-    setSearchInput(e.target.value);
+    const value = e.target.value;
+    setSearchInput(value);
     // form.setFieldsValue({location : e.target.value})
+  };
+
+  const handleSetLocationId = (location, locationId , selectedLocationThumbnail) => {
+    setLocationId(locationId);
+    setSearchInput(location); 
+    setLocationThumbnail(selectedLocationThumbnail)
+    form.setFieldsValue({ location });
+    form.setFieldsValue({ locationId: locationId });
   };
 
   return (
@@ -103,19 +129,19 @@ const ModalEditTopic = ({ topic }) => {
                 className="h-auto"
               >
                 <Input
-                    onChange={onChangeSearchInput}
-                    value={searchInput} 
+                  onChange={onChangeSearchInput}
+                  value={searchInput}
                   className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300"
                 />
                 <div>
                   <RenderSearchInput
-                  searchInput={searchInput}
-                  // handleSetLocationId={handleSetLocationId}
+                    searchInput={searchInput}
+                    handleSetLocationId={handleSetLocationId}
                   />
                 </div>
               </Form.Item>
 
-              <Form.Item
+              {/* <Form.Item
                 label={
                   <div className="label">
                     <span className="label-text font-bold text-black text-base">
@@ -128,7 +154,7 @@ const ModalEditTopic = ({ topic }) => {
 
                 <img className="w-full h-full object-fill" src={locationThumbnail} />
               </div>
-              </Form.Item>
+              </Form.Item> */}
 
               <Form.Item
                 name="description"
@@ -160,17 +186,12 @@ const ModalEditTopic = ({ topic }) => {
                 />
               </Form.Item>
 
-              <Form.Item
-                className="hidden"
-                name="locationId"
-              >
+              <Form.Item className="hidden" name="locationId">
                 <Input
-                //    onChange={onChangeLocationId}
-                //     value={locationId}
+                  //  onChange={onChangeLocationId}
+                  value={locationId}
                 />
               </Form.Item>
-
-             
 
               {/* <div className="flex justify-between">
                 <div className="form-control max-w-xs">
@@ -218,7 +239,7 @@ const ModalEditTopic = ({ topic }) => {
                   <Button className="bg-[lightgray]" onClick={handleCancel}>
                     Cancel
                   </Button>
-                  <Button type="primary" htmlType="submit">
+                  <Button loading={loading} type="primary" htmlType="submit">
                     Save Change
                   </Button>
                 </div>

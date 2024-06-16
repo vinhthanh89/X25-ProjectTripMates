@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 
 import ModalDeleteTopic from "../ModalDeleteTopic";
 import ModalEditTopic from "../ModalEditTopic";
+import ModalChangeTopicThumbnail from "../ModalChangeTopicThumbnail";
 
 const UserTopic = ({ topic }) => {
   const userLogin = useSelector((state) => state.user.user);
@@ -40,14 +41,15 @@ const UserTopic = ({ topic }) => {
   return (
     <div className="flex border-[2px] rounded-l-[15px] h-[200px]">
       <div
-        onClick={() => navigate(`/topic/${_id}`)}
+        // onClick={() => navigate(`/topic/${_id}`)}
         className="bgImage w-[35%] hover:opacity-50 "
       >
-        <img
+        {/* <img
           src={thumbnail ? thumbnail : locationThumbnail}
           alt={country}
           className="rounded-l-[15px] cursor-pointer w-full h-full object-fill"
-        />
+        /> */}
+        <ModalChangeTopicThumbnail topic={topic} />
       </div>
       <div className="info flex flex-col gap-2 px-[15px] py-[8px] w-[60%]">
         <h1

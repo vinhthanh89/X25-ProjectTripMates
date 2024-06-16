@@ -1,0 +1,9 @@
+.modal-topic-thumbnail .ant-modal-content{
+    background: none;
+    box-shadow: none;
+    padding: 0px;
+}
+
+.modal-topic-thumbnail .ant-modal{
+    background-color: none;
+}

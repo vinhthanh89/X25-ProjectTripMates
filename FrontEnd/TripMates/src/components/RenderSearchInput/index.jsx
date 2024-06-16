@@ -10,32 +10,39 @@ const RenderSearchInput = ({ searchInput , handleSetLocationId }) => {
       try {
         const response = await getLocation();
         console.log(response);
-        setDataLocation(response.data.locationData);
+        const dataResponse = response.data.locationData
+        const dataFilter = dataResponse.filter((item) => {
+            const locationLower = item.locationName.toLowerCase()
+            const searchInputLower = searchInput ? searchInput.toLowerCase() : ' '
+            return locationLower.startsWith(searchInputLower)
+          })
+          console.log(dataFilter);
+        setDataLocation(dataFilter);
       } catch (error) {
         console.log(error);
       }
     };
     fetchDataLocation();
-  }, []);
+  }, [searchInput]);
 
-  const handleClickLocation = (location , locationId , locationThumbnail) => {
-    handleSetLocationId(location , locationId , locationThumbnail)
+  const handleClickLocation = (location , locationId , locationThumbnail ) => {
+    handleSetLocationId(location , locationId , locationThumbnail )
     setDataLocation([])
   }
 
 
-  const render = dataLocation.filter((item) => {
-    const locationLower = item.locationName.toLowerCase()
-    const searchInputLower = searchInput ? searchInput.toLowerCase() : ' '
-    return locationLower.startsWith(searchInputLower)
-  });
+  // const render = dataLocation.filter((item) => {
+  //   const locationLower = item.locationName.toLowerCase()
+  //   const searchInputLower = searchInput ? searchInput.toLowerCase() : ' '
+  //   return locationLower.startsWith(searchInputLower)
+  // });
 
-  const renderDataLocation = render.map((item) => {
+  const renderDataLocation = dataLocation.map((item) => {
     const {_id, locationThumbnail, locationName, continent , country } = item;
     return (
       <div
         key={_id}
-        onClick={() => handleClickLocation(locationName , _id , locationThumbnail)}
+        onClick={() => handleClickLocation(locationName , _id , locationThumbnail )}
         className="flex w-full h-[70px] py-[10px] pl-[5px] rounded-[8px]  hover:bg-[#d7d5d5] cursor-pointer"
       >
         <div className="w-[50px] h-full">
@@ -60,7 +67,7 @@ const RenderSearchInput = ({ searchInput , handleSetLocationId }) => {
 
   return (
     <>
-      {render.length === 0 ? (
+      {dataLocation.length === 0 ? (
         <></>
       ) : (
         <>

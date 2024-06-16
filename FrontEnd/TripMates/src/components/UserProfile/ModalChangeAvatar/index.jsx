@@ -79,7 +79,7 @@ const MoadlChangeAvatar = ({ userProfile, handleEditUser }) => {
         onCancel={handleCancel}
         width={330}
       >
-        <Form onFinish={handleOk} initialValues={{}}>
+        <Form onFinish={handleOk} >
           <div className="flex flex-col justify-center items-center">
             <img
               className="w-[200px] h-[200px] object-cover rounded-full"
