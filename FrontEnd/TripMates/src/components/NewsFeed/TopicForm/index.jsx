@@ -40,17 +40,10 @@ const TopicForm = ({ onClose, open }) => {
     // form.setFieldsValue({location : e.target.value})
   };
 
-  const onChangeLocationId = (e) => {
-    const value = e.target.value
-    console.log(value);
-    setLocationId(e.target.value);
-    // form.setFieldsValue({locationId : locationId})
-  };
-
-  const handleSetLocationId = (location, locationId , thumbnail) => {
+  const handleSetLocationId = (location, locationId , locationThumbnail) => {
     setLocationId(locationId);
     setSearchInput(location);
-    setThumbnail(thumbnail)
+    setThumbnail(locationThumbnail)
     form.setFieldsValue({ location });
     form.setFieldsValue({ locationId: locationId });
   };
@@ -58,31 +51,22 @@ const TopicForm = ({ onClose, open }) => {
   const onFinish = async (values) => {
     try {
       console.log(values);
+      const {title , description , locationId , startDate , endDate} = values
       const formData = {
-        title : values.title,
-        description : values.description,
-        thumbnail : thumbnail ,
+        title ,
+        description ,
         locationId ,
         startDate,
-        endDate : values.endDate
+        endDate ,
+        thumbnail 
       }
-
+      console.log('formData :::' ,formData);
       await createTopic(formData);
       onClose()
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log(thumbnail);
-
-
-  // const fetchPlaces = async (inputValue) => {
-  //   const filteredPlaces = staticPlaces.filter((place) =>
-  //     place.toLowerCase().includes(inputValue.toLowerCase())
-  //   );
-  //   setPlaces(filteredPlaces);
-  // };
 
   return (
     <Drawer onClose={onClose} open={open} width={500}>
@@ -139,7 +123,8 @@ const TopicForm = ({ onClose, open }) => {
             </Form.Item>
 
             <Form.Item className="hidden" label="location id" name="locationId">
-              <Input onChange={onChangeLocationId} value={locationId} />
+              <Input 
+               value={locationId} />
             </Form.Item>
 
             <Form.Item
@@ -170,13 +155,6 @@ const TopicForm = ({ onClose, open }) => {
                     handleSetLocationId={handleSetLocationId}
                   />
                 </div>
-
-                {/* <AutoComplete
-                  options={places.map((place) => ({ value: place }))}
-                  onSearch={fetchPlaces}
-                  placeholder="e.g., Asia"
-                  style={inputStyle}
-                /> */}
               </label>
             </Form.Item>
 

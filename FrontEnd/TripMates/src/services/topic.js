@@ -1,4 +1,6 @@
+
 import { axiosAuthInstance } from "."
+
 
 export const fetchTopicData = () => {
     return axiosAuthInstance.get('/api/topic/get-topics')
@@ -18,4 +20,12 @@ export const createTopic = (formData) => {
 
 export const deleteTopic = (topicId) => {
     return axiosAuthInstance.delete(`/api/topic/delete-topic/${topicId}`)
+}
+
+export const editTopic = (topicId , formData) => {
+    return axiosAuthInstance.put(`/api/topic/edit-topic/${topicId}` , formData)
+}
+
+export const uploadTopicThumbnail = (topicId , formData) => {
+    return axiosAuthInstance.put(`/api/topic/upload-thumbnail/${topicId}` , formData)
 }
