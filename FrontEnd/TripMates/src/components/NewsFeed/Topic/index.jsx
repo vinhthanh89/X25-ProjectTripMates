@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
-import { MdPlace } from "react-icons/md";
-import { useNavigate } from "react-router";
-import { BiSolidMessageSquareDetail } from "react-icons/bi";
 import { IoIosHeart } from "react-icons/io";
-import { useState } from "react";
-import CommentModal from "./Components/CommentModal";
+import { MdPlace } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import CommentModal from "./Components/CommentModal";
 
 const Topic = ({ topic }) => {
   const iconSize = 25;
@@ -81,7 +79,7 @@ const Topic = ({ topic }) => {
               />
               <p>1000+</p>
             </button>
-            <CommentModal iconSize={iconSize} iconStyle={iconStyle}/>
+            <CommentModal iconSize={iconSize} iconStyle={iconStyle} />
           </div>
         </div>
       </div>
@@ -121,19 +119,22 @@ const Topic = ({ topic }) => {
           {/* <span>#{continent}</span>
             <span>#{country}</span> */}
         </div>
-        <h1
-          title={title}
-          className="text-2xl font-bold text-ellipsis line-clamp-1"
-        >
-          {title}
-        </h1>
+        <div>
+          <h1
+            onClick={() => navigate(`/topic/${_id}`)}
+            title={title}
+            className="text-2xl font-bold text-ellipsis line-clamp-1 cursor-pointer"
+          >
+            {title}
+          </h1>
 
-        <p
-          title={description}
-          className="text-[grey] font-medium text-ellipsis leading-[1.5rem] h-[3rem] overflow-hidden whitespace-nowrap"
-        >
-          {description}
-        </p>
+          <p
+            title={description}
+            className="text-[grey] font-medium line-clamp-2 h-[3rem] mt-[10px]"
+          >
+            {description}
+          </p>
+        </div>
       </div>
     </div>
   );
