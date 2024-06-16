@@ -213,7 +213,14 @@ export const uploadUserAvatar = async (req , res) => {
     const userId = req.params.userId
     const file = req.file
 
-    const findUser = await User.findById(userId).select("-password")
+    const b64 = Buffer.from(file.buffer).toString("base64");
+    let dataURI = "data:" + file.mimetype + ";base64," + b64;
+
+    const [result , findUser] = await Promise.all([
+      handleUpload(dataURI) , 
+      User.findById(userId).select("-password")
+    ])
+
     if(!findUser){
       if(result){
         cloudinary.uploader.destroy(result.public_id)
@@ -223,12 +230,6 @@ export const uploadUserAvatar = async (req , res) => {
         message : "User Id isn't exits"
       })
     }
-
-    const b64 = Buffer.from(file.buffer).toString("base64");
-    let dataURI = "data:" + file.mimetype + ";base64," + b64;
-
-    const result = await handleUpload(dataURI)
-    // const [result , findUser] = await Promise.all([handleUpload(dataURI) , User.findById(userId).select("-password")])
 
     const oldAvatarPublicId = getAvatarPublicId(findUser.avatar)
 

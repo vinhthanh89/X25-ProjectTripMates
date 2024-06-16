@@ -45,6 +45,12 @@ const MoadlChangeAvatar = ({ userProfile, handleEditUser }) => {
       const formData = new FormData();
       formData.append("avatar", uploadFile);
       formData.append("userId", userLogin._id);
+      const uploadFileSize = uploadFile.size;
+      if (uploadFileSize > 5000000) {
+        alert(
+          "Can't upload file larger than 5MB , please select another picture"
+        );
+      }
       const response = await uploadAvatar(userProfile._id , formData);
       handleEditUser(response.data.userUploaded);
       saveUserToLocal(response.data.userUploaded);
@@ -100,7 +106,7 @@ const MoadlChangeAvatar = ({ userProfile, handleEditUser }) => {
 
               <label htmlFor="upload">
                 <div className="px-[15px] py-[5px]  cursor-pointer rounded-[8px] bg-[#5143d9] text-[white] mr-[10px]">
-                  Upload
+                  Select Image
                 </div>
               </label>
             </div>
