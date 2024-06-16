@@ -113,7 +113,7 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
 
                 <label htmlFor="upload">
                   <div className="px-[15px] py-[5px]  cursor-pointer rounded-[8px] bg-[#5143d9] hover:opacity-90 text-[white] mr-[20px]">
-                    Choose Image
+                    Select Image
                   </div>
                 </label>
               </div>
