@@ -73,14 +73,15 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
         className="rounded-l-[15px] cursor-pointer w-full h-full object-fill"
       />
       <Modal
-        className="modal-topic-thumbnail"
-        width="700px"
-        style={{
-          top: 60,
+        className="modal-topic-thumbnail bg-white"
+        width="50rem"
+        height="30rem"
+        style={{                   
+          borderRadius: "10px"
         }}
         closable={true}
         closeIcon={
-          <div className=" text-black bg-[lightgray] text-[30px] bg-opacity-0">
+          <div className=" text-black text-[30px]">
             <MdOutlineClose />
           </div>
         }
@@ -90,9 +91,9 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
         cancelButtonProps={{ style: { display: "none" } }}
       >
         <Form onFinish={onFinish}>
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center pt-[2rem]">
             <img
-              className="w-full h-[400px] object-fill"
+              className="w-[40rem] rounded object-fill"
               src={editAvatar}
               alt={country}
             />
@@ -100,7 +101,7 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
           <div
             className={`${userLogin._id === userCreated._id ? "" : "hidden"}`}
           >
-            <div className="py-[20px] bg-[none] flex justify-center items-center">
+            <div className="py-[2rem] flex justify-center items-center">
               <div>
                 <div className="hidden">
                   <input

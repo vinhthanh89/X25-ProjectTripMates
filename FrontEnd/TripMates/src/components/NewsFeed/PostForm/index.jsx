@@ -46,8 +46,8 @@ const PostForm = () => {
               name="location"
               className="h-auto"
             >
-              <label className="form-control grid grid-cols-7 gap-5">
-                <div className="col-span-4">
+              <label className="form-control grid grid-cols-2 gap-5">
+                <div className="col-span-1">
                   <div className="label ">
                     <span className="label-text font-bold text-black text-base">
                       Where to? (countries)
@@ -59,7 +59,30 @@ const PostForm = () => {
                   </div>
                 </div>
 
-                <div className="date-control col-span-3 flex justify-between">
+                <div className="col-span-1">
+                  <div className="label">
+                    <span className="label-text font-bold text-black text-base">
+                      Start date
+                    </span>
+                  </div>
+                  <Form.Item
+                    name="startDate"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please pick start date!",
+                      },
+                    ]}
+                  >
+                    <DatePicker
+                      placeholder="e.g., 2024-01-01"
+                      className="input border-2 border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-extraboldw w-full"
+                      format="DD-MM-YYYY"
+                    />
+                  </Form.Item>
+                </div>
+
+                {/* <div className="date-control col-span-3 flex justify-between">
                   <div>
                     <div className="label ">
                       <span className="label-text font-bold text-black text-base">
@@ -84,7 +107,7 @@ const PostForm = () => {
                   </div>
 
                   <div>
-                    <div className="label ">
+                    <div className="label   ">
                       <span className="label-text font-bold text-black text-base">
                         End date
                       </span>
@@ -97,7 +120,7 @@ const PostForm = () => {
                       />
                     </Form.Item>
                   </div>
-                </div>
+                </div> */}
               </label>
             </Form.Item>
 
