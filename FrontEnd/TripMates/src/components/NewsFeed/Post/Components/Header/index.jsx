@@ -71,9 +71,9 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <h1 className="text-4xl font-bold">
+      {/* <h1 className="text-4xl font-bold">
         Top 10 places you should visit in Vietnam and make sure to take photos
-      </h1>
+      </h1> */}
     </div>
   );
 };

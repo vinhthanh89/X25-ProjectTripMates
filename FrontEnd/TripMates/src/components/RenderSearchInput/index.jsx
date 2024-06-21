@@ -9,14 +9,12 @@ const RenderSearchInput = ({ searchInput , handleSetLocationId }) => {
     const fetchDataLocation = async () => {
       try {
         const response = await getLocation();
-        console.log(response);
         const dataResponse = response.data.locationData
         const dataFilter = dataResponse.filter((item) => {
             const locationLower = item.locationName.toLowerCase()
             const searchInputLower = searchInput ? searchInput.toLowerCase() : ' '
             return locationLower.startsWith(searchInputLower)
           })
-          console.log(dataFilter);
         setDataLocation(dataFilter);
       } catch (error) {
         console.log(error);

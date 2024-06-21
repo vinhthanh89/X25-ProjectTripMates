@@ -8,8 +8,8 @@ import { editTopic } from "../../../services/topic";
 const ModalEditTopic = ({ topic }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { title, description, location , thumbnail } = topic;
-  const [locationThumbnail , setLocationThumbnail] = useState(thumbnail)
+  const { title, description, location, thumbnail } = topic;
+  const [locationThumbnail, setLocationThumbnail] = useState(thumbnail);
   const [searchInput, setSearchInput] = useState(location.locationName);
   const [locationId, setLocationId] = useState(null);
 
@@ -31,13 +31,14 @@ const ModalEditTopic = ({ topic }) => {
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      const {title , locationId ,description } = values
+      const { title, locationId, description } = values;
+      console.log(values);
       const formData = {
         title,
         locationId,
         description,
-        thumbnail : locationThumbnail
-      }
+        thumbnail: locationThumbnail,
+      };
       await editTopic(topic._id, formData);
       setIsModalOpen(false);
     } catch (error) {
@@ -57,11 +58,15 @@ const ModalEditTopic = ({ topic }) => {
     // form.setFieldsValue({location : e.target.value})
   };
 
-  const handleSetLocationId = (location, locationId , selectedLocationThumbnail) => {
+  const handleSetLocationId = (
+    location,
+    locationId,
+    selectedLocationThumbnail
+  ) => {
     setLocationId(locationId);
-    setSearchInput(location); 
-    setLocationThumbnail(selectedLocationThumbnail)
-    form.setFieldsValue({ location });
+    // setSearchInput(location);
+    setLocationThumbnail(selectedLocationThumbnail);
+    form.setFieldsValue({ location});
     form.setFieldsValue({ locationId: locationId });
   };
 
@@ -111,13 +116,21 @@ const ModalEditTopic = ({ topic }) => {
                   className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300"
                 />
               </Form.Item>
+
+              <Form.Item className="hidden" name="locationId">
+                <Input
+                  //  onChange={onChangeLocationId}
+                  value={locationId}
+                />
+              </Form.Item>
+
               <Form.Item
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: "Please input location!",
-                //   },
-                // ]}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input location!",
+                  },
+                ]}
                 label={
                   <div className="label">
                     <span className="label-text font-bold text-black text-base">
@@ -133,14 +146,13 @@ const ModalEditTopic = ({ topic }) => {
                   value={searchInput}
                   className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300"
                 />
-                <div>
-                  <RenderSearchInput
-                    searchInput={searchInput}
-                    handleSetLocationId={handleSetLocationId}
-                  />
-                </div>
               </Form.Item>
-
+              <div>
+                <RenderSearchInput
+                  searchInput={searchInput}
+                  handleSetLocationId={handleSetLocationId}
+                />
+              </div>
               {/* <Form.Item
                 label={
                   <div className="label">
@@ -183,13 +195,6 @@ const ModalEditTopic = ({ topic }) => {
                     fontSize: "1rem",
                   }}
                   className="border-2 border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] transition-colors duration-300"
-                />
-              </Form.Item>
-
-              <Form.Item className="hidden" name="locationId">
-                <Input
-                  //  onChange={onChangeLocationId}
-                  value={locationId}
                 />
               </Form.Item>
 

@@ -9,6 +9,7 @@ export const handleUpload = async (file) => {
   return response;
 };
 
+
 export const getAvatarPublicId = (avatarUrl) => {
   const splitedAvatar = avatarUrl.split("/").reverse();
   const fileName = splitedAvatar[0].split(".");

@@ -10,6 +10,8 @@ import TopicDetail from "./components/NewsFeed/TopicDetail";
 import UserProfile from "./components/NewsFeed/UserProfile";
 import Header from "./components/NewsFeed/Header";
 import Message from "./pages/Message";
+import PostForm from "./components/NewsFeed/PostForm";
+import Post from "./components/NewsFeed/Post";
 
 const App = () => {
   const user = useSelector((state) => state.user.user);
@@ -28,6 +30,8 @@ const App = () => {
             <Route path="/" element={<NewsFeed />}>
               <Route path="" element={<Content />} />
               <Route path="/topic/:topicId" element={<TopicDetail />} />
+              <Route path="/topic/createPost/:topicId" element={<PostForm />}/>
+              <Route path="/topic/post/:postId" element={<Post />}/>
             </Route>
             <Route path="/user/:userId" element={<UserProfile />} />
             <Route path="/message" element={<Message />} />

@@ -8,6 +8,7 @@ import { getTopicById } from "../../../services/topic";
 import EmptyMilestone from "../Post/Components/EmptyMilestone";
 import { Modal } from "antd";
 import { MdOutlineClose } from "react-icons/md";
+import PostTableInTopicDetail from "../../PostTabelInTopicDetail";
 // eslint-disable-next-line no-unused-vars
 
 const TopicDetail = () => {
@@ -16,6 +17,7 @@ const TopicDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [topicDetail, setTopicDetail] = useState({
+    _id: "",
     title: "",
     thumbnail: "",
     userCreated: {},
@@ -29,7 +31,6 @@ const TopicDetail = () => {
     const fetchData = async () => {
       try {
         const response = await getTopicById(urlParam.topicId);
-        console.log(response);
         setTopicDetail(response.data.findTopic);
       } catch (error) {
         console.log(error);
@@ -39,6 +40,7 @@ const TopicDetail = () => {
   }, [urlParam.topicId]);
 
   const {
+    _id,
     title,
     thumbnail,
     userCreated,
@@ -46,6 +48,7 @@ const TopicDetail = () => {
     startDate,
     endDate,
     location,
+    post,
   } = topicDetail;
 
   const { continent, country, locationThumbnail, locationName } = location;
@@ -64,36 +67,7 @@ const TopicDetail = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  // Testing
-  // const columns = [
-  //   {
-  //     title: "Date",
-  //     dataIndex: "date",
-  //     width: 200,
-  //   },
-  //   {
-  //     title: "Blog Title",
-  //     dataIndex: "blog",
-  //     width: 400,
-  //   },
-  //   {
-  //     title: "Location",
-  //     dataIndex: "location",
-  //   },
-  // ];
-  // const data = [];
-  // for (let i = 0; i < 40; i++) {
-  //   data.push({
-  //     key: i,
-  //     date: <p className="font-bold">{convertedStartDate}</p>,
-  //     blog: "A beautiful day in Japan",
-  //     location: (
-  //       <p>
-  //         {continent} &gt;&gt; {country}
-  //       </p>
-  //     ),
-  //   });
-  // }
+
   return (
     <>
       <div className="flex flex-col gap-[1rem] p-[1.5rem] bg-white overflow-y-scroll">
@@ -142,7 +116,8 @@ const TopicDetail = () => {
               >
                 <img
                   className="w-full h-[500px] object-fill"
-                 src={thumbnail ? thumbnail : locationThumbnail} />
+                  src={thumbnail ? thumbnail : locationThumbnail}
+                />
               </Modal>
             </div>
           </div>
@@ -185,17 +160,11 @@ const TopicDetail = () => {
             </div>
           </div>
         </div>
-        {/* <Table
-          columns={columns}
-          dataSource={data}
-          pagination={{
-            pageSize: 20,
-          }}
-          scroll={{
-            y: 240,
-          }}
-        /> */}
-        <EmptyMilestone />
+        {post?.length === 0 ? (
+          <EmptyMilestone topicId={topicDetail._id} />
+        ) : (
+          <PostTableInTopicDetail topicId={urlParam.topicId} />
+        )}
       </div>
     </>
   );
