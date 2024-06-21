@@ -61,8 +61,6 @@ const LeftSideBar = () => {
   // }, [urlParam.userId, userProfile]);
   return (
     <>
-
-
       <div className="flex flex-col font-bold gap-[3rem] w-[85%] h-full pt-[10px] overflow-y-scroll">
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-5">
@@ -84,7 +82,10 @@ const LeftSideBar = () => {
             </div>
 
             <div className="flex flex-col gap-5">
-              <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
+              <button
+                className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out"
+                onClick={() => navigate("/")}
+              >
                 <FaCompass
                   className="group-hover:bg-[#303030]"
                   size={iconSize}
@@ -92,7 +93,10 @@ const LeftSideBar = () => {
                 />
                 <p>Feeds</p>
               </button>
-              <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
+              <button
+                className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out"
+                onClick={() => navigate("/shorts")}
+              >
                 <BiSolidMoviePlay
                   className="group-hover:bg-[#303030]"
                   size={iconSize}
@@ -100,7 +104,10 @@ const LeftSideBar = () => {
                 />
                 <p>Shorts</p>
               </button>
-              <button className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out">
+              <button
+                className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out"
+                onClick={() => navigate("/message")}
+              >
                 <AiFillMessage
                   className="group-hover:bg-[#303030]"
                   size={iconSize}

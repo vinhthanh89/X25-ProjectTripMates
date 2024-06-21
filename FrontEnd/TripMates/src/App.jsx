@@ -4,12 +4,13 @@ import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import LandingPage from "./pages/LandingPage";
 import NewsFeed from "./pages/NewsFeed";
-import isObjectEmpty from "./utils/isObjectyEmty";
 import Content from "./components/NewsFeed/Content";
 import TopicDetail from "./components/NewsFeed/TopicDetail";
 import UserProfile from "./components/NewsFeed/UserProfile";
 import Header from "./components/NewsFeed/Header";
 import Message from "./pages/Message";
+import isObjectEmpty from './utils/isObjectyEmty';
+import Reels from "./components/Reels";
 import PostForm from "./components/NewsFeed/PostForm";
 import Post from "./components/NewsFeed/Post";
 
@@ -28,13 +29,14 @@ const App = () => {
           <Header />
           <Routes>
             <Route path="/" element={<NewsFeed />}>
-              <Route path="" element={<Content />} />
-              <Route path="/topic/:topicId" element={<TopicDetail />} />
+              <Route index element={<Content />} />
+              <Route path="/shorts" element={<Reels />} />
+              <Route path="/message" element={<Message />} />
+              <Route path="topic/:topicId" element={<TopicDetail />} />
               <Route path="/topic/createPost/:topicId" element={<PostForm />}/>
               <Route path="/topic/post/:postId" element={<Post />}/>
             </Route>
-            <Route path="/user/:userId" element={<UserProfile />} />
-            <Route path="/message" element={<Message />} />
+            <Route path="user/:userId" element={<UserProfile />} />
           </Routes>
         </div>
       )}

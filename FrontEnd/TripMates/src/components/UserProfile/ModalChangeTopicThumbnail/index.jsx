@@ -71,7 +71,6 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
       <Modal
         className="modal-topic-thumbnail bg-white"
         width="50rem"
-        height="30rem"
         style={{                   
           borderRadius: "10px"
         }}
@@ -89,7 +88,7 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
         <Form onFinish={onFinish}>
           <div className="flex flex-col justify-center items-center pt-[2rem]">
             <img
-              className="w-[40rem] rounded object-fill"
+              className="w-[80%] h-[25rem] rounded object-fill"
               src={editAvatar}
               alt={country}
             />
@@ -97,7 +96,7 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
           <div
             className={`${userLogin._id === userCreated._id ? "" : "hidden"}`}
           >
-            <div className="py-[2rem] flex justify-center items-center">
+            <div className="pt-[1rem] flex justify-center items-center">
               <div>
                 <div className="hidden">
                   <input

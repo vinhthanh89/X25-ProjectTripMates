@@ -4,6 +4,8 @@ import { fetchTopicData } from "../../../services/topic";
 import Topic from "../Topic";
 import { PiClockCounterClockwiseBold } from "react-icons/pi";
 import { MdStars } from "react-icons/md";
+import { FaUsers } from "react-icons/fa6";
+
 
 const Content = () => {
   const iconSize = 20;
@@ -57,14 +59,14 @@ const Content = () => {
           </button>
           <button
             className={`flex items-center gap-2 font-bold p-2 rounded-lg transition duration-300 ease-in-out ${
-              feedType === "Popular"
+              feedType === "Friends"
                 ? "bg-[#303030] text-white"
                 : "hover:bg-[#303030] hover:text-white"
             }`}
-            onClick={() => handleFeedTypeChange("Popular")}
+            onClick={() => handleFeedTypeChange("Friends")}
           >
-            <MdStars size={iconSize} />
-            <p>Popular</p>
+            <FaUsers size={iconSize} />
+            <p>Friends</p>
           </button>
           {/* <Continents /> */}
         </div>

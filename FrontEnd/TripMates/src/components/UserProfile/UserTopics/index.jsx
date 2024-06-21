@@ -39,23 +39,18 @@ const UserTopic = ({ topic }) => {
   ];
 
   return (
-    <div className="flex border-[2px] rounded-l-[15px] h-[200px]">
+    <div className="flex border-[2px] rounded-[15px] h-[200px]">
       <div
         // onClick={() => navigate(`/topic/${_id}`)}
         className="bgImage w-[35%] hover:opacity-50 "
       >
-        {/* <img
-          src={thumbnail ? thumbnail : locationThumbnail}
-          alt={country}
-          className="rounded-l-[15px] cursor-pointer w-full h-full object-fill"
-        /> */}
         <ModalChangeTopicThumbnail topic={topic} />
       </div>
       <div className="info flex flex-col gap-2 px-[15px] py-[8px] w-[60%]">
         <h1
           onClick={() => navigate(`/topic/${_id}`)}
           title={title}
-          className="line-clamp-2 text-2xl font-bold hover:opacity-50 cursor-pointer"
+          className="text-ellipsis truncate text-2xl font-bold hover:opacity-50 cursor-pointer "
         >
           {title}
         </h1>
@@ -68,13 +63,36 @@ const UserTopic = ({ topic }) => {
             <span>#{continent}</span>
             <span>{country ? `#${country}` : ""}</span>
           </div>
-          <p title={description} className="line-clamp-2 text-sm font-light">
+          <p title={description} className="text-ellipsis truncate text-sm font-light">
             {description}
           </p>
+          <div className="avatar-group -space-x-3">
+            <div className="avatar w-9 border-white">
+              <div className="w-full rounded-full">
+                <img
+                  src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?q=80&w=1776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  className="w-full object-fill"
+                />
+              </div>
+            </div>
+            <div className="avatar w-9 border-white">
+              <div className="w-full rounded-full">
+                <img
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  className="w-full object-fill"
+                />
+              </div>
+            </div>
+            <div className="avatar placeholder w-9 border-white">
+              <div className="w-full bg-[#f2f2f2] border-transparent text-[0.7rem]">
+                <span>+2</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="w-[5%] flex justify-center">
+      <div className="w-[2rem] flex justify-center pt-2">
         <Dropdown
           menu={{
             items,

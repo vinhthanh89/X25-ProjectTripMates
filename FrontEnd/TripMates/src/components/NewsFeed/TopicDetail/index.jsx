@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-// import { Table } from "antd";
+// eslint-disable-next-line no-unused-vars
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-
 import dayjs from "dayjs";
 import { getTopicById } from "../../../services/topic";
 import EmptyMilestone from "../Post/Components/EmptyMilestone";
+import UserJoined from "./UserJoined";
+// import Milestone from "./Milestones";
 import { Modal } from "antd";
 import { MdOutlineClose } from "react-icons/md";
 import PostTableInTopicDetail from "../../PostTabelInTopicDetail";
@@ -71,10 +72,10 @@ const TopicDetail = () => {
   return (
     <>
       <div className="flex flex-col gap-[1rem] p-[1.5rem] bg-white overflow-y-scroll">
-        <div className="flex items-end justify-between border-b-2 p-4">
+        <div className="flex flex-col border-b-2 p-4 ">
           <div
             onClick={() => navigate(`/user/${userCreated._id}`)}
-            className="flex items-center text-sm gap-[8px] cursor-pointer hover:opacity-80"
+            className="flex items-center text-sm gap-[8px] cursor-pointer hover:opacity-80 "
           >
             <img
               src={userCreated.avatar}
@@ -86,7 +87,9 @@ const TopicDetail = () => {
               <p className="text-[grey]">1 month ago</p>
             </div>
           </div>
+          <UserJoined />
         </div>
+
         <p className="text-3xl font-bold">{title}</p>
         <div className="grid grid-cols-2 gap-5 ">
           <div className="col-span-1">
@@ -113,15 +116,10 @@ const TopicDetail = () => {
                     <MdOutlineClose />
                   </div>
                 }
-              >
-                <img
-                  className="w-full h-[500px] object-fill"
-                  src={thumbnail ? thumbnail : locationThumbnail}
-                />
-              </Modal>
+              />
             </div>
           </div>
-          <div className="col-span-1 gap-2 text-[#303030] ">
+          <div className="col-span-1 gap-2 text-[#303030]">
             <p>
               <span className="text-base text-[#5143d9] font-bold">
                 Description :{" "}
@@ -132,7 +130,7 @@ const TopicDetail = () => {
               <span className="text-[#5143d9]">Location : </span>
               {continent ? (
                 <span>
-                  <a className="underline">{continent}</a>
+                  <a>{continent}</a>
                   <span> &gt;&gt; </span>
                 </span>
               ) : (
@@ -140,21 +138,21 @@ const TopicDetail = () => {
               )}
               {country ? (
                 <span>
-                  <a className="underline">{country}</a>
+                  <a>{country}</a>
                   <span> &gt;&gt; </span>
                 </span>
               ) : (
                 <></>
               )}
-              <span className="underline">{locationName}</span>
+              <span>{locationName}</span>
             </p>
-            <div className="flex justify-between text-base font-bold pt-[10px]">
+            <div className="flex justify-between text-base pt-[10px]">
               <p>
-                <span className="text-[#5143d9]">From: </span>
+                <span className="text-[#5143d9] font-bold">From: </span>
                 {convertedStartDate}
               </p>
               <p>
-                <span className="text-[#5143d9]">Until: </span>
+                <span className="text-[#5143d9] font-bold">Until: </span>
                 {convertedEndDate}
               </p>
             </div>

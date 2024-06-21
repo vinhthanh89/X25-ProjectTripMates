@@ -1,52 +1,41 @@
 /* eslint-disable react/prop-types */
 import { IoIosHeart } from "react-icons/io";
 import { MdPlace } from "react-icons/md";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import CommentModal from "./Components/CommentModal";
+import CommentModal from "./CommentModal";
+import { useState } from "react";
 
 const Topic = ({ topic }) => {
   const iconSize = 25;
   const iconStyle = {
     background: "transparent",
   };
-  
   const user = useSelector((state) => state.user.user);
-
   const navigate = useNavigate();
-  const { _id, thumbnail, description, title, userCreated, location } = topic;
+  const {
+    _id,
+    thumbnail,
+    description,
+    title,
+    userCreated,
+    location,
+  } = topic;
   const { locationName, continent, country, locationThumbnail } = location;
 
+  // Handle like
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const toggleLike = () => {
+    if (liked) {
+      setLikeCount(likeCount - 1);
+    } else {
+      setLikeCount(likeCount + 1);
+    }
+    setLiked(!liked);
+  };
   return (
-    <div className="flex flex-col gap-[1rem] rounded-lg bg-white px-[1rem] py-[1.5rem]">
+    <div className="flex flex-col gap-[0.5rem] rounded-lg bg-white px-[1rem] py-[1.5rem] ">
       <div>
-        {/* <div className="flex justify-between border-b-2 pb-[1rem]">
-          <div className="user flex items-center gap-3">
-            <div className="w-[3rem] h-[3rem]">
-              <img
-                src={userCreated.avatar}
-                className="w-full h-full object-cover rounded-full border"
-              />
-            </div>
-            <div>
-              <p className="text-base font-medium">{userCreated.fullName}</p>
-              <div className="flex items-center gap-1 text-gray-400 text-xs">
-                <MdPlace size={15} />
-                <p>{locationName}</p>
-              </div>
-            </div>
-          </div>
-          <div className="function flex gap-5 text-[#545454] font-medium text-sm">
-            <span className="flex items-center gap-3 ">
-              <IoIosHeart size={iconSize} style={iconStyle} />
-              <p>1000+</p>
-            </span>
-            <span className="flex items-center gap-3">
-              <BiSolidMessageSquareDetail size={iconSize} style={iconStyle} />
-              <p>500+</p>
-            </span>
-          </div>
-        </div> */}
         <img
           src={thumbnail ? thumbnail : locationThumbnail}
           alt={locationName}
@@ -72,54 +61,50 @@ const Topic = ({ topic }) => {
               </div>
             </div>
           </div>
-          <div className="function flex gap-5 text-[#545454] font-medium text-sm">
-            <button className="flex items-center gap-3 ">
-              <IoIosHeart
-                size={iconSize}
-                style={iconStyle}
-                className="hover:text-red-500"
-              />
-              <p>1000+</p>
-            </button>
+          <div className="reactCmt flex gap-5 text-[#545454] font-medium text-sm">
+            <div className="flex items-center gap-3">
+              <button onClick={toggleLike}>
+                <IoIosHeart
+                  size={iconSize}
+                  style={iconStyle}
+                  className={liked ? "text-red-500" : ""}
+                />
+              </button>
+              <p className="w-2">{likeCount}</p>
+            </div>
             <CommentModal iconSize={iconSize} iconStyle={iconStyle} />
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-[0.5rem]">
-        {/* USER INFO AND REACT + COMMENTS */}
-        {/* <div className="flex justify-between border-b-2 py-2">
-          <div className="user flex items-center gap-3">
-            <div className="w-[3rem] h-[3rem]">
-              <img
-                src={userCreated.avatar}
-                className="w-full h-full object-cover rounded-full border"
-              />
-            </div>
-            <div>
-              <p className="text-base font-medium">{userCreated.fullName}</p>
-              <div className="flex items-center gap-1 text-gray-400 text-xs">
-                <MdPlace size={15}/>
-                <p>{locationName}</p>
-              </div>
-            </div>
+
+      <div className="avatar-group -space-x-3">
+        <div className="avatar w-9 border-white">
+          <div className="w-full rounded-full">
+            <img
+              src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?q=80&w=1776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              className="w-full object-fill"
+            />
           </div>
-          <div className="function flex gap-5 text-[#545454] font-medium text-sm">
-            <span className="flex items-center gap-3 ">
-              <IoIosHeart size={iconSize} style={iconStyle} />
-              <p>1000+</p>
-            </span>
-            <span className="flex items-center gap-3">
-              <BiSolidMessageSquareDetail size={iconSize} style={iconStyle} />
-              <p>500+</p>
-            </span>
+        </div>
+        <div className="avatar w-9 border-white">
+          <div className="w-full rounded-full">
+            <img
+              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+              className="w-full object-fill"
+            />
           </div>
-        </div> */}
-        {/* USER INFO AND REACT + COMMENTS */}
+        </div>
+        <div className="avatar placeholder w-9 border-white">
+          <div className="w-full bg-[#f2f2f2] border-transparent text-[0.7rem]">
+            <span>+2</span>
+          </div>
+        </div>
+      </div>
+
+      <div className=" flex flex-col gap-[0.5rem]">
         <div className="text-sm text-[#5143d9]">
           {continent ? <span>#{continent}</span> : <></>}
           {country ? <span> - #{country}</span> : <></>}
-          {/* <span>#{continent}</span>
-            <span>#{country}</span> */}
         </div>
         <div>
           <h1

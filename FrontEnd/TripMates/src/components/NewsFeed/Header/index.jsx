@@ -56,9 +56,9 @@ const Header = () => {
           {open && <TopicForm onClose={onClose} open={open} />}
         </div>
         <div className="col-span-1 flex justify-end items-center gap-[0.5rem] pr-5">
-          <button className="btn_all hover:scale-105 text-[#545454]">
+          {/* <button className="btn_all hover:scale-105 text-[#545454]">
             <AiFillMessage size={iconSize} style={iconStyle} />
-          </button>
+          </button> */}
           <button className="btn_all hover:scale-105 text-[#545454]">
             <FaBell size={iconSize} style={iconStyle} />
           </button>
@@ -68,30 +68,12 @@ const Header = () => {
                 <button className="btn_all hover:scale-105 text-[#545454]">
                   <IoMdSettings size={iconSize} style={iconStyle} />
                 </button>
-                {/* <div className="w-[40px] h-[40px] rounded-full border-2">
-                  <img
-                    className="w-full h-full object-cover rounded-full"
-                    src={user.avatar}
-                    alt=""
-                  />
-                </div> */}
-                {/* <div className="flex-1 overflow-hidden">
-                  <p className="truncate">{user.fullName}</p>
-                  <p className="text-xs text-[#717171]">{user.email}</p>
-                </div> */}
               </div>
             </div>
             <ul
               tabIndex={0}
               className="dropdown-content z-20 menu p-4 shadow bg-white rounded-box w-56 gap-3"
             >
-              {/* <button
-                className="flex justify-start items-center btn_all gap-2 w-full transition duration-300 ease-in-out bg-[#5143d9] hover:bg-[#6e5eff] text-white text-sm"
-                onClick={() => navigate(`/user/${user._id}`)}
-              >
-                <FaUserCircle size={20} style={iconStyle} />
-                My profile
-              </button> */}
               <ModalChangePassword user={user} />
               <div className="flex items-center btn_all gap-2 w-full transition duration-300 ease-in-out bg-red-600 hover:bg-red-500 text-white text-base font-bold">
                 <FaSignOutAlt size={20} style={iconStyle} />
