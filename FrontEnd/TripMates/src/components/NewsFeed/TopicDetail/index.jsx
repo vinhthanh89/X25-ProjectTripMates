@@ -6,8 +6,11 @@ import dayjs from "dayjs";
 import { getTopicById } from "../../../services/topic";
 import EmptyMilestone from "../Post/Components/EmptyMilestone";
 import UserJoined from "./UserJoined";
-import ModalShowImg from "./ModalShowImg";
 // import Milestone from "./Milestones";
+import { Modal } from "antd";
+import { MdOutlineClose } from "react-icons/md";
+import PostTableInTopicDetail from "../../PostTabelInTopicDetail";
+// eslint-disable-next-line no-unused-vars
 
 const TopicDetail = () => {
   const urlParam = useParams();
@@ -15,6 +18,7 @@ const TopicDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [topicDetail, setTopicDetail] = useState({
+    _id: "",
     title: "",
     thumbnail: "",
     userCreated: {},
@@ -28,7 +32,6 @@ const TopicDetail = () => {
     const fetchData = async () => {
       try {
         const response = await getTopicById(urlParam.topicId);
-        console.log(response);
         setTopicDetail(response.data.findTopic);
       } catch (error) {
         console.log(error);
@@ -38,6 +41,7 @@ const TopicDetail = () => {
   }, [urlParam.topicId]);
 
   const {
+    _id,
     title,
     thumbnail,
     userCreated,
@@ -45,6 +49,7 @@ const TopicDetail = () => {
     startDate,
     endDate,
     location,
+    post,
   } = topicDetail;
 
   const { continent, country, locationThumbnail, locationName } = location;
@@ -95,14 +100,21 @@ const TopicDetail = () => {
                 src={thumbnail ? thumbnail : locationThumbnail}
                 alt=""
               />
-              <ModalShowImg
-                isModalOpen={isModalOpen}
-                handleCancel={handleCancel}
-                img={
-                  <img
-                    className="w-full h-[500px] object-fill"
-                    src={thumbnail ? thumbnail : locationThumbnail}
-                  />
+              <Modal
+                open={isModalOpen}
+                okButtonProps={{ style: { display: "none" } }}
+                cancelButtonProps={{ style: { display: "none" } }}
+                onCancel={handleCancel}
+                className="modal-topic-thumbnail"
+                width="700px"
+                style={{
+                  top: 60,
+                }}
+                closable={true}
+                closeIcon={
+                  <div className=" text-black bg-[lightgray] text-[30px] bg-opacity-0">
+                    <MdOutlineClose />
+                  </div>
                 }
               />
             </div>
@@ -118,7 +130,7 @@ const TopicDetail = () => {
               <span className="text-[#5143d9]">Location : </span>
               {continent ? (
                 <span>
-                  <a >{continent}</a>
+                  <a>{continent}</a>
                   <span> &gt;&gt; </span>
                 </span>
               ) : (
@@ -126,13 +138,13 @@ const TopicDetail = () => {
               )}
               {country ? (
                 <span>
-                  <a >{country}</a>
+                  <a>{country}</a>
                   <span> &gt;&gt; </span>
                 </span>
               ) : (
                 <></>
               )}
-              <span >{locationName}</span>
+              <span>{locationName}</span>
             </p>
             <div className="flex justify-between text-base pt-[10px]">
               <p>
@@ -146,9 +158,11 @@ const TopicDetail = () => {
             </div>
           </div>
         </div>
-        
-        <EmptyMilestone />
-        {/* <Milestone convertedStartDate={convertedStartDate} continent={continent} country={country}/> */}
+        {post?.length === 0 ? (
+          <EmptyMilestone topicId={topicDetail._id} />
+        ) : (
+          <PostTableInTopicDetail topicId={urlParam.topicId} />
+        )}
       </div>
     </>
   );

@@ -50,7 +50,13 @@ const Topic = new mongoose.Schema({
     location : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "locations"
-    }
+    },
+    post : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'posts'
+        }
+    ]
 } , {timestamps : true})
 
 export default mongoose.model('topics' , Topic)

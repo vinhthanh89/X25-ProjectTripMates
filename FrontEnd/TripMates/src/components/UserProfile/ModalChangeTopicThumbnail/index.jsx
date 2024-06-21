@@ -9,6 +9,7 @@ import { uploadTopicThumbnail } from "../../../services/topic";
 
 // eslint-disable-next-line react/prop-types
 const ModalChangeTopicThumbnail = ({ topic }) => {
+
   const userLogin = useSelector((state) => state.user.user);
   const { thumbnail, location, userCreated } = topic;
   const { locationThumbnail, country } = location;
@@ -17,6 +18,7 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
   const [editAvatar, setEditAvatar] = useState(
     thumbnail ? thumbnail : locationThumbnail
   );
+  
   const [uploadFile, setUploadFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -35,13 +37,7 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
       setLoading(true);
       const formData = new FormData();
       formData.append("thumbnail", uploadFile);
-      console.log(uploadFile);
-      const uploadFileSize = uploadFile.size;
-      if (uploadFileSize > 5000000) {
-        alert(
-          "Can't upload file larger than 5MB , please select another picture"
-        );
-      }
+
       await uploadTopicThumbnail(topic._id, formData);
 
       setIsModalOpen(false);

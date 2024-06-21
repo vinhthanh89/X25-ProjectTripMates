@@ -10,6 +10,7 @@ const Topic = ({ topic }) => {
   const iconStyle = {
     background: "transparent",
   };
+  const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
   const {
     _id,
@@ -43,7 +44,7 @@ const Topic = ({ topic }) => {
         />
         <div className="flex justify-between pt-[1rem]">
           <div
-            className="flex items-center gap-3 cursor-pointer"
+            className="user flex items-center gap-3 cursor-pointer"
             onClick={() => navigate(`/user/${userCreated._id}`)}
           >
             <div className="w-[3rem] h-[3rem]">

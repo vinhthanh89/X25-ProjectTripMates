@@ -1,7 +1,7 @@
 
 import {Router} from 'express'
 // import { authentication } from '../middleware/authentication.js'
-import { createTopic, deleteTopic, editTopic, getTopicById, getTopicByUserCreated, getTopics, uploadTopicThumbnail } from '../controller/topic.controller.js'
+import { addPostToTopic, createTopic, deleteTopic, editTopic, getTopicById, getTopicByUserCreated, getTopics, uploadTopicThumbnail } from '../controller/topic.controller.js'
 import upload from '../middleware/upload.js'
 
 
@@ -14,5 +14,6 @@ router.get('/topic-by-user-created/:userId' , getTopicByUserCreated)
 router.delete('/delete-topic/:topicId' , deleteTopic)
 router.put('/edit-topic/:topicId' , editTopic)
 router.put('/upload-thumbnail/:topicId' , upload.single('thumbnail') , uploadTopicThumbnail)
+router.put('/add-post/:topicId' , addPostToTopic)
 
 export default router

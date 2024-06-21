@@ -1,5 +1,3 @@
-// import Post from "../../components/NewsFeed/Post";
-// import PostForm from "../../components/NewsFeed/PostForm";
 import LeftSideBar from "../../components/NewsFeed/SideLeft";
 import RightSideBar from "../../components/NewsFeed/SideRight";
 import { Outlet } from "react-router";
