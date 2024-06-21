@@ -1,5 +1,3 @@
-
-
 import { Button, DatePicker, Drawer, Form, Input } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
@@ -10,11 +8,10 @@ import RenderSearchInput from "../../RenderSearchInput";
 
 // eslint-disable-next-line react/prop-types
 const TopicForm = ({ onClose, open }) => {
-
   const [searchInput, setSearchInput] = useState("");
   const [locationId, setLocationId] = useState(null);
   const [startDate, setStartDate] = useState(null);
-  const [thumbnail , setThumbnail] = useState(null)
+  const [thumbnail, setThumbnail] = useState(null);
 
   const [form] = Form.useForm();
 
@@ -31,18 +28,17 @@ const TopicForm = ({ onClose, open }) => {
     form.setFieldsValue({ endDate: null });
   };
 
-
   const onChangeSearchInput = (e) => {
-    const value = e.target.value
+    const value = e.target.value;
     console.log(value);
     setSearchInput(e.target.value);
-    // form.setFieldsValue({location : e.target.value})
+    form.setFieldsValue({ location: e.target.value });
   };
 
-  const handleSetLocationId = (location, locationId , locationThumbnail) => {
+  const handleSetLocationId = (location, locationId, locationThumbnail) => {
     setLocationId(locationId);
-    setSearchInput(location);
-    setThumbnail(locationThumbnail)
+    // setSearchInput(location);
+    setThumbnail(locationThumbnail);
     form.setFieldsValue({ location });
     form.setFieldsValue({ locationId: locationId });
   };
@@ -50,18 +46,18 @@ const TopicForm = ({ onClose, open }) => {
   const onFinish = async (values) => {
     try {
       console.log(values);
-      const {title , description , locationId , startDate , endDate} = values
+      const { title, description, locationId, startDate, endDate } = values;
       const formData = {
-        title ,
-        description ,
-        locationId ,
+        title,
+        description,
+        locationId,
         startDate,
-        endDate ,
-        thumbnail 
-      }
-      console.log('formData :::' ,formData);
+        endDate,
+        thumbnail,
+      };
+      console.log("formData :::", formData);
       await createTopic(formData);
-      onClose()
+      onClose();
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +65,13 @@ const TopicForm = ({ onClose, open }) => {
 
   return (
     <Drawer onClose={onClose} open={open} width={500}>
-      <Form form={form} name="basic" className="pb-[20px]" onFinish={onFinish}>
+      <Form
+        layout="vertical"
+        form={form}
+        name="basic"
+        className="pb-[20px]"
+        onFinish={onFinish}
+      >
         <div className="text-black px-5">
           <h2 className="text-2xl font-semibold mb-4">Start a New Trip</h2>
           <div className="flex flex-col gap-4">
@@ -88,7 +90,11 @@ const TopicForm = ({ onClose, open }) => {
                     Topic name
                   </span>
                 </div>
-                <Input showCount maxLength={80} className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300" />
+                <Input
+                  showCount
+                  maxLength={80}
+                  className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300"
+                />
               </label>
             </Form.Item>
             <Form.Item
@@ -122,10 +128,9 @@ const TopicForm = ({ onClose, open }) => {
             </Form.Item>
 
             <Form.Item className="hidden" label="location id" name="locationId">
-              <Input 
-               value={locationId} />
+              <Input value={locationId} />
             </Form.Item>
-
+            
             <Form.Item
               rules={[
                 {
@@ -133,29 +138,29 @@ const TopicForm = ({ onClose, open }) => {
                   message: "Please input location!",
                 },
               ]}
-              name="location"
-              className="h-auto"
-            >
-              <label className="form-control max-w-full">
+              label={
                 <div className="label">
                   <span className="label-text font-bold text-black text-base">
                     Where to? (countries)
                   </span>
                 </div>
-
-                <Input
-                  onChange={onChangeSearchInput}
-                  value={searchInput}
-                  className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300"
-                />
-                <div>
-                  <RenderSearchInput
-                    searchInput={searchInput}
-                    handleSetLocationId={handleSetLocationId}
-                  />
-                </div>
-              </label>
+              }
+              name="location"
+              className="h-auto"
+            >
+              <Input
+                onChange={onChangeSearchInput}
+                value={searchInput}
+                className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300"
+              />
             </Form.Item>
+
+            <div className="ring-1 mt-[-20px]">
+              <RenderSearchInput
+                searchInput={searchInput}
+                handleSetLocationId={handleSetLocationId}
+              />
+            </div>
 
             <div className="flex justify-between">
               <div className="form-control max-w-xs">

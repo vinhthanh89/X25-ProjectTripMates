@@ -10,7 +10,9 @@ const Topic = ({ topic }) => {
   const iconStyle = {
     background: "transparent",
   };
+  
   const user = useSelector((state) => state.user.user);
+
   const navigate = useNavigate();
   const { _id, thumbnail, description, title, userCreated, location } = topic;
   const { locationName, continent, country, locationThumbnail } = location;
@@ -54,7 +56,7 @@ const Topic = ({ topic }) => {
         <div className="flex justify-between pt-[1rem]">
           <div
             className="user flex items-center gap-3 cursor-pointer"
-            onClick={() => navigate(`/user/${user._id}`)}
+            onClick={() => navigate(`/user/${userCreated._id}`)}
           >
             <div className="w-[3rem] h-[3rem]">
               <img

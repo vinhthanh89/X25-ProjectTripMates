@@ -1,4 +1,4 @@
-// import Post from "../../components/NewsFeed/Post";
+import Post from "../../components/NewsFeed/Post";
 import PostForm from "../../components/NewsFeed/PostForm";
 import LeftSideBar from "../../components/NewsFeed/SideLeft";
 import RightSideBar from "../../components/NewsFeed/SideRight";
@@ -14,9 +14,8 @@ const NewsFeed = () => {
         <LeftSideBar />
       </div>
       <div className="col-span-4 flex flex-col overflow-y-scroll">
-        {/* <Outlet /> */}
+        <Outlet />
         {/* <Post/> */}
-        <PostForm/>
       </div>
       <div className="col-span-1 flex flex-col items-center gap-[5rem] px-[1.5rem] bg-white rounded">
         <RightSideBar />

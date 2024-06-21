@@ -29,3 +29,7 @@ export const editTopic = (topicId , formData) => {
 export const uploadTopicThumbnail = (topicId , formData) => {
     return axiosAuthInstance.put(`/api/topic/upload-thumbnail/${topicId}` , formData)
 }
+
+export const addPostToTopic = (topicId , postId) => {
+    return axiosAuthInstance.put(`/api/topic/add-post/${topicId}` , postId)
+}
