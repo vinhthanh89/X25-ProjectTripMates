@@ -29,17 +29,19 @@ const ModalDeleteTopic = ({topic}) => {
 
   return (
     <div>
-      <div onClick={showModal} className="flex justify-between items-center">
-        <span>delete topic</span>
-        <MdDelete className="text-[16px]" />
+      <div
+        onClick={showModal}
+        className="flex justify-end items-center gap-2 text-red-500"
+      >
+        <span className="font-semibold">Delete topic</span>
+        <MdDelete className="text-[16px] " />
       </div>
       <Modal
-        title="Do You Want To Delete This Topic ?"
+        title="Do you want to delete this topic?"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-      >
-      </Modal>
+      ></Modal>
     </div>
   );
 };

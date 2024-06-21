@@ -2,8 +2,6 @@
 import { FaUserEdit } from "react-icons/fa";
 import { CiMail, CiCalendar } from "react-icons/ci";
 import { BsGenderMale } from "react-icons/bs";
-
-
 import { useState } from "react";
 import ModalUser from "../ModalUser";
 import { useSelector } from "react-redux";

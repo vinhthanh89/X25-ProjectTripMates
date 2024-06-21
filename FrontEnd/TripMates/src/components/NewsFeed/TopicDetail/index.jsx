@@ -1,14 +1,13 @@
 /* eslint-disable react/prop-types */
-// import { Table } from "antd";
+// eslint-disable-next-line no-unused-vars
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-
 import dayjs from "dayjs";
 import { getTopicById } from "../../../services/topic";
 import EmptyMilestone from "../Post/Components/EmptyMilestone";
-import { Modal } from "antd";
-import { MdOutlineClose } from "react-icons/md";
-// eslint-disable-next-line no-unused-vars
+import UserJoined from "./UserJoined";
+import ModalShowImg from "./ModalShowImg";
+// import Milestone from "./Milestones";
 
 const TopicDetail = () => {
   const urlParam = useParams();
@@ -64,43 +63,14 @@ const TopicDetail = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  // Testing
-  // const columns = [
-  //   {
-  //     title: "Date",
-  //     dataIndex: "date",
-  //     width: 200,
-  //   },
-  //   {
-  //     title: "Blog Title",
-  //     dataIndex: "blog",
-  //     width: 400,
-  //   },
-  //   {
-  //     title: "Location",
-  //     dataIndex: "location",
-  //   },
-  // ];
-  // const data = [];
-  // for (let i = 0; i < 40; i++) {
-  //   data.push({
-  //     key: i,
-  //     date: <p className="font-bold">{convertedStartDate}</p>,
-  //     blog: "A beautiful day in Japan",
-  //     location: (
-  //       <p>
-  //         {continent} &gt;&gt; {country}
-  //       </p>
-  //     ),
-  //   });
-  // }
+
   return (
     <>
       <div className="flex flex-col gap-[1rem] p-[1.5rem] bg-white overflow-y-scroll">
-        <div className="flex items-end justify-between border-b-2 p-4">
+        <div className="flex flex-col border-b-2 p-4 ">
           <div
             onClick={() => navigate(`/user/${userCreated._id}`)}
-            className="flex items-center text-sm gap-[8px] cursor-pointer hover:opacity-80"
+            className="flex items-center text-sm gap-[8px] cursor-pointer hover:opacity-80 "
           >
             <img
               src={userCreated.avatar}
@@ -112,7 +82,9 @@ const TopicDetail = () => {
               <p className="text-[grey]">1 month ago</p>
             </div>
           </div>
+          <UserJoined />
         </div>
+
         <p className="text-3xl font-bold">{title}</p>
         <div className="grid grid-cols-2 gap-5 ">
           <div className="col-span-1">
@@ -123,30 +95,19 @@ const TopicDetail = () => {
                 src={thumbnail ? thumbnail : locationThumbnail}
                 alt=""
               />
-              <Modal
-                open={isModalOpen}
-                okButtonProps={{ style: { display: "none" } }}
-                cancelButtonProps={{ style: { display: "none" } }}
-                onCancel={handleCancel}
-                className="modal-topic-thumbnail"
-                width="700px"
-                style={{
-                  top: 60,
-                }}
-                closable={true}
-                closeIcon={
-                  <div className=" text-black bg-[lightgray] text-[30px] bg-opacity-0">
-                    <MdOutlineClose />
-                  </div>
+              <ModalShowImg
+                isModalOpen={isModalOpen}
+                handleCancel={handleCancel}
+                img={
+                  <img
+                    className="w-full h-[500px] object-fill"
+                    src={thumbnail ? thumbnail : locationThumbnail}
+                  />
                 }
-              >
-                <img
-                  className="w-full h-[500px] object-fill"
-                 src={thumbnail ? thumbnail : locationThumbnail} />
-              </Modal>
+              />
             </div>
           </div>
-          <div className="col-span-1 gap-2 text-[#303030] ">
+          <div className="col-span-1 gap-2 text-[#303030]">
             <p>
               <span className="text-base text-[#5143d9] font-bold">
                 Description :{" "}
@@ -157,7 +118,7 @@ const TopicDetail = () => {
               <span className="text-[#5143d9]">Location : </span>
               {continent ? (
                 <span>
-                  <a className="underline">{continent}</a>
+                  <a >{continent}</a>
                   <span> &gt;&gt; </span>
                 </span>
               ) : (
@@ -165,37 +126,29 @@ const TopicDetail = () => {
               )}
               {country ? (
                 <span>
-                  <a className="underline">{country}</a>
+                  <a >{country}</a>
                   <span> &gt;&gt; </span>
                 </span>
               ) : (
                 <></>
               )}
-              <span className="underline">{locationName}</span>
+              <span >{locationName}</span>
             </p>
-            <div className="flex justify-between text-base font-bold pt-[10px]">
+            <div className="flex justify-between text-base pt-[10px]">
               <p>
-                <span className="text-[#5143d9]">From: </span>
+                <span className="text-[#5143d9] font-bold">From: </span>
                 {convertedStartDate}
               </p>
               <p>
-                <span className="text-[#5143d9]">Until: </span>
+                <span className="text-[#5143d9] font-bold">Until: </span>
                 {convertedEndDate}
               </p>
             </div>
           </div>
         </div>
-        {/* <Table
-          columns={columns}
-          dataSource={data}
-          pagination={{
-            pageSize: 20,
-          }}
-          scroll={{
-            y: 240,
-          }}
-        /> */}
+        
         <EmptyMilestone />
+        {/* <Milestone convertedStartDate={convertedStartDate} continent={continent} country={country}/> */}
       </div>
     </>
   );

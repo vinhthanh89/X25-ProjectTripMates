@@ -67,8 +67,8 @@ const ModalEditTopic = ({ topic }) => {
 
   return (
     <div>
-      <div onClick={showModal} className="flex justify-between items-center">
-        <span>edit topic</span>
+      <div onClick={showModal} className="flex items-center gap-2">
+        <span className="font-semibold">Edit topic</span>
         <MdEdit />
       </div>
       <Modal

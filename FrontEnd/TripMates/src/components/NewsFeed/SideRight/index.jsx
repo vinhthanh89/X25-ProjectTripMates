@@ -19,30 +19,7 @@ const RightSideBar = () => {
         "https://www.shutterstock.com/image-photo/young-asian-woman-professional-entrepreneur-600nw-2127014192.jpg",
     },
   ];
-
-  // const ImageStories = [
-  //   {
-  //     name: "John Smith",
-  //     imageUrl:
-  //       "https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   },
-  //   {
-  //     name: "Mary Jane",
-  //     imageUrl:
-  //       "https://plus.unsplash.com/premium_photo-1661964344898-c5bfe7b6cb06?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   },
-  //   {
-  //     name: "Jake Paul",
-  //     imageUrl:
-  //       "https://plus.unsplash.com/premium_photo-1661964414899-6528336922d9?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   },
-  //   {
-  //     name: "Amanda",
-  //     imageUrl:
-  //       "https://images.unsplash.com/photo-1531737212413-667205e1cda7?q=80&w=1934&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   },
-  // ];
-
+  
   return (
     <div className="flex flex-col gap-[2rem] font-bold pt-[1rem] w-full ">
       <ul className="friend-list flex flex-col gap-[1rem]">

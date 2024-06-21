@@ -78,8 +78,8 @@ const UserProfile = () => {
           </div>
 
         </div> */}
-        <div className="grid grid-cols-4 h-screen pt-[1rem] px-[2rem]">
-          <div className="col-span-1 flex flex-col gap-[10px] px-[2rem] ">
+        <div className="grid grid-cols-4 h-screen pt-[1rem] ">
+          <div className="col-span-1 flex flex-col gap-[10px] pr-[1rem] mr-[2rem]">
             <div className="flex flex-col items-center gap-3 bg-white rounded p-[1rem] ">
               <div className="relative">
                 <img
@@ -106,7 +106,7 @@ const UserProfile = () => {
               </button>
             </div>
 
-            <div className="flex flex-col gap-2 bg-white rounded p-[1rem]">
+            {/* <div className="flex flex-col gap-2 bg-white rounded p-[1rem]">
               <h1 className="text-base font-bold">Topics</h1>
               <button className="flex btn_all gap-2 w-full transition duration-300 ease-in-out">
                 <div className="flex items-start gap-2 w-full">
@@ -138,10 +138,10 @@ const UserProfile = () => {
                   <p className="text-base">Traveling the world</p>
                 </div>
               </button>
-            </div>
+            </div> */}
           </div>
 
-          <div className="col-span-3 flex flex-col text-sm font-semibold gap-[10px] p-[2rem] bg-white rounded">
+          <div className="col-span-3 flex flex-col text-sm font-semibold gap-[10px] p-[2rem] bg-white rounded ">
             <div>
               <button
                 onClick={() => setShowComponent("topic")}
