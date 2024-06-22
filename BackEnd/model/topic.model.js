@@ -13,12 +13,10 @@ const Topic = new mongoose.Schema({
     thumbnail: {
         type : String ,
     },
-    reaction : [
-        {
-            type : mongoose.Schema.Types.ObjectId,
-            ref : 'reactions'
-        }
-    ],
+    reaction : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'reactions'
+    },
     description : {
         type : String
     },
