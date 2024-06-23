@@ -6,6 +6,7 @@ import topicRouter from './topic.router.js'
 import locationRouter from './location.router.js'
 import postRouter from './post.router.js'
 import reactRouter from './reaction.router.js'
+import commentRouter from './comment.router.js'
 import { authentication } from '../middleware/authentication.js'
 
 
@@ -16,6 +17,7 @@ router.use('/api/topic' , authentication , topicRouter)
 router.use('/api/location' , locationRouter)
 router.use('/api/post' , authentication , postRouter)
 router.use('/api/react' , authentication , reactRouter)
+router.use('/api/comment' , authentication , commentRouter)
 
 
 export default router

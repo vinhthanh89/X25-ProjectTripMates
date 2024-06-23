@@ -5,9 +5,9 @@ const Reaction = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'topics'
     },
-    reactions : [
+    usersReaction : [
         {
-            userReaction : {
+            userId : {
                 type : mongoose.Schema.Types.ObjectId,
                 ref : 'users'
             },

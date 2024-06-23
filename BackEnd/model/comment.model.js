@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
 const Comment = new mongoose.Schema({
-  topicId: {
+  topicComment: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "topics",
   },
-  commentsOfTopic : [
+  usersComment : [
     {
-        userComment : {
+        userId : {
             type : mongoose.Schema.Types.ObjectId,
             ref : 'users'
         },
@@ -19,3 +19,5 @@ const Comment = new mongoose.Schema({
     }
   ]
 });
+
+export default mongoose.model('comments' , Comment)

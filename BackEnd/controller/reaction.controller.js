@@ -1,4 +1,5 @@
 import Reaction from "../model/reaction.model.js";
+import mongoose from "mongoose";
 
 export const getReactByTopicId = async (req, res) => {
   try {
@@ -7,7 +8,7 @@ export const getReactByTopicId = async (req, res) => {
 
     const findReactByTopic = await Reaction.findOne({
       topicIdReaction: topicId,
-    });
+    }).populate('usersReaction usersReaction.userId')
 
     if (!findReactByTopic) {
       return res.status(200).json({
@@ -19,7 +20,7 @@ export const getReactByTopicId = async (req, res) => {
     if (findReactByTopic) {
       return res.status(200).json({
         message: "Get React By Topic Successfully",
-        reactions: findReactByTopic.reactions,
+        reactions: findReactByTopic.usersReaction
       });
     }
   } catch (error) {
@@ -37,14 +38,14 @@ export const reactTopic = async (req, res) => {
 
     const findTopicReaction = await Reaction.findOne({
       topicIdReaction: topicId,
-    });
+    }).populate('usersReaction usersReaction.userId');
 
     if (!findTopicReaction) {
       const newTopicReactions = await Reaction.create({
         topicIdReaction: topicId,
-        reactions: [
+        usersReaction: [
           {
-            userReaction: userId,
+            userId: userId,
             react: "like",
           },
         ],
@@ -52,7 +53,7 @@ export const reactTopic = async (req, res) => {
 
       return res.status(201).json({
         message: "React Successfully",
-        newTopicReactions,
+        reactions : newTopicReactions.usersReaction
       });
     }
 
@@ -61,17 +62,17 @@ export const reactTopic = async (req, res) => {
         { topicIdReaction: topicId },
         {
             $push: {
-              reactions: {
-                userReaction: userId,
+              usersReaction: {
+                userId: userId,
                 react: 'like'
               }
             }
-          },
-      );
+          },{new : true}
+      ).populate('usersReaction usersReaction.userId');
 
       return res.status(201).json({
         message: "React Successfully",
-        newTopicReactions,
+        reactions : newTopicReactions.usersReaction,
       });
     }
   } catch (error) {
@@ -91,15 +92,15 @@ export const removeReact = async (req, res) => {
       { topicIdReaction: topicId },
       {
         $pull: {
-          reactions: { userReaction: userId },
+          usersReaction: { userId: userId },
         },
       },
       { new: true }
-    );
+    ).populate('usersReaction usersReaction.userId');
 
     return res.status(200).json({
       message: "Remove React Successfull",
-      newTopicReactions,
+      reactions : newTopicReactions.usersReaction
     });
   } catch (error) {
     console.log(error);
