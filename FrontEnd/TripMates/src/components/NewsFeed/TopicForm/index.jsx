@@ -155,7 +155,7 @@ const TopicForm = ({ onClose, open }) => {
               />
             </Form.Item>
 
-            <div className="ring-1 mt-[-20px]">
+            <div className="mt-[-20px]">
               <RenderSearchInput
                 searchInput={searchInput}
                 handleSetLocationId={handleSetLocationId}

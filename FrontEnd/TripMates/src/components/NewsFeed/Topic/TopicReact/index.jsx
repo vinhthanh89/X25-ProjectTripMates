@@ -18,11 +18,15 @@ const TopicReact = ({ topic }) => {
     const fetchReact = async () => {
       try {
         const response = await getReactByTopicId(topic._id);
+
         const reactions = response.data.reactions
         setTopicReaction(reactions)
-        const checkIsReact = reactions.filter(react => react.userReaction === userLogin._id)
 
-        setIsReact(checkIsReact.length > 0 ? true : false )
+        const userExists = reactions.some(reaction =>
+          reaction.userId._id === userLogin._id
+        );
+
+        setIsReact(userExists ? true : false )
       } catch (error) {
         console.log(error);
       }
@@ -33,8 +37,7 @@ const TopicReact = ({ topic }) => {
   const handleReactTopic = async () => {
     try {
         const response = await reactTopic(topic._id)
-        console.log(response);
-        const newTopicReactions = response.data.newTopicReactions.reactions
+        const newTopicReactions = response.data.reactions
         setTopicReaction(newTopicReactions)
         setIsReact(true)
     } catch (error) {
@@ -45,8 +48,7 @@ const TopicReact = ({ topic }) => {
   const handleRemoveReactTopic = async () => {
     try {
         const response = await removeReact(topic._id)
-        console.log(response);
-        const newTopicReactions = response.data.newTopicReactions.reactions
+        const newTopicReactions = response.data.reactions
         setTopicReaction(newTopicReactions)
         setIsReact(false)
     } catch (error) {
