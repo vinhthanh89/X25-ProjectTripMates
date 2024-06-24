@@ -1,5 +1,4 @@
 import Reaction from "../model/reaction.model.js";
-import mongoose from "mongoose";
 
 export const getReactByTopicId = async (req, res) => {
   try {

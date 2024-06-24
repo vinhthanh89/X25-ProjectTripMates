@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import {useSelector} from 'react-redux'
 import { IoIosHeart } from "react-icons/io";
 import { getReactByTopicId, reactTopic, removeReact } from "../../../../services/react";
+import { Modal } from "antd";
+import { useNavigate } from "react-router";
+import AvatarFollower from "../../../UserProfile/AvatarFollower";
 
 const TopicReact = ({ topic }) => {
   const iconSize = 25;
@@ -10,18 +13,28 @@ const TopicReact = ({ topic }) => {
     background: "transparent",
   };
   const userLogin = useSelector(state => state.user.user)
+  const navigate = useNavigate()
 
   const [topicReaction, setTopicReaction] = useState([]);
   const [isReact, setIsReact] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const fetchReact = async () => {
       try {
         const response = await getReactByTopicId(topic._id);
-
         const reactions = response.data.reactions
         setTopicReaction(reactions)
-
         const userExists = reactions.some(reaction =>
           reaction.userId._id === userLogin._id
         );
@@ -56,6 +69,28 @@ const TopicReact = ({ topic }) => {
     }
   }
 
+  const renderPeopleReactTopic = topicReaction.map(user => {
+    const {userId , _id} = user
+    return (
+      <div key={_id}>
+        <AvatarFollower user={userId} />
+      </div>
+    )
+    // return (
+    //   <div className="w-full h-[60px] flex gap-[10px] items-center" key={_id}>
+    //       <div className="w-[40px] h-[40px]">
+    //         <img
+    //         className="w-full h-full rounded-full object-cover"
+    //          src={userId.avatar} alt="" />
+    //       </div>
+    //       <p
+    //         onClick={() => navigate(`/user/${userId._id}`)}
+    //        className="text-[16px] font-bold cursor-pointer hover:opacity-60">{userId.fullName}</p>
+    //   </div>
+    // )
+  })
+
+
   return (
     <div className="flex items-center gap-1">
       {isReact ? (
@@ -71,7 +106,24 @@ const TopicReact = ({ topic }) => {
           <IoIosHeart size={iconSize} style={iconStyle} className="" />
         </button>
       )}
-      <p className="w-2">{topicReaction.length}</p>
+      <p 
+      onClick={showModal}
+      className="w-2 cursor-pointer hover:underline">{topicReaction.length}</p>
+      <Modal
+      title='People Like Topic'
+      open={isModalOpen} 
+      onOk={handleOk} 
+      onCancel={handleCancel}
+      okButtonProps={{style : {display : 'none'}}}
+      cancelButtonProps={{style : {display : 'none'}}}
+      style={{
+        top : 20,
+      }}
+      >
+        <div className="min-h-[300px] grid grid-cols-4">
+          {renderPeopleReactTopic}
+        </div>
+      </Modal>
     </div>
   );
 };

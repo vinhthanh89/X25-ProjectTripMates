@@ -66,7 +66,6 @@ const Post = () => {
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2 text-base">
               <img className="w-[30px] h-[30px] rounded-full" src={userCreated?.avatar} alt="" />
-                {/* <FaUserCircle size={iconSize} /> */}
                 <strong
                 className="hover:opacity-70 cursor-pointer"
                 onClick={() => navigate(`/user/${userCreated._id}`)}

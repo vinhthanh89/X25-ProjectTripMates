@@ -71,7 +71,7 @@ const TopicDetail = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-[1rem] p-[1.5rem] bg-white overflow-y-scroll">
+      <div className="flex flex-col gap-[1rem] p-[1.5rem] bg-white overflow-y-scroll pb-[30px]">
         <div className="flex flex-col border-b-2 p-4 ">
           <div
             onClick={() => navigate(`/user/${userCreated._id}`)}
@@ -115,8 +115,11 @@ const TopicDetail = () => {
                   <div className=" text-black bg-[lightgray] text-[30px] bg-opacity-0">
                     <MdOutlineClose />
                   </div>
-                }
-              />
+                }>
+                    <img
+                    className="w-full object-fill"
+                     src={thumbnail ? thumbnail : locationThumbnail} alt="" />
+              </Modal>
             </div>
           </div>
           <div className="col-span-1 gap-2 text-[#303030]">
