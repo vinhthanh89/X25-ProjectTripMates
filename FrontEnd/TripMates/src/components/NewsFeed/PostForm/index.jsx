@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
@@ -10,17 +9,16 @@ import { addPostToTopic } from "../../../services/topic";
 import { getImageFile, getImageSrc } from "../../../utils/getImageSrc";
 import RenderSearchInput from "../../RenderSearchInput";
 import ContentEditor from "./ContentEditor";
+import { FaLongArrowAltLeft } from "react-icons/fa";
 
 const PostForm = () => {
-  const urlParams = useParams()
-  const navigate = useNavigate()
+  const urlParams = useParams();
+  const navigate = useNavigate();
   const [model, setModel] = useState("");
-  
+
   const [searchInput, setSearchInput] = useState("");
   const [locationId, setLocationId] = useState(null);
-  const [loading , setLoading] = useState(false)
-
-
+  const [loading, setLoading] = useState(false);
 
   const [form] = Form.useForm();
 
@@ -47,12 +45,12 @@ const PostForm = () => {
 
   const onFinish = async (values) => {
     try {
-      setLoading(true)
+      setLoading(true);
       const imgBlobSrc = getImageSrc(model);
 
       const imgFilesList = await getImageFile(imgBlobSrc);
 
-      const formData = new FormData()
+      const formData = new FormData();
 
       imgFilesList.forEach((file, index) => {
         formData.append(`images[${index}]`, file);
@@ -60,36 +58,42 @@ const PostForm = () => {
       imgBlobSrc.forEach((file, index) => {
         formData.append(`imageBlob[${index}]`, file);
       });
-      formData.append('content' , model)
-      formData.append('title' , values.title)
-      formData.append('locationId' , values.locationId)
-      formData.append('date' , values.date)
-      formData.append('topicId' , urlParams.topicId)
+      formData.append("content", model);
+      formData.append("title", values.title);
+      formData.append("locationId", values.locationId);
+      formData.append("date", values.date);
+      formData.append("topicId", urlParams.topicId);
 
-      const response = await createPost(formData)
+      const response = await createPost(formData);
 
-      const newPost = response.data.newPost
+      const newPost = response.data.newPost;
 
-      await addPostToTopic(urlParams.topicId , {postId : newPost._id})
-
+      await addPostToTopic(urlParams.topicId, { postId: newPost._id });
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false)
-      navigate(`/topic/${urlParams.topicId}`)
+      setLoading(false);
+      navigate(`/topic/${urlParams.topicId}`);
     }
   };
 
   return (
     <div className="gap-[3rem] pt-5 px-[3rem] bg-white rounded h-full overflow-y-scroll">
       <Form
-      form={form}
+        form={form}
         layout="vertical"
         name="basic"
         className="pb-[20px]"
         onFinish={onFinish}
       >
-        <div className="text-black px-5">
+        <div className="text-black">
+          <button
+            onClick={() => navigate(`/topic/${urlParams.topicId}`)}
+            className="flex items-center gap-2 hover:underline mb-[5px]"
+          >
+            <FaLongArrowAltLeft />
+            Back
+          </button>
           <h2 className="text-2xl font-semibold mb-4">Create your post</h2>
           <div className="flex flex-col gap-4">
             <Form.Item
@@ -117,10 +121,7 @@ const PostForm = () => {
               />
             </Form.Item>
 
-            <Form.Item
-             className="hidden"
-              label="location id"
-               name="locationId">
+            <Form.Item className="hidden" label="location id" name="locationId">
               <Input value={locationId} />
             </Form.Item>
 
@@ -140,7 +141,7 @@ const PostForm = () => {
                       message: "Please input location!",
                     },
                   ]}
-                  name='location'
+                  name="location"
                   className="h-auto"
                 >
                   <Input

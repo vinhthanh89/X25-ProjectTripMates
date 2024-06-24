@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
-import { IoIosHeart } from "react-icons/io";
 import { MdPlace } from "react-icons/md";
 import { useNavigate } from "react-router";
-import CommentModal from "./CommentModal";
-import { useEffect, useState } from "react";
-import { getReactByTopicId } from "../../../services/react";
+
+import CommentModal from "../../Comment/CommentModal";
 import TopicReact from "./TopicReact";
 
 const Topic = ({ topic }) => {
@@ -16,9 +14,6 @@ const Topic = ({ topic }) => {
 
   const { _id, thumbnail, description, title, userCreated, location } = topic;
   const { locationName, continent, country, locationThumbnail } = location;
-
-  
-
   
   return (
     <div className="flex flex-col gap-[0.5rem] rounded-lg bg-white px-[1rem] py-[1.5rem] ">
@@ -50,7 +45,7 @@ const Topic = ({ topic }) => {
           </div>
           <div className="reactCmt flex gap-5 text-[#545454] font-medium text-sm">
             <TopicReact topic={topic} />
-            <CommentModal iconSize={iconSize} iconStyle={iconStyle} />
+            <CommentModal iconSize={iconSize} iconStyle={iconStyle} topic={topic}/>
           </div>
         </div>
       </div>
