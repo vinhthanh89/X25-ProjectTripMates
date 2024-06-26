@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 const AvatarFollower = ({ user }) => {
   const navigate = useNavigate();
 
+  console.log(user);
+
   return (
     <div
       onClick={() => navigate(`/user/${user._id}`)}

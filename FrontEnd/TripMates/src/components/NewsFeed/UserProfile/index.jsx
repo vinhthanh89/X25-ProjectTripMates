@@ -8,9 +8,10 @@ import { useParams } from "react-router";
 // import { useDispatch } from "react-redux";
 import { getUserById } from "../../../services/user";
 import AboutMe from "../../UserProfile/AboutMe";
-import Followers from "../../UserProfile/Followers";
+import Followers from "../../Follow/Followers";
 import MoadlChangeAvatar from "../../UserProfile/ModalChangeAvatar";
 import UserCreatedTopic from "../../UserProfile/UserCreatedTopic";
+import Following from "../../Follow/Following";
 
 const UserProfile = () => {
   const urlParam = useParams();
@@ -96,14 +97,12 @@ const UserProfile = () => {
               <h1 className="w-full flex justify-center text-lg font-bold truncate">
                 {userProfile.fullName}
               </h1>
-
-              <AboutMe
-                userProfile={userProfile}
-                handleEditUser={handleEditUser}
-              />
-              <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold rounded px-2 py-1">
-                + Follow
-              </button>
+              <div className="w-full">
+                <AboutMe
+                  userProfile={userProfile}
+                  handleEditUser={handleEditUser}
+                />
+              </div>
             </div>
 
             {/* <div className="flex flex-col gap-2 bg-white rounded p-[1rem]">
@@ -155,16 +154,20 @@ const UserProfile = () => {
               >
                 Followers
               </button>
-              <button className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
+              <button 
+                onClick={() => setShowComponent("following")}
+              className="relative px-[10px] py-[5px] before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full">
                 Following
               </button>
             </div>
             <div className="px-[15px] pt-[5px] overflow-hidden max-h-[600px] overflow-y-auto">
               {(showComponent === "topic" && (
-                <UserCreatedTopic userId={urlParam.userId}  />
+                <UserCreatedTopic userId={urlParam.userId} />
               )) ||
                 (showComponent === "follower" && (
                   <Followers userProfile={userProfile} />
+                )) || (showComponent === "following" && (
+                  <Following userProfile={userProfile} />
                 ))}
             </div>
           </div>

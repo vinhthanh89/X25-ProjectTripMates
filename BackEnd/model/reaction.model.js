@@ -17,6 +17,6 @@ const Reaction = new mongoose.Schema({
             }
         }
     ]
-})
+} ,  {timestamps : true})
 
 export default mongoose.model('reactions' , Reaction)

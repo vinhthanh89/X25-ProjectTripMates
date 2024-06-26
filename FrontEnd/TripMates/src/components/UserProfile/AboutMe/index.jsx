@@ -6,8 +6,9 @@ import { useState } from "react";
 import ModalUser from "../ModalUser";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
+import FollowButton from "../../Follow/FolllowButton";
 
-const AboutMe = ({ userProfile , handleEditUser }) => {
+const AboutMe = ({ userProfile, handleEditUser }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const userLogin = useSelector((state) => state.user.user);
   const { email, gender, description, birthday } = userProfile;
@@ -20,6 +21,8 @@ const AboutMe = ({ userProfile , handleEditUser }) => {
     setIsModalOpen(false);
   };
 
+  console.log(userProfile);
+
   const iconSize = 20;
   return (
     <div className="flex flex-col gap-2 border-b-[1.5px] px-[0.5rem] pb-[0.5rem] text-base">
@@ -28,7 +31,7 @@ const AboutMe = ({ userProfile , handleEditUser }) => {
           userProfile={userProfile}
           isModalOpen={isModalOpen}
           handleCancel={handleCancel}
-          handleEditUser={handleEditUser}          
+          handleEditUser={handleEditUser}
         />
         <h1 className="font-bold">About me</h1>
         {userLogin._id === userProfile._id ? (
@@ -65,6 +68,13 @@ const AboutMe = ({ userProfile , handleEditUser }) => {
       <div>
         <p className="text-sm text-[#717171]">{description}</p>
       </div>
+      {userLogin._id === userProfile._id ? (
+        <></>
+      ) : (
+        <div className="w-full">
+          <FollowButton userProfile={userProfile} />
+        </div>
+      )}
     </div>
   );
 };

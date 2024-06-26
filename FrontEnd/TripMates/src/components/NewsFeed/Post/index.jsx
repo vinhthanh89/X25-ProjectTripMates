@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { FaLongArrowAltLeft } from "react-icons/fa";
 import { MdPlace } from "react-icons/md";
-import { FaLongArrowAltLeft, FaUserCircle } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router";
 
-import Header from "./Components/Header";
-import Recommend from "./Components/Recommend";
-
-import Content from "./Components/Content";
 import { getPostById } from "../../../services/post";
+import Content from "./Components/Content";
 
 const Post = () => {
   const urlParam = useParams()
@@ -29,9 +26,7 @@ const Post = () => {
   }, [urlParam.postId]);
 
   const { title, date, location, userCreated , topicId } = post
-  // const {locationName , continent , country} = location
-
-  const iconSize = 25;
+ 
   const convertDate = dayjs(date, "YYYY-MM-DD").format("DD-MMMM-YYYY");
 
   return (
@@ -52,7 +47,6 @@ const Post = () => {
     //   </div>
     // </div>
 
-    //! UI2
     <div className="gap-[3rem] pt-5 px-[3rem] bg-white rounded h-full overflow-y-scroll">
       <div className="col-span-4 flex flex-col gap-[2rem]">
         <div className="flex flex-col gap-4">
