@@ -6,37 +6,35 @@ export const createPost = async (req, res) => {
     const userCreated = req.user;
     const files = req.files;
     const { imageBlob, content, date, title, locationId, topicId } = req.body;
-
-    const filesBase64 = [];
-
-    files.forEach((file) => {
-      const b64 = Buffer.from(file.buffer).toString("base64");
-      let dataURI = "data:" + file.mimetype + ";base64," + b64;
-      filesBase64.push(dataURI);
-    });
-
-    const cloudinaryResponse = await Promise.all(
-      filesBase64.map((file, index) =>
-        handleUpload(file).then((response) => ({ response, index }))
-      )
-    );
-
-    cloudinaryResponse.sort((a, b) => a.index - b.index);
-    const orderedResponses = cloudinaryResponse.map((item) => item.response);
-
-    const cloudinaryURL = orderedResponses.map((item) => item.secure_url);
-
     let covertedContent = content;
 
-    for (let i = 0; i < imageBlob.length; i++) {
-      covertedContent = covertedContent.replace(imageBlob[i], cloudinaryURL[i]);
-    }
+    if (files.length > 0) {
+      const filesBase64 = [];
 
-    console.log('content ::::' , content);
-    console.log('imageBlob' , imageBlob);
-    console.log('cloudinaryURL :::' ,cloudinaryURL);
-    console.log('orderedResponses :::' , orderedResponses);
-    console.log('covertedContent :::' , covertedContent);
+      files.forEach((file) => {
+        const b64 = Buffer.from(file.buffer).toString("base64");
+        let dataURI = "data:" + file.mimetype + ";base64," + b64;
+        filesBase64.push(dataURI);
+      });
+
+      const cloudinaryResponse = await Promise.all(
+        filesBase64.map((file, index) =>
+          handleUpload(file).then((response) => ({ response, index }))
+        )
+      );
+
+      cloudinaryResponse.sort((a, b) => a.index - b.index);
+      const orderedResponses = cloudinaryResponse.map((item) => item.response);
+
+      const cloudinaryURL = orderedResponses.map((item) => item.secure_url);
+
+      for (let i = 0; i < imageBlob.length; i++) {
+        covertedContent = covertedContent.replace(
+          imageBlob[i],
+          cloudinaryURL[i]
+        );
+      }
+    }
 
     const newPost = await Post.create({
       title,

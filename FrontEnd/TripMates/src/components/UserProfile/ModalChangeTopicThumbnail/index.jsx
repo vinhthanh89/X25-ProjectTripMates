@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 
-import "./style.css";
 import { Button, Form, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { uploadTopicThumbnail } from "../../../services/topic";
+import { RiImageEditFill } from "react-icons/ri";
+import "./style.css";
 
 // eslint-disable-next-line react/prop-types
 const ModalChangeTopicThumbnail = ({ topic }) => {
-
   const userLogin = useSelector((state) => state.user.user);
   const { thumbnail, location, userCreated } = topic;
   const { locationThumbnail, country } = location;
@@ -37,14 +37,14 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
       setLoading(true);
       const formData = new FormData();
       formData.append("thumbnail", uploadFile);
-
-      await uploadTopicThumbnail(topic._id, formData);
-
+      const response = await uploadTopicThumbnail(topic._id, formData);
+      setEditAvatar(response.data.topicUpdated.thumbnail)
+      setLoading(false)
       setIsModalOpen(false);
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   };
 
@@ -61,18 +61,21 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
   };
 
   return (
-    <>
-      <img
+    <div>
+        <div
         onClick={showModal}
-        src={thumbnail ? thumbnail : locationThumbnail}
-        alt={country}
-        className="rounded-l-[15px] cursor-pointer w-full h-full object-fill"
-      />
+        className="flex justify-end items-center gap-2 text-black"
+      >
+        <span className="font-semibold">Change Thumbnail</span>
+        <RiImageEditFill className="text-[16px] " />
+      </div>
+
       <Modal
         className="modal-topic-thumbnail bg-white"
         width="50rem"
         style={{                   
-          borderRadius: "10px"
+          borderRadius: "10px",
+          top : 20
         }}
         closable={true}
         closeIcon={
@@ -108,18 +111,18 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
                 </div>
 
                 <label htmlFor="upload">
-                  <div className="px-[15px] py-[5px]  cursor-pointer rounded-[8px] bg-[#5143d9] hover:opacity-90 text-[white] mr-[20px]">
+                  <div className={`px-[15px] py-[5px]  cursor-pointer rounded-[8px] bg-[#5143d9] hover:opacity-90 text-[white] mr-[20px] ${loading ? 'hidden' : ''}`}>
                     Select Image
                   </div>
                 </label>
               </div>
               <Button
+              loading={loading}
                 htmlType="submit"
                 style={{
                   background: "blue",
                   border: "none",
                 }}
-                loading={loading}
                 className="hover:opacity-80 overflow-hidden"
               >
                 <p className="text-white">Save changes</p>
@@ -128,7 +131,7 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
           </div>
         </Form>
       </Modal>
-    </>
+    </div>
   );
 };
 

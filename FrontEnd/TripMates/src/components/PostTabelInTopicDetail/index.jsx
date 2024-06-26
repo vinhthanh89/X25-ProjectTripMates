@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { getPostByTopicId } from "../../services/post";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
-const PostTableInTopicDetail = ({ topicId }) => {
+const PostTableInTopicDetail = ({ topicId, userCreated }) => {
   const navigate = useNavigate();
+  const userLogin = useSelector((state) => state.user.user);
   const [postInTopic, setPostInTopic] = useState([]);
 
   useEffect(() => {
@@ -76,6 +78,9 @@ const PostTableInTopicDetail = ({ topicId }) => {
   return (
     <div>
       <Table
+        locale={{
+          emptyText: "No Post",
+        }}
         columns={columns}
         dataSource={data}
         pagination={false}
@@ -83,12 +88,16 @@ const PostTableInTopicDetail = ({ topicId }) => {
           y: 240,
         }}
       />
-      <button
-      onClick={() => navigate(`/topic/createPost/${topicId}`)}
-      
-       className="font-bold mt-[5px] bg-[#5143d9] text-white py-[10px] px-[5px] text-[14px] rounded-xl float-right">
-        Create A New Post
-      </button>
+      {userLogin._id === userCreated._id ? (
+        <button
+          onClick={() => navigate(`/topic/createPost/${topicId}`)}
+          className="font-bold mt-[5px] bg-[#5143d9] text-white py-[10px] px-[5px] text-[14px] rounded-xl float-right"
+        >
+          Create A New Post
+        </button>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

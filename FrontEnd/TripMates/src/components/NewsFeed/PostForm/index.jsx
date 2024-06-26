@@ -10,6 +10,7 @@ import { getImageFile, getImageSrc } from "../../../utils/getImageSrc";
 import RenderSearchInput from "../../RenderSearchInput";
 import ContentEditor from "./ContentEditor";
 import { FaLongArrowAltLeft } from "react-icons/fa";
+import ModalLoading from "../../ModalLoading";
 
 const PostForm = () => {
   const urlParams = useParams();
@@ -185,9 +186,7 @@ const PostForm = () => {
                 </Form.Item>
               </div>
             </label>
-
             <ContentEditor changeContent={changeContent} model={model} />
-
             <Button
               loading={loading}
               htmlType="submit"
@@ -195,6 +194,7 @@ const PostForm = () => {
             >
               Post now
             </Button>
+            <ModalLoading loading={loading} />
           </div>
         </div>
       </Form>
