@@ -21,8 +21,6 @@ const AboutMe = ({ userProfile, handleEditUser }) => {
     setIsModalOpen(false);
   };
 
-  console.log(userProfile);
-
   const iconSize = 20;
   return (
     <div className="flex flex-col gap-2 border-b-[1.5px] px-[0.5rem] pb-[0.5rem] text-base">
@@ -68,9 +66,7 @@ const AboutMe = ({ userProfile, handleEditUser }) => {
       <div>
         <p className="text-sm text-[#717171]">{description}</p>
       </div>
-      {userLogin._id === userProfile._id ? (
-        <></>
-      ) : (
+      {userLogin._id !== userProfile._id && (
         <div className="w-full">
           <FollowButton userProfile={userProfile} />
         </div>
