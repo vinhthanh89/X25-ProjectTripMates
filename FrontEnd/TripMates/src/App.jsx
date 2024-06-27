@@ -29,7 +29,7 @@ const App = () => {
           <Header />
           <Routes>
             <Route path="/" element={<NewsFeed />}>
-              <Route index element={<Content />} />
+              <Route path="" element={<Content />} />
               <Route path="/shorts" element={<Reels />} />
               <Route path="/message" element={<Message />} />
               <Route path="topic/:topicId" element={<TopicDetail />} />

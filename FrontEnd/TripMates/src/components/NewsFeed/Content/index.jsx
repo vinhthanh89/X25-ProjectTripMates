@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import Continents from "../Continents";
-import { fetchDataTopics, fetchTopicData } from "../../../services/topic";
-import Topic from "../Topic";
-import { PiClockCounterClockwiseBold } from "react-icons/pi";
-import { MdStars } from "react-icons/md";
 import { FaUsers } from "react-icons/fa6";
+import { PiClockCounterClockwiseBold } from "react-icons/pi";
+import { fetchDataTopics } from "../../../services/topic";
+import Topic from "../Topic";
 
 
 const Content = () => {
@@ -23,7 +21,7 @@ const Content = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [topicData]);
 
   const handleFeedTypeChange = (type) => {
     setFeedType(type);
