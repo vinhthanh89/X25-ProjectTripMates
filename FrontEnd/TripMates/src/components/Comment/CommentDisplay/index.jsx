@@ -13,12 +13,8 @@ import { useEffect, useRef, useState } from "react";
 
       useEffect(() => {
         if (commentRef.current) {
-          const elementStyle = window.getComputedStyle(commentRef.current)
-          console.log(elementStyle);
           const lineHeight = parseInt(window.getComputedStyle(commentRef.current).lineHeight, 10);
           const maxLinesHeight = lineHeight * 3;
-          console.log(commentRef.current.scrollHeight);
-          console.log(commentRef.current.lineHeight);
           if (commentRef.current.scrollHeight > maxLinesHeight) {
             setIsOverflowing(true);
           }

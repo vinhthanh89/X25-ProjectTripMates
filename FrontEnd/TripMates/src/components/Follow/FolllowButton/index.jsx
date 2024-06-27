@@ -4,13 +4,11 @@ import { checkIsFollow, followUser, unfollowUser } from "../../../services/userF
 
 const FollowButton = ({ userProfile }) => {
   const [isFollow, setIsFollow] = useState(null);
-  console.log(userProfile);
 
   useEffect(() => {
     const checkUserIsFollow = async () => {
       try {
         const response = await checkIsFollow(userProfile._id);
-        console.log(response);
         setIsFollow(response.data.isFollow);
       } catch (error) {
         console.log(error);

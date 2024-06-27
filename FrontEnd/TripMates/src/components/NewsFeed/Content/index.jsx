@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Continents from "../Continents";
-import { fetchTopicData } from "../../../services/topic";
+import { fetchDataTopics, fetchTopicData } from "../../../services/topic";
 import Topic from "../Topic";
 import { PiClockCounterClockwiseBold } from "react-icons/pi";
 import { MdStars } from "react-icons/md";
@@ -16,10 +16,8 @@ const Content = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchTopicData();
-        const topics = response.data.dataTopic;
-        const dataRender = topics.reverse();
-        setTopicData(dataRender);
+        const response = await fetchDataTopics();
+        setTopicData(response.data.topics);
       } catch (error) {
         console.log(error);
       }
