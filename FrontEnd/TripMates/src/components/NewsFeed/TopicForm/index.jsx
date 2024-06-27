@@ -5,9 +5,9 @@ import dayjs from "dayjs";
 import { useState } from "react";
 // import { useNavigate } from "react-router";
 
+import { FaRegQuestionCircle } from "react-icons/fa";
 import { createTopic } from "../../../services/topic";
 import RenderSearchInput from "../../RenderSearchInput";
-import { FaRegQuestionCircle } from "react-icons/fa";
 
 // eslint-disable-next-line react/prop-types
 const TopicForm = ({ onClose, open }) => {
@@ -54,7 +54,6 @@ const TopicForm = ({ onClose, open }) => {
 
   const onFinish = async (values) => {
     try {
-      console.log(values);
       const {isPrivate , title, description, locationId, startDate, endDate } = values;
       const formData = {
         isPrivate,
@@ -65,11 +64,11 @@ const TopicForm = ({ onClose, open }) => {
         endDate,
         thumbnail,
       };
-      console.log("formData :::", formData);
       await createTopic(formData);
-      onClose();
     } catch (error) {
       console.log(error);
+    } finally {
+      onClose();
     }
   };
 
