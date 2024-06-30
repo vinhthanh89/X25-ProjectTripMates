@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 
 import CommentModal from "../../Comment/CommentModal";
 import TopicReact from "./TopicReact";
+import UserJoinTripAvatarGroup from "../../UserJoinTrip/UserJoinTripAvatarGroup";
 
 const Topic = ({ topic }) => {
   const navigate = useNavigate();
@@ -49,8 +50,8 @@ const Topic = ({ topic }) => {
           </div>
         </div>
       </div>
-
-      <div className="avatar-group -space-x-3">
+    <UserJoinTripAvatarGroup />
+      {/* <div className="avatar-group -space-x-3">
         <div className="avatar w-9 border-white">
           <div className="w-full rounded-full">
             <img
@@ -72,7 +73,7 @@ const Topic = ({ topic }) => {
             <span>+2</span>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className=" flex flex-col gap-[0.5rem]">
         <div className="text-sm text-[#5143d9]">

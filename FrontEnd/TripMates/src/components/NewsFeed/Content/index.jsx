@@ -1,41 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaUsers } from "react-icons/fa6";
 import { PiClockCounterClockwiseBold } from "react-icons/pi";
-import { fetchDataTopics } from "../../../services/topic";
-import Topic from "../Topic";
-
+import FriendsFeeds from "../FriendFeeds";
+import RecentsFeed from "../RecentsFeed";
 
 const Content = () => {
   const iconSize = 20;
 
-  const [topicData, setTopicData] = useState(null);
-  const [feedType, setFeedType] = useState("Recents");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetchDataTopics();
-        setTopicData(response.data.topics);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [topicData]);
+  const [feedType, setFeedType] = useState("Friends");
 
   const handleFeedTypeChange = (type) => {
     setFeedType(type);
   };
-
-  const renderTopicData = topicData ? (
-    topicData.map((topic) => (
-      <div key={topic._id}>
-        <Topic topic={topic} />
-      </div>
-    ))
-  ) : (
-    <p>Loading ...</p>
-  );
 
   return (
     <div className="flex flex-col gap-2 h-full overflow-y-scroll text-[#303030] pb-[20px]">
@@ -67,12 +43,23 @@ const Content = () => {
           {/* <Continents /> */}
         </div>
       </div>
-      <div
+      {(feedType === "Recents" && (
+        <div className="grid grid-cols-2 gap-[1rem] py-[1rem]">
+          <RecentsFeed />
+        </div>
+      )) ||
+        (feedType === "Friends" && (
+          <div className="grid grid-cols-2 gap-[1rem] py-[1rem]">
+            <FriendsFeeds />
+          </div>
+        ))}
+
+      {/* <div
         className="grid grid-cols-2 gap-[1rem] py-[1rem]"
         // style={{ "-ms-overflow-style": "none" }}
       >
         {renderTopicData}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -32,7 +32,7 @@ const App = () => {
               <Route path="" element={<Content />} />
               <Route path="/shorts" element={<Reels />} />
               <Route path="/message" element={<Message />} />
-              <Route path="topic/:topicId" element={<TopicDetail />} />
+              <Route path="/topic/:topicId" element={<TopicDetail />} />
               <Route path="/topic/createPost/:topicId" element={<PostForm />}/>
               <Route path="/topic/post/:postId" element={<Post />}/>
             </Route>

@@ -4,15 +4,16 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { getTopicById } from "../../../services/topic";
-import UserJoined from "./UserJoined";
+// import UserJoined from "./UserJoined";
 // import Milestone from "./Milestones";
 import { Modal } from "antd";
 import { MdOutlineClose } from "react-icons/md";
 import PostTableInTopicDetail from "../../PostTabelInTopicDetail";
+import UserJoinTripAvatarGroup from "../../UserJoinTrip/UserJoinTripAvatarGroup";
+import InviteUserJoinTripButton from "../../UserJoinTrip/InviteUserJoinTripButton";
 // eslint-disable-next-line no-unused-vars
 
 const TopicDetail = () => {
-
   const urlParam = useParams();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,10 +72,10 @@ const TopicDetail = () => {
   return (
     <>
       <div className="flex flex-col gap-[1rem] p-[1.5rem] bg-white overflow-y-scroll pb-[30px]">
-        <div className="flex flex-col border-b-2 p-4 ">
+        <div className="flex justify-between border-b-2 p-4 ">
           <div
             onClick={() => navigate(`/user/${userCreated._id}`)}
-            className="flex items-center text-sm gap-[8px] cursor-pointer hover:opacity-80 "
+            className="flex items-center text-sm gap-[8px] cursor-pointer hover:opacity-80 w-fit"
           >
             <img
               src={userCreated.avatar}
@@ -86,7 +87,13 @@ const TopicDetail = () => {
               <p className="text-[grey]">1 month ago</p>
             </div>
           </div>
-          <UserJoined />
+          <div className="">
+            <InviteUserJoinTripButton />
+          </div>
+          {/* <UserJoined /> */}
+
+          {/* userJoin */}
+          {/* <UserJoinTripAvatarGroup /> */}
         </div>
 
         <p className="text-3xl font-bold">{title}</p>
@@ -125,6 +132,14 @@ const TopicDetail = () => {
             </div>
           </div>
           <div className="col-span-1 gap-2 text-[#303030]">
+            <div className="flex items-center">
+              <span className="text-base text-[#5143d9] font-bold">
+                TripMates : {" "}
+              </span>
+              <div className="inline-block ml-[5px]">
+                <UserJoinTripAvatarGroup />
+              </div>
+            </div>
             <p>
               <span className="text-base text-[#5143d9] font-bold">
                 Description :{" "}
@@ -168,8 +183,10 @@ const TopicDetail = () => {
         ) : (
           <PostTableInTopicDetail topicId={urlParam.topicId} />
         )} */}
-        <PostTableInTopicDetail topicId={urlParam.topicId} userCreated={userCreated} />
-
+        <PostTableInTopicDetail
+          topicId={urlParam.topicId}
+          userCreated={userCreated}
+        />
       </div>
     </>
   );

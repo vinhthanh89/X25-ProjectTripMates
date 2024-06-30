@@ -10,6 +10,10 @@ export const fetchDataTopics = () => {
     return axiosAuthInstance.get('/api/topic/fetch-topics')
 }
 
+export const fetchTopicsByUserFollow = () => {
+    return axiosAuthInstance.get('/api/topic/get-topic-by-userFollow')
+}
+
 export const getTopicById = (topicId) => {
     return axiosAuthInstance.get(`/api/topic/topic-detail/${topicId}`)
 }
