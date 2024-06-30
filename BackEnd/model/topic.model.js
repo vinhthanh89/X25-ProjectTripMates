@@ -6,6 +6,10 @@ const Topic = new mongoose.Schema({
         ref : 'users',
         required : true
     },
+    isPrivate : {
+        type : Boolean,
+        default : false,
+    },
     title : {
         type : String,
         required : true
@@ -13,12 +17,10 @@ const Topic = new mongoose.Schema({
     thumbnail: {
         type : String ,
     },
-    reaction : [
-        {
-            type : mongoose.Schema.Types.ObjectId,
-            ref : 'reactions'
-        }
-    ],
+    reaction : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'reactions'
+    },
     description : {
         type : String
     },

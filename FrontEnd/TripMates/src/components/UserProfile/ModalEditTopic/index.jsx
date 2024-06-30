@@ -1,14 +1,17 @@
 /* eslint-disable react/prop-types */
-import { Button, Form, Input, Modal } from "antd";
+import { Button, Form, Input, Modal, Radio } from "antd";
 import { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import RenderSearchInput from "../../RenderSearchInput";
 import { editTopic } from "../../../services/topic";
+import { FaRegQuestionCircle } from "react-icons/fa";
 
 const ModalEditTopic = ({ topic }) => {
+  const {isPrivate , title, description, location, thumbnail } = topic;
+
+  const [isPrivateValue , setIsPrivateValue] = useState(isPrivate)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { title, description, location, thumbnail } = topic;
   const [locationThumbnail, setLocationThumbnail] = useState(thumbnail);
   const [searchInput, setSearchInput] = useState(location.locationName);
   const [locationId, setLocationId] = useState(null);
@@ -21,23 +24,29 @@ const ModalEditTopic = ({ topic }) => {
       description,
       location: location.locationName,
       locationId: location._id,
+      isPrivate,
     });
-  }, [form, title, isModalOpen, description, location]);
+  }, [form, title, isModalOpen, description, location , isPrivate]);
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
+  const onChangeIsPrivateRadio = (e) => {
+    console.log('radio checked', e.target.value);
+    setIsPrivateValue(e.target.value);
+  };
+
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      const { title, locationId, description } = values;
-      console.log(values);
+      const {isPrivate , title, locationId, description } = values;
       const formData = {
         title,
         locationId,
         description,
         thumbnail: locationThumbnail,
+        isPrivate
       };
       await editTopic(topic._id, formData);
       setIsModalOpen(false);
@@ -92,6 +101,26 @@ const ModalEditTopic = ({ topic }) => {
         >
           <div className="text-black px-5">
             <div className="flex flex-col gap-4">
+            <Form.Item
+              name="isPrivate"
+              label={
+                <div className="label" title="Everyone can see your topic when you choose public and just follower can see when you choose private">
+                  <span className="label-text font-bold text-black text-base">
+                    Who can see your topic
+                  </span>
+                  <sup><FaRegQuestionCircle /></sup>
+                </div>
+              }
+            >
+              <Radio.Group defaultValue={false} onChange={onChangeIsPrivateRadio}  value={isPrivateValue}>
+                <Radio value={false}>
+                  <span className="text-[18px] font-bold">Public</span>
+                </Radio>
+                <Radio value={true}>
+                  <span className="text-[18px] font-bold">Private</span>
+                </Radio>
+              </Radio.Group>
+            </Form.Item>
               <Form.Item
                 name="title"
                 label={
@@ -124,7 +153,7 @@ const ModalEditTopic = ({ topic }) => {
                 />
               </Form.Item>
 
-              <Form.Item
+                <Form.Item
                 rules={[
                   {
                     required: true,
@@ -147,12 +176,14 @@ const ModalEditTopic = ({ topic }) => {
                   className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-[25rem] transition-colors duration-300"
                 />
               </Form.Item>
-              <div>
+              <div className="mt-[-40px]">
                 <RenderSearchInput
                   searchInput={searchInput}
                   handleSetLocationId={handleSetLocationId}
                 />
               </div>
+
+
               {/* <Form.Item
                 label={
                   <div className="label">

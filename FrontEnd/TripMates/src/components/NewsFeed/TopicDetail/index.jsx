@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
+import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import dayjs from "dayjs";
 import { getTopicById } from "../../../services/topic";
-import EmptyMilestone from "../Post/Components/EmptyMilestone";
 import UserJoined from "./UserJoined";
 // import Milestone from "./Milestones";
 import { Modal } from "antd";
@@ -13,6 +12,7 @@ import PostTableInTopicDetail from "../../PostTabelInTopicDetail";
 // eslint-disable-next-line no-unused-vars
 
 const TopicDetail = () => {
+
   const urlParam = useParams();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,7 +41,6 @@ const TopicDetail = () => {
   }, [urlParam.topicId]);
 
   const {
-    _id,
     title,
     thumbnail,
     userCreated,
@@ -71,7 +70,7 @@ const TopicDetail = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-[1rem] p-[1.5rem] bg-white overflow-y-scroll">
+      <div className="flex flex-col gap-[1rem] p-[1.5rem] bg-white overflow-y-scroll pb-[30px]">
         <div className="flex flex-col border-b-2 p-4 ">
           <div
             onClick={() => navigate(`/user/${userCreated._id}`)}
@@ -116,7 +115,13 @@ const TopicDetail = () => {
                     <MdOutlineClose />
                   </div>
                 }
-              />
+              >
+                <img
+                  className="w-full object-fill"
+                  src={thumbnail ? thumbnail : locationThumbnail}
+                  alt=""
+                />
+              </Modal>
             </div>
           </div>
           <div className="col-span-1 gap-2 text-[#303030]">
@@ -158,11 +163,13 @@ const TopicDetail = () => {
             </div>
           </div>
         </div>
-        {post?.length === 0 ? (
+        {/* {post?.length === 0 ? (
           <EmptyMilestone topicId={topicDetail._id} />
         ) : (
           <PostTableInTopicDetail topicId={urlParam.topicId} />
-        )}
+        )} */}
+        <PostTableInTopicDetail topicId={urlParam.topicId} userCreated={userCreated} />
+
       </div>
     </>
   );

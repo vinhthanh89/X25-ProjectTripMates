@@ -1,8 +1,11 @@
-import { Button, DatePicker, Drawer, Form, Input } from "antd";
+
+
+import { Button, DatePicker, Drawer, Form, Input, Radio } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
 // import { useNavigate } from "react-router";
 
+import { FaRegQuestionCircle } from "react-icons/fa";
 import { createTopic } from "../../../services/topic";
 import RenderSearchInput from "../../RenderSearchInput";
 
@@ -12,6 +15,7 @@ const TopicForm = ({ onClose, open }) => {
   const [locationId, setLocationId] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [thumbnail, setThumbnail] = useState(null);
+  const [isPrivate , setIsPrivate] = useState(false)
 
   const [form] = Form.useForm();
 
@@ -21,6 +25,11 @@ const TopicForm = ({ onClose, open }) => {
 
   const disableStarDate = (current) => {
     return current && current < dayjs(startDate).endOf("day");
+  };
+
+  const onChangeIsPrivateRadio = (e) => {
+    console.log('radio checked', e.target.value);
+    setIsPrivate(e.target.value);
   };
 
   const onChangeStartDate = (date) => {
@@ -45,9 +54,9 @@ const TopicForm = ({ onClose, open }) => {
 
   const onFinish = async (values) => {
     try {
-      console.log(values);
-      const { title, description, locationId, startDate, endDate } = values;
+      const {isPrivate , title, description, locationId, startDate, endDate } = values;
       const formData = {
+        isPrivate,
         title,
         description,
         locationId,
@@ -55,11 +64,11 @@ const TopicForm = ({ onClose, open }) => {
         endDate,
         thumbnail,
       };
-      console.log("formData :::", formData);
       await createTopic(formData);
-      onClose();
     } catch (error) {
       console.log(error);
+    } finally {
+      onClose();
     }
   };
 
@@ -75,6 +84,26 @@ const TopicForm = ({ onClose, open }) => {
         <div className="text-black px-5">
           <h2 className="text-2xl font-semibold mb-4">Start a New Trip</h2>
           <div className="flex flex-col gap-4">
+            <Form.Item
+              name="isPrivate"
+              label={
+                <div className="label" title="Everyone can see your topic when you choose public and just follower can see when you choose private">
+                  <span className="label-text font-bold text-black text-base">
+                    Who can see your topic
+                  </span>
+                  <sup><FaRegQuestionCircle /></sup>
+                </div>
+              }
+            >
+              <Radio.Group defaultValue={false} onChange={onChangeIsPrivateRadio} value={isPrivate}  >
+                <Radio value={false}>
+                  <span className="text-[18px] font-bold">Public</span>
+                </Radio>
+                <Radio value={true}>
+                  <span className="text-[18px] font-bold">Private</span>
+                </Radio>
+              </Radio.Group>
+            </Form.Item>
             <Form.Item
               name="title"
               rules={[
@@ -130,7 +159,7 @@ const TopicForm = ({ onClose, open }) => {
             <Form.Item className="hidden" label="location id" name="locationId">
               <Input value={locationId} />
             </Form.Item>
-            
+
             <Form.Item
               rules={[
                 {
@@ -155,7 +184,7 @@ const TopicForm = ({ onClose, open }) => {
               />
             </Form.Item>
 
-            <div className="ring-1 mt-[-20px]">
+            <div className="mt-[-20px]">
               <RenderSearchInput
                 searchInput={searchInput}
                 handleSetLocationId={handleSetLocationId}

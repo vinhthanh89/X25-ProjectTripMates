@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { IoIosSettings, IoMdSettings } from "react-icons/io";
-import { FaSignOutAlt, FaBell, FaUserCircle } from "react-icons/fa";
-import { logoutAction } from "../../../features/user/userSlices.js";
-import { useNavigate } from "react-router";
-import ModalChangePassword from "../../UserProfile/ModalChangePassword";
+import { FaBell, FaSignOutAlt } from "react-icons/fa";
+import { IoMdSettings } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import TopicForm from "../TopicForm/index.jsx";
+import { useNavigate } from "react-router";
+import { logoutAction } from "../../../features/user/userSlices.js";
+import ModalChangePassword from "../../UserProfile/ModalChangePassword";
 import SearchBar from "../SearchBar/index.jsx";
-import { AiFillMessage } from "react-icons/ai";
+import TopicForm from "../TopicForm/index.jsx";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -48,7 +47,7 @@ const Header = () => {
         <div className="col-span-3 flex justify-center gap-[25px]">
           <SearchBar />
           <button
-            className="font-bold bg-[#5143d9] text-white p-3 rounded-xl ring-1"
+            className="font-bold bg-[#5143d9] text-white p-3 rounded-xl"
             onClick={showDrawer}
           >
             Start a new trip

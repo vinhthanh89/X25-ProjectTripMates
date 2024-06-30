@@ -1,13 +1,20 @@
 /* eslint-disable react/prop-types */
 import { FaUserEdit } from "react-icons/fa";
 import { CiMail, CiCalendar } from "react-icons/ci";
-import { BsGenderMale } from "react-icons/bs";
+import {
+  BsGenderAmbiguous,
+  BsGenderFemale,
+  BsGenderMale,
+} from "react-icons/bs";
 import { useState } from "react";
-import ModalUser from "../ModalUser";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 
-const AboutMe = ({ userProfile , handleEditUser }) => {
+import ModalUser from "../ModalUser";
+
+import FollowButton from "../../Follow/FolllowButton";
+
+const AboutMe = ({ userProfile, handleEditUser }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const userLogin = useSelector((state) => state.user.user);
   const { email, gender, description, birthday } = userProfile;
@@ -58,21 +65,32 @@ const AboutMe = ({ userProfile , handleEditUser }) => {
           <span>{dayjs(birthday).format("DD-MMMM-YYYY")}</span>
         </li>
         <li className="flex items-center gap-2">
-          <div>
-            <BsGenderMale size={iconSize} />
-          </div>
+          {(!gender && (
+            <div>
+              <BsGenderAmbiguous size={iconSize} />
+            </div>
+          )) ||
+            (gender === "Male" && (
+              <div>
+                <BsGenderMale size={iconSize} />
+              </div>
+            )) ||
+            (gender === "Female" && (
+              <div>
+                <BsGenderFemale size={iconSize} />
+              </div>
+            ))}
+
           <span>{gender}</span>
         </li>
       </ul>
       <div>
         <p className="text-sm text-[#717171]">{description}</p>
       </div>
-      {userLogin._id === userProfile._id ? (
-        <></>
-      ) : (
-        <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold rounded px-2 py-1">
-          + Follow
-        </button>
+      {userLogin._id !== userProfile._id && (
+        <div className="w-full">
+          <FollowButton userProfile={userProfile} />
+        </div>
       )}
     </div>
   );

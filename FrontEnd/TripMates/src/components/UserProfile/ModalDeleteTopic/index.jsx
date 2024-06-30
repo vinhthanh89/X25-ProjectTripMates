@@ -31,7 +31,7 @@ const ModalDeleteTopic = ({topic}) => {
     <div>
       <div
         onClick={showModal}
-        className="flex justify-end items-center gap-2 text-red-500"
+        className="flex justify-start items-center gap-2 text-red-500"
       >
         <span className="font-semibold">Delete topic</span>
         <MdDelete className="text-[16px] " />

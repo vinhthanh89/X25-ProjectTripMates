@@ -1,38 +1,20 @@
 /* eslint-disable react/prop-types */
-import { IoIosHeart } from "react-icons/io";
 import { MdPlace } from "react-icons/md";
 import { useNavigate } from "react-router";
-import CommentModal from "./CommentModal";
-import { useState } from "react";
+
+import CommentModal from "../../Comment/CommentModal";
+import TopicReact from "./TopicReact";
 
 const Topic = ({ topic }) => {
+  const navigate = useNavigate();
   const iconSize = 25;
   const iconStyle = {
     background: "transparent",
   };
-  const user = useSelector((state) => state.user.user);
-  const navigate = useNavigate();
-  const {
-    _id,
-    thumbnail,
-    description,
-    title,
-    userCreated,
-    location,
-  } = topic;
-  const { locationName, continent, country, locationThumbnail } = location;
 
-  // Handle like
-  const [liked, setLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
-  const toggleLike = () => {
-    if (liked) {
-      setLikeCount(likeCount - 1);
-    } else {
-      setLikeCount(likeCount + 1);
-    }
-    setLiked(!liked);
-  };
+  const { _id, thumbnail, description, title, userCreated, location } = topic;
+  const { locationName, continent, country, locationThumbnail } = location;
+  
   return (
     <div className="flex flex-col gap-[0.5rem] rounded-lg bg-white px-[1rem] py-[1.5rem] ">
       <div>
@@ -62,17 +44,8 @@ const Topic = ({ topic }) => {
             </div>
           </div>
           <div className="reactCmt flex gap-5 text-[#545454] font-medium text-sm">
-            <div className="flex items-center gap-3">
-              <button onClick={toggleLike}>
-                <IoIosHeart
-                  size={iconSize}
-                  style={iconStyle}
-                  className={liked ? "text-red-500" : ""}
-                />
-              </button>
-              <p className="w-2">{likeCount}</p>
-            </div>
-            <CommentModal iconSize={iconSize} iconStyle={iconStyle} />
+            <TopicReact topic={topic} />
+            <CommentModal iconSize={iconSize} iconStyle={iconStyle} topic={topic}/>
           </div>
         </div>
       </div>

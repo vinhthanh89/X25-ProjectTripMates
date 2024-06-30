@@ -4,7 +4,9 @@ import cloudinary from "../configs/cloudinary.js";
 
 
 import Topic from "../model/topic.model.js";
+import UserFollowing from '../model/userFollowing.model.js'
 import { handleUpload } from "../utils/handleUpload.js";
+import { response } from "express";
 
 
 
@@ -12,7 +14,7 @@ const { ObjectId } = mongoose.Types;
 
 export const createTopic = async (req, res) => {
   try {
-    const { title, description, locationId, startDate, endDate , thumbnail } = req.body;
+    const {isPrivate , title, description, locationId, startDate, endDate , thumbnail } = req.body;
 
     const userId = req.user;
 
@@ -23,7 +25,8 @@ export const createTopic = async (req, res) => {
       startDate,
       endDate,
       location: locationId,
-      thumbnail
+      thumbnail,
+      isPrivate
     });
 
     return res.status(201).json({
@@ -41,7 +44,7 @@ export const editTopic = async (req, res) => {
   try {
     const userLogin = req.user;
     const topicId = req.params.topicId;
-    const { title, description, locationId , thumbnail } = req.body;
+    const {isPrivate, title, description, locationId , thumbnail } = req.body;
 
     const findTopic = await Topic.findById(topicId).populate("userCreated");
     if (!findTopic) {
@@ -62,7 +65,8 @@ export const editTopic = async (req, res) => {
         title,
         description,
         location: locationId,
-        thumbnail
+        thumbnail,
+        isPrivate
       },
       { new: true }
     );
@@ -79,8 +83,37 @@ export const editTopic = async (req, res) => {
   }
 };
 
+export const fetchDataTopics = async (req , res)=> {
+  try {
+    const userLogin = req.user
+    const findUserFollow = await UserFollowing.findOne({userId : userLogin})
+    const findUsersFollowing = findUserFollow.usersFollowing
+    const usersFollowing = findUsersFollowing.map(user => user.userFollow)
+    usersFollowing.push(userLogin)
+
+    const topics = await Topic.find({$nor : 
+      [
+        {isPrivate : true , 
+        userCreated : {$nin : usersFollowing}}
+      ]}).populate("userCreated location")
+    
+    return res.status(200).json({
+      message : 'success',
+      number : topics.length,
+      topics : topics.reverse()
+    })
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message : error
+    })
+  }
+}
+
 export const getTopics = async (req, res) => {
   try {
+    const userLogin = req.user
     const dataTopic = await Topic.find().populate("userCreated location");
 
     return res.status(200).json({
