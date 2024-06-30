@@ -8,7 +8,7 @@ import { FaCamera } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { saveUserToLocal } from "../../../utils/localstorage.js";
 
-const MoadlChangeAvatar = ({ userProfile, handleEditUser }) => {
+const ModalChangeAvatar = ({ userProfile, handleEditUser }) => {
   const iconSize = 15;
   const userLogin = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
@@ -124,4 +124,4 @@ const MoadlChangeAvatar = ({ userProfile, handleEditUser }) => {
   );
 };
 
-export default MoadlChangeAvatar;
+export default ModalChangeAvatar;

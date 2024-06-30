@@ -28,8 +28,10 @@ const AboutMe = ({ userProfile, handleEditUser }) => {
   };
 
   const iconSize = 20;
+
+
   return (
-    <div className="flex flex-col gap-2 border-b-[1.5px] px-[0.5rem] pb-[0.5rem] text-base">
+    <div className="flex flex-col gap-2 px-[0.5rem] pb-[0.5rem] text-base">
       <div className="flex items-center gap-2">
         <ModalUser
           userProfile={userProfile}
