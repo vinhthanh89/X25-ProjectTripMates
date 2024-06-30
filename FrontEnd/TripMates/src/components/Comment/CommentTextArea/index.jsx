@@ -3,48 +3,50 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { addComment } from "../../../services/comment";
+import { addNotification } from "../../../services/notification";
 
 // eslint-disable-next-line react/prop-types
-const CommentTextArea = ({ topic , addUserComment }) => {
+const CommentTextArea = ({ topic, addUserComment }) => {
   const userLogin = useSelector((state) => state.user.user);
   const [commentText, setCommentText] = useState("");
 
   const handleAddComment = async () => {
     try {
+      await addNotification(topic._id, { interaction: "comment" });
+
       const response = await addComment(topic._id, { comment: commentText });
-      addUserComment(response.data.usersComment)
-      setCommentText('')
+      addUserComment(response.data.usersComment);
+      setCommentText("");
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-      <div className="flex">
-        <div className="w-[40px]">
-          <img
-            className="w-[30px] h-[30px] rounded-full object-cover"
-            src={userLogin.avatar}
-          />
-        </div>
-        <div className="w-full border-solid border-[1px] border-[lightgray] rounded-[8px] pt-[5px] px-[5px]">
-          <textarea
-          value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
-            placeholder="Add a comment here ..."
-            type="text"
-            className="resize-none w-full max-h-[200px] overflow-y-auto text-[16px] outline-none min-h-[100px]"
-          />
-          <hr />
-          <button
-            onClick={handleAddComment}
-            className="bg-[#5143d9] text-white font-bold px-[8px] text-[16px] rounded-xl py-[5px] float-right my-[5px]"
-          >
-            Send
-          </button>
-        </div>
+    <div className="flex">
+      <div className="w-[40px]">
+        <img
+          className="w-[30px] h-[30px] rounded-full object-cover"
+          src={userLogin.avatar}
+        />
       </div>
-
+      <div className="w-full border-solid border-[1px] border-[lightgray] rounded-[8px] pt-[5px] px-[5px]">
+        <textarea
+          value={commentText}
+          onChange={(e) => setCommentText(e.target.value)}
+          placeholder="Add a comment here ..."
+          type="text"
+          className="resize-none w-full max-h-[200px] overflow-y-auto text-[16px] outline-none min-h-[100px]"
+        />
+        <hr />
+        <button
+          onClick={handleAddComment}
+          className="bg-[#5143d9] text-white font-bold px-[8px] text-[16px] rounded-xl py-[5px] float-right my-[5px]"
+        >
+          Send
+        </button>
+      </div>
+    </div>
 
     // <ul className="flex flex-col gap-5 px-2 py-4">
     //   <div className="user flex items-center gap-3">

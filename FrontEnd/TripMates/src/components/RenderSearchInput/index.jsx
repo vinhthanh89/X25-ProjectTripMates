@@ -13,6 +13,7 @@ const RenderSearchInput = ({ searchInput , handleSetLocationId }) => {
         const dataFilter = dataResponse.filter((item) => {
             const locationLower = item.locationName.toLowerCase()
             const searchInputLower = searchInput ? searchInput.toLowerCase() : ' '
+            
             return locationLower.startsWith(searchInputLower)
           })
         setDataLocation(dataFilter);

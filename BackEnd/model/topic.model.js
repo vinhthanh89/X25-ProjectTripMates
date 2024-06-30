@@ -36,10 +36,12 @@ const Topic = new mongoose.Schema({
     country : {
         type : String,
     },
-    userJoinTrip : [
+    tripMates : [
         {
-            type : mongoose.Schema.Types.ObjectId,
-            ref : 'users'
+            userJoinTrip : {
+                type : mongoose.Schema.Types.ObjectId,
+                ref : 'users'
+            }
         }
     ],
     startDate : {

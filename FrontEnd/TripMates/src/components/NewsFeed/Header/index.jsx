@@ -7,6 +7,7 @@ import { logoutAction } from "../../../features/user/userSlices.js";
 import ModalChangePassword from "../../UserProfile/ModalChangePassword";
 import SearchBar from "../SearchBar/index.jsx";
 import TopicForm from "../TopicForm/index.jsx";
+import NotificationContainer from "../../Notification/NotificationContainer/index.jsx";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -58,9 +59,10 @@ const Header = () => {
           {/* <button className="btn_all hover:scale-105 text-[#545454]">
             <AiFillMessage size={iconSize} style={iconStyle} />
           </button> */}
-          <button className="btn_all hover:scale-105 text-[#545454]">
+          {/* <button className="btn_all hover:scale-105 text-[#545454]">
             <FaBell size={iconSize} style={iconStyle} />
-          </button>
+          </button> */}
+          <NotificationContainer />
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button">
               <div>

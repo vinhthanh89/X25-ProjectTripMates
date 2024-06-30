@@ -4,7 +4,6 @@ import { getTopicByUserCreated } from "../../../services/topic";
 
 import UserTopic from "../UserTopics";
 
-
 const UserCreatedTopic = ({ userId }) => {
   const [userCreatedTopic, setUserCreatedTopic] = useState(null);
 
@@ -12,8 +11,8 @@ const UserCreatedTopic = ({ userId }) => {
     const fetchData = async () => {
       try {
         const response = await getTopicByUserCreated(userId);
-        const renderData = response.data.findTopicByUserId
-        setUserCreatedTopic(renderData.reverse());
+        const renderData = response.data.topics
+        setUserCreatedTopic(renderData);
       } catch (error) {
         console.log(error);
       }

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 import ModalDeleteTopic from "../ModalDeleteTopic";
 import ModalEditTopic from "../ModalEditTopic";
 import ModalChangeTopicThumbnail from "../ModalChangeTopicThumbnail";
+import UserJoinTripAvatarGroup from "../../UserJoinTrip/UserJoinTripAvatarGroup";
 
 const UserTopic = ({ topic }) => {
   const userLogin = useSelector((state) => state.user.user);
@@ -81,7 +82,8 @@ const UserTopic = ({ topic }) => {
           >
             {description}
           </p>
-          <div className="avatar-group -space-x-3">
+          <UserJoinTripAvatarGroup />
+          {/* <div className="avatar-group -space-x-3">
             <div className="avatar w-9 border-white">
               <div className="w-full rounded-full">
                 <img
@@ -103,7 +105,7 @@ const UserTopic = ({ topic }) => {
                 <span>+2</span>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
