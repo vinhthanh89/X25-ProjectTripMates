@@ -21,14 +21,16 @@ const AboutMe = ({ userProfile , handleEditUser }) => {
   };
 
   const iconSize = 20;
+
+
   return (
-    <div className="flex flex-col gap-2 border-b-[1.5px] px-[0.5rem] pb-[0.5rem] text-base">
+    <div className="flex flex-col gap-2 px-[0.5rem] pb-[0.5rem] text-base">
       <div className="flex items-center gap-2">
         <ModalUser
           userProfile={userProfile}
           isModalOpen={isModalOpen}
           handleCancel={handleCancel}
-          handleEditUser={handleEditUser}          
+          handleEditUser={handleEditUser}
         />
         <h1 className="font-bold">About me</h1>
         {userLogin._id === userProfile._id ? (
@@ -65,6 +67,13 @@ const AboutMe = ({ userProfile , handleEditUser }) => {
       <div>
         <p className="text-sm text-[#717171]">{description}</p>
       </div>
+      {userLogin._id === userProfile._id ? (
+        <></>
+      ) : (
+        <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold rounded px-2 py-1">
+          + Follow
+        </button>
+      )}
     </div>
   );
 };
