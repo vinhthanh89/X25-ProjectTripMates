@@ -91,9 +91,9 @@ const PostTableInTopicDetail = ({ topicId, userCreated }) => {
       {userLogin._id === userCreated._id ? (
         <button
           onClick={() => navigate(`/topic/createPost/${topicId}`)}
-          className="font-bold mt-[5px] bg-[#5143d9] text-white py-[10px] px-[5px] text-[14px] rounded-xl float-right"
+          className="font-bold bg-[#5143d9] text-white p-[10px] mt-4 text-sm rounded-xl float-right"
         >
-          Create A New Post
+          Create new post
         </button>
       ) : (
         <></>
