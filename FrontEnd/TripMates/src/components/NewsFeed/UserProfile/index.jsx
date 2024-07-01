@@ -102,9 +102,6 @@ const UserProfile = () => {
                 userProfile={userProfile}
                 handleEditUser={handleEditUser}
               />
-              <button className="bg-black hover:bg-[#303030] hover:scale-105 text-white font-bold rounded px-2 py-1">
-                + Follow
-              </button>
             </div>
 
             {/* <div className="flex flex-col gap-2 bg-white rounded p-[1rem]">

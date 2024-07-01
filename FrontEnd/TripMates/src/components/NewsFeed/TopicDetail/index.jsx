@@ -11,11 +11,13 @@ import { MdOutlineClose } from "react-icons/md";
 import PostTableInTopicDetail from "../../PostTabelInTopicDetail";
 import UserJoinTripAvatarGroup from "../../UserJoinTrip/UserJoinTripAvatarGroup";
 import InviteUserJoinTripButton from "../../UserJoinTrip/InviteUserJoinTripButton";
+import { useSelector } from "react-redux";
 // eslint-disable-next-line no-unused-vars
 
 const TopicDetail = () => {
   const urlParam = useParams();
   const navigate = useNavigate();
+  const userLogin = useSelector((state) => state.user.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [topicDetail, setTopicDetail] = useState({
@@ -69,6 +71,8 @@ const TopicDetail = () => {
     setIsModalOpen(false);
   };
 
+  console.log(userCreated);
+
   return (
     <>
       <div className="flex flex-col gap-[1rem] p-[1.5rem] bg-white overflow-y-scroll pb-[30px]">
@@ -87,9 +91,12 @@ const TopicDetail = () => {
               <p className="text-[grey]">1 month ago</p>
             </div>
           </div>
-          <div className="">
-            <InviteUserJoinTripButton />
-          </div>
+          {userLogin._id === userCreated._id && (
+            <div className="">
+              <InviteUserJoinTripButton />
+            </div>
+          )}
+
           {/* <UserJoined /> */}
 
           {/* userJoin */}
@@ -134,7 +141,7 @@ const TopicDetail = () => {
           <div className="col-span-1 gap-2 text-[#303030]">
             <div className="flex items-center">
               <span className="text-base text-[#5143d9] font-bold">
-                TripMates : {" "}
+                TripMates :{" "}
               </span>
               <div className="inline-block ml-[5px]">
                 <UserJoinTripAvatarGroup />
