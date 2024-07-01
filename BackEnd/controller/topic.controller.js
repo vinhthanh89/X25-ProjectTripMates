@@ -192,7 +192,7 @@ export const getTopicByUserCreated = async (req, res) => {
           { userCreated: { $ne: userId } },
           { isPrivate: true, userCreated: { $nin: usersFollowing } },
         ],
-      });
+      }).populate('userCreated location');
 
       return res.status(200).json({
         message: "Get Topic By User Success",

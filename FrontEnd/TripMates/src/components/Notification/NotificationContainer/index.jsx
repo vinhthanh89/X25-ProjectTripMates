@@ -17,7 +17,7 @@ const NotificationContainer = () => {
       }
     };
     fetchNotification();
-  }, []);
+  }, [notifications]);
 
   const handleSetNotify = (notifications) => {
     setNotifications(notifications);
@@ -44,7 +44,7 @@ const NotificationContainer = () => {
   return (
     <Dropdown
       menu={{
-        items: notificationsMenu,
+        items: notificationsMenu.reverse(),
       }}
       trigger={["click"]}
     >

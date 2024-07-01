@@ -20,7 +20,6 @@ const FollowButton = ({ userProfile }) => {
   const handleFollowUser = async () => {
     try {
       const response = await followUser(userProfile._id);
-      console.log(response);
       const usersFollowing = response.data.usersFollowing;
       setIsFollow(true);
     } catch (error) {
@@ -31,7 +30,6 @@ const FollowButton = ({ userProfile }) => {
   const handleUnfollowUser = async () => {
     try {
       const response = await unfollowUser(userProfile._id)
-      console.log(response);
       setIsFollow(false)
     } catch (error) {
       console.log(error);

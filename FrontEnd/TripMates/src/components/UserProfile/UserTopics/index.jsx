@@ -19,7 +19,6 @@ const UserTopic = ({ topic }) => {
   const { _id, thumbnail, description, title, location, userCreated } = topic;
 
   const { continent, country, locationThumbnail, locationName } = location;
-
   const items = [
     {
       key: "0",

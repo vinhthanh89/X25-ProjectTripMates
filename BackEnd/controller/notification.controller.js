@@ -37,7 +37,6 @@ export const addNotification = async (req, res) => {
     const interaction = req.body.interaction;
 
     const findTopic = await Topic.findById(topicId);
-    console.log(findTopic);
     if (!findTopic) {
       return res.status(404).json({
         message: "Topic Not Found",
@@ -77,8 +76,6 @@ export const updateIsReadNotification = async (req, res) => {
   try {
     const userLogin = req.user;
     const notificationId = req.body.notificationsId;
-
-    console.log(notificationId);
 
     const findNotification = await Notification.findOneAndUpdate(
       { userId: userLogin, "notifications._id": notificationId },
