@@ -41,3 +41,4 @@ export const uploadTopicThumbnail = (topicId , formData) => {
 export const addPostToTopic = (topicId , postId) => {
     return axiosAuthInstance.put(`/api/topic/add-post/${topicId}` , postId)
 }
+

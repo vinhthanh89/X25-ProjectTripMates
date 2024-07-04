@@ -3,9 +3,7 @@
 import { useNavigate } from "react-router";
 
 const AvatarFollower = ({ user }) => {
-  const navigate = useNavigate();
-
-  console.log(user);
+  const navigate = useNavigate()
 
   return (
     <div

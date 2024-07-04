@@ -38,7 +38,7 @@ const RenderSearchUserJoinTrip = ({ searchInput , pickUserJoinTrip }) => {
       <div
         key={user._id}
         onClick={() => handlePickUserJoinTrip(user)}
-        className="flex w-full h-[70px] py-[10px] pl-[5px] rounded-[8px]  hover:bg-[#d7d5d5] cursor-pointer"
+        className="flex w-full items-center h-[70px] py-[10px] pl-[5px] rounded-[8px]  hover:bg-[#d7d5d5] cursor-pointer"
       >
         <div className="w-[50px] h-full">
           <img

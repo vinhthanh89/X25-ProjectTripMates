@@ -28,6 +28,7 @@ const TopicDetail = () => {
     description: "",
     startDate: "",
     endDate: "",
+    userJoinTrip : [],
     location: {},
   });
 
@@ -51,7 +52,6 @@ const TopicDetail = () => {
     startDate,
     endDate,
     location,
-    post,
   } = topicDetail;
 
   const { continent, country, locationThumbnail, locationName } = location;
@@ -71,7 +71,9 @@ const TopicDetail = () => {
     setIsModalOpen(false);
   };
 
-  console.log(userCreated);
+  const handleSetTopicDetail = (newTopicDetail) => {
+    setTopicDetail(newTopicDetail);
+  };
 
   return (
     <>
@@ -93,7 +95,10 @@ const TopicDetail = () => {
           </div>
           {userLogin._id === userCreated._id && (
             <div className="">
-              <InviteUserJoinTripButton />
+              <InviteUserJoinTripButton
+                topicDetail={topicDetail}
+                handleSetTopicDetail={handleSetTopicDetail}
+              />
             </div>
           )}
 
@@ -104,12 +109,12 @@ const TopicDetail = () => {
         </div>
 
         <p className="text-3xl font-bold">{title}</p>
-        <div className="grid grid-cols-2 gap-5 ">
-          <div className="col-span-1">
-            <div className="flex justify-center items-center ">
+        <div className="grid grid-cols-5 gap-5 ">
+          <div className="col-span-2 flex justify-center items-center max-h-[270px]">
+            <div className="flex justify-center items-center h-full">
               <img
                 onClick={showModal}
-                className="w-[25rem] h-[220px] object-fill cursor-pointer"
+                className="w-[25rem] h-full object-cover cursor-pointer"
                 src={thumbnail ? thumbnail : locationThumbnail}
                 alt=""
               />
@@ -138,13 +143,15 @@ const TopicDetail = () => {
               </Modal>
             </div>
           </div>
-          <div className="col-span-1 gap-2 text-[#303030]">
+          <div className="col-span-3 gap-2 text-[#303030]">
             <div className="flex items-center">
               <span className="text-base text-[#5143d9] font-bold">
                 TripMates :{" "}
               </span>
-              <div className="inline-block ml-[5px]">
-                <UserJoinTripAvatarGroup />
+              <div>
+                <UserJoinTripAvatarGroup
+                  topicDetail={topicDetail}
+                />
               </div>
             </div>
             <p>

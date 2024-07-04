@@ -13,7 +13,7 @@ const Topic = ({ topic }) => {
     background: "transparent",
   };
 
-  const { _id, thumbnail, description, title, userCreated, location } = topic;
+  const { _id, thumbnail, description, title, userCreated, location , userJoinTrip } = topic;
   const { locationName, continent, country, locationThumbnail } = location;
   
   return (
@@ -22,7 +22,7 @@ const Topic = ({ topic }) => {
         <img
           src={thumbnail ? thumbnail : locationThumbnail}
           alt={locationName}
-          className="rounded-[8px] cursor-pointer w-full h-[200px] object-fill"
+          className="rounded-[8px] cursor-pointer w-full h-[200px] object-cover"
           onClick={() => navigate(`/topic/${_id}`)}
         />
         <div className="flex justify-between pt-[1rem]">
@@ -50,7 +50,7 @@ const Topic = ({ topic }) => {
           </div>
         </div>
       </div>
-    <UserJoinTripAvatarGroup />
+    {/* <UserJoinTripAvatarGroup topicDetail={topic} /> */}
       {/* <div className="avatar-group -space-x-3">
         <div className="avatar w-9 border-white">
           <div className="w-full rounded-full">

@@ -36,12 +36,16 @@ const Topic = new mongoose.Schema({
     country : {
         type : String,
     },
-    tripMates : [
+    userJoinTrip : [
         {
-            userJoinTrip : {
+            userId : {
                 type : mongoose.Schema.Types.ObjectId,
                 ref : 'users'
-            }
+            },
+            status : {
+                type : String ,
+                default : 'pending'
+            },
         }
     ],
     startDate : {

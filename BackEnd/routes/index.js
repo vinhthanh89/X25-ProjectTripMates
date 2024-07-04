@@ -9,6 +9,7 @@ import reactRouter from './reaction.router.js'
 import commentRouter from './comment.router.js'
 import userFollowingRouter from './userFollowing.router.js'
 import notificationRouter from './notification.router.js'
+import userJoinTripRouter from './userJoinTrip.router.js'
 import { authentication } from '../middleware/authentication.js'
 
 
@@ -22,6 +23,6 @@ router.use('/api/react' , authentication , reactRouter)
 router.use('/api/comment' , authentication , commentRouter)
 router.use('/api/following' , authentication , userFollowingRouter)
 router.use('/api/notification' , authentication , notificationRouter)
-
+router.use('/api/userJoinTrip' , authentication , userJoinTripRouter)
 
 export default router
