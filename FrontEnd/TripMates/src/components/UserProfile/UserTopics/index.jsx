@@ -66,6 +66,8 @@ const UserTopic = ({ topic }) => {
         >
           {title}
         </h1>
+        {/* <UserJoinTripAvatarGroup topicDetail={topic} /> */}
+
         <div className="flex flex-col gap-[10px]">
           <div className="flex items-center gap-1 font-medium text-gray-400 text-base">
             <MdPlace />
@@ -81,7 +83,6 @@ const UserTopic = ({ topic }) => {
           >
             {description}
           </p>
-          <UserJoinTripAvatarGroup />
           {/* <div className="avatar-group -space-x-3">
             <div className="avatar w-9 border-white">
               <div className="w-full rounded-full">

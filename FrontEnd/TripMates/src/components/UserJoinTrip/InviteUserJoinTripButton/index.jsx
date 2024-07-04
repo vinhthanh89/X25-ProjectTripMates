@@ -1,12 +1,16 @@
-import { Modal, Tag } from "antd";
+/* eslint-disable react/prop-types */
+import { ConfigProvider, Modal } from "antd";
 import { useState } from "react";
-import RenderSearchUserJoinTrip from "../RenderSearchUserJoinTrip";
-import RenderPickUserTag from "../RenderPickUserTag";
+import InviteUserJoinTripContainer from "../InviteUserJoinTripContainer";
+import UserInvitedList from "../UserInvitedList";
 
-const InviteUserJoinTripButton = () => {
+const InviteUserJoinTripButton = ({topicDetail , handleSetTopicDetail}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searchInput, setSearchInput] = useState("");
-  const [pickedUser, setPickedUser] = useState([]);
+  const [activeTab, setActiveTab] = useState("search");
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -14,22 +18,7 @@ const InviteUserJoinTripButton = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
-    setPickedUser([])
   };
-
-  const onChangeSearchInput = (e) => {
-    const value = e.target.value;
-    setSearchInput(value);
-  };
-
-  const pickUserJoinTrip = (user) => {
-    setPickedUser((prev) => [...prev, user]);
-    setSearchInput('')
-  };
-
-  const removePickUser = (userEmail) => {
-    setPickedUser((prev) => prev.filter((item) => item.email !== userEmail));
-  };  
 
   return (
     <div>
@@ -39,45 +28,57 @@ const InviteUserJoinTripButton = () => {
       >
         Invite a trip mates
       </button>
+      <ConfigProvider
+  theme={{
+    components: {
+      Modal: {
+        contentBg : "lightGray",
+        headerBg : 'lighGray',
+        titleFontSize :   18
+      },
+    },
+  }}
+>
+
       <Modal
-        title="Invite a trip mates"
+        title='Invite a tripmates'
         open={isModalOpen}
         onCancel={handleCancel}
         footer={null}
+        closeIcon={null}
       >
         <div>
-          <div className="py-[5px] mb-[10px] flex w-full flex-wrap gap-[5px]">
-            <RenderPickUserTag
-              pickedUser={pickedUser}
-              removePickUser={removePickUser}
-            />
+          <div className="flex justify-around  bg-[lightgray]">
+            <button
+              className={`p-2 w-[50%] ${
+                activeTab === "search" ? "rounded-t-[10px]  bg-[white] underline" : ""
+              }`}
+              onClick={() => handleTabClick("search")}
+            >
+              <span className="text-[18px]">Invite</span>
+            </button>
+            <button
+              className={`p-2 w-[50%] ${
+                activeTab === "list" ? "rounded-t-[10px] bg-[white] underline" : ""
+              }`}
+              onClick={() => handleTabClick("list")}
+            >
+              <span className="text-[18px]">List</span>
+            </button>
           </div>
-          <input
-          value={searchInput}
-            onChange={onChangeSearchInput}
-            placeholder="Enter a username"
-            type="text"
-            className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-full transition-colors duration-300"
-          />
-        </div>
-        <div>
-          <RenderSearchUserJoinTrip
-            searchInput={searchInput}
-            pickUserJoinTrip={pickUserJoinTrip}
-          />
-        </div>
-        <div className="flex justify-end mt-[20px]">
-          <button
-            onClick={handleCancel}
-            className="hover:opacity-70 font-bold bg-[lightgray] text-black rounded-[8px] py-[7px] px-[10px]"
-          >
-            Cancle
-          </button>
-          <button className="hover:opacity-70 font-bold bg-[#5143d9] text-white rounded-[8px] py-[7px] px-[10px] ml-[15px]">
-            Invite
-          </button>
+          {activeTab === "search" && (
+            <>
+              <InviteUserJoinTripContainer topicId={topicDetail._id} handleCancel={handleCancel} handleSetTopicDetail={handleSetTopicDetail} />
+            </>
+          ) || activeTab === 'list' && (
+            <>
+              <UserInvitedList userJoinTrip={topicDetail.userJoinTrip} />
+            </>
+          )}
         </div>
       </Modal>
+</ConfigProvider>
+
     </div>
   );
 };

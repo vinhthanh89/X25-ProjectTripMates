@@ -1,26 +1,26 @@
-import { AntDesignOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Tooltip } from "antd";
+/* eslint-disable react/prop-types */
+import { Avatar } from "antd";
 
-const UserJoinTripAvatarGroup = () => {
+const UserJoinTripAvatarGroup = ({topicDetail}) => {
+  
+  const userJoinTrip = topicDetail.userJoinTrip
+  const userJoinTripFilter = userJoinTrip.filter(user => user.status === 'accept')
+
+  const renderUserJoinTripAvatar = userJoinTripFilter.map(user => {
+    return (
+      <div key={user.userId._id}>
+          <Avatar size={40} src={user.userId.avatar} />
+      </div>
+    )
+  })
+
   return (
-    <div>
+    <div className="inline-block ml-[5px]">
       <Avatar.Group
         maxCount={5}
         maxStyle={{color: '#f56a00', backgroundColor: '#fde3cf'}}
       >
-        <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
-
-        <Avatar style={{ backgroundColor: "#f56a00" }}>K</Avatar>
-
-        <Avatar
-          style={{ backgroundColor: "#87d068" }}
-          icon={<UserOutlined />}
-        />
-
-        <Avatar
-          style={{ backgroundColor: "#1677ff" }}
-          icon={<AntDesignOutlined />}
-        />
+        {renderUserJoinTripAvatar}
       </Avatar.Group>
     </div>
   );

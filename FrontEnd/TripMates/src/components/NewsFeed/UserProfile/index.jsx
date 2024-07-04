@@ -32,6 +32,7 @@ const UserProfile = () => {
     const fetchUserData = async () => {
       try {
         const response = await getUserById(urlParam.userId);
+        console.log(response);
         setUserProfile(response.data.findUser);
         setShowComponent("topic");
       } catch (error) {

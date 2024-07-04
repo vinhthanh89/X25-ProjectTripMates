@@ -72,6 +72,54 @@ export const addNotification = async (req, res) => {
   }
 };
 
+export const addInviteNotification = async (req , res) => {
+  try {
+      const userLogin = req.user
+      const topicId = req.params.topicId
+      const pickedUser = req.body
+
+      const pickedUsersId = pickedUser.map(user => user._id)
+
+      console.log(topicId);
+      console.log(pickedUsersId);
+
+      const findTopic = await Topic.findById(topicId);
+      if (!findTopic) {
+        return res.status(404).json({
+          message: "Topic Not Found",
+        });
+      }
+      
+      if(findTopic){
+        pickedUsersId.forEach( async (user) => {
+          await Notification.findOneAndUpdate(
+            { userId: user },
+            {
+              $push: {
+                notifications: {
+                  interactUserId: userLogin,
+                  topicId: findTopic._id,
+                  interaction: 'invite',
+                },
+              },
+            },
+            { new: true, upsert: true }
+          );
+        })
+
+        return res.status(200).json({
+          message : 'add invite notification success'
+        })    
+      }
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message : error
+    })
+  }
+}
+
 export const updateIsReadNotification = async (req, res) => {
   try {
     const userLogin = req.user;
