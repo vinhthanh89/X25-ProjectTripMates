@@ -22,3 +22,5 @@ app.listen(PORT , () => {
     console.log(`App is running in http://localhost:${PORT}`);
     connectToDb()
 })
+
+

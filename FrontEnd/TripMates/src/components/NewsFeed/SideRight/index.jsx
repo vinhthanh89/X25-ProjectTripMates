@@ -43,27 +43,7 @@ const RightSideBar = () => {
             </div>
           </li>
         ))}
-      </ul>
-      {/* <div className="recommend-list">
-        <h1 className="text-lg font-bold">Top travelers</h1>
-        <div className="grid grid-cols-2 gap-4 pt-[1rem]">
-          {ImageStories.slice(0, 4).map((story, index) => (
-            <div
-              key={index}
-              className="relative overflow-hidden rounded-md transition-transform duration-300 hover:scale-105"
-            >
-              <img
-                src={story.imageUrl}
-                alt={`Traveler Story ${index + 1}`}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 flex items-end px-4 pb-4 bg-[#303030] bg-opacity-50 text-white">
-                <p className="text-sm font-semibold">{`  ${story.name}`}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div> */}
+      </ul>      
       <div className="flex flex-col gap-[1rem]">
         <h1 className="text-lg font-bold">Explore</h1>
         <Continents />

@@ -1,57 +1,61 @@
 import { useState, useEffect, useRef } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 
 const Reels = () => {
-  const [videos, setVideos] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(-1);
+  const videoSrc = ["/Vietnam.mp4", "/Japan.mp4", "/Bali.mp4"];
+  const iconSize = 25;
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const videoRefs = useRef([]);
 
-  //! Fetch video
+  //! Pause video
   useEffect(() => {
-    fetchMoreVideos();
-  }, []);
-  // Pause video when currentVideoIndex changes
-  useEffect(() => {
-    if (currentVideoIndex !== -1 && videoRefs.current[currentVideoIndex]) {
-      videoRefs.current[currentVideoIndex].pause();
+    if (currentVideoIndex !== -1) {
+      videoRefs.current.forEach((video, index) => {
+        if (index !== currentVideoIndex && video) {
+          video.pause();
+        }
+      });
     }
   }, [currentVideoIndex]);
 
-  const fetchMoreVideos = () => {
-    setTimeout(() => {
-      const newVideos = Array.from({ length: 20 }, (_, i) => ({
-        id: videos.length + i,
-        src: `/Bali.mp4`,
-      }));
-      setVideos((prevVideos) => [...prevVideos, ...newVideos]);
-      if (videos.length >= 30) {
-        setHasMore(false);
-      }
-    }, 1500);
+  const handleNext = () => {
+    setCurrentVideoIndex((prevIndex) =>
+      Math.min(prevIndex + 1, videoSrc.length - 1)
+    );
+  };
+
+  const handlePrevious = () => {
+    setCurrentVideoIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   };
 
   return (
-    <div className="flex justify-center p-5"> 
-      <InfiniteScroll
-        dataLength={videos.length}
-        next={fetchMoreVideos}
-        hasMore={hasMore}
-        loader={<p>Loading...</p>}
-        className="flex flex-col gap-12 w-full max-w-lg p-5"
-      >
-        {videos.map((video, index) => (
-          <div key={video.id} className="gap-10 rounded-lg h-[calc(90vh-4rem)]">
-            <video
-              ref={(element) => (videoRefs.current[index] = element)}
-              className="w-full h-full object-cover rounded-lg"
-              controls
-              src={video.src}
-              onPause={() => setCurrentVideoIndex(-1)}
-            />
-          </div>
-        ))}
-      </InfiniteScroll>
+    <div className="flex justify-center ring-1 bg-black">
+      {videoSrc.length > 0 && (
+        <div className="flex justify-between items-center w-[60rem] ">
+          <button
+            className="p-4 bg-[#303030] text-white rounded-lg"
+            onClick={handlePrevious}
+            disabled={currentVideoIndex === 0}
+          >
+            <FaArrowAltCircleLeft size={iconSize} />
+          </button>
+          <video
+            ref={(element) => (videoRefs.current[currentVideoIndex] = element)}
+            className="rounded-lg w-[50rem] h-[40rem] object-cover ring-1"
+            controls
+            src={videoSrc[currentVideoIndex]}
+            onPause={() => setCurrentVideoIndex(-1)}
+          />
+          <button
+            className="p-4 bg-[#303030] text-white rounded-lg"
+            onClick={handleNext}
+            disabled={currentVideoIndex === videoSrc.length - 1}
+          >
+            <FaArrowAltCircleRight size={iconSize} />
+          </button>
+        </div>
+      )}
+      {videoSrc.length === 0 && <p>Loading...</p>}
     </div>
   );
 };

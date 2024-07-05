@@ -11,7 +11,9 @@ const Following = ({userProfile}) => {
     useEffect(() => {
         const fectchDataUsersFollowing = async () => {
             try {
-                const  response = await getDataUserFollowing(userProfile._id)
+
+                const response = await getDataUserFollowing(userProfile._id)
+                console.log(response);
                 setUsersFollowing(response.data.usersFollowing)
             } catch (error) {
                 console.log(error);

@@ -3,6 +3,7 @@ import { FaCompass } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 // import { useEffect, useState } from "react";
 // import { useParams } from "react-router";
 // import { getUserById } from "../../../services/user";
@@ -34,7 +35,15 @@ const LeftSideBar = () => {
        imageUrl:
          "https://images.unsplash.com/photo-1531737212413-667205e1cda7?q=80&w=1934&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
      },
-   ];
+  ];
+  
+  //! Handle selected
+  const [focusedButton, setFocusedButton] = useState("feeds");
+   const handleButtonClick = (path, buttonName) => {
+     navigate(path);
+     setFocusedButton(buttonName);
+   };
+
   // const [userProfile, setUserProfile] = useState({
   //   email: "",
   //   fullName: "",
@@ -83,36 +92,30 @@ const LeftSideBar = () => {
 
             <div className="flex flex-col gap-5">
               <button
-                className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out"
-                onClick={() => navigate("/")}
+                className={`flex justify-start items-center btn_all gap-2 w-full ${
+                  focusedButton === "feeds" ? "bg-[#303030] text-white" : ""
+                } hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out`}
+                onClick={() => handleButtonClick("/", "feeds")}
               >
-                <FaCompass
-                  className="group-hover:bg-[#303030]"
-                  size={iconSize}
-                  style={iconStyle}
-                />
+                <FaCompass size={iconSize} style={iconStyle} />
                 <p>Feeds</p>
               </button>
               <button
-                className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out"
-                onClick={() => navigate("/shorts")}
+                className={`flex justify-start items-center btn_all gap-2 w-full ${
+                  focusedButton === "shorts" ? "bg-[#303030] text-white" : ""
+                } hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out`}
+                onClick={() => handleButtonClick("/shorts", "shorts")}
               >
-                <BiSolidMoviePlay
-                  className="group-hover:bg-[#303030]"
-                  size={iconSize}
-                  style={iconStyle}
-                />
+                <BiSolidMoviePlay size={iconSize} style={iconStyle} />
                 <p>Shorts</p>
               </button>
               <button
-                className="flex justify-start items-center btn_all gap-2 w-full focus:bg-[#303030] focus:text-white hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out"
-                onClick={() => navigate("/message")}
+                className={`flex justify-start items-center btn_all gap-2 w-full ${
+                  focusedButton === "message" ? "bg-[#303030] text-white" : ""
+                } hover:bg-[#303030] hover:text-white transition duration-300 ease-in-out`}
+                onClick={() => handleButtonClick("/message", "message")}
               >
-                <AiFillMessage
-                  className="group-hover:bg-[#303030]"
-                  size={iconSize}
-                  style={iconStyle}
-                />
+                <AiFillMessage size={iconSize} style={iconStyle} />
                 <p>Messages</p>
               </button>
             </div>
@@ -120,11 +123,12 @@ const LeftSideBar = () => {
           <div className="flex flex-col gap-3">
             <div className="recommend-list">
               <h1 className="text-lg font-bold">Top travelers</h1>
-              <div className="grid grid-cols-2 gap-4 pt-[1rem]">
+              <div className="grid grid-cols-2 gap-4 pt-[1rem] px-[5px]">
                 {ImageStories.slice(0, 4).map((story, index) => (
-                  <div
+                  <button
                     key={index}
                     className="relative overflow-hidden rounded-md transition-transform duration-300 hover:scale-105"
+                    onClick={() => navigate("/shorts")}
                   >
                     <img
                       src={story.imageUrl}
@@ -132,9 +136,9 @@ const LeftSideBar = () => {
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 flex items-end px-4 pb-4 bg-[#303030] bg-opacity-50 text-white">
-                      <p className="text-sm font-semibold">{`  ${story.name}`}</p>
+                      <p className="text-sm font-semibold">{`${story.name}`}</p>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
