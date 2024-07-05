@@ -132,6 +132,7 @@ const CommentTextArea = ({ topic, addUserComment }) => {
     try {
       await addNotification(topic._id, { interaction: "comment" });
       const response = await addComment(topic._id, { comment: commentText });
+      console.log(response);
       addUserComment(response.data.usersComment);
       setCommentText("");
     } catch (error) {

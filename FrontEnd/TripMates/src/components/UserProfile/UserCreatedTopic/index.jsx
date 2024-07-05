@@ -18,7 +18,7 @@ const UserCreatedTopic = ({ userId }) => {
       }
     };
     fetchData();
-  }, [userId , userCreatedTopic]);
+  }, [userId ]);
 
   const renderTopicData = userCreatedTopic ? (
     userCreatedTopic.map((topic) => {

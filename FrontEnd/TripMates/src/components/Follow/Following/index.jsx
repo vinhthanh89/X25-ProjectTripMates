@@ -8,11 +8,10 @@ import AvatarFollower from "../../UserProfile/AvatarFollower";
 const Following = ({userProfile}) => {
     const [usersFollowing , setUsersFollowing] = useState([])
 
-    console.log(userProfile);
-
     useEffect(() => {
         const fectchDataUsersFollowing = async () => {
             try {
+
                 const response = await getDataUserFollowing(userProfile._id)
                 console.log(response);
                 setUsersFollowing(response.data.usersFollowing)

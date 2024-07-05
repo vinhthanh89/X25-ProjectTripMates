@@ -32,6 +32,7 @@ const UserProfile = () => {
     const fetchUserData = async () => {
       try {
         const response = await getUserById(urlParam.userId);
+        console.log(response);
         setUserProfile(response.data.findUser);
         setShowComponent("topic");
       } catch (error) {
@@ -97,6 +98,7 @@ const UserProfile = () => {
               <h1 className="w-full flex justify-center text-lg font-bold truncate">
                 {userProfile.fullName}
               </h1>
+
               <div className="w-full">
                 <AboutMe
                   userProfile={userProfile}
