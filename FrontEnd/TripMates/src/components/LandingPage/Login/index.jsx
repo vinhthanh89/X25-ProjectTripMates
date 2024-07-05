@@ -14,7 +14,6 @@ import {
 
 const Login = () => {
   const dispatch = useDispatch()
-  // const navigate = useNavigate()
   // eslint-disable-next-line no-unused-vars
   const user = useSelector(state => state.user.user)
 
@@ -34,7 +33,7 @@ const Login = () => {
 
   return (
     <>
-      <Form onFinish={onFinish}>
+      <Form onFinish={onFinish} >
         <Form.Item
           name="email"
           rules={[

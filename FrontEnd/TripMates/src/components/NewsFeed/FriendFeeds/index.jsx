@@ -1,39 +1,38 @@
-import { useEffect, useState } from 'react'
-import Topic from '../Topic';
-import { fetchTopicsByUserFollow } from '../../../services/topic';
+import { useEffect, useState } from "react";
+import Topic from "../Topic";
+import { fetchTopicsByUserFollow } from "../../../services/topic";
 
 const FriendsFeeds = () => {
-    const [topicData, setTopicData] = useState(null);
+  const [topicData, setTopicData] = useState(null);
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetchTopicsByUserFollow();
-          setTopicData(response.data.topics);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchData();
-    }, [topicData]);
-  
-    const renderTopicData = topicData ? (
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetchTopicsByUserFollow();
+        setTopicData(response.data.topics);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const renderTopicData = topicData ? (
+    topicData.length > 0 ? (
       topicData.map((topic) => (
         <div key={topic._id}>
           <Topic topic={topic} />
         </div>
       ))
     ) : (
-      <p>Loading ...</p>
-    );
+      <p>You have no friends</p>
+    )
+  ) : (
+    <p>Loading ...</p>
+  );
 
-  return (
-<>
+  return <>{renderTopicData}</>;
+};
 
-      {renderTopicData}
-</>
+export default FriendsFeeds;
 
-  )
-}
-
-export default FriendsFeeds

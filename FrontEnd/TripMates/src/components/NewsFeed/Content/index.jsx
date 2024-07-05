@@ -7,7 +7,7 @@ import RecentsFeed from "../RecentsFeed";
 const Content = () => {
   const iconSize = 20;
 
-  const [feedType, setFeedType] = useState("Friends");
+  const [feedType, setFeedType] = useState("Recents");
 
   const handleFeedTypeChange = (type) => {
     setFeedType(type);

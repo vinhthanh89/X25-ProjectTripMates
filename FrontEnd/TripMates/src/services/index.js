@@ -24,8 +24,7 @@ axiosAuthInstance.interceptors.response.use((response) => {
     const message = response.data.message
     if(message && message === 'jwt expired'){
         console.log('New AccessToken');
-        config.headers['accesstoken'] = `Bearer ${response.data.newAccessToken}
-        `
+        config.headers['accesstoken'] = `Bearer ${response.data.newAccessToken}`
         saveAccessTokenToLocal(response.data.newAccessToken)
 
         return axiosAuthInstance(config)

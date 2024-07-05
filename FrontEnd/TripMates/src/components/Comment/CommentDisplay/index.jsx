@@ -33,7 +33,7 @@ import { useEffect, useRef, useState } from "react";
           />
         </div>
         <div className="flex-1">
-          <div className="px-[5px] py-[5px] inline-block rounded-[8px] bg-[#c2bfbf] bg-opacity-60">
+          <div className="py-[8px] px-[10px] inline-block rounded-[8px] bg-[#d9d9d9] bg-opacity-60">
             <div className="font-black cursor-pointer">{userId.fullName}</div>
             <div ref={commentRef} className={`font-normal text-[15px] ${isExpanded ? '' : 'line-clamp-3'} `}>{comment}</div>
             {isOverflowing && !isExpanded && (
