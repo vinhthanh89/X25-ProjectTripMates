@@ -79,7 +79,7 @@ const UserTopic = ({ topic }) => {
           </div>
           <p
             title={description}
-            className="text-ellipsis truncate text-sm font-light"
+            className="text-ellipsis line-clamp-2 text-sm font-light"
           >
             {description}
           </p>
