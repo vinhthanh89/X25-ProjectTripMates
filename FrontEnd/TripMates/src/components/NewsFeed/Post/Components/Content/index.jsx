@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import FroalaEditorView from "react-froala-wysiwyg/FroalaEditorView";
-import { MdPlace } from "react-icons/md";
 
 const Content = ({post}) => {
 
