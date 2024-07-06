@@ -1,16 +1,15 @@
 /* eslint-disable react/prop-types */
+import { Modal } from "antd";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { IoIosHeart } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { addNotification } from "../../../../services/notification";
 import {
   getReactByTopicId,
   reactTopic,
   removeReact,
 } from "../../../../services/react";
-import { Modal } from "antd";
-import { useNavigate } from "react-router";
 import AvatarFollower from "../../../UserProfile/AvatarFollower";
-import { addNotification } from "../../../../services/notification";
 
 const TopicReact = ({ topic }) => {
   const iconSize = 25;
@@ -18,7 +17,6 @@ const TopicReact = ({ topic }) => {
     background: "transparent",
   };
   const userLogin = useSelector((state) => state.user.user);
-  const navigate = useNavigate();
 
   const [topicReaction, setTopicReaction] = useState([]);
   const [isReact, setIsReact] = useState(false);
@@ -40,11 +38,7 @@ const TopicReact = ({ topic }) => {
         const response = await getReactByTopicId(topic._id);
         const reactions = response.data.reactions;
         setTopicReaction(reactions);
-        const userExists = reactions.some(
-          (reaction) => reaction.userId._id === userLogin._id
-        );
-
-        setIsReact(userExists ? true : false);
+        setIsReact(response.data.isReact);
       } catch (error) {
         console.log(error);
       }
@@ -54,11 +48,13 @@ const TopicReact = ({ topic }) => {
 
   const handleReactTopic = async () => {
     try {
-      await addNotification(topic._id, { interaction: "react" });
-      const response = await reactTopic(topic._id);
+      const [response] = await Promise.all([
+        reactTopic(topic._id),
+        addNotification(topic._id, { interaction: "react" }),
+      ]);
+      setIsReact(true);
       const newTopicReactions = response.data.reactions;
       setTopicReaction(newTopicReactions);
-      setIsReact(true);
     } catch (error) {
       console.log(error);
     }
@@ -82,18 +78,6 @@ const TopicReact = ({ topic }) => {
         <AvatarFollower user={userId} />
       </div>
     );
-    // return (
-    //   <div className="w-full h-[60px] flex gap-[10px] items-center" key={_id}>
-    //       <div className="w-[40px] h-[40px]">
-    //         <img
-    //         className="w-full h-full rounded-full object-cover"
-    //          src={userId.avatar} alt="" />
-    //       </div>
-    //       <p
-    //         onClick={() => navigate(`/user/${userId._id}`)}
-    //        className="text-[16px] font-bold cursor-pointer hover:opacity-60">{userId.fullName}</p>
-    //   </div>
-    // )
   });
 
   return (
