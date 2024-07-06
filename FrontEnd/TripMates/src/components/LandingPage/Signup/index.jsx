@@ -1,29 +1,49 @@
-
-
 import { Form, Input } from "antd";
 import { signup } from "../../../services/user";
 import toast from "react-hot-toast";
-
+import {
+  saveAccessTokenToLocal,
+  saveRefreshTokenToLocal,
+  saveUserToLocal,
+} from "../../../utils/localstorage";
+import { loginAction } from "../../../features/user/userSlices";
+import { useDispatch } from "react-redux";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
+  const [form] = Form.useForm();
 
   const onFinish = async (values) => {
     try {
-      const response = await signup(values)
+      const response = await signup(values);
       console.log(response);
-      toast.success(response.data.message)
+      saveAccessTokenToLocal(response.data.accessToken);
+      saveRefreshTokenToLocal(response.data.refreshToken);
+      saveUserToLocal(response.data.user);
+      dispatch(loginAction({ user: response.data.user }));
+      toast.success(response.data.message);
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message)
+      if(error.response.status === 403){
+        const errorFields = error.response.data.validateError
+        form.setFields([
+          {
+            name: errorFields.name,
+            errors: [errorFields.errorMessage]
+          },
+        ]
+         
+       )
+      }
     }
-  }
+  };
+
 
 
   return (
     <>
-      <Form
-      onFinish={onFinish}
-      >
+      <Form form={form} onFinish={onFinish}>
         <Form.Item
           name="fullName"
           rules={[
@@ -62,11 +82,22 @@ const SignUp = () => {
         </Form.Item>
         <Form.Item
           name="confirmPassword"
+          dependencies={['password']}
+          
           rules={[
             {
               required: true,
               message: "Please input your password!",
             },
+            ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (getFieldValue('password') === value) {
+                console.log(value)
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+            },
+          }),
           ]}
         >
           <Input.Password
@@ -86,4 +117,4 @@ const SignUp = () => {
     </>
   );
 };
-export default SignUp
+export default SignUp;

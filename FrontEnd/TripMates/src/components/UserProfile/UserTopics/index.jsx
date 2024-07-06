@@ -6,10 +6,9 @@ import { MdPlace } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
+import ModalChangeTopicThumbnail from "../ModalChangeTopicThumbnail";
 import ModalDeleteTopic from "../ModalDeleteTopic";
 import ModalEditTopic from "../ModalEditTopic";
-import ModalChangeTopicThumbnail from "../ModalChangeTopicThumbnail";
-import UserJoinTripAvatarGroup from "../../UserJoinTrip/UserJoinTripAvatarGroup";
 
 const UserTopic = ({ topic }) => {
   const userLogin = useSelector((state) => state.user.user);

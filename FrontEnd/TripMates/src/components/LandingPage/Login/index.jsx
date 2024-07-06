@@ -3,9 +3,8 @@ import toast from "react-hot-toast";
 // import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-
 import { login } from "../../../services/user";
-import {loginAction} from "../../../features/user/userSlices.js"
+import { loginAction } from "../../../features/user/userSlices.js";
 import {
   saveAccessTokenToLocal,
   saveRefreshTokenToLocal,
@@ -13,27 +12,40 @@ import {
 } from "../../../utils/localstorage";
 
 const Login = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
-  const user = useSelector(state => state.user.user)
+  const user = useSelector((state) => state.user.user);
+
+  const [form] = Form.useForm();
 
   const onFinish = async (values) => {
     try {
       const response = await login(values);
       saveAccessTokenToLocal(response.data.accessToken);
       saveRefreshTokenToLocal(response.data.refreshToken);
-      saveUserToLocal(response.data.user)
-      dispatch(loginAction({user : response.data.user}))
+      saveUserToLocal(response.data.user);
+      dispatch(loginAction({ user: response.data.user }));
       toast.success(response.data.message);
     } catch (error) {
-      console.log(error.response.data);
-      toast.error(error.response.data.message);
+      console.log(error);
+      if(error.response.status === 403){
+        const errorFields = error.response.data.validateError
+        form.setFields([
+          {
+            name: errorFields.name,
+            errors: [errorFields.errorMessage]
+          },
+        ]
+         
+       )
+      }
+      // toast.error(error.response.data.message);
     }
   };
 
   return (
     <>
-      <Form onFinish={onFinish} >
+      <Form form={form} onFinish={onFinish}>
         <Form.Item
           name="email"
           rules={[
