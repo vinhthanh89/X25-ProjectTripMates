@@ -144,7 +144,7 @@ const TopicDetail = () => {
             </div>
           </div>
           <div className="col-span-3 gap-2 text-[#303030]">
-            <div className="flex items-center">
+            <div className="flex items-center py-[5px]">
               <span className="text-base text-[#5143d9] font-bold">
                 TripMates :{" "}
               </span>

@@ -25,7 +25,7 @@ const UserInvitedList = ({ userJoinTrip }) => {
           className={`text-[16px]
           ${user.status === 'pending' && 'text-[lightgray]' ||
           user.status === 'accept' && 'text-[lightgreen]' ||
-          user.status === 'đecline' && 'text-[#c1121f]'
+          user.status === 'decline' && 'text-[#c1121f]'
           }
           `}>
           {user.status}
