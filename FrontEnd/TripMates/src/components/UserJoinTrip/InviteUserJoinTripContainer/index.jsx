@@ -47,7 +47,7 @@ const InviteUserJoinTripContainer = ({ handleCancel, topicId , handleSetTopicDet
   };
 
   return (
-    <div className="bg-white px-[10px] pb-[20px]">
+    <div className="px-[10px] pb-[20px]">
       <div>
         <div className="pb-[5px] pt-[15px] mb-[10px] flex w-full flex-wrap gap-[5px]">
           <RenderPickUserTag
@@ -69,16 +69,16 @@ const InviteUserJoinTripContainer = ({ handleCancel, topicId , handleSetTopicDet
           pickUserJoinTrip={pickUserJoinTrip}
         />
       </div>
-      <div className="flex justify-end mt-[20px]">
+      <div className="flex justify-end gap-5 mt-[20px]">
         <button
           onClick={handleCancelPicked}
-          className="hover:opacity-70 font-bold bg-[lightgray] text-black rounded-[8px] py-[7px] px-[10px]"
+          className="hover:opacity-70 font-bold bg-red-500 text-white rounded-lg p-[10px]"
         >
-          Cancle
+          Cancel
         </button>
         <button
           onClick={handleAddUserJoinTrip}
-          className="hover:opacity-70 font-bold bg-[#5143d9] text-white rounded-[8px] py-[7px] px-[10px] ml-[15px]"
+          className="hover:opacity-70 font-bold bg-[#5143d9] text-white rounded-lg p-[10px]"
         >
           Invite
         </button>

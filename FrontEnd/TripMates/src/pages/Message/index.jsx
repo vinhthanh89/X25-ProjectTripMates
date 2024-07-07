@@ -13,30 +13,28 @@ const Message = () => {
   const [friends, setFriends] = useState([]);
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [error, setError] = useState(null);
 
+  //! Fetch friends
   useEffect(() => {
     const fetchFriends = async () => {
       try {
         const response = await getDataUserFollowing(userLogin._id);
         console.log("Friends data:", response.data);
         setFriends(response.data.usersFollowing);
-        setError(null);
       } catch (error) {
         console.error("Error fetching friends:", error);
-        setError("Failed fetching friends");
       }
     };
     fetchFriends();
   }, [userLogin._id]);
 
-  useEffect(() => {
-    if (socket) {
-      socket.on("receive_message", (message) => {
-        setMessages((prevMessages) => [...prevMessages, message]);
-      });
-    }
-  }, [socket]);
+  // useEffect(() => {
+  //   if (socket) {
+  //     socket.on("receive_message", (message) => {
+  //       setMessages((prevMessages) => [...prevMessages, message]);
+  //     });
+  //   }
+  // }, [socket]);
 
   const handleSelectFriend = (friend) => {
     setSelectedFriend(friend);
@@ -61,16 +59,12 @@ const Message = () => {
     }
   };
 
-  if (error) {
-    return <div className="error-message">{error}</div>;
-  }
-
   return (
-    <div className="grid grid-cols-7 bg-[#f2f2f2] gap-2 h-[80vh]">
-      <div className="col-span-2 h-full">
+    <div className="grid grid-cols-7 bg-white h-[90vh] rounded-lg">
+      <div className="col-span-2 h-full py-2">
         <LeftSideBar friends={friends} onSelectFriend={handleSelectFriend} />
       </div>
-      <div className="col-span-5 h-full">
+      <div className="col-span-5 h-full py-2">
         <Content
           selectedFriend={selectedFriend}
           messages={messages}
@@ -82,3 +76,5 @@ const Message = () => {
 };
 
 export default Message;
+
+

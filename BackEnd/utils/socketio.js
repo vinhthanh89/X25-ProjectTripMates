@@ -1,34 +1,32 @@
-import http from "http";
-import { Server } from "socket.io";
+// const { Server } = require("socket.io");
 
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-  },
-});
+// const app = express();
+// const server = http.createServer(app);
+// const io = new Server(server, {
+//   cors: {
+//     origin: "*",
+//     methods: ["GET", "POST"],
+//   },
+// });
 
-const PORT = process.env.PORT
+// io.on("connection", (socket) => {
+//   console.log("a user connected:", socket.id);
 
-// Socket.IO
-io.on("connection", (socket) => {
-  console.log("A user connected");
+//   socket.on("join_room", (roomId) => {
+//     socket.join(roomId);
+//     console.log(`User ${socket.id} joined room ${roomId}`);
+//   });
 
-  // Handle joining a room (could be a private chat or a group chat)
-  socket.on("join_room", (roomId) => {
-    socket.join(roomId);
-    console.log(`User joined room: ${roomId}`);
-  });
+//   socket.on("send_message", (message) => {
+//     const { roomId } = message;
+//     io.to(roomId).emit("receive_message", message);
+//   });
 
-  // Handle sending a message
-  socket.on("send_message", (data) => {
-    // Broadcast the message to the room
-    io.to(data.roomId).emit("receive_message", data);
-  });
+//   socket.on("disconnect", () => {
+//     console.log("user disconnected");
+//   });
+// });
 
-  socket.on("disconnect", () => {
-    console.log("A user disconnected");
-  });
-});
-
+// server.listen(3000, () => {
+//   console.log("listening on *:3000");
+// });

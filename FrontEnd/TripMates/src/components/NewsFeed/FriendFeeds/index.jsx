@@ -25,7 +25,7 @@ const FriendsFeeds = () => {
         </div>
       ))
     ) : (
-      <p>You have no friends</p>
+      <p>You are not following anyone</p>
     )
   ) : (
     <p>Loading ...</p>

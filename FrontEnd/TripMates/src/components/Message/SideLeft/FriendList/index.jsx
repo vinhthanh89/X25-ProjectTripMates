@@ -45,7 +45,11 @@ import Friend from "../Friend";
 // export default FriendList;
 
 const FriendList = ({ friends, onSelectFriend }) => {
-  console.log(friends)
+  if (!friends) {
+    return (
+      <><h1>Hello</h1></>
+    )
+  }
   return (
     <div className="flex flex-col gap-2">
       {friends.map((user) => (

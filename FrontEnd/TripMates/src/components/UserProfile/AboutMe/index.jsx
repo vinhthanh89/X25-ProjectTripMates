@@ -66,9 +66,7 @@ const AboutMe = ({ userProfile, handleEditUser }) => {
         </li>
         <li className="flex items-center gap-2">
           {(!gender && (
-            <div>
-              <BsGenderAmbiguous size={iconSize} />
-            </div>
+            <></>
           )) ||
             (gender === "Male" && (
               <div>

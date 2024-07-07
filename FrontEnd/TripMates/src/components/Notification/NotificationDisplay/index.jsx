@@ -54,7 +54,7 @@ const NotificationDisplay = ({ notify, handleSetNotify }) => {
     <>
       <div
         onClick={handleClickItems}
-        className={`w-[400px] pl-[10px] py-[5px] flex items-center ${
+        className={`w-[400px] p-[10px] flex items-center  ${
           isRead ? "" : "bg-[lightgray] bg-opacity-55"
         }`}
       >
