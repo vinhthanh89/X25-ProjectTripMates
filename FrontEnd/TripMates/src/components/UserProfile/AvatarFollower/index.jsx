@@ -8,18 +8,21 @@ const AvatarFollower = ({ user }) => {
   return (
     <div
       onClick={() => navigate(`/user/${user._id}`)}
-      className="flex flex-col items-center gap-3 pt-[15px] cursor-pointer w-full  "
+      className="flex items-center gap-3 cursor-pointer w-full h-[5rem] border-2 rounded-lg p-2"
     >
       <div>
         <img
-          className="w-[70px] h-[70px] object-cover rounded-full"
+          className="w-[55px] h-[55px] object-cover rounded-lg"
           src={user.avatar}
           alt=""
         />
       </div>
 
-      <div className="w-full h-[50px]pb-[10px]">
-        <p title={user.fullName} className="text-lg text-center font-bold line-clamp-2 break-words">
+      <div className="w-[60%]">
+        <p
+          title={user.fullName}
+          className="text-[16px] font-bold break-words"
+        >
           {user.fullName}
         </p>
       </div>

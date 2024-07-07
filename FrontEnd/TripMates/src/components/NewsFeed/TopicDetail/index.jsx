@@ -12,6 +12,7 @@ import PostTableInTopicDetail from "../../PostTabelInTopicDetail";
 import UserJoinTripAvatarGroup from "../../UserJoinTrip/UserJoinTripAvatarGroup";
 import InviteUserJoinTripButton from "../../UserJoinTrip/InviteUserJoinTripButton";
 import { useSelector } from "react-redux";
+import RenderComment from "./RenderComment";
 // eslint-disable-next-line no-unused-vars
 
 const TopicDetail = () => {
@@ -149,9 +150,7 @@ const TopicDetail = () => {
                 TripMates :{" "}
               </span>
               <div>
-                <UserJoinTripAvatarGroup
-                  topicDetail={topicDetail}
-                />
+                <UserJoinTripAvatarGroup topicDetail={topicDetail} />
               </div>
             </div>
             <p>
@@ -201,6 +200,12 @@ const TopicDetail = () => {
           topicId={urlParam.topicId}
           userCreated={userCreated}
         />
+        <div className="react">
+          <h1 className="text-md">
+            <span className="text-red-500 font-bold">100</span> people loved this Topic
+          </h1>
+        </div>
+        <RenderComment />
       </div>
     </>
   );

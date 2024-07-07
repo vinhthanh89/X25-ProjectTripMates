@@ -5,33 +5,41 @@ import { useEffect, useState } from "react";
 import AvatarFollower from "../../UserProfile/AvatarFollower";
 import { getDataUserFollower } from "../../../services/userFollowing";
 
-const Followers = ({ userProfile }) => {  
-  const [usersFollower , setUsersFollower] = useState([])
+const Followers = ({ userProfile }) => {
+  const [usersFollower, setUsersFollower] = useState(null);
 
   useEffect(() => {
     const fetchDataUsersFollower = async () => {
       try {
-        const response = await getDataUserFollower(userProfile._id)
-        setUsersFollower(response.data.usersFollower)
+        const response = await getDataUserFollower(userProfile._id);
+        setUsersFollower(response.data.usersFollower);
       } catch (error) {
         console.log(error);
       }
-    }
-    fetchDataUsersFollower()
-  } , [userProfile._id])
+    };
+    fetchDataUsersFollower();
+  }, [userProfile._id]);
 
-  
-  const renderFollower = usersFollower.map((user) => {
-    return (
-      <div key={user._id}>
-        <AvatarFollower user={user} />
+  const renderFollower =
+    usersFollower === null ? (
+      <p>Loading...</p>
+    ) : usersFollower.length === 0 ? (
+      <div className="h-[400px] col-span-6 flex justify-center items-center">
+        <p className="text-2xl">You have no folowers</p>
       </div>
+    ) : (
+      usersFollower.map((user) => (
+        <div className="py-2" key={user._id}>
+          <AvatarFollower user={user} />
+        </div>
+      ))
     );
-  });
+    const totalFollowers = usersFollower ? usersFollower.length : 0;
 
   return (
     <div>
-      <div className="followers grid grid-cols-6 gap-[10px]">
+      <h1 className="text-lg">Total: {totalFollowers}</h1>
+      <div className="followers grid grid-cols-4 gap-2 py-2">
         {renderFollower}
       </div>
     </div>

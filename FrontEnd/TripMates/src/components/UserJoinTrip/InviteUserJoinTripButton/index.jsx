@@ -29,56 +29,62 @@ const InviteUserJoinTripButton = ({topicDetail , handleSetTopicDetail}) => {
         Invite a trip mates
       </button>
       <ConfigProvider
-  theme={{
-    components: {
-      Modal: {
-        contentBg : "lightGray",
-        headerBg : 'lighGray',
-        titleFontSize :   18
-      },
-    },
-  }}
->
-
-      <Modal
-        title='Invite a tripmates'
-        open={isModalOpen}
-        onCancel={handleCancel}
-        footer={null}
-        closeIcon={null}
+        theme={{
+          components: {
+            Modal: {
+              contentBg: "white",
+              titleFontSize: 18,
+            },
+          },
+        }}
       >
-        <div>
-          <div className="flex justify-around  bg-[lightgray]">
-            <button
-              className={`p-2 w-[50%] ${
-                activeTab === "search" ? "rounded-t-[10px]  bg-[white] underline" : ""
-              }`}
-              onClick={() => handleTabClick("search")}
-            >
-              <span className="text-[18px]">Invite</span>
-            </button>
-            <button
-              className={`p-2 w-[50%] ${
-                activeTab === "list" ? "rounded-t-[10px] bg-[white] underline" : ""
-              }`}
-              onClick={() => handleTabClick("list")}
-            >
-              <span className="text-[18px]">List</span>
-            </button>
+        <Modal
+          title="Invite a TripMate"
+          open={isModalOpen}
+          onCancel={handleCancel}
+          footer={null}
+          closeIcon={null}
+        >
+          <div>
+            <div className="flex justify-around border-b-2 py-2">
+              <button
+                className={`p-2 w-[50%] ${
+                  activeTab === "search"
+                    ? "rounded-lg bg-[#5143d9] text-white"
+                    : ""
+                }`}
+                onClick={() => handleTabClick("search")}
+              >
+                <span className="text-lg ">Invite</span>
+              </button>
+              <button
+                className={`p-2 w-[50%] ${
+                  activeTab === "list"
+                    ? "rounded-lg bg-[#5143d9] text-white"
+                    : ""
+                }`}
+                onClick={() => handleTabClick("list")}
+              >
+                <span className="text-lg ">List</span>
+              </button>
+            </div>
+            {(activeTab === "search" && (
+              <>
+                <InviteUserJoinTripContainer
+                  topicId={topicDetail._id}
+                  handleCancel={handleCancel}
+                  handleSetTopicDetail={handleSetTopicDetail}
+                />
+              </>
+            )) ||
+              (activeTab === "list" && (
+                <>
+                  <UserInvitedList userJoinTrip={topicDetail.userJoinTrip} />
+                </>
+              ))}
           </div>
-          {activeTab === "search" && (
-            <>
-              <InviteUserJoinTripContainer topicId={topicDetail._id} handleCancel={handleCancel} handleSetTopicDetail={handleSetTopicDetail} />
-            </>
-          ) || activeTab === 'list' && (
-            <>
-              <UserInvitedList userJoinTrip={topicDetail.userJoinTrip} />
-            </>
-          )}
-        </div>
-      </Modal>
-</ConfigProvider>
-
+        </Modal>
+      </ConfigProvider>
     </div>
   );
 };
