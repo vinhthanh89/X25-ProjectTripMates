@@ -36,7 +36,9 @@ const FilterTopicContainer = () => {
     <div className="pt-[1rem] pb-[2rem]">
       {fitlerTopics?.length > 0 ? (
         <>
-          <h1 className="text-[24px] font-semibold mb-[15px]">Filter Topic By : {queryContinent}</h1>
+          <h1 className="flex gap-2 text-2xl font-semibold mb-[15px]">
+            Topic filterd by: <p className="text-[#5143d9]">{queryContinent}</p>
+          </h1>
           <div className="grid grid-cols-2 gap-[1rem] ">
             <>{renderTopicData}</>
           </div>
