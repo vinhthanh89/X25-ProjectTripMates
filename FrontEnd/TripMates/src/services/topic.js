@@ -7,7 +7,7 @@ export const fetchTopicData = () => {
 }
 
 export const fetchDataTopics = () => {
-    return axiosAuthInstance.get('/api/topic/fetch-topics')
+    return axiosAuthInstance.get(`/api/topic/fetch-topics`)
 }
 
 export const fetchTopicsByUserFollow = () => {
