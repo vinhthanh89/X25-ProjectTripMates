@@ -5,7 +5,6 @@ import { Button, DatePicker, Form, Input } from "antd";
 import dayjs from "dayjs";
 
 import { createPost } from "../../../services/post";
-import { addPostToTopic } from "../../../services/topic";
 import { getImageFile, getImageSrc } from "../../../utils/getImageSrc";
 import RenderSearchInput from "../../RenderSearchInput";
 import ContentEditor from "./ContentEditor";
@@ -65,11 +64,8 @@ const PostForm = () => {
       formData.append("date", values.date);
       formData.append("topicId", urlParams.topicId);
 
-      const response = await createPost(formData);
+      await createPost(formData);
 
-      const newPost = response.data.newPost;
-
-      await addPostToTopic(urlParams.topicId, { postId: newPost._id });
     } catch (error) {
       console.log(error);
     } finally {

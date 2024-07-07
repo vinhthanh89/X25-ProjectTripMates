@@ -301,40 +301,6 @@ export const uploadTopicThumbnail = async (req, res) => {
   }
 };
 
-export const addPostToTopic = async (req, res) => {
-  try {
-    const topicId = req.params.topicId;
-    const newPostId = req.body.postId;
-
-    console.log("topicID", topicId);
-    console.log("postId", newPostId);
-    console.log("body", req.body);
-
-    const findTopic = await Topic.findById(topicId);
-    if (!findTopic) {
-      return res.status(404).json({
-        message: "Topic Not Found",
-      });
-    }
-
-    const topic = await Topic.findByIdAndUpdate(
-      findTopic._id,
-      { $push: { post: newPostId } },
-      { new: true }
-    );
-
-    return res.status(200).json({
-      message: "Add Post To Topic Successfully",
-      topic,
-    });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      message: error,
-    });
-  }
-};
-
 export const getTopicByUserFollow = async (req, res) => {
   try {
     const userLogin = req.user;

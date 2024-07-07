@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const Continents = () => {
 
   const continents = [
-    { icon: FaGlobe, name: "All", query: null },
+    { icon: FaGlobe, name: "All" },
     { icon: FaGlobeAfrica, name: "Africa", query: "Africa" },
     { icon: FaEarthOceania, name: "Oceania", query: "Oceania" },
     { icon: FaGlobeEurope, name: "Europe", query: "Europe" },
@@ -28,7 +28,7 @@ const Continents = () => {
       <div className="grid grid-rows-3 grid-cols-2 h-[20rem] gap-4">
         {continents.map(({ icon: Icon, name, query }) => (
           <Link
-            to={`${query ? `/search/?continent=${query}` : ''}`}
+            to={`${query ? `/search?continent=${query}` : ''}`}
             key={name}
             className="flex flex-col items-center justify-center gap-2 bg-[#303030] rounded-lg hover_trans hover:scale-105"
             title={name}
