@@ -17,7 +17,6 @@ const SignUp = () => {
   const onFinish = async (values) => {
     try {
       const response = await signup(values);
-      console.log(response);
       saveAccessTokenToLocal(response.data.accessToken);
       saveRefreshTokenToLocal(response.data.refreshToken);
       saveUserToLocal(response.data.user);

@@ -1,34 +1,39 @@
 /* eslint-disable react/prop-types */
 import { MdPlace } from "react-icons/md";
-import { useNavigate } from "react-router";
 
+import { Link } from "react-router-dom";
 import CommentModal from "../../Comment/CommentModal";
 import TopicReact from "./TopicReact";
-import UserJoinTripAvatarGroup from "../../UserJoinTrip/UserJoinTripAvatarGroup";
 
 const Topic = ({ topic }) => {
-  const navigate = useNavigate();
   const iconSize = 25;
   const iconStyle = {
     background: "transparent",
   };
 
-  const { _id, thumbnail, description, title, userCreated, location , userJoinTrip } = topic;
+  const {
+    _id,
+    thumbnail,
+    description,
+    title,
+    userCreated,
+    location,
+    userJoinTrip,
+  } = topic;
   const { locationName, continent, country, locationThumbnail } = location;
-  
+
   return (
     <div className="flex flex-col gap-[0.5rem] rounded-lg bg-white px-[1rem] py-[1.5rem] ">
-      <div>
+      <Link to={`/topic/${_id}`}>
         <img
           src={thumbnail ? thumbnail : locationThumbnail}
           alt={locationName}
           className="rounded-[8px] cursor-pointer w-full h-[200px] object-cover"
-          onClick={() => navigate(`/topic/${_id}`)}
         />
         <div className="flex justify-between pt-[1rem]">
-          <div
+          <Link
+            to={`/user/${userCreated._id}`}
             className="user flex items-center gap-3 cursor-pointer"
-            onClick={() => navigate(`/user/${userCreated._id}`)}
           >
             <div className="w-[3rem] h-[3rem]">
               <img
@@ -43,14 +48,18 @@ const Topic = ({ topic }) => {
                 <p>{locationName}</p>
               </div>
             </div>
-          </div>
+          </Link>
           <div className="reactCmt flex gap-5 text-[#545454] font-medium text-sm">
             <TopicReact topic={topic} />
-            <CommentModal iconSize={iconSize} iconStyle={iconStyle} topic={topic}/>
+            <CommentModal
+              iconSize={iconSize}
+              iconStyle={iconStyle}
+              topic={topic}
+            />
           </div>
         </div>
-      </div>
-    {/* <UserJoinTripAvatarGroup topicDetail={topic} /> */}
+      </Link>
+      {/* <UserJoinTripAvatarGroup topicDetail={topic} /> */}
       {/* <div className="avatar-group -space-x-3">
         <div className="avatar w-9 border-white">
           <div className="w-full rounded-full">
@@ -81,13 +90,13 @@ const Topic = ({ topic }) => {
           {country ? <span> - #{country}</span> : <></>}
         </div>
         <div>
-          <h1
-            onClick={() => navigate(`/topic/${_id}`)}
+          <Link
+            to={`/topic/${_id}`}
             title={title}
             className="text-2xl font-bold text-ellipsis line-clamp-1 cursor-pointer"
           >
             {title}
-          </h1>
+          </Link>
 
           <p
             title={description}

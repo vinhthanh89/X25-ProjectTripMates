@@ -1,11 +1,8 @@
-import mongoose from "mongoose";
 import cloudinary from "../configs/cloudinary.js";
 
 import Topic from "../model/topic.model.js";
 import UserFollowing from "../model/userFollowing.model.js";
 import { handleUpload } from "../utils/handleUpload.js";
-
-const { ObjectId } = mongoose.Types;
 
 export const createTopic = async (req, res) => {
   try {
@@ -89,18 +86,20 @@ export const editTopic = async (req, res) => {
 export const fetchDataTopics = async (req, res) => {
   try {
     const userLogin = req.user;
+
     const findUserFollow = await UserFollowing.findOne({ userId: userLogin });
 
     if (!findUserFollow) {
       const usersFollowing = [];
 
       const topics = await Topic.find({
-        $and : [{isPrivate : false , userCreated : {$nin : usersFollowing}}]
-      }).populate('userCreated location userJoinTrip.userId')
+        $and: [{ isPrivate: false }, { userCreated: { $nin: usersFollowing } }],
+      }).populate(
+        "userCreated location userJoinTrip.userId"
+      );
 
       return res.status(200).json({
         message: "success",
-        number: topics.length,
         topics: topics.reverse(),
       });
     }
@@ -110,17 +109,12 @@ export const fetchDataTopics = async (req, res) => {
       const usersFollowing = findUsersFollowing.map((user) => user.userFollow);
       usersFollowing.push(userLogin);
 
-      // const topics = await Topic.find({
-      //   $nor: [{ isPrivate: true, userCreated: { $nin: usersFollowing } }],
-      // }).populate("userCreated location");
-
       const topics = await Topic.find({
-        $and : [{isPrivate : false , userCreated : {$nin : usersFollowing}}]
-      }).populate('userCreated location')
+        $and: [{ isPrivate: false }, { userCreated: { $nin: usersFollowing } }],
+      }).populate("userCreated location");
 
       return res.status(200).json({
         message: "success",
-        number: topics.length,
         topics: topics.reverse(),
       });
     }
@@ -135,7 +129,9 @@ export const fetchDataTopics = async (req, res) => {
 export const getTopics = async (req, res) => {
   try {
     const userLogin = req.user;
-    const dataTopic = await Topic.find().populate("userCreated location userJoinTrip.userId");
+    const dataTopic = await Topic.find().populate(
+      "userCreated location userJoinTrip.userId"
+    );
 
     return res.status(200).json({
       message: "Get Topics Successfully",
@@ -188,11 +184,11 @@ export const getTopicByUserCreated = async (req, res) => {
           { userCreated: { $ne: userId } },
           { isPrivate: true, userCreated: { $nin: usersFollowing } },
         ],
-      }).populate('userCreated location userJoinTrip.userId');
+      }).populate("userCreated location userJoinTrip.userId");
 
       return res.status(200).json({
         message: "Get Topic By User Success",
-        topics : findTopicByUserId,
+        topics: findTopicByUserId,
       });
     }
 
@@ -363,14 +359,15 @@ export const getTopicByUserFollow = async (req, res) => {
       const userLoginFollowing = findUserLoginFollowing.usersFollowing;
       const usersFollowing = userLoginFollowing.map((user) => user.userFollow);
 
-      const topics = await Topic.find({ userCreated: { $in: usersFollowing } }).populate('userCreated location userJoinTrip.userId');
+      const topics = await Topic.find({
+        userCreated: { $in: usersFollowing },
+      }).populate("userCreated location userJoinTrip.userId");
 
       return res.status(200).json({
         message: "Fetch Data Success",
         topics: topics.reverse(),
       });
     }
-
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -378,4 +375,3 @@ export const getTopicByUserFollow = async (req, res) => {
     });
   }
 };
-

@@ -26,7 +26,6 @@ const LandingPage = () => {
                 Login
               </button>
               <span>|</span>
-              {/* Add conditional class based on isLogin */}
               <button
                 onClick={() => setIsLogin(false)}
                 className={`hover:underline ${!isLogin ? "underline" : ""}`}
@@ -38,11 +37,6 @@ const LandingPage = () => {
             <button className="flex items-center gap-[10px] text-[#717171] text-sm font-light">
               Or sign in with <FcGoogle size={20} />
             </button>
-            {/* <div>
-              <Link className="flex justify-center btn_all w-[10rem] bg-black hover:bg-[#505050] hover:scale-105 hover_trans text-white">
-                {isLogin ? "Login" : "Sign up"}
-              </Link>
-            </div> */}
           </div>
           <div className="col-span-1">
             <img src="./Travel-Black.jpg" className="w-[90%]" />

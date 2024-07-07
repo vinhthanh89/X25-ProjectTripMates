@@ -27,4 +27,6 @@ router.use('/api/notification', authentication, notificationRouter)
 router.use('/api/messages', authentication, messageRouter)
 router.use('/api/userJoinTrip' , authentication , userJoinTripRouter)
 
+
+
 export default router

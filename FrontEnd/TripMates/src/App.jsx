@@ -1,18 +1,19 @@
-import "./App.css";
-import { Routes, Route } from "react-router";
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
-import LandingPage from "./pages/LandingPage";
-import NewsFeed from "./pages/NewsFeed";
+import { Route, Routes } from "react-router";
+import "./App.css";
+import FilterTopicContainer from "./components/FilterTopicContainer";
 import Content from "./components/NewsFeed/Content";
+import Header from "./components/NewsFeed/Header";
+import Post from "./components/NewsFeed/Post";
+import PostForm from "./components/NewsFeed/PostForm";
 import TopicDetail from "./components/NewsFeed/TopicDetail";
 import UserProfile from "./components/NewsFeed/UserProfile";
-import Header from "./components/NewsFeed/Header";
-import Message from "./pages/Message";
-import isObjectEmpty from './utils/isObjectyEmty';
 import Reels from "./components/Reels";
-import PostForm from "./components/NewsFeed/PostForm";
-import Post from "./components/NewsFeed/Post";
+import LandingPage from "./pages/LandingPage";
+import Message from "./pages/Message";
+import NewsFeed from "./pages/NewsFeed";
+import isObjectEmpty from './utils/isObjectyEmty';
 
 const App = () => {
   const user = useSelector((state) => state.user.user);
@@ -30,6 +31,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<NewsFeed />}>
               <Route path="" element={<Content />} />
+              <Route path="/search" element={<FilterTopicContainer />} />
               <Route path="/shorts" element={<Reels />} />
               <Route path="/message" element={<Message />} />
               <Route path="/topic/:topicId" element={<TopicDetail />} />
