@@ -52,11 +52,11 @@ const NotificationContainer = () => {
         <button className="btn_all hover:scale-105 text-[#545454]">
           <FaBell size={iconSize} style={iconStyle} />
         </button>
-        {unreadNotificatons.length > 0 && (
+        {unreadNotificatons.length > 0 && ( 
           <div className="absolute top-0 -right-1 w-[20px] h-[20px] flex items-center justify-center bg-[#f63c3c] text-[white] rounded-full">
             {unreadNotificatons.length}
           </div>
-        )}
+        )} 
       </div>
     </Dropdown>
   );

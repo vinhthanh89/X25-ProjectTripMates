@@ -147,7 +147,7 @@ const TopicDetail = () => {
           <div className="col-span-3 gap-2 text-[#303030]">
             <div className="flex items-center py-[5px]">
               <span className="text-base text-[#5143d9] font-bold">
-                TripMates :{" "}
+                TripMates :
               </span>
               <div>
                 <UserJoinTripAvatarGroup topicDetail={topicDetail} />
@@ -179,14 +179,14 @@ const TopicDetail = () => {
               )}
               <span>{locationName}</span>
             </p>
-            <div className="flex justify-between text-base pt-[10px]">
+            <div className="flex gap-3 text-base pt-[10px]">
               <p>
                 <span className="text-[#5143d9] font-bold">From: </span>
                 {convertedStartDate}
               </p>
               <p>
                 <span className="text-[#5143d9] font-bold">Until: </span>
-                {convertedEndDate}
+                {convertedEndDate ? (convertedEndDate) : (<span>On going</span>)}
               </p>
             </div>
           </div>

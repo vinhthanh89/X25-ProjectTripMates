@@ -42,7 +42,7 @@ const Topic = ({ topic }) => {
               />
             </div>
             <div>
-              <p className="text-base font-medium">{userCreated.fullName}</p>
+              <p className="text-base font-bold">{userCreated.fullName}</p>
               <div className="flex items-center gap-1 text-gray-400 text-xs">
                 <MdPlace size={15} />
                 <p>{locationName}</p>
