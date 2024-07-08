@@ -24,12 +24,14 @@ const Topic = ({ topic }) => {
 
   return (
     <div className="flex flex-col gap-[0.5rem] rounded-lg bg-white px-[1rem] py-[1.5rem] ">
-      <Link to={`/topic/${_id}`}>
-        <img
-          src={thumbnail ? thumbnail : locationThumbnail}
-          alt={locationName}
-          className="rounded-[8px] cursor-pointer w-full h-[200px] object-cover"
-        />
+        <Link to={`/topic/${_id}`}>
+          <img
+            src={thumbnail ? thumbnail : locationThumbnail}
+            alt={locationName}
+            className="rounded-[8px] cursor-pointer w-full h-[200px] object-cover"
+          />
+        </Link>
+
         <div className="flex justify-between pt-[1rem]">
           <Link
             to={`/user/${userCreated._id}`}
@@ -58,7 +60,6 @@ const Topic = ({ topic }) => {
             />
           </div>
         </div>
-      </Link>
       {/* <UserJoinTripAvatarGroup topicDetail={topic} /> */}
       {/* <div className="avatar-group -space-x-3">
         <div className="avatar w-9 border-white">
