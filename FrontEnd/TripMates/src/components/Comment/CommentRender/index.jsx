@@ -7,9 +7,9 @@ import CommentDisplay from "../CommentDisplay";
 const CommentRender = ({ usersComment }) => {
 
   useEffect(() => {
-    scroll.scrollToBottom({
+    scroll.scrollToTop({
       containerId: "comments-container",
-      duration: 100,
+      duration: 200,
       delay: 0,
       smooth: true,
       isDynamic: true,
@@ -22,7 +22,7 @@ const CommentRender = ({ usersComment }) => {
         <CommentDisplay userComment={userComment} />
       </div>
     );
-  });
+  }).reverse();
 
   return (
     <div

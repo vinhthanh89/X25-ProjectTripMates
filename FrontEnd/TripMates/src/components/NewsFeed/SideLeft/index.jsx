@@ -116,7 +116,7 @@ const LeftSideBar = () => {
                 onClick={() => handleButtonClick("/message", "message")}
               >
                 <AiFillMessage size={iconSize} style={iconStyle} />
-                <p>Messages</p>
+                <p className="flex gap-2">Messages <span className="w-8 rounded-full bg-[red]">1</span></p>
               </button>
             </div>
           </div>

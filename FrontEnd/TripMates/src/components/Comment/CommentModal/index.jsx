@@ -7,22 +7,21 @@ import { getUsersComment } from "../../../services/comment";
 import CommentRender from "../CommentRender";
 import CommentTextArea from "../CommentTextArea";
 
-// eslint-disable-next-line react/prop-types
 const CommentModal = ({ iconSize, iconStyle, topic }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [usersComment, setUsersComment] = useState([]);
 
   useEffect(() => {
-      const fetchDataUsersComment = async () => {
-        try {
-          const response = await getUsersComment(topic._id);
-          setUsersComment(response.data.usersComment);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchDataUsersComment();
-    }, [topic._id]);
+    const fetchDataUsersComment = async () => {
+      try {
+        const response = await getUsersComment(topic._id);
+        setUsersComment(response.data.usersComment);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDataUsersComment();
+  }, [topic._id]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -33,21 +32,30 @@ const CommentModal = ({ iconSize, iconStyle, topic }) => {
   };
 
   const addUserComment = (newUsersComment) => {
-    setUsersComment(newUsersComment)
-  }
+    setUsersComment(newUsersComment);
+  };
+
+  const numberOfComment = usersComment.length;
+  const displayNumberOfComment =
+    numberOfComment > 100 ? "100+" : numberOfComment;
 
   return (
-    <div className="flex items-center gap-3">
-      <button className="flex items-center gap-3" onClick={showModal}>
+    <div className="flex items-center">
+      <button className="flex items-center gap-1" onClick={showModal}>
         <BiSolidMessageSquareDetail
           size={iconSize}
           style={iconStyle}
           className="hover:text-[#5143d9]"
         />
-        <p className="w-2">{usersComment.length}</p>
+        <p className="w-6">{displayNumberOfComment}</p>
       </button>
       <Modal
-        title="Comments"
+        title={
+          <div className="flex gap-1">
+            Comment
+            <span>({displayNumberOfComment})</span>
+          </div>
+        }
         open={isModalOpen}
         onCancel={handleCancel}
         footer={null}

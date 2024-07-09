@@ -147,7 +147,7 @@ const TopicDetail = () => {
           <div className="col-span-3 gap-2 text-[#303030]">
             <div className="flex items-center py-[5px]">
               <span className="text-base text-[#5143d9] font-bold">
-                TripMates :
+                TripMates:
               </span>
               <div>
                 <UserJoinTripAvatarGroup topicDetail={topicDetail} />
@@ -155,14 +155,14 @@ const TopicDetail = () => {
             </div>
             <p>
               <span className="text-base text-[#5143d9] font-bold">
-                Description :{" "}
+                Description:
               </span>{" "}
               {description}
             </p>
-            <p className="text-base font-bold pt-[10px]">
-              <span className="text-[#5143d9]">Location : </span>
+            <p className="text-base pt-[10px]">
+              <span className="text-[#5143d9] font-bold">Location: </span>
               {continent ? (
-                <span>
+                <span >
                   <a>{continent}</a>
                   <span> &gt;&gt; </span>
                 </span>
@@ -177,7 +177,7 @@ const TopicDetail = () => {
               ) : (
                 <></>
               )}
-              <span>{locationName}</span>
+              <span >{locationName}</span>
             </p>
             <div className="flex gap-3 text-base pt-[10px]">
               <p>
@@ -186,7 +186,7 @@ const TopicDetail = () => {
               </p>
               <p>
                 <span className="text-[#5143d9] font-bold">Until: </span>
-                {convertedEndDate ? (convertedEndDate) : (<span>On going</span>)}
+                {convertedEndDate ? convertedEndDate : <span>On going</span>}
               </p>
             </div>
           </div>
@@ -202,7 +202,8 @@ const TopicDetail = () => {
         />
         <div className="react">
           <h1 className="text-md">
-            <span className="text-red-500 font-bold">100</span> people loved this Topic
+            <span className="text-red-500 font-bold">100</span> people loved
+            this Topic
           </h1>
         </div>
         <RenderComment />

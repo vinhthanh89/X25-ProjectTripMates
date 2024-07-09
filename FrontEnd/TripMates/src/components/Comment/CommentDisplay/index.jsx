@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 
   const CommentDisplay = ({ userComment }) => {
       const [isExpanded, setIsExpanded] = useState(false);
       const [isOverflowing, setIsOverflowing] = useState(false);
       const commentRef = useRef(null);
-
+      const navigate = useNavigate()
       const toggleExpanded = () => {
         setIsExpanded(!isExpanded);
       };
@@ -24,30 +25,45 @@ import { useEffect, useRef, useState } from "react";
     const { userId, comment } = userComment;
 
     return (
-      <div className="flex">
-        <div className="w-[40px]">
+      <div className="flex gap-2">
+        <div
+          className="cursor-pointer"
+          onClick={() => navigate(`/user/${userId._id}`)}
+        >
           <img
-            className="w-[30px] h-[30px] rounded-full object-cover"
+            className="w-[35px] h-[35px] rounded-full object-cover"
             src={userId.avatar}
             alt=""
           />
         </div>
         <div className="flex-1">
-          <div className="py-[8px] px-[10px] inline-block rounded-[8px] bg-[#d9d9d9] bg-opacity-60">
+          <div className="py-[8px] px-[10px] inline-block rounded-[8px] bg-[#dfdfdf] bg-opacity-60">
             <div className="font-black cursor-pointer">{userId.fullName}</div>
-            <div ref={commentRef} className={`font-normal text-[15px] ${isExpanded ? '' : 'line-clamp-3'} `}>{comment}</div>
+            <div
+              ref={commentRef}
+              className={`font-normal text-[15px] ${
+                isExpanded ? "" : "line-clamp-3"
+              } `}
+            >
+              {comment}
+            </div>
             {isOverflowing && !isExpanded && (
-            <div className="cursor-pointer text-blue-500 float-right" onClick={toggleExpanded}>
-              See more
-            </div>
-          )}
-          {isExpanded && (
-            <div className="cursor-pointer text-blue-500 float-right" onClick={toggleExpanded}>
-              Show less
-            </div>
-          )}
+              <div
+                className="cursor-pointer text-blue-500 float-right"
+                onClick={toggleExpanded}
+              >
+                See more
+              </div>
+            )}
+            {isExpanded && (
+              <div
+                className="cursor-pointer text-blue-500 float-right"
+                onClick={toggleExpanded}
+              >
+                Show less
+              </div>
+            )}
           </div>
-          
         </div>
       </div>
     );
