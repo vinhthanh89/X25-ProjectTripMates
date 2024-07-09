@@ -46,7 +46,7 @@ const Header = () => {
           <h1 className="text-2xl font-semibold text-[#303030]">TripMates</h1>
         </button>
         <div className="col-span-3 flex justify-center gap-[25px]">
-          <SearchBar />
+       <SearchBar />
           <button
             className="font-bold bg-[#5143d9] text-white p-3 rounded-xl"
             onClick={showDrawer}

@@ -41,3 +41,7 @@ export const uploadTopicThumbnail = (topicId , formData) => {
 export const filterTopicByContinent = (continentQuery) => {
     return axiosAuthInstance.get(`/api/topic/filter-topic?continent=${continentQuery}`)
 }
+
+export const filterTopicByTitle = (titleQuery) => {
+    return axiosAuthInstance.get(`/api/topic/filter-topic-by-title?keyword=${titleQuery}`)
+}

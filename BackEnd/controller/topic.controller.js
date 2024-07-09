@@ -90,13 +90,7 @@ export const fetchDataTopics = async (req, res) => {
     const findUserFollow = await UserFollowing.findOne({ userId: userLogin });
 
     if (!findUserFollow) {
-      const usersFollowing = [];
-
-      const topics = await Topic.find({
-        $and: [{ isPrivate: false }, { userCreated: { $nin: usersFollowing } }],
-      }).populate(
-        "userCreated location userJoinTrip.userId"
-      );
+      const topics = await Topic.find({isPrivate : false}).populate("userCreated location userJoinTrip.userId");
 
       return res.status(200).json({
         message: "success",
@@ -110,7 +104,10 @@ export const fetchDataTopics = async (req, res) => {
       usersFollowing.push(userLogin);
 
       const topics = await Topic.find({
-        $and: [{ isPrivate: false }, { userCreated: { $nin: usersFollowing } }],
+        $or: [
+          { isPrivate: false },
+          { isPrivate: true, userCreated: { $in: usersFollowing } },
+        ],
       }).populate("userCreated location");
 
       return res.status(200).json({
