@@ -19,7 +19,6 @@ const Topic = ({ topic }) => {
     title,
     userCreated,
     location,
-    userJoinTrip,
   } = topic;
   const { locationName, continent, country, locationThumbnail } = location;
 

@@ -12,7 +12,7 @@ import {
   uploadTopicThumbnail,
 } from "../controller/topic.controller.js";
 import upload from "../middleware/upload.js";
-import { filterTopicByContinent } from "../controller/filterTopic.controller.js";
+import { filterTopicByContinent, filterTopicByTitle } from "../controller/filterTopic.controller.js";
 
 const router = Router();
 
@@ -30,5 +30,6 @@ router.put(
   uploadTopicThumbnail
 );
 router.get('/filter-topic' , filterTopicByContinent)
+router.get('/filter-topic-by-title' , filterTopicByTitle)
 
 export default router;

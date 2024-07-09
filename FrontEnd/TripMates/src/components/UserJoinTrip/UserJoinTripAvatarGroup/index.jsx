@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 import { Avatar, Modal } from "antd";
 import { useState } from "react";
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router";
 
 const UserJoinTripAvatarGroup = ({ topicDetail }) => {
-  const navigate = useNavigate()
-  //! Modal show user joined trip
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -29,22 +28,19 @@ const UserJoinTripAvatarGroup = ({ topicDetail }) => {
   }
 
   const renderUserJoinTripAvatar = userJoinTripFilter.map((user) => (
-    <div key={user.userId._id}>
-      <Avatar size={40} src={user.userId.avatar} />
-    </div>
+    <Avatar key={user.userId._id} size={40} src={user.userId.avatar} />
   ));
 
   return (
-    <div
-      className="inline-block ml-[5px] cursor-pointer"
-      onClick={showModal}
-    >
-      <Avatar.Group
-        maxCount={5}
-        maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
-      >
-        {renderUserJoinTripAvatar}
-      </Avatar.Group>
+    <>
+      <div className="inline-block ml-[5px] cursor-pointer" onClick={showModal}>
+        <Avatar.Group
+          maxCount={5}
+          maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+        >
+          {renderUserJoinTripAvatar}
+        </Avatar.Group>
+      </div>
       <Modal
         title={
           <div className="flex gap-1">
@@ -55,6 +51,7 @@ const UserJoinTripAvatarGroup = ({ topicDetail }) => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        footer={null}
       >
         <div className="grid grid-cols-2 gap-2">
           {userJoinTrip.map((user) => (
@@ -69,7 +66,7 @@ const UserJoinTripAvatarGroup = ({ topicDetail }) => {
           ))}
         </div>
       </Modal>
-    </div>
+    </>
   );
 };
 
