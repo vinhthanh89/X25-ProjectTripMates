@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import { MdPlace } from "react-icons/md";
-
 import { Link } from "react-router-dom";
 import CommentModal from "../../Comment/CommentModal";
 import TopicReact from "./TopicReact";
+import TopicSaved from "./TopicSaved";
 
 const Topic = ({ topic }) => {
+ 
   const iconSize = 25;
   const iconStyle = {
     background: "transparent",
@@ -22,6 +23,8 @@ const Topic = ({ topic }) => {
   } = topic;
   const { locationName, continent, country, locationThumbnail } = location;
 
+ 
+  
   return (
     <div className="flex flex-col gap-[0.5rem] rounded-lg bg-white px-[1rem] py-[1.5rem] ">
       <Link to={`/topic/${_id}`}>
@@ -43,9 +46,13 @@ const Topic = ({ topic }) => {
             </div>
             <div>
               <p className="text-base font-bold">{userCreated.fullName}</p>
-              <div className="flex items-center gap-1 text-gray-400 text-xs">
+              <div className="flex items-center text-gray-400 text-xs">
                 <MdPlace size={15} />
-                <p>{locationName}</p>
+                <div className="flex gap-1">
+                  <p>{locationName}</p>
+                  <span>|</span>
+                  <p>1 day ago</p>
+                </div>
               </div>
             </div>
           </Link>
@@ -104,6 +111,7 @@ const Topic = ({ topic }) => {
           >
             {description}
           </p>
+          <TopicSaved iconSize={iconSize} iconStyle={iconStyle} />
         </div>
       </div>
     </div>

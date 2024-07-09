@@ -6,6 +6,7 @@ import Followers from "../../Follow/Followers";
 import MoadlChangeAvatar from "../../UserProfile/ModalChangeAvatar";
 import UserCreatedTopic from "../../UserProfile/UserCreatedTopic";
 import Following from "../../Follow/Following";
+import UserSavedTopic from "../../UserProfile/UserSavedTopic";
 
 const UserProfile = () => {
   const urlParam = useParams();
@@ -79,7 +80,15 @@ const UserProfile = () => {
                   showComponent === "topic" ? "before:w-full" : ""
                 } before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full`}
               >
-                Topics
+                My topics
+              </button>
+              <button
+                onClick={() => setShowComponent("saved")}
+                className={`relative px-[10px] py-[5px] ${
+                  showComponent === "saved" ? "before:w-full" : ""
+                } before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full`}
+              >
+                Saved topics
               </button>
               <button
                 onClick={() => setShowComponent("follower")}
@@ -101,6 +110,9 @@ const UserProfile = () => {
             <div className="px-[15px] overflow-hidden max-h-[600px] overflow-y-auto">
               {showComponent === "topic" && (
                 <UserCreatedTopic userId={urlParam.userId} />
+              )}
+              {showComponent === "saved" && (
+                <UserSavedTopic userProfile={userProfile} />
               )}
               {showComponent === "follower" && (
                 <Followers userProfile={userProfile} />

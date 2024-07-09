@@ -2,11 +2,19 @@
 import { useState } from "react";
 import RenderPickUserTag from "../RenderPickUserTag";
 import RenderSearchUserJoinTrip from "../RenderSearchUserJoinTrip";
+import toast from "react-hot-toast";
 
-import { addInviteNotification, addNotification } from "../../../services/notification";
+import {
+  addInviteNotification,
+  addNotification,
+} from "../../../services/notification";
 import { addUserJoinTrip } from "../../../services/userJoinTrip";
 
-const InviteUserJoinTripContainer = ({ handleCancel, topicId , handleSetTopicDetail }) => {
+const InviteUserJoinTripContainer = ({
+  handleCancel,
+  topicId,
+  handleSetTopicDetail,
+}) => {
   const [searchInput, setSearchInput] = useState("");
   const [pickedUser, setPickedUser] = useState([]);
 
@@ -32,9 +40,10 @@ const InviteUserJoinTripContainer = ({ handleCancel, topicId , handleSetTopicDet
   const handleAddUserJoinTrip = async () => {
     try {
       const response = await addUserJoinTrip(topicId, pickedUser);
-      await addInviteNotification(topicId , pickedUser)
-      handleSetTopicDetail(response.data.findTopic)
+      await addInviteNotification(topicId, pickedUser);
+      handleSetTopicDetail(response.data.findTopic);
       setPickedUser([]);
+      toast.success("User invited!")
       handleCancel();
     } catch (error) {
       console.log(error);
