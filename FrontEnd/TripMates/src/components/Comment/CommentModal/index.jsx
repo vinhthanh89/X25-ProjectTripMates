@@ -21,7 +21,7 @@ const CommentModal = ({ iconSize, iconStyle, topic }) => {
       }
     };
     fetchDataUsersComment();
-  }, [topic._id]);
+  }, [topic._id , usersComment]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -64,7 +64,7 @@ const CommentModal = ({ iconSize, iconStyle, topic }) => {
         }}
       >
         <div className="comment-container">
-          <CommentRender usersComment={usersComment} />
+          <CommentRender usersComment={usersComment} topicId={topic._id} />
           <CommentTextArea topic={topic} addUserComment={addUserComment} />
         </div>
       </Modal>

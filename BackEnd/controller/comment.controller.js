@@ -12,6 +12,7 @@ export const getCommentByTopicId = async (req, res) => {
     if (!commentByTopicId) {
       return res.status(200).json({
         message: "Get data comment success",
+        topicIdComment: topicId,
         usersComment: [],
       });
     }
@@ -19,6 +20,7 @@ export const getCommentByTopicId = async (req, res) => {
     if (commentByTopicId) {
       return res.status(200).json({
         message: "Get data comment success",
+        topicIdComment: topicId,
         usersComment: commentByTopicId.usersComment,
       });
     }
@@ -61,6 +63,39 @@ export const addComment = async (req, res) => {
         message: "user comment success",
         usersComment: commentsTopic.usersComment,
       });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: error,
+    });
+  }
+};
+
+export const deleteComment = async (req, res) => {
+  try {
+    const topicId = req.params.topicId;
+    const commentId = req.query.commentId;
+
+    const findTopicComment = await Comment.findOne({ topicIdComment: topicId });
+
+    if (!findTopicComment) {
+      return res.status(404).json({
+        message: "TopicId Not Found",
+      });
+    }
+
+    if (findTopicComment) {
+      const DeletedComments = await Comment.findOneAndUpdate(
+        { topicIdComment: topicId },
+        { $pull: { usersComment: { _id: commentId } } },
+        {new : true}
+      ).populate("usersComment usersComment.userId");
+      
+      return res.status(200).json({
+        message : "Delete success",
+        usersComment : DeletedComments
+      })
     }
   } catch (error) {
     console.log(error);
