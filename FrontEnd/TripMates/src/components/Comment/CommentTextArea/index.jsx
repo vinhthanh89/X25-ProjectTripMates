@@ -6,38 +6,43 @@ import { addComment } from "../../../services/comment";
 import { addNotification } from "../../../services/notification";
 import EmojiPicker from "emoji-picker-react";
 import { BsEmojiSmile } from "react-icons/bs";
+import { Button } from "antd";
 
 // eslint-disable-next-line react/prop-types
 const CommentTextArea = ({ topic, addUserComment }) => {
   const userLogin = useSelector((state) => state.user.user);
+  const [isLoading , setIsLoading] = useState(false)
   const [commentText, setCommentText] = useState("");
   const [openEmoji, setOpenEmoji] = useState(false);
+
+  const { userCreated } = topic;
 
   const handleAddComment = async () => {
     if (commentText.trim() === "") {
       return;
     }
     try {
-      await addNotification(topic._id, { interaction: "comment" });
+      setIsLoading(true)
+      if (userLogin._id !== userCreated._id) {
+        await addNotification(topic._id, { interaction: "comment" });
+      }
       const response = await addComment(topic._id, { comment: commentText });
-      console.log(response);
       addUserComment(response.data.usersComment);
       setCommentText("");
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false)
     }
   };
 
-
-    const handleEmoji = (e) => {
-      setCommentText((prev) => prev + e.emoji);
-      setOpenEmoji(false);
-    };
+  const handleEmoji = (e) => {
+    setCommentText((prev) => prev + e.emoji);
+    setOpenEmoji(false);
+  };
   return (
     <div className="flex flex-col gap-3 w-full border-2 rounded-[8px] p-4">
-      <div
-        className="flex items-center gap-2" 
-      >
+      <div className="flex items-center gap-2">
         <img
           className="w-[35px] h-[35px] rounded-full object-cover"
           src={userLogin.avatar}
@@ -67,7 +72,8 @@ const CommentTextArea = ({ topic, addUserComment }) => {
             height={300}
           />
         </div>
-        <button
+        <Button
+        loading={isLoading}
           onClick={handleAddComment}
           className={`bg-[#5143d9] text-white font-bold  text-[16px] rounded-xl py-1 px-2 ${
             commentText.trim() === "" ? "opacity-50 cursor-not-allowed" : ""
@@ -75,7 +81,7 @@ const CommentTextArea = ({ topic, addUserComment }) => {
           disabled={commentText.trim() === ""}
         >
           Send
-        </button>
+        </Button>
       </div>
     </div>
   );

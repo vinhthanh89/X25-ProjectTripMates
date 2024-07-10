@@ -7,3 +7,7 @@ export const getUsersComment = (topicId) => {
 export const addComment = (topicId , comment) => {
     return axiosAuthInstance.put(`/api/comment/add-comment/${topicId}` , comment)
 }
+
+export const deleteComment = (topicId , commentId) => {
+    return axiosAuthInstance.delete(`/api/comment/delete-comment/${topicId}?commentId=${commentId}`)
+}
