@@ -4,7 +4,7 @@ import { animateScroll as scroll } from "react-scroll";
 
 import CommentDisplay from "../CommentDisplay";
 
-const CommentRender = ({ usersComment , topicId }) => {
+const CommentRender = ({ usersComment , topicId , handleSetUsersComment }) => {
 
   
   useEffect(() => {
@@ -20,7 +20,7 @@ const CommentRender = ({ usersComment , topicId }) => {
   const renderComments = usersComment.map((userComment) => {
     return (
       <div key={userComment._id}>
-        <CommentDisplay userComment={userComment} topicId={topicId} />
+        <CommentDisplay userComment={userComment} topicId={topicId} handleSetUsersComment={handleSetUsersComment} />
       </div>
     );
   }).reverse();
