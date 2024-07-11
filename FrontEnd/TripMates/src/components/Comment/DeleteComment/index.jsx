@@ -4,7 +4,7 @@ import { Button, Modal } from "antd";
 import { useState } from "react";
 import { deleteComment } from "../../../services/comment";
 
-const DeleteComment = ({ userComment, topicId }) => {
+const DeleteComment = ({ userComment, topicId , handleSetUsersComment }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const showModal = () => {
@@ -14,7 +14,8 @@ const DeleteComment = ({ userComment, topicId }) => {
   const handleConfirmDelete = async () => {
     try {
       setLoading(true);
-      await deleteComment(topicId, userComment._id);
+      const response = await deleteComment(topicId, userComment._id);
+      handleSetUsersComment(response.data.usersComment)
     } catch (error) {
       console.log(error);
     } finally {

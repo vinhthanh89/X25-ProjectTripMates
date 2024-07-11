@@ -4,11 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import CommentThreeDotsDropDown from "../CommentThreeDotsDropDown";
+import CommentEditor from "../CommentEditor";
 
-const CommentDisplay = ({ userComment , topicId }) => {
+const CommentDisplay = ({ userComment, topicId, handleSetUsersComment }) => {
   const userLogin = useSelector((state) => state.user.user);
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+
   const commentRef = useRef(null);
   const navigate = useNavigate();
   const toggleExpanded = () => {
@@ -28,6 +32,10 @@ const CommentDisplay = ({ userComment , topicId }) => {
     }
   }, []);
 
+  const handSetIsEdit = () => {
+    setIsEdit(!isEdit);
+  };
+
   const { userId, comment } = userComment;
 
   return (
@@ -41,43 +49,58 @@ const CommentDisplay = ({ userComment , topicId }) => {
           src={userId.avatar}
         />
       </div>
-      <div>
-        <div className="py-[8px] px-[10px] inline-block rounded-[8px] bg-[#dfdfdf] bg-opacity-60">
-          <div
-            onClick={() => navigate(`/user/${userId._id}`)}
-            className="font-black cursor-pointer"
-          >
-            {userId.fullName}
-          </div>
-          <div
-            ref={commentRef}
-            className={`font-normal text-[15px] ${
-              isExpanded ? "" : "line-clamp-3"
-            } `}
-          >
-            {comment}
-          </div>
-          {isOverflowing && !isExpanded && (
+
+      {isEdit ? (
+        <CommentEditor
+          userComment={userComment}
+          topicId={topicId}
+          handleSetUsersComment={handleSetUsersComment}
+          handSetIsEdit={handSetIsEdit}
+        />
+      ) : (
+        <div className="flex gap-[5px]">
+          <div className="py-[8px] px-[10px] inline-block rounded-[8px] bg-[#dfdfdf] bg-opacity-60">
             <div
-              className="cursor-pointer text-blue-500 float-right"
-              onClick={toggleExpanded}
+              onClick={() => navigate(`/user/${userId._id}`)}
+              className="font-black cursor-pointer"
             >
-              See more
+              {userId.fullName}
+            </div>
+            <div
+              ref={commentRef}
+              className={`font-normal text-[15px] ${
+                isExpanded ? "" : "line-clamp-3"
+              } `}
+            >
+              {comment}
+            </div>
+            {isOverflowing && !isExpanded && (
+              <div
+                className="cursor-pointer text-blue-500 float-right"
+                onClick={toggleExpanded}
+              >
+                See more
+              </div>
+            )}
+            {isExpanded && (
+              <div
+                className="cursor-pointer text-blue-500 float-right"
+                onClick={toggleExpanded}
+              >
+                Show less
+              </div>
+            )}
+          </div>
+          {userLogin._id === userId._id && (
+            <div className="my-auto inline-block invisible cursor-pointer group-hover:visible">
+              <CommentThreeDotsDropDown
+                handSetIsEdit={handSetIsEdit}
+                handleSetUsersComment={handleSetUsersComment}
+                userComment={userComment}
+                topicId={topicId}
+              />
             </div>
           )}
-          {isExpanded && (
-            <div
-              className="cursor-pointer text-blue-500 float-right"
-              onClick={toggleExpanded}
-            >
-              Show less
-            </div>
-          )}
-        </div>
-      </div>
-      {userLogin._id === userId._id && (
-        <div className="my-auto invisible cursor-pointer group-hover:visible">
-          <CommentThreeDotsDropDown userComment={userComment} topicId={topicId} />
         </div>
       )}
     </div>

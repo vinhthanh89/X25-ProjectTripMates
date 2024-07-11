@@ -94,7 +94,7 @@ export const deleteComment = async (req, res) => {
       
       return res.status(200).json({
         message : "Delete success",
-        usersComment : DeletedComments
+        usersComment : DeletedComments.usersComment
       })
     }
   } catch (error) {
@@ -104,3 +104,40 @@ export const deleteComment = async (req, res) => {
     });
   }
 };
+
+export const editComment = async (req , res) => {
+  try {
+    const topicId = req.params.topicId
+    const body = req.body
+
+    const {editedComment , commentId} = body
+
+    const findTopicComment = await Comment.findOne({topicIdComment : topicId})
+    if(!findTopicComment){
+      return res.status(404).json({
+        message : "Topic Comment Not Found"
+      })
+    }
+
+    if(findTopicComment){
+      const EditedComment = await Comment.findOneAndUpdate(
+        {topicIdComment : topicId , 'usersComment._id' : commentId},
+        { 
+          $set: { 'usersComment.$.comment': editedComment } 
+        },
+        { new: true }
+      ).populate("usersComment usersComment.userId")
+
+      return res.status(200).json({
+        message : "Edit comment success",
+        usersComment : EditedComment.usersComment
+      })
+    }
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message : error
+    })
+  }
+}

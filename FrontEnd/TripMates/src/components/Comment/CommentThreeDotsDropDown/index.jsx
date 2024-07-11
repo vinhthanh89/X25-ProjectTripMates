@@ -3,14 +3,14 @@ import { Dropdown } from "antd";
 import { BsThreeDots } from "react-icons/bs";
 import DeleteComment from "../DeleteComment";
 
-const CommentThreeDotsDropDown = ({ userComment, topicId }) => {
+const CommentThreeDotsDropDown = ({ userComment, topicId , handleSetUsersComment , handSetIsEdit }) => {
   const items = [
     {
-      label: <span>Edit Comment</span>,
+      label: <span onClick={handSetIsEdit}>Edit Comment</span>,
       key: "0",
     },
     {
-      label: <DeleteComment userComment={userComment} topicId={topicId} />,
+      label: <DeleteComment userComment={userComment} topicId={topicId} handleSetUsersComment={handleSetUsersComment} />,
       key: "1",
     },
   ];
