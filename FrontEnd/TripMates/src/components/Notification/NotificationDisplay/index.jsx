@@ -1,8 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { updateIsRead } from "../../../services/notification";
 import {
+  getUserJoinTripStatus,
   handleUserAcceptJoinTrip,
   handleUserDeclineJoinTrip,
 } from "../../../services/userJoinTrip";
@@ -12,15 +14,28 @@ const NotificationDisplay = ({ notify, handleSetNotify }) => {
   const userLogin = useSelector((state) => state.user.user);
   const navigate = useNavigate();
   const [isRead, setIsRead] = useState(notify.isRead);
-  const [isPending, setIsPending] = useState(true);
-  const { interactUserId, topicId } = notify;
+  const [isPending, setIsPending] = useState('pending');
+  const { interactUserId, topicId, interaction } = notify;
 
-  const handleClickItems = async () => {
+  useEffect(() => {
+    const checkUserJoinTripstatus = async () => {
+      try {
+        const response = await getUserJoinTripStatus(topicId._id , userLogin._id)
+        console.log(response);
+        setIsPending(response.data.userJoinTripStatus)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    checkUserJoinTripstatus()
+  } , [topicId , userLogin])
+
+  const handleSetIsRead = async () => {
     try {
       const response = await updateIsRead(notify._id);
       handleSetNotify(response.data.notifications);
       setIsRead(true);
-      navigate(`/topic/${notify.topicId}`);
+      navigate(`/topic/${topicId._id}`);
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +47,7 @@ const NotificationDisplay = ({ notify, handleSetNotify }) => {
         userId: userLogin._id,
       });
       console.log(response);
-      setIsPending(false)
+      setIsPending(false);
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +59,7 @@ const NotificationDisplay = ({ notify, handleSetNotify }) => {
         userId: userLogin._id,
       });
       console.log(response);
-      setIsPending(false)
+      setIsPending(false);
     } catch (error) {
       console.log(error);
     }
@@ -53,7 +68,7 @@ const NotificationDisplay = ({ notify, handleSetNotify }) => {
   return (
     <>
       <div
-        onClick={handleClickItems}
+        onClick={handleSetIsRead}
         className={`w-[400px] p-[10px] flex items-center ${
           isRead ? "" : "bg-[lightgray] bg-opacity-55"
         }`}
@@ -65,41 +80,29 @@ const NotificationDisplay = ({ notify, handleSetNotify }) => {
           />
         </div>
         <div className="flex-1">
-          <p>
-            {(notify.interaction === "comment" && (
-              <>
-                <span className="font-bold text-[16px]">
-                  {interactUserId?.fullName}
-                </span>
+          <div>
+            <span className="font-bold text-[16px]">
+              {interactUserId?.fullName}
+            </span>
+            {(interaction === "react" && (
+              <span className="text-[16px]"> just like your topic </span>
+            )) ||
+              (interaction === "comment" && (
                 <span className="text-[16px]">
                   {" "}
                   just commented on your topic{" "}
                 </span>
-              </>
-            )) ||
-              (notify.interaction === "react" && (
-                <>
-                  <span className="font-bold text-[16px]">
-                    {interactUserId?.fullName}
-                  </span>
-                  <span className="text-[16px]"> just like your topic </span>
-                </>
               )) ||
-              (notify.interaction === "invite" && (
-                <>
-                  <span className="font-bold text-[16px]">
-                    {interactUserId?.fullName}
-                  </span>
-                  <span className="text-[16px]">
-                    {" "}
-                    invite you join the trip{" "}
-                  </span>
-                </>
+              (interaction === "invite" && (
+                <span className="text-[16px]"> invite you join the trip </span>
               ))}
-          </p>
+            <span className="text-[16px] font-semibold">
+              "{topicId?.title}"
+            </span>
+          </div>
         </div>
       </div>
-      {notify.interaction === "invite" && isPending && (
+      {interaction === "invite" && isPending === 'pending' && (
         <div className="flex justify-end gap-[10px] py-[5px]">
           <button
             onClick={handleAccpet}

@@ -1,4 +1,4 @@
-import { Dropdown, Menu } from "antd";
+import { Dropdown } from "antd";
 import { useEffect, useState } from "react";
 import { FaBell } from "react-icons/fa";
 import { getNotification } from "../../../services/notification";
@@ -27,14 +27,7 @@ const NotificationContainer = () => {
     const key = notify._id;
     return {
       key: key,
-      label: (
-        <div>
-          <NotificationDisplay
-            notify={notify}
-            handleSetNotify={handleSetNotify}
-          />
-        </div>
-      ),
+      label: <NotificationDisplay notify={notify} handleSetNotify={handleSetNotify} />,
     };
   });
 
@@ -47,15 +40,13 @@ const NotificationContainer = () => {
 
   return (
     <Dropdown
-      overlay={
-        <Menu
-          items={notificationsMenu.reverse()}
-          style={{
-            maxHeight: "320px",
-            overflowY: "auto",
-          }}
-        />
-      }
+      menu={{
+        items: notificationsMenu.reverse(),
+        style: {
+          maxHeight: "320px",
+          overflowY: "auto",
+        },
+      }}
       trigger={["click"]}
       placement="bottomRight"
     >

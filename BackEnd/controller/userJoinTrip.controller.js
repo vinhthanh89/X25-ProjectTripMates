@@ -108,3 +108,33 @@ export const userDeclineJoinTrip = async (req , res) => {
     })
   }
 }
+
+export const getUserJoinTripStatus = async (req , res) => {
+  try {
+    const topicId = req.params.topicId
+    const userJoinTripId = req.query.userJoinTripId
+
+    const findTopic = await Topic.findById(topicId)
+    if(!findTopic){
+      return res.status(404).json({
+        message : "TopicId Not Found"
+      })
+    }
+
+    if(findTopic){
+      const {userJoinTrip} = findTopic
+      const findUserJoinTrip = userJoinTrip.find(obj => obj.userId.equals(userJoinTripId))
+
+      // console.log(findUserJoinTrip);
+      return res.status(200).json({
+        userJoinTripStatus : findUserJoinTrip?.status || null
+      })
+    }
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message : error
+    })
+  }
+}

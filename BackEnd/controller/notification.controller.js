@@ -7,7 +7,7 @@ export const getNotificationByUserId = async (req, res) => {
 
     const findUserNotification = await Notification.findOne({
       userId: userLogin,
-    }).populate("notifications.interactUserId");
+    }).populate("notifications.interactUserId notifications.topicId");
 
     if (!findUserNotification) {
       return res.status(200).json({
