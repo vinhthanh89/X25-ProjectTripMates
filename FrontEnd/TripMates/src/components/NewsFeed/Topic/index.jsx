@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import CommentModal from "../../Comment/CommentModal";
 import TopicReact from "./TopicReact";
 import TopicSaved from "./TopicSaved";
+import { calculateDifferenceDays } from "../../../utils/calculateDifferenceDays";
 
 const Topic = ({ topic }) => {
- 
   const iconSize = 25;
   const iconStyle = {
     background: "transparent",
@@ -19,53 +19,61 @@ const Topic = ({ topic }) => {
     title,
     userCreated,
     location,
+    createdAt,
   } = topic;
   const { locationName, continent, country, locationThumbnail } = location;
 
- 
-  
+  const daysDifference = calculateDifferenceDays(createdAt)
+  // const createDate = new Date(createdAt);
+  // const currentDate = new Date();
+
+  // const timeDifference = currentDate - createDate;
+
+  // const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  // const monthDifference = Math.floor(daysDifference / 30);
+
   return (
     <div className="flex flex-col gap-[0.5rem] rounded-lg bg-white px-[1rem] py-[1.5rem] ">
-        <Link to={`/topic/${_id}`}>
-          <img
-            src={thumbnail ? thumbnail : locationThumbnail}
-            alt={locationName}
-            className="rounded-[8px] cursor-pointer w-full h-[200px] object-cover"
-          />
-        </Link>
+      <Link to={`/topic/${_id}`}>
+        <img
+          src={thumbnail ? thumbnail : locationThumbnail}
+          alt={locationName}
+          className="rounded-[8px] cursor-pointer w-full h-[200px] object-cover"
+        />
+      </Link>
 
-        <div className="flex justify-between pt-[1rem]">
-          <Link
-            to={`/user/${userCreated._id}`}
-            className="user flex items-center gap-3 cursor-pointer"
-          >
-            <div className="w-[3rem] h-[3rem]">
-              <img
-                src={userCreated.avatar}
-                className="w-full h-full object-cover rounded-full border"
-              />
-            </div>
-            <div>
-              <p className="text-base font-bold">{userCreated.fullName}</p>
-              <div className="flex items-center text-gray-400 text-xs">
-                <MdPlace size={15} />
-                <div className="flex gap-1">
-                  <p>{locationName}</p>
-                  <span>|</span>
-                  <p>1 day ago</p>
-                </div>
-              </div>
-            </div>
-          </Link>
-          <div className="reactCmt flex gap-5 text-[#545454] font-medium text-sm">
-            <TopicReact topic={topic} />
-            <CommentModal
-              iconSize={iconSize}
-              iconStyle={iconStyle}
-              topic={topic}
+      <div className="flex justify-between pt-[1rem]">
+        <Link
+          to={`/user/${userCreated._id}`}
+          className="user flex items-center gap-3 cursor-pointer"
+        >
+          <div className="w-[3rem] h-[3rem]">
+            <img
+              src={userCreated.avatar}
+              className="w-full h-full object-cover rounded-full border"
             />
           </div>
+          <div>
+            <p className="text-base font-bold">{userCreated.fullName}</p>
+            <div className="flex items-center text-gray-400 text-xs">
+              <MdPlace size={15} />
+              <div className="flex gap-1">
+                <p>{locationName}</p>
+                <span>|</span>
+                <p>{daysDifference}</p>
+              </div>
+            </div>
+          </div>
+        </Link>
+        <div className="reactCmt flex gap-5 text-[#545454] font-medium text-sm">
+          <TopicReact topic={topic} />
+          <CommentModal
+            iconSize={iconSize}
+            iconStyle={iconStyle}
+            topic={topic}
+          />
         </div>
+      </div>
       {/* <UserJoinTripAvatarGroup topicDetail={topic} /> */}
       {/* <div className="avatar-group -space-x-3">
         <div className="avatar w-9 border-white">

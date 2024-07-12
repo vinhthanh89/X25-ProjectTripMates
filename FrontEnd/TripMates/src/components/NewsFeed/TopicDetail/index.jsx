@@ -13,6 +13,7 @@ import UserJoinTripAvatarGroup from "../../UserJoinTrip/UserJoinTripAvatarGroup"
 import InviteUserJoinTripButton from "../../UserJoinTrip/InviteUserJoinTripButton";
 import { useSelector } from "react-redux";
 import RenderComment from "./RenderComment";
+import { calculateDifferenceDays } from "../../../utils/calculateDifferenceDays";
 // eslint-disable-next-line no-unused-vars
 
 const TopicDetail = () => {
@@ -29,7 +30,7 @@ const TopicDetail = () => {
     description: "",
     startDate: "",
     endDate: "",
-    userJoinTrip : [],
+    userJoinTrip: [],
     location: {},
   });
 
@@ -53,16 +54,19 @@ const TopicDetail = () => {
     startDate,
     endDate,
     location,
+    createdAt,
   } = topicDetail;
 
   const { continent, country, locationThumbnail, locationName } = location;
+
+  const daysDifference = calculateDifferenceDays(createdAt)
 
   const convertedStartDate = dayjs(startDate, "YYYY-MM-DD").format(
     "MMMM Do, YYYY"
   );
   const convertedEndDate = endDate
     ? dayjs(endDate, "YYYY-MM-DD").format("MMMM Do, YYYY")
-    : "";
+    : "On Going";
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -91,7 +95,7 @@ const TopicDetail = () => {
             />
             <div className="flex flex-col text-xs">
               <p className="text-base font-semibold">{userCreated.fullName}</p>
-              <p className="text-[grey]">1 month ago</p>
+              <p className="text-[grey]">{daysDifference}</p>
             </div>
           </div>
           {userLogin._id === userCreated._id && (
@@ -162,7 +166,7 @@ const TopicDetail = () => {
             <p className="text-base pt-[10px]">
               <span className="text-[#5143d9] font-bold">Location: </span>
               {continent ? (
-                <span >
+                <span>
                   <a>{continent}</a>
                   <span> &gt;&gt; </span>
                 </span>
@@ -177,7 +181,7 @@ const TopicDetail = () => {
               ) : (
                 <></>
               )}
-              <span >{locationName}</span>
+              <span>{locationName}</span>
             </p>
             <div className="flex gap-3 text-base pt-[10px]">
               <p>
