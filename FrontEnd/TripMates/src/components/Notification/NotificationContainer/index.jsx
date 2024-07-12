@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FaBell } from "react-icons/fa";
 import { getNotification } from "../../../services/notification";
 import NotificationDisplay from "../NotificationDisplay";
+import InviteNotification from "../InviteNotificationButtons";
 
 const NotificationContainer = () => {
   const [notifications, setNotifications] = useState([]);
@@ -24,10 +25,16 @@ const NotificationContainer = () => {
   };
 
   const notificationsMenu = notifications.map((notify) => {
-    const key = notify._id;
+    const { _id} = notify;
     return {
-      key: key,
-      label: <NotificationDisplay notify={notify} handleSetNotify={handleSetNotify} />,
+      key: _id,
+      label:
+       (
+          <NotificationDisplay
+            notify={notify}
+            handleSetNotify={handleSetNotify}
+          />
+        ),
     };
   });
 
@@ -43,7 +50,7 @@ const NotificationContainer = () => {
       menu={{
         items: notificationsMenu.reverse(),
         style: {
-          maxHeight: "320px",
+          maxHeight: "420px",
           overflowY: "auto",
         },
       }}

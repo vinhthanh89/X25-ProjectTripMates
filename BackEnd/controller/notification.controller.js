@@ -129,7 +129,7 @@ export const updateIsReadNotification = async (req, res) => {
       { userId: userLogin, "notifications._id": notificationId },
       { $set: { "notifications.$.isRead": true } },
       { new: true }
-    ).populate("notifications.interactUserId");
+    ).populate("notifications.interactUserId notifications.topicId");
 
     return res.status(200).json({
       message : 'Update success',

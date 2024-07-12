@@ -4,10 +4,7 @@ import RenderPickUserTag from "../RenderPickUserTag";
 import RenderSearchUserJoinTrip from "../RenderSearchUserJoinTrip";
 import toast from "react-hot-toast";
 
-import {
-  addInviteNotification,
-  addNotification,
-} from "../../../services/notification";
+import { addInviteNotification } from "../../../services/notification";
 import { addUserJoinTrip } from "../../../services/userJoinTrip";
 
 const InviteUserJoinTripContainer = ({
@@ -17,6 +14,7 @@ const InviteUserJoinTripContainer = ({
 }) => {
   const [searchInput, setSearchInput] = useState("");
   const [pickedUser, setPickedUser] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const onChangeSearchInput = (e) => {
     const value = e.target.value;
@@ -43,14 +41,13 @@ const InviteUserJoinTripContainer = ({
       await addInviteNotification(topicId, pickedUser);
       handleSetTopicDetail(response.data.findTopic);
       setPickedUser([]);
-      toast.success("User invited!")
+      toast.success("User invited!");
       handleCancel();
     } catch (error) {
-      console.log(error);
       const errorResponse = error.response.data.error;
       if (errorResponse === "users exist") {
         const errorMessage = error.response.data.errorMessage;
-        alert(errorMessage);
+        setErrorMessage(errorMessage);
       }
     }
   };
@@ -65,12 +62,14 @@ const InviteUserJoinTripContainer = ({
           />
         </div>
         <input
+          name=""
           value={searchInput}
           onChange={onChangeSearchInput}
           placeholder="Enter a username"
           type="text"
           className="input border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-bold w-full transition-colors duration-300"
         />
+        {errorMessage && <p className="mt-[15px] text-[red]">{errorMessage}</p>}
       </div>
       <div className="mt-[5px]">
         <RenderSearchUserJoinTrip
