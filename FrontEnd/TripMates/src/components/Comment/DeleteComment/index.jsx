@@ -4,7 +4,7 @@ import { Button, Modal } from "antd";
 import { useState } from "react";
 import { deleteComment } from "../../../services/comment";
 
-const DeleteComment = ({ userComment, topicId , handleSetUsersComment }) => {
+const DeleteComment = ({ userComment, topicId, handleSetUsersComment }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const showModal = () => {
@@ -15,7 +15,7 @@ const DeleteComment = ({ userComment, topicId , handleSetUsersComment }) => {
     try {
       setLoading(true);
       const response = await deleteComment(topicId, userComment._id);
-      handleSetUsersComment(response.data.usersComment)
+      handleSetUsersComment(response.data.usersComment);
     } catch (error) {
       console.log(error);
     } finally {
@@ -38,7 +38,6 @@ const DeleteComment = ({ userComment, topicId , handleSetUsersComment }) => {
         footer={null}
       >
         <div className="flex justify-end">
-            
           <button
             disabled={loading}
             onClick={handleCancel}

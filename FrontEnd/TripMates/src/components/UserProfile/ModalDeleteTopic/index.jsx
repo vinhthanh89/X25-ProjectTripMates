@@ -1,25 +1,26 @@
 /* eslint-disable react/prop-types */
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { deleteTopic } from "../../../services/topic";
 
-const ModalDeleteTopic = ({topic}) => {
-
-
+const ModalDeleteTopic = ({ topic }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
   };
 
   const handleOk = async () => {
     try {
-        // eslint-disable-next-line react/prop-types
-        const response = await deleteTopic(topic._id)
-        console.log(response);
-        setIsModalOpen(false);
+      // eslint-disable-next-line react/prop-types
+      setLoading(true);
+      await deleteTopic(topic._id);
+      setIsModalOpen(false);
     } catch (error) {
-        console.log(error);
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -39,9 +40,30 @@ const ModalDeleteTopic = ({topic}) => {
       <Modal
         title="Do you want to delete this topic?"
         open={isModalOpen}
-        onOk={handleOk}
+        footer={null}
+        closeIcon={null}
         onCancel={handleCancel}
-      ></Modal>
+      >
+        <div className="flex justify-end">
+          <button
+            disabled={loading}
+            onClick={handleCancel}
+            type="button"
+            className="font-semibold px-[15px] rounded-[7px] bg-[lightgray] hover:bg-opacity-75"
+          >
+            Cancle
+          </button>
+          <Button
+            loading={loading}
+            onClick={handleOk}
+            type="primary"
+            danger
+            className="font-semibold ml-[15px]"
+          >
+            Delete
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 };
