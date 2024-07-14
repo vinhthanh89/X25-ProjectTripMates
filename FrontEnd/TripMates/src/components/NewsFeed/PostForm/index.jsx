@@ -33,12 +33,10 @@ const PostForm = () => {
   const onChangeSearchInput = (e) => {
     const value = e.target.value;
     setSearchInput(value);
-    // form.setFieldsValue({location : e.target.value})
   };
 
   const handleSetLocationId = (location, locationId) => {
     setLocationId(locationId);
-    // setSearchInput(location);
     form.setFieldsValue({ location });
     form.setFieldsValue({ locationId: locationId });
   };
@@ -49,6 +47,7 @@ const PostForm = () => {
       const imgBlobSrc = getImageSrc(model);
 
       const imgFilesList = await getImageFile(imgBlobSrc);
+
 
       const formData = new FormData();
 
@@ -68,7 +67,8 @@ const PostForm = () => {
 
     } catch (error) {
       console.log(error);
-    } finally {
+    } 
+    finally {
       setLoading(false);
       navigate(`/topic/${urlParams.topicId}`);
     }

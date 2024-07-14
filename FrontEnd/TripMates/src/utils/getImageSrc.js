@@ -15,19 +15,23 @@ export const getImageSrc = (content) => {
 }
 
 export const getImageFile = async (imgSrc) => {
-    const imgFilesList = [];
 
-    const fetchPromises = imgSrc.map(async (img) => {
+    const imgFilesList = new Array(imgSrc.length);
+
+    const fetchPromises = imgSrc.map(async (img , index) => {
+        const fileName = img.split("/").pop() || "unknown";
+        
         const res = await fetch(img);
 
         const myBlob = await res.blob();
 
-        const fileName = img.split("/").pop() || "unknown";
         const file = new File([myBlob], fileName, {
           type: myBlob.type,
-        });
-        console.log(file);
-        imgFilesList.push(file);
+        } );
+
+        imgFilesList[index] = file; 
+
+
     });
     
     await Promise.all(fetchPromises);

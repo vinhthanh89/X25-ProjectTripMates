@@ -17,7 +17,7 @@ const NotificationContainer = () => {
       }
     };
     fetchNotification();
-  }, []);
+  }, [notifications]);
 
   const handleSetNotify = (notifications) => {
     setNotifications(notifications);
