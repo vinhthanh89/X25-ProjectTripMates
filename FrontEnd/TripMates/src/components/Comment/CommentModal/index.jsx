@@ -7,7 +7,7 @@ import { getUsersComment } from "../../../services/comment";
 import CommentRender from "../CommentRender";
 import CommentTextArea from "../CommentTextArea";
 
-const CommentModal = ({ iconSize, iconStyle, topic }) => {
+const CommentModal = ({ topic }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [usersComment, setUsersComment] = useState([]);
 
@@ -43,6 +43,11 @@ const CommentModal = ({ iconSize, iconStyle, topic }) => {
   const displayNumberOfComment =
     numberOfComment > 100 ? "100+" : numberOfComment;
 
+    const iconSize = 25;
+    const iconStyle = {
+      background: "transparent",
+    };
+
   return (
     <div className="flex items-center">
       <button className="flex items-center gap-1" onClick={showModal}>
@@ -51,7 +56,7 @@ const CommentModal = ({ iconSize, iconStyle, topic }) => {
           style={iconStyle}
           className="hover:text-[#5143d9]"
         />
-        <p className="w-6">{displayNumberOfComment}</p>
+        {/* <p className="w-6">{displayNumberOfComment}</p> */}
       </button>
       <Modal
         title={

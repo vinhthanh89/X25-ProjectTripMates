@@ -54,7 +54,7 @@ const UserJoinTripAvatarGroup = ({ topicDetail }) => {
         footer={null}
       >
         <div className="grid grid-cols-2 gap-2">
-          {userJoinTrip.map((user) => (
+          {userJoinTripFilter.map((user) => (
             <div
               key={user.userId._id}
               className="flex items-center gap-3 mb-2 cursor-pointer border-2 rounded-lg p-2"

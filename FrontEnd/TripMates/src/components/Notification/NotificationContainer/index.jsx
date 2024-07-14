@@ -1,9 +1,8 @@
-import { Dropdown } from "antd";
+import { ConfigProvider, Dropdown, Empty } from "antd";
 import { useEffect, useState } from "react";
-import { FaBell } from "react-icons/fa";
+import { FaBell, FaBellSlash } from "react-icons/fa";
 import { getNotification } from "../../../services/notification";
 import NotificationDisplay from "../NotificationDisplay";
-import InviteNotification from "../InviteNotificationButtons";
 
 const NotificationContainer = () => {
   const [notifications, setNotifications] = useState([]);
@@ -25,18 +24,40 @@ const NotificationContainer = () => {
   };
 
   const notificationsMenu = notifications.map((notify) => {
-    const { _id} = notify;
+    const { _id } = notify;
     return {
       key: _id,
-      label:
-       (
-          <NotificationDisplay
-            notify={notify}
-            handleSetNotify={handleSetNotify}
-          />
-        ),
+      label: (
+        <NotificationDisplay
+          notify={notify}
+          handleSetNotify={handleSetNotify}
+        />
+      ),
     };
   });
+
+  const emptyNotification = [
+    {
+      key: "emtpy",
+      label: (
+        <ConfigProvider
+          theme={{
+            token: {
+              colorTextDescription: "#AB274F",
+              fontSize: 18,
+              opacityImage : 0.7
+            },
+          }}
+        >
+          <Empty
+            description="No Notification" 
+            image={<FaBellSlash />}
+            imageStyle={{ fontSize: "40px", color: "#545454" }}
+          />
+        </ConfigProvider>
+      ),
+    },
+  ];
 
   const unreadNotificatons = notifications.filter(
     (notify) => notify.isRead === false
@@ -48,8 +69,12 @@ const NotificationContainer = () => {
   return (
     <Dropdown
       menu={{
-        items: notificationsMenu.reverse(),
+        items:
+          notifications.length > 0
+            ? notificationsMenu.reverse()
+            : emptyNotification,
         style: {
+          minWidth : '300px',
           maxHeight: "420px",
           overflowY: "auto",
         },

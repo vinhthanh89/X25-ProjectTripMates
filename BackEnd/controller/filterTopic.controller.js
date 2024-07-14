@@ -69,8 +69,6 @@ export const filterTopicByTitle = async (req, res) => {
     const userLogin = req.user;
     const query = req.query.keyword;
 
-    console.log(query);
-
     const findUserFollow = await UserFollowing.findOne({ userId: userLogin });
 
     if (!findUserFollow) {

@@ -17,7 +17,7 @@ const ContentEditor = ({ changeContent, model }) => {
           fontSize: ["8", "10", "12", "14", "18", "30", "44", "60", "96"],
           fontSizeDefaultSelection : '18',
           placeholderText: "Write something in here",
-          height: 500,
+          height: '100vh',
           heightMax: 1000,
           events: {
             initialized: function (editor) {

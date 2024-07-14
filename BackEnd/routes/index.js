@@ -11,6 +11,7 @@ import userFollowingRouter from './userFollowing.router.js'
 import notificationRouter from './notification.router.js'
 import messageRouter from "./message.router.js";
 import userJoinTripRouter from './userJoinTrip.router.js'
+import bookmarkRouter from './bookmark.router.js'
 import { authentication } from '../middleware/authentication.js'
 
 
@@ -26,7 +27,7 @@ router.use('/api/following' , authentication , userFollowingRouter)
 router.use('/api/notification', authentication, notificationRouter)
 router.use('/api/messages', authentication, messageRouter)
 router.use('/api/userJoinTrip' , authentication , userJoinTripRouter)
-
+router.use('/api/bookmark' , authentication , bookmarkRouter)
 
 
 export default router
