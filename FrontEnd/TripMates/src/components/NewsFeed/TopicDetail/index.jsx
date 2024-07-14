@@ -6,21 +6,21 @@ import { useNavigate, useParams } from "react-router";
 import { getTopicById } from "../../../services/topic";
 // import UserJoined from "./UserJoined";
 // import Milestone from "./Milestones";
-import { Modal } from "antd";
-import { MdOutlineClose } from "react-icons/md";
-import PostTableInTopicDetail from "../../PostTabelInTopicDetail";
-import UserJoinTripAvatarGroup from "../../UserJoinTrip/UserJoinTripAvatarGroup";
-import InviteUserJoinTripButton from "../../UserJoinTrip/InviteUserJoinTripButton";
+import { Image } from "antd";
 import { useSelector } from "react-redux";
-import RenderComment from "./RenderComment";
 import { calculateDifferenceDays } from "../../../utils/calculateDifferenceDays";
+import CommentModal from "../../Comment/CommentModal";
+import PostTableInTopicDetail from "../../PostTabelInTopicDetail";
+import InviteUserJoinTripButton from "../../UserJoinTrip/InviteUserJoinTripButton";
+import UserJoinTripAvatarGroup from "../../UserJoinTrip/UserJoinTripAvatarGroup";
+import TopicReact from "../Topic/TopicReact";
+import RenderComment from "./RenderComment";
 // eslint-disable-next-line no-unused-vars
 
 const TopicDetail = () => {
   const urlParam = useParams();
   const navigate = useNavigate();
   const userLogin = useSelector((state) => state.user.user);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [topicDetail, setTopicDetail] = useState({
     _id: "",
@@ -59,7 +59,7 @@ const TopicDetail = () => {
 
   const { continent, country, locationThumbnail, locationName } = location;
 
-  const daysDifference = calculateDifferenceDays(createdAt)
+  const daysDifference = calculateDifferenceDays(createdAt);
 
   const convertedStartDate = dayjs(startDate, "YYYY-MM-DD").format(
     "MMMM Do, YYYY"
@@ -67,14 +67,6 @@ const TopicDetail = () => {
   const convertedEndDate = endDate
     ? dayjs(endDate, "YYYY-MM-DD").format("MMMM Do, YYYY")
     : "On Going";
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
 
   const handleSetTopicDetail = (newTopicDetail) => {
     setTopicDetail(newTopicDetail);
@@ -90,7 +82,6 @@ const TopicDetail = () => {
           >
             <img
               src={userCreated.avatar}
-              alt=""
               className="w-[3rem] h-[3rem] object-cover rounded-full"
             />
             <div className="flex flex-col text-xs">
@@ -117,35 +108,12 @@ const TopicDetail = () => {
         <div className="grid grid-cols-5 gap-5 ">
           <div className="col-span-2 flex justify-center items-center max-h-[270px]">
             <div className="flex justify-center items-center h-full">
-              <img
-                onClick={showModal}
-                className="w-[25rem] h-full object-cover cursor-pointer"
+              <Image
                 src={thumbnail ? thumbnail : locationThumbnail}
-                alt=""
+                width="280px"
+                height="280px"
+                className="object-fill"
               />
-              <Modal
-                open={isModalOpen}
-                okButtonProps={{ style: { display: "none" } }}
-                cancelButtonProps={{ style: { display: "none" } }}
-                onCancel={handleCancel}
-                className="modal-topic-thumbnail"
-                width="700px"
-                style={{
-                  top: 60,
-                }}
-                closable={true}
-                closeIcon={
-                  <div className=" text-black bg-[lightgray] text-[30px] bg-opacity-0">
-                    <MdOutlineClose />
-                  </div>
-                }
-              >
-                <img
-                  className="w-full object-fill"
-                  src={thumbnail ? thumbnail : locationThumbnail}
-                  alt=""
-                />
-              </Modal>
             </div>
           </div>
           <div className="col-span-3 gap-2 text-[#303030]">
@@ -200,17 +168,16 @@ const TopicDetail = () => {
         ) : (
           <PostTableInTopicDetail topicId={urlParam.topicId} />
         )} */}
+        <div className="react flex justify-end gap-[15px]">
+          <TopicReact topic={topicDetail} />
+          <CommentModal topic={topicDetail} />
+        </div>
         <PostTableInTopicDetail
           topicId={urlParam.topicId}
           userCreated={userCreated}
         />
-        <div className="react">
-          <h1 className="text-md">
-            <span className="text-red-500 font-bold">100</span> people loved
-            this Topic
-          </h1>
-        </div>
-        <RenderComment />
+  
+        {/* <RenderComment topic={topicDetail} /> */}
       </div>
     </>
   );

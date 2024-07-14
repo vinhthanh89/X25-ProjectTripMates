@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { FaBell, FaSignOutAlt } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { logoutAction } from "../../../features/user/userSlices.js";
+import NotificationContainer from "../../Notification/NotificationContainer/index.jsx";
 import ModalChangePassword from "../../UserProfile/ModalChangePassword";
 import SearchBar from "../SearchBar/index.jsx";
 import TopicForm from "../TopicForm/index.jsx";
-import NotificationContainer from "../../Notification/NotificationContainer/index.jsx";
 
 const Header = () => {
   const navigate = useNavigate();

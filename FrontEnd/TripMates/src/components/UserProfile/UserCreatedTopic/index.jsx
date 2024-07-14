@@ -19,7 +19,7 @@ const UserCreatedTopic = ({ userId }) => {
       }
     };
     fetchData();
-  }, [userId]);
+  }, [userId , userCreatedTopic]);
 
   //! Handle open form
   // Handle Modal
@@ -31,6 +31,7 @@ const UserCreatedTopic = ({ userId }) => {
   const onClose = () => {
     setOpen(false);
   };
+
   const renderTopicData =
     userCreatedTopic === null ? (
       <p>Loading...</p>

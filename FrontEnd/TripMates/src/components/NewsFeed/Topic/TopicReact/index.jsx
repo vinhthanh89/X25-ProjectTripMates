@@ -82,6 +82,9 @@ const TopicReact = ({ topic }) => {
 
   return (
     <div className="flex items-center gap-2">
+      <p onClick={showModal} className="w-2 cursor-pointer hover:underline">
+        {topicReaction.length}
+      </p>
       {isReact ? (
         <button onClick={handleRemoveReactTopic}>
           <IoIosHeart
@@ -95,9 +98,7 @@ const TopicReact = ({ topic }) => {
           <IoIosHeart size={iconSize} style={iconStyle} />
         </button>
       )}
-      <p onClick={showModal} className="w-2 cursor-pointer hover:underline">
-        {topicReaction.length}
-      </p>
+
       <Modal
         title="People Like Topic"
         open={isModalOpen}

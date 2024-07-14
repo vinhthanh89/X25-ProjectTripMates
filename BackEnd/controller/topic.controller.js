@@ -101,11 +101,10 @@ export const fetchDataTopics = async (req, res) => {
     if (findUserFollow) {
       const findUsersFollowing = findUserFollow.usersFollowing;
       const usersFollowing = findUsersFollowing.map((user) => user.userFollow);
-      usersFollowing.push(userLogin);
 
       const topics = await Topic.find({
         $or: [
-          { isPrivate: false },
+          { isPrivate: false , userCreated : {$ne : userLogin} },
           { isPrivate: true, userCreated: { $in: usersFollowing } },
         ],
       }).populate("userCreated location");
@@ -285,6 +284,8 @@ export const uploadTopicThumbnail = async (req, res) => {
       { thumbnail: result.secure_url },
       { new: true }
     );
+
+    console.log(topicUpdated);
 
     return res.status(200).json({
       message: "Upload Topic Thumbnail Successfully",

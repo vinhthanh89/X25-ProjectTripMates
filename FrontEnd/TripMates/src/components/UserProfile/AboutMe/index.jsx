@@ -62,7 +62,7 @@ const AboutMe = ({ userProfile, handleEditUser }) => {
           <div>
             <CiCalendar size={iconSize} />
           </div>
-          <span>{dayjs(birthday).format("DD-MMMM-YYYY")}</span>
+          <span>{birthday ? dayjs(birthday).format("DD-MMMM-YYYY") : <></>}</span>
         </li>
         <li className="flex items-center gap-2">
           {(!gender && (

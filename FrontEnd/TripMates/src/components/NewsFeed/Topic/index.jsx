@@ -7,10 +7,7 @@ import TopicSaved from "./TopicSaved";
 import { calculateDifferenceDays } from "../../../utils/calculateDifferenceDays";
 
 const Topic = ({ topic }) => {
-  const iconSize = 25;
-  const iconStyle = {
-    background: "transparent",
-  };
+
 
   const {
     _id,
@@ -24,13 +21,6 @@ const Topic = ({ topic }) => {
   const { locationName, continent, country, locationThumbnail } = location;
 
   const daysDifference = calculateDifferenceDays(createdAt)
-  // const createDate = new Date(createdAt);
-  // const currentDate = new Date();
-
-  // const timeDifference = currentDate - createDate;
-
-  // const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-  // const monthDifference = Math.floor(daysDifference / 30);
 
   return (
     <div className="flex flex-col gap-[0.5rem] rounded-lg bg-white px-[1rem] py-[1.5rem] ">
@@ -65,13 +55,14 @@ const Topic = ({ topic }) => {
             </div>
           </div>
         </Link>
-        <div className="reactCmt flex gap-5 text-[#545454] font-medium text-sm">
+        <div className="reactCmt flex gap-3 items-center text-[#545454] font-medium text-sm">
           <TopicReact topic={topic} />
+          <TopicSaved topic={topic} />
+
           <CommentModal
-            iconSize={iconSize}
-            iconStyle={iconStyle}
             topic={topic}
           />
+
         </div>
       </div>
       {/* <UserJoinTripAvatarGroup topicDetail={topic} /> */}
@@ -119,7 +110,6 @@ const Topic = ({ topic }) => {
           >
             {description}
           </p>
-          <TopicSaved iconSize={iconSize} iconStyle={iconStyle} />
         </div>
       </div>
     </div>
