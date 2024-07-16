@@ -48,11 +48,11 @@ const TopicReact = ({ topic }) => {
 
   const handleReactTopic = async () => {
     try {
+      setIsReact(true);
       const [response] = await Promise.all([
         reactTopic(topic._id),
         addNotification(topic._id, { interaction: "react" }),
       ]);
-      setIsReact(true);
       const newTopicReactions = response.data.reactions;
       setTopicReaction(newTopicReactions);
     } catch (error) {
@@ -62,10 +62,10 @@ const TopicReact = ({ topic }) => {
 
   const handleRemoveReactTopic = async () => {
     try {
+      setIsReact(false);
       const response = await removeReact(topic._id);
       const newTopicReactions = response.data.reactions;
       setTopicReaction(newTopicReactions);
-      setIsReact(false);
     } catch (error) {
       console.log(error);
     }

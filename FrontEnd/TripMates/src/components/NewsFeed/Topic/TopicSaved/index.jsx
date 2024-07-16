@@ -26,8 +26,8 @@ const TopicSaved = ({ topic }) => {
 
   const handleClickAddTopicToBookmark = async () => {
     try {
-      await bookmarkTopic({ topicId: topic._id });
       setIsBookmarked(true);
+      await bookmarkTopic({ topicId: topic._id });
       toast.success('bookmark topic success')
     } catch (error) {
       console.log(error);
@@ -36,8 +36,8 @@ const TopicSaved = ({ topic }) => {
 
   const handleClickRemoveBookmark = async () => {
     try {
-      await unBookmarkTopic({ topicId: topic._id });
       setIsBookmarked(false);
+      await unBookmarkTopic({ topicId: topic._id });
     } catch (error) {
       console.log(error);
     }
