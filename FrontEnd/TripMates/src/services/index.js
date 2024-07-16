@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API_URL } from '../config'
+import { API_URL} from '../config'
 import { getAccessTokenFromLocal, getRefreshTokenFromLocal, saveAccessTokenToLocal } from '../utils/localstorage'
 
 export const axiosInstance = axios.create({
