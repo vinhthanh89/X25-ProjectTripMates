@@ -14,7 +14,7 @@ app.use(
   cors({
     // origin : "*"
     origin: [
-      "https://x25-projecttripmates.onrender.com/",
+      "https://x25-projecttripmates.onrender.com",
       "http://localhost:5173",
     ],
   })
