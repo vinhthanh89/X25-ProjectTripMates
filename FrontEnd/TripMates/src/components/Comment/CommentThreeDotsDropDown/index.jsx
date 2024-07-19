@@ -23,7 +23,7 @@ const CommentThreeDotsDropDown = ({ userComment, topicId , handleSetUsersComment
       }}
       trigger={["click"]}
     >
-      <div className="w-[25px] h-[25px] flex items-center justify-center bg-[#dfdfdf] bg-opacity-60 rounded-full">
+      <div className="w-[25px] h-[25px] flex items-center justify-center bg-opacity-60 rounded-full">
         <BsThreeDots />
       </div>
     </Dropdown>

@@ -7,15 +7,15 @@ import CommentDisplay from "../CommentDisplay";
 const CommentRender = ({ usersComment , topicId , handleSetUsersComment }) => {
 
   
-  useEffect(() => {
-    scroll.scrollToTop({
-      containerId: "comments-container",
-      duration: 200,
-      delay: 0,
-      smooth: true,
-      isDynamic: true,
-    });
-  }, [usersComment]);
+  // useEffect(() => {
+  //   scroll.scrollToTop({
+  //     containerId: "comments-container",
+  //     duration: 200,
+  //     delay: 0,
+  //     smooth: true,
+  //     isDynamic: true,
+  //   });
+  // }, [usersComment]);
 
   const renderComments = usersComment.map((userComment) => {
     return (

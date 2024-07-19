@@ -75,7 +75,7 @@ const CommentTextArea = ({ topic, addUserComment }) => {
         <Button
         loading={isLoading}
           onClick={handleAddComment}
-          className={`bg-[#5143d9] text-white font-bold  text-[16px] rounded-xl py-1 px-2 ${
+          className={`bg-[#5143d9] text-white font-bold text-[16px] rounded-xl px-2 ${
             commentText.trim() === "" ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={commentText.trim() === ""}

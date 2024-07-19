@@ -73,7 +73,7 @@ const CommentEditor = ({
               onClick={handleCancelEdit}
               className="font-bold  text-[14px] border-none py-1 px-2 outline-none mr-[7px]"
             >
-              Cancle
+              Cancel
             </Button>
             <Button
               onClick={handleEditComment}

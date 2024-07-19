@@ -34,7 +34,7 @@ const Followers = ({ userProfile }) => {
         </div>
       ))
     );
-    const totalFollowers = usersFollower ? usersFollower.length : 0;
+  const totalFollowers = usersFollower ? usersFollower.length : 0;
 
   return (
     <div>

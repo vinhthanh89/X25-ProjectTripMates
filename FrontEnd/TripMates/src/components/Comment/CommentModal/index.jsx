@@ -21,7 +21,7 @@ const CommentModal = ({ topic }) => {
       }
     };
     fetchDataUsersComment();
-  }, [topic._id]);
+  }, [topic._id, usersComment]);
 
   const showModal = () => {
     setIsModalOpen(true);

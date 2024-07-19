@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
 import { IoIosHeart } from "react-icons/io";
@@ -21,6 +20,7 @@ const TopicReact = ({ topic }) => {
   const [topicReaction, setTopicReaction] = useState([]);
   const [isReact, setIsReact] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -48,11 +48,14 @@ const TopicReact = ({ topic }) => {
 
   const handleReactTopic = async () => {
     try {
+      setIsReact(true);
+      triggerScaleEffect();
+
       const [response] = await Promise.all([
         reactTopic(topic._id),
         addNotification(topic._id, { interaction: "react" }),
       ]);
-      setIsReact(true);
+
       const newTopicReactions = response.data.reactions;
       setTopicReaction(newTopicReactions);
     } catch (error) {
@@ -62,13 +65,21 @@ const TopicReact = ({ topic }) => {
 
   const handleRemoveReactTopic = async () => {
     try {
+      setIsReact(false);
+      triggerScaleEffect();
       const response = await removeReact(topic._id);
       const newTopicReactions = response.data.reactions;
       setTopicReaction(newTopicReactions);
-      setIsReact(false);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const triggerScaleEffect = () => {
+    setIsClicked(true);
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 200); // Duration of the scale effect in milliseconds
   };
 
   const renderPeopleReactTopic = topicReaction.map((user) => {
@@ -90,17 +101,25 @@ const TopicReact = ({ topic }) => {
           <IoIosHeart
             size={iconSize}
             style={iconStyle}
-            className="text-[red]"
+            className={`text-[red] transform transition-transform ${
+              isClicked ? "scale-125" : "scale-100"
+            }`}
           />
         </button>
       ) : (
         <button onClick={handleReactTopic}>
-          <IoIosHeart size={iconSize} style={iconStyle} />
+          <IoIosHeart
+            size={iconSize}
+            style={iconStyle}
+            className={`transform transition-transform ${
+              isClicked ? "scale-125" : "scale-100"
+            }`}
+          />
         </button>
       )}
 
       <Modal
-        title="People Like Topic"
+        title="People liked topic"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -110,7 +129,7 @@ const TopicReact = ({ topic }) => {
           top: 20,
         }}
       >
-        <div className="min-h-[300px] grid grid-cols-4">
+        <div className="max-h-[350px] flex flex-col gap-2 overflow-y-scroll">
           {renderPeopleReactTopic}
         </div>
       </Modal>

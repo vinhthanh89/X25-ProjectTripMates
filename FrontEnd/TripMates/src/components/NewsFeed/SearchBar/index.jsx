@@ -23,7 +23,7 @@ const SearchBar = () => {
           value={searchInput}
           type="text"
           className="grow text-black font-semibold"
-          placeholder="Search topic title ..."
+          placeholder="Search topics..."
         />
         <svg
           onClick={onClickSearch}

@@ -34,9 +34,9 @@ const LandingPage = () => {
               </button>
             </div>
             {isLogin ? <Login /> : <SignUp />}
-            <button className="flex items-center gap-[10px] text-[#717171] text-sm font-light">
+            {/* <button className="flex items-center gap-[10px] text-[#717171] text-sm font-light">
               Or sign in with <FcGoogle size={20} />
-            </button>
+            </button> */}
           </div>
           <div className="col-span-1">
             <img src="./Travel-Black.jpg" className="w-[90%]" />
