@@ -2,7 +2,7 @@
 import { Button, DatePicker, Form, Input, Modal, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import dayjs from "dayjs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 import { editUser } from "../../../services/user.js";
@@ -12,6 +12,7 @@ import { editUserAction } from "../../../features/user/userSlices.js";
 
 const ModalUser = ({ isModalOpen, handleCancel, userProfile  , handleEditUser}) => {
   const { fullName, birthday, gender, description } = userProfile;
+  const [isLoading , setIsLoading] = useState(false)
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
@@ -20,7 +21,7 @@ const ModalUser = ({ isModalOpen, handleCancel, userProfile  , handleEditUser}) 
       fullName,
       gender,
       description,
-      birthday: dayjs(birthday),
+      birthday: birthday ? dayjs(birthday) : null,
     });
   }, [fullName, gender, description, birthday, form]);
 
@@ -32,6 +33,7 @@ const ModalUser = ({ isModalOpen, handleCancel, userProfile  , handleEditUser}) 
         description: values.description,
         birthday: dayjs(values.birthday, "YYYY-MM-DD").format("DD-MMMM-YYYY"),
       };
+      setIsLoading(true)
       const response = await editUser(userProfile._id, formData);
       console.log(response);
       handleEditUser(response.data.userUpdated)
@@ -42,6 +44,8 @@ const ModalUser = ({ isModalOpen, handleCancel, userProfile  , handleEditUser}) 
     } catch (error) {
       console.log(error);
       toast.error("Update Failed");
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -49,6 +53,7 @@ const ModalUser = ({ isModalOpen, handleCancel, userProfile  , handleEditUser}) 
     <>
       <Modal
         title="User Profile"
+        closeIcon={null}
         open={isModalOpen}
         onCancel={handleCancel}
         okButtonProps={{ style: { display: "none" } }}
@@ -81,13 +86,16 @@ const ModalUser = ({ isModalOpen, handleCancel, userProfile  , handleEditUser}) 
           <Form.Item>
             <div className="flex items-center justify-end">
               <Button
+                disabled={isLoading}
                 className="text-black mr-[10px] bg-[lightgray]"
                 htmlType="button"
                 onClick={handleCancel}
               >
                 <p>Cancel</p>
               </Button>
-              <Button type="primary" htmlType="submit">
+              <Button 
+              loading={isLoading}
+              type="primary" htmlType="submit">
                 <p className="text-white">Save changes</p>
               </Button>
             </div>

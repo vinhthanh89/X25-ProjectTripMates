@@ -1,18 +1,16 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Content from "../../components/Message/Content";
 import LeftSideBar from "../../components/Message/SideLeft";
-import useSocketIO from "../../hooks/useSocketIO";
+import { checkRoomChatId } from "../../firebase/firebaseServices";
 import { getDataUserFollowing } from "../../services/userFollowing";
 
 const Message = () => {
   const userLogin = useSelector((state) => state.user.user);
-  const socket = useSocketIO(userLogin._id);
-  
-  console.log(socket)
+
   const [friends, setFriends] = useState([]);
   const [selectedFriend, setSelectedFriend] = useState(null);
-  const [messages, setMessages] = useState([]);
+  const [roomChatId, setRoomChatId] = useState(null);
 
   //! Fetch friends
   useEffect(() => {
@@ -28,53 +26,23 @@ const Message = () => {
     fetchFriends();
   }, [userLogin._id]);
 
-  // useEffect(() => {
-  //   if (socket) {
-  //     socket.on("receive_message", (message) => {
-  //       setMessages((prevMessages) => [...prevMessages, message]);
-  //     });
-  //   }
-  // }, [socket]);
-
-  const handleSelectFriend = (friend) => {
+  const handleSelectFriend = async (friend) => {
     setSelectedFriend(friend);
-    if (socket) {
-      const roomId = [userLogin._id, friend._id].sort().join("");
-      socket.emit("join_room", roomId);
-    }
-  };
-
-  const handleSendMessage = (text) => {
-    if (socket && selectedFriend) {
-      const messageData = {
-        senderId: userLogin._id,
-        receiverId: selectedFriend._id,
-        content: text,
-        roomId: [userLogin._id, selectedFriend._id].sort().join(""),
-      };
-      console.log(messageData)
-      socket.emit("send_message", messageData);
-      setMessages((prevMessages) => [...prevMessages, messageData]);
-      console.log(messages)
-    }
+    const roomChatId = await checkRoomChatId(userLogin, friend);
+    console.log(roomChatId);
+    setRoomChatId(roomChatId);
   };
 
   return (
-    <div className="grid grid-cols-7 bg-white h-[90vh] rounded-lg">
+    <div className="grid grid-cols-9 bg-white rounded-lg">
       <div className="col-span-2 h-full py-2">
         <LeftSideBar friends={friends} onSelectFriend={handleSelectFriend} />
       </div>
-      <div className="col-span-5 h-full py-2">
-        <Content
-          selectedFriend={selectedFriend}
-          messages={messages}
-          onSendMessage={handleSendMessage}
-        />
+      <div className="col-span-7 h-mes-container py-2">
+        <Content roomChatId={roomChatId} selectedFriend={selectedFriend} />
       </div>
     </div>
   );
 };
 
 export default Message;
-
-

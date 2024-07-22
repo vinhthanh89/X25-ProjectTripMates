@@ -48,12 +48,12 @@ const PostForm = () => {
 
       const imgFilesList = await getImageFile(imgBlobSrc);
 
-
       const formData = new FormData();
 
       imgFilesList.forEach((file, index) => {
         formData.append(`images[${index}]`, file);
       });
+      
       imgBlobSrc.forEach((file, index) => {
         formData.append(`imageBlob[${index}]`, file);
       });

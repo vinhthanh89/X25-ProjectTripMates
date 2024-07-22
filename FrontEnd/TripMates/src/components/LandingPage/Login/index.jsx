@@ -1,4 +1,4 @@
-import { Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import toast from "react-hot-toast";
 // import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,9 +10,11 @@ import {
   saveRefreshTokenToLocal,
   saveUserToLocal,
 } from "../../../utils/localstorage";
+import { useState } from "react";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const [isLoading , setIsLoading] = useState(false)
   // eslint-disable-next-line no-unused-vars
   const user = useSelector((state) => state.user.user);
 
@@ -20,6 +22,7 @@ const Login = () => {
 
   const onFinish = async (values) => {
     try {
+      setIsLoading(true)
       const response = await login(values);
       saveAccessTokenToLocal(response.data.accessToken);
       saveRefreshTokenToLocal(response.data.refreshToken);
@@ -28,18 +31,17 @@ const Login = () => {
       toast.success(response.data.message);
     } catch (error) {
       console.log(error);
-      if(error.response.status === 403){
-        const errorFields = error.response.data.validateError
+      if (error.response.status === 403) {
+        const errorFields = error.response.data.validateError;
         form.setFields([
           {
             name: errorFields.name,
-            errors: [errorFields.errorMessage]
+            errors: [errorFields.errorMessage],
           },
-        ]
-         
-       )
+        ]);
       }
-      // toast.error(error.response.data.message);
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -72,12 +74,13 @@ const Login = () => {
           />
         </Form.Item>
         <Form.Item>
-          <button
-            type="submit"
-            className="flex justify-center btn_all w-[10rem] bg-black hover:bg-[#505050] hover:scale-105 hover_trans text-white"
+          <Button
+            loading={isLoading}
+            htmlType="submit"
+            className="flex justify-center btn_all w-[10rem] h-[3rem] bg-black hover:bg-[#505050] hover:scale-105 hover_trans text-white"
           >
             Login
-          </button>
+          </Button>
         </Form.Item>
       </Form>
     </>

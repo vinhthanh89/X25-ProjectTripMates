@@ -64,7 +64,6 @@ const ModalEditTopic = ({ topic }) => {
   const onChangeSearchInput = (e) => {
     const value = e.target.value;
     setSearchInput(value);
-    // form.setFieldsValue({location : e.target.value})
   };
 
   const handleSetLocationId = (
@@ -73,7 +72,6 @@ const ModalEditTopic = ({ topic }) => {
     selectedLocationThumbnail
   ) => {
     setLocationId(locationId);
-    // setSearchInput(location);
     setLocationThumbnail(selectedLocationThumbnail);
     form.setFieldsValue({ location});
     form.setFieldsValue({ locationId: locationId });
@@ -182,23 +180,6 @@ const ModalEditTopic = ({ topic }) => {
                   handleSetLocationId={handleSetLocationId}
                 />
               </div>
-
-
-              {/* <Form.Item
-                label={
-                  <div className="label">
-                    <span className="label-text font-bold text-black text-base">
-                      Thumbnail
-                    </span>
-                  </div>
-                }
-              >
-              <div className="w-full h-[200px]">
-
-                <img className="w-full h-full object-fill" src={locationThumbnail} />
-              </div>
-              </Form.Item> */}
-
               <Form.Item
                 name="description"
                 label={
@@ -228,51 +209,11 @@ const ModalEditTopic = ({ topic }) => {
                   className="border-2 border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] transition-colors duration-300"
                 />
               </Form.Item>
-
-              {/* <div className="flex justify-between">
-                <div className="form-control max-w-xs">
-                  <div className="label">
-                    <span className="label-text font-bold text-black text-base">
-                      Start date
-                    </span>
-                  </div>
-                  <Form.Item
-                    name="startDate"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please pick start date!",
-                      },
-                    ]}
-                  >
-                    <DatePicker
-                      // onChange={onChangeStartDate}
-                      // disabledDate={disabledDate}
-                      placeholder="e.g., 2024-01-01"
-                      className="input border-2 border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-extrabold w-[12rem]"
-                      format="DD-MM-YYYY"
-                    />
-                  </Form.Item>
-                </div>
-                <div className="form-control max-w-xs">
-                  <div className="label">
-                    <span className="label-text font-bold text-black text-base">
-                      End date
-                    </span>
-                  </div>
-                  <Form.Item name="endDate">
-                    <DatePicker
-                      // disabledDate={disableStarDate}
-                      placeholder="e.g., 2024-01-01"
-                      className="input border-2 border-[#d2d2d2] hover:border-[#4096ff] focus:border-[#4096ff] bg-white font-extrabold w-[12rem]"
-                      format="DD-MM-YYYY"
-                    />
-                  </Form.Item>
-                </div>
-              </div> */}
               <Form.Item>
                 <div className="flex items-center justify-center gap-5">
-                  <Button className="bg-[lightgray]" onClick={handleCancel}>
+                  <Button
+                  disabled={loading}
+                   className="bg-[lightgray]" onClick={handleCancel}>
                     Cancel
                   </Button>
                   <Button loading={loading} type="primary" htmlType="submit">

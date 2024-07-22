@@ -12,6 +12,7 @@ const ModalChangePassword = ({ user }) => {
   const iconStyle = { background: "transparent" };
   // Handle Modal
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading , setIsLoading] = useState(false)
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -24,13 +25,24 @@ const ModalChangePassword = ({ user }) => {
   // Handle Form
   const onFinish = async (values) => {
     try {
+      setIsLoading(true)
       const response = await changeUserPassword(user._id, values);
       form.resetFields();
       setIsModalOpen(false);
       toast.success(response.data.message);
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message);
+      if (error.response.status === 403) {
+        const errorFields = error.response.data.validateError;
+        form.setFields([
+          {
+            name: errorFields.name,
+            errors: [errorFields.errorMessage],
+          },
+        ]);
+      }
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -42,17 +54,18 @@ const ModalChangePassword = ({ user }) => {
 
         <Modal
           title="User Profile"
+          closeIcon={null}
           open={isModalOpen}
           onCancel={handleCancel}
           okButtonProps={{ style: { display: "none" } }}
           cancelButtonProps={{ style: { display: "none" } }}
         >
-          <Form form={form} name="basic" onFinish={onFinish} labelAlign="left">
+          <Form layout="vertical" form={form} name="basic" onFinish={onFinish} labelAlign="left">
             <Form.Item label="Current Password" name="oldPassword">
               <Input.Password />
             </Form.Item>
 
-            <Form.Item label="New Password" name="newPassword">
+            <Form.Item label="New Password" name="password">
               <Input.Password />
             </Form.Item>
 
@@ -62,13 +75,14 @@ const ModalChangePassword = ({ user }) => {
             <Form.Item>
               <div className="flex items-center justify-end">
                 <Button
+                  disabled={isLoading}
                   className="mr-[10px]"
                   htmlType="button"
                   onClick={handleCancel}
                 >
                   <p>Cancel</p>
                 </Button>
-                <Button type="primary" htmlType="submit">
+                <Button loading={isLoading} type="primary" htmlType="submit">
                   <p className="text-white">Save changes</p>
                 </Button>
               </div>

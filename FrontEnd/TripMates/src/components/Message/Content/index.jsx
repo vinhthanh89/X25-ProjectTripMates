@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // import Header from "./Header";
 // import MessageInput from "./MessageInput";
 // import TextBox from "./TextBox";
@@ -14,11 +15,11 @@
 
 // export default Content;
 
-import TextBox from "./TextBox";
+import TextBoxHeader from "./TextBoxHeader";
 import MessageInput from "./MessageInput";
-import Header from "./Header";
+import TextBox from "./TextBox";
 
-const Content = ({ selectedFriend, messages, onSendMessage }) => {
+const Content = ({ selectedFriend, messages, onSendMessage , roomChatId }) => {
   if (!selectedFriend) {
     return (
       <div className="h-full flex items-center justify-center">
@@ -28,10 +29,10 @@ const Content = ({ selectedFriend, messages, onSendMessage }) => {
   }
 
   return (
-    <div className="flex flex-col h-full bg-white p-2 rounded-lg">
-      <Header selectedFriend={selectedFriend}/>
-      <TextBox messages={messages} currentUserId={selectedFriend._id} />
-      <MessageInput onSendMessage={onSendMessage} />
+    <div className="flex flex-col h-full bg-white p-2 rounded-lg relative">
+      <TextBoxHeader selectedFriend={selectedFriend}/>
+      <TextBox messages={messages} selectedFriend={selectedFriend} roomChatId={roomChatId} />
+      <MessageInput onSendMessage={onSendMessage} selectedFriend={selectedFriend} roomChatId={roomChatId} />
     </div>
   );
 };

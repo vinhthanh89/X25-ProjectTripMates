@@ -31,7 +31,6 @@ export const getImageFile = async (imgSrc) => {
 
         imgFilesList[index] = file; 
 
-
     });
     
     await Promise.all(fetchPromises);

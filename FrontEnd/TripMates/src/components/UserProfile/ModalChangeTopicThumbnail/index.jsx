@@ -14,13 +14,13 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
   const { thumbnail, location, userCreated } = topic;
   const { locationThumbnail, country } = location;
 
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editAvatar, setEditAvatar] = useState(
     thumbnail ? thumbnail : locationThumbnail
   );
   
   const [uploadFile, setUploadFile] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -39,12 +39,11 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
       formData.append("thumbnail", uploadFile);
       const response = await uploadTopicThumbnail(topic._id, formData);
       setEditAvatar(response.data.topicUpdated.thumbnail)
-      setLoading(false)
-      setIsModalOpen(false);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false)
+      setIsModalOpen(false);
     }
   };
 
@@ -85,8 +84,7 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
         }
         open={isModalOpen}
         onCancel={handleCancel}
-        okButtonProps={{ style: { display: "none" } }}
-        cancelButtonProps={{ style: { display: "none" } }}
+        footer={null}
       >
         <Form onFinish={onFinish}>
           <div className="flex flex-col justify-center items-center pt-[2rem]">
@@ -123,7 +121,7 @@ const ModalChangeTopicThumbnail = ({ topic }) => {
                   background: "blue",
                   border: "none",
                 }}
-                className="hover:opacity-80 overflow-hidden"
+                className="hover:opacity-80 pt-[5px] overflow-hidden"
               >
                 <p className="text-white">Save changes</p>
               </Button>

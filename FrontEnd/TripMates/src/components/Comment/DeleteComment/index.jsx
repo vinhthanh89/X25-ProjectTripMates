@@ -31,7 +31,7 @@ const DeleteComment = ({ userComment, topicId, handleSetUsersComment }) => {
     <>
       <div onClick={showModal}>Delete Comment</div>
       <Modal
-        title="Are you want to delete comment ?"
+        title="Do you want to delete this comment ?"
         open={isModalOpen}
         onCancel={handleCancel}
         closeIcon={null}
@@ -44,7 +44,7 @@ const DeleteComment = ({ userComment, topicId, handleSetUsersComment }) => {
             type="button"
             className="font-semibold px-[15px] rounded-[7px] bg-[lightgray] hover:bg-opacity-75"
           >
-            Cancle
+            Cancel
           </button>
           <Button
             loading={loading}

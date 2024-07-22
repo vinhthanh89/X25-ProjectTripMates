@@ -49,7 +49,7 @@ const PostTableInTopicDetail = ({ topicId, userCreated }) => {
     title: (
       <span
         onClick={() => navigate(`/topic/post/${post._id}`)}
-        className="cursor-pointer hover:no-underline hover:text-[lightblue]"
+        className="cursor-pointer text-[15px] font-semibold hover:no-underline hover:text-[lightblue]"
       >
         {post.title}
       </span>

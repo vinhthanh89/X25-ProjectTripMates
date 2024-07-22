@@ -7,8 +7,6 @@ import TopicSaved from "./TopicSaved";
 import { calculateDifferenceDays } from "../../../utils/calculateDifferenceDays";
 
 const Topic = ({ topic }) => {
-
-
   const {
     _id,
     thumbnail,
@@ -20,7 +18,7 @@ const Topic = ({ topic }) => {
   } = topic;
   const { locationName, continent, country, locationThumbnail } = location;
 
-  const daysDifference = calculateDifferenceDays(createdAt)
+  const daysDifference = calculateDifferenceDays(createdAt);
 
   return (
     <div className="flex flex-col gap-[0.5rem] rounded-lg bg-white px-[1rem] py-[1.5rem] ">
@@ -59,10 +57,7 @@ const Topic = ({ topic }) => {
           <TopicReact topic={topic} />
           <TopicSaved topic={topic} />
 
-          <CommentModal
-            topic={topic}
-          />
-
+          <CommentModal topic={topic} />
         </div>
       </div>
       {/* <UserJoinTripAvatarGroup topicDetail={topic} /> */}

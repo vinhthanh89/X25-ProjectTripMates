@@ -11,7 +11,6 @@ const UserSavedTopic = () => {
     const getBookmarkTopic = async () => {
       try {
         const response = await getBookmarkTopicByUserId(userLogin._id);
-        console.log(response);
         setBookmarksTopic(response.data.bookmarksTopic);
       } catch (error) {
         console.log(error);
@@ -22,7 +21,9 @@ const UserSavedTopic = () => {
 
   const renderBookmarksTopic =
     bookmarksTopic?.length === 0 ? (
-      <>No Bookmark Topics</>
+      <div className="h-[400px] col-span-6 flex justify-center items-center">
+      <p className="text-2xl">No Bookmark Topics</p>
+    </div>
     ) : (
       bookmarksTopic?.map((topic) => {
         return (
