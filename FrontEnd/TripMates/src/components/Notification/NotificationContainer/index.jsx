@@ -11,6 +11,7 @@ const NotificationContainer = () => {
     const fetchNotification = async () => {
       try {
         const response = await getNotification();
+        console.log(response);
         setNotifications(response.data.notifications);
       } catch (error) {
         console.log(error);

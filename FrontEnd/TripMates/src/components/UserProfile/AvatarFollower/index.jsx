@@ -2,7 +2,7 @@
 
 import { useNavigate } from "react-router";
 
-const AvatarFollower = ({ user }) => {
+const   AvatarFollower = ({ user }) => {
   const navigate = useNavigate()
 
   return (

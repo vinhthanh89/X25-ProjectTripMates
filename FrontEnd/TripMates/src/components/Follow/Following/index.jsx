@@ -24,7 +24,7 @@ const Following = ({ userProfile }) => {
       <p>Loading...</p>
     ) : usersFollowing.length === 0 ? (
       <div className="h-[400px] col-span-6 flex justify-center items-center">
-        <p className="text-2xl">You are not following anyone</p>
+        <p className="text-2xl">User is not following anyone</p>
       </div>
     ) : (
       usersFollowing.map((user) => {

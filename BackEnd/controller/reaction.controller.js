@@ -20,9 +20,9 @@ export const getReactByTopicId = async (req, res) => {
 
     if (findReactByTopic) {
       const reactions = findReactByTopic.usersReaction
-      // console.log(reactions);
       const userExists = reactions.some(
-        (reaction) => reaction.userId._id.toString() === userLogin
+        (reaction) =>
+           reaction.userId._id.toString() === userLogin
       );
 
       return res.status(200).json({

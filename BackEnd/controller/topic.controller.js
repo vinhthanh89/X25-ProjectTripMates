@@ -173,7 +173,7 @@ export const getTopicByUserCreated = async (req, res) => {
 
     const findUserFollow = await UserFollowing.findOne({ userId: userLogin });
     if (!findUserFollow) {
-      const usersFollowing = [];
+      const usersFollowing = [userLogin];
 
       const findTopicByUserId = await Topic.find({
         $nor: [

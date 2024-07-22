@@ -51,7 +51,7 @@ const ModalChangeAvatar = ({ userProfile, handleEditUser }) => {
           "Can't upload file larger than 5MB , please select another picture"
         );
       }
-      const response = await uploadAvatar(userProfile._id , formData);
+      const response = await uploadAvatar(userProfile._id, formData);
       handleEditUser(response.data.userUploaded);
       saveUserToLocal(response.data.userUploaded);
       dispatch(editUserAction({ user: response.data.userUploaded }));
@@ -85,7 +85,7 @@ const ModalChangeAvatar = ({ userProfile, handleEditUser }) => {
         onCancel={handleCancel}
         width={330}
       >
-        <Form onFinish={handleOk} >
+        <Form onFinish={handleOk}>
           <div className="flex flex-col justify-center items-center">
             <img
               className="w-[200px] h-[200px] object-cover rounded-full"
@@ -105,7 +105,11 @@ const ModalChangeAvatar = ({ userProfile, handleEditUser }) => {
               </div>
 
               <label htmlFor="upload">
-                <div className="px-[15px] py-[5px]  cursor-pointer rounded-[8px] bg-[#5143d9] text-[white] mr-[10px]">
+                <div
+                  className={`px-[15px] py-[5px]  cursor-pointer rounded-[8px] bg-[#5143d9] hover:opacity-90 text-[white] mr-[20px] ${
+                    loading ? "hidden" : ""
+                  }`}
+                >
                   Select Image
                 </div>
               </label>

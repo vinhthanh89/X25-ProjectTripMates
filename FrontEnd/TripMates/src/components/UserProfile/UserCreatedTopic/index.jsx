@@ -4,8 +4,11 @@ import { getTopicByUserCreated } from "../../../services/topic";
 
 import UserTopic from "../UserTopics";
 import TopicForm from "../../NewsFeed/TopicForm";
+import { useSelector } from "react-redux";
 
 const UserCreatedTopic = ({ userId }) => {
+  console.log(userId);
+  const userLogin = useSelector((state) => state.user.user);
   const [userCreatedTopic, setUserCreatedTopic] = useState(null);
 
   useEffect(() => {
@@ -19,7 +22,7 @@ const UserCreatedTopic = ({ userId }) => {
       }
     };
     fetchData();
-  }, [userId , userCreatedTopic]);
+  }, [userId, userCreatedTopic]);
 
   //! Handle open form
   // Handle Modal
@@ -37,15 +40,19 @@ const UserCreatedTopic = ({ userId }) => {
       <p>Loading...</p>
     ) : userCreatedTopic.length === 0 ? (
       <div className="flex flex-col gap-2 justify-center items-center w-full h-[400px]">
-        <p className="text-2xl">You have no topics</p>
-        <p className="text-[#a0a0a0]">Create one here</p>
-        <button
-          className="font-bold bg-[#5143d9] text-white p-3 rounded-xl"
-          onClick={showDrawer}
-        >
-          Create your trip
-        </button>
-        {open && <TopicForm onClose={onClose} open={open} />}
+        <p className="text-2xl">User has no topics</p>
+        {userLogin._id === userId && (
+          <>
+            <p className="text-[#a0a0a0]">Create one here</p>
+            <button
+              className="font-bold bg-[#5143d9] text-white p-3 rounded-xl"
+              onClick={showDrawer}
+            >
+              Create your trip
+            </button>
+            {open && <TopicForm onClose={onClose} open={open} />}
+          </>
+        )}
       </div>
     ) : (
       userCreatedTopic.map((topic) => (
@@ -54,7 +61,7 @@ const UserCreatedTopic = ({ userId }) => {
         </div>
       ))
     );
-    const totalTopics = userCreatedTopic ? userCreatedTopic.length : 0;
+  const totalTopics = userCreatedTopic ? userCreatedTopic.length : 0;
 
   return (
     <div>

@@ -25,9 +25,11 @@ const TopicReact = ({ topic }) => {
   const showModal = () => {
     setIsModalOpen(true);
   };
+
   const handleOk = () => {
     setIsModalOpen(false);
   };
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -44,7 +46,7 @@ const TopicReact = ({ topic }) => {
       }
     };
     fetchReact();
-  }, [topic._id, userLogin]);
+  }, [topic._id, userLogin , topicReaction]);
 
   const handleReactTopic = async () => {
     try {
@@ -110,7 +112,7 @@ const TopicReact = ({ topic }) => {
           top: 20,
         }}
       >
-        <div className="min-h-[300px] grid grid-cols-4">
+        <div className="max-h-[400px] grid overflow-auto">
           {renderPeopleReactTopic}
         </div>
       </Modal>

@@ -25,7 +25,7 @@ const Followers = ({ userProfile }) => {
       <p>Loading...</p>
     ) : usersFollower.length === 0 ? (
       <div className="h-[400px] col-span-6 flex justify-center items-center">
-        <p className="text-2xl">You have no folowers</p>
+        <p className="text-2xl">User has no folowers</p>
       </div>
     ) : (
       usersFollower.map((user) => (

@@ -5,7 +5,7 @@ const Content = ({post}) => {
 
   return (
     <div className="container mx-auto px-4">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 ">
         {/* <span className="flex items-center gap-2 font-bold">
           <MdPlace />
           <img

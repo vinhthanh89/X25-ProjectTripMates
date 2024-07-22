@@ -50,16 +50,16 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
 
-    const findUser = await User.findById(newUser._id).select('-password')
+    const findUser = await User.findById(newUser._id).select("-password");
 
     const accessToken = signAccessToken(findUser._id);
     const refreshToken = signRefreshToken(findUser._id);
 
     return res.status(201).json({
       message: "Sign up successfully",
-      user : findUser,
+      user: findUser,
       accessToken,
-      refreshToken
+      refreshToken,
     });
   } catch (error) {
     console.log(error);
@@ -76,20 +76,20 @@ export const login = async (req, res) => {
     const findUser = await User.findOne({ email }).lean();
     if (!findUser) {
       return res.status(403).json({
-        validateError : {
-          name : 'email',
+        validateError: {
+          name: "email",
           errorMessage: "Email does not exist",
-        }
+        },
       });
     }
 
     const checkPassword = comparePassword(password, findUser.password);
     if (!checkPassword) {
       return res.status(403).json({
-        validateError : {
-          name : 'password',
-          errorMessage: "Password isn't correct",
-        }
+        validateError: {
+          name: "password",
+          errorMessage: "Password is wrong",
+        },
       });
     }
 
@@ -141,7 +141,6 @@ export const getUserById = async (req, res) => {
 export const editUser = async (req, res) => {
   try {
     const userId = req.params.userId;
-    console.log(userId);
     const { fullName, birthday, gender, description } = req.body;
     const findUser = await User.findById(userId);
     if (!findUser) {
@@ -176,7 +175,7 @@ export const editUser = async (req, res) => {
 export const changeUserPassword = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const { oldPassword, newPassword, confirmPassword } = req.body;
+    const { oldPassword, password, confirmPassword } = req.body;
 
     const findUser = await User.findById(userId);
     if (!findUser) {
@@ -188,30 +187,36 @@ export const changeUserPassword = async (req, res) => {
     const checkPassword = comparePassword(oldPassword, findUser.password);
 
     if (!checkPassword) {
-      return res.status(401).json({
-        message: "Password is wrong",
+      return res.status(403).json({
+        validateError: {
+          name: "oldPassword",
+          errorMessage: "Password is wrong",
+        },
       });
     }
 
     const validate = validateData(changePasswordValidate, {
-      password: newPassword,
+      password: password,
     });
 
     if (validate) {
       return res.status(403).json({
-        message: validate,
+        validateError: validate,
       });
     }
 
-    if (!(newPassword === confirmPassword)) {
-      return res.status(401).json({
-        message: "The new password does not match",
+    if (!(password === confirmPassword)) {
+      return res.status(403).json({
+        validateError: {
+          name: "confirmPassword",
+          errorMessage: "The new password does not match",
+        },
       });
     }
 
-    const hashedPassword = hashPassword(newPassword);
+    const hashedPassword = hashPassword(password);
 
-    await User.findByIdAndUpdate(userId, { password: hashedPassword });
+    await User.findByIdAndUpdate(userId, { password: hashedPassword } , {new : true});
 
     return res.status(200).json({
       message: "Change Password Successfully",

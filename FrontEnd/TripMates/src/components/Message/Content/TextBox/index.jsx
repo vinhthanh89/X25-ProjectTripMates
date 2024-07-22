@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // import { useEffect, useRef } from "react";
 
 // const TextBox = () => {
@@ -48,28 +49,46 @@
 
 // export default TextBox;
 
+import { useEffect, useMemo } from "react";
+import { animateScroll as scroll } from "react-scroll";
 
-import { useEffect, useRef } from "react";
 
-const TextBox = ({ messages, currentUserId }) => {
-  const endRef = useRef(null);
+import { useFirestore } from "../../../../hooks/useFirestore";
+import MessageText from "../MessageText";
 
-  useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+const TextBox = ({roomChatId }) => {
+
+  const condition = useMemo(() => ({
+    fieldName : "roomChatId",
+    operator : '==',
+    compareValue : roomChatId
+  }) , [roomChatId])
+
+    const chats = useFirestore('chats' , condition)
+
+    useEffect(() => {
+      scroll.scrollToBottom({
+        containerId: "messages-container",
+        duration: 200,
+        delay: 0,
+        smooth: true,
+        isDynamic: true,
+      });
+    }, [chats]);
+
+    const renderChats = chats.map(chat => {
+      return (
+        <div key={chat.id}>
+          <MessageText chat={chat}/>
+        </div>
+      )
+    })
 
   return (
-    <div className="h-[72vh] overflow-scroll">
-      {messages.map((message, index) => (
-        <div
-          key={index}
-          className={
-            message.senderId === currentUserId ? "myChat" : "friendChat"
-          }
-        >
-        </div>
-      ))}
-      {/* <div ref={endRef}></div> */}
+    <div 
+      id="messages-container"
+    className="h-[75vh] flex flex-col gap-[10px] overflow-y-auto pt-[10px] pb-[20px]">
+      {renderChats}
     </div>
   );
 };

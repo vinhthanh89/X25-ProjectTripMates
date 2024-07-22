@@ -16,11 +16,11 @@ const ModalDeleteTopic = ({ topic }) => {
       // eslint-disable-next-line react/prop-types
       setLoading(true);
       await deleteTopic(topic._id);
-      setIsModalOpen(false);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
+      setIsModalOpen(false);
     }
   };
 
@@ -45,14 +45,13 @@ const ModalDeleteTopic = ({ topic }) => {
         onCancel={handleCancel}
       >
         <div className="flex justify-end">
-          <button
+          <Button
             disabled={loading}
             onClick={handleCancel}
-            type="button"
             className="font-semibold px-[15px] rounded-[7px] bg-[lightgray] hover:bg-opacity-75"
           >
-            Cancle
-          </button>
+            Cancel
+          </Button>
           <Button
             loading={loading}
             onClick={handleOk}

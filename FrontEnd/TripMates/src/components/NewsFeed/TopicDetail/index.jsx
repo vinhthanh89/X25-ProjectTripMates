@@ -14,7 +14,7 @@ import PostTableInTopicDetail from "../../PostTabelInTopicDetail";
 import InviteUserJoinTripButton from "../../UserJoinTrip/InviteUserJoinTripButton";
 import UserJoinTripAvatarGroup from "../../UserJoinTrip/UserJoinTripAvatarGroup";
 import TopicReact from "../Topic/TopicReact";
-import RenderComment from "./RenderComment";
+import TopicSaved from "../Topic/TopicSaved";
 // eslint-disable-next-line no-unused-vars
 
 const TopicDetail = () => {
@@ -44,7 +44,7 @@ const TopicDetail = () => {
       }
     };
     fetchData();
-  }, [urlParam.topicId]);
+  }, [urlParam.topicId , topicDetail]);
 
   const {
     title,
@@ -60,7 +60,6 @@ const TopicDetail = () => {
   const { continent, country, locationThumbnail, locationName } = location;
 
   const daysDifference = calculateDifferenceDays(createdAt);
-
   const convertedStartDate = dayjs(startDate, "YYYY-MM-DD").format(
     "MMMM Do, YYYY"
   );
@@ -170,13 +169,16 @@ const TopicDetail = () => {
         )} */}
         <div className="react flex justify-end gap-[15px]">
           <TopicReact topic={topicDetail} />
+          {userCreated?._id !== userLogin._id && (
+            <TopicSaved topic={topicDetail} />
+          )}
           <CommentModal topic={topicDetail} />
         </div>
         <PostTableInTopicDetail
           topicId={urlParam.topicId}
           userCreated={userCreated}
         />
-  
+
         {/* <RenderComment topic={topicDetail} /> */}
       </div>
     </>

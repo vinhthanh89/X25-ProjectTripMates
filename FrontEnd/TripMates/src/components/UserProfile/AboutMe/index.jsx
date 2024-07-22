@@ -28,7 +28,7 @@ const AboutMe = ({ userProfile, handleEditUser }) => {
   };
 
   const iconSize = 20;
-
+  const formatedBirthday = dayjs(birthday).format("DD-MMMM-YYYY");
 
   return (
     <div className="flex flex-col gap-2 px-[0.5rem] pb-[0.5rem] text-base">
@@ -59,15 +59,20 @@ const AboutMe = ({ userProfile, handleEditUser }) => {
           <span>{email}</span>
         </li>
         <li className="flex items-center gap-2">
-          <div>
-            <CiCalendar size={iconSize} />
-          </div>
-          <span>{birthday ? dayjs(birthday).format("DD-MMMM-YYYY") : <></>}</span>
+          {birthday ? (
+            <>
+              <div>
+                <CiCalendar size={iconSize} />
+              </div>
+
+              <span>{formatedBirthday}</span>
+            </>
+          ) : (
+            <></>
+          )}
         </li>
         <li className="flex items-center gap-2">
-          {(!gender && (
-            <></>
-          )) ||
+          {(!gender && <></>) ||
             (gender === "Male" && (
               <div>
                 <BsGenderMale size={iconSize} />
@@ -83,7 +88,7 @@ const AboutMe = ({ userProfile, handleEditUser }) => {
         </li>
       </ul>
       <div>
-        <p className="text-sm text-[#717171]">{description}</p>
+        <p className="text-base">{description}</p>
       </div>
       {userLogin._id !== userProfile._id && (
         <div className="w-full">

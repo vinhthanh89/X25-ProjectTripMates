@@ -47,7 +47,7 @@ const Post = () => {
     //   </div>
     // </div>
 
-    <div className="gap-[3rem] pt-5 px-[3rem] bg-white rounded h-full overflow-y-scroll">
+    <div className="gap-[3rem] pt-5 pb-[50px] px-[3rem] bg-white h-full overflow-y-scroll">
       <div className="col-span-4 flex flex-col gap-[2rem]">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-5 border-b-2 pb-4">

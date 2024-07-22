@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // import { useEffect, useState } from "react";
 // import { getDataUserFollowing } from "../../../../services/userFollowing";
 // import { useSelector } from "react-redux";
@@ -21,7 +22,7 @@ import Friend from "../Friend";
 //     }
 //     fetchFriends()
 //   }, [userLogin._id])
- 
+
 // console.log(friends)
 //  const renderFriend = friends.map((user) => {
 //    const userFollow = user.userFollow;
@@ -45,20 +46,19 @@ import Friend from "../Friend";
 // export default FriendList;
 
 const FriendList = ({ friends, onSelectFriend }) => {
-  if (!friends) {
-    return (
-      <><h1>Hello</h1></>
-    )
-  }
+
+  const renderFriendsList = friends.map((user) => (
+    <Friend key={user._id} user={user} onSelect={() => onSelectFriend(user)} />
+  ));
+
   return (
     <div className="flex flex-col gap-2">
-      {friends.map((user) => (
-        <Friend
-          key={user._id}
-          user={user}
-          onSelect={() => onSelectFriend(user)}
-        />
-      ))}
+      <h1 className="font-black text-[18px]">Friends List</h1>
+      {friends.length ? (
+        renderFriendsList
+      ) : (
+        <div className="ring-1 ">You must follow a user to chat</div>
+      )}
     </div>
   );
 };

@@ -7,9 +7,13 @@ import MoadlChangeAvatar from "../../UserProfile/ModalChangeAvatar";
 import UserCreatedTopic from "../../UserProfile/UserCreatedTopic";
 import Following from "../../Follow/Following";
 import UserSavedTopic from "../../UserProfile/UserSavedTopic";
+import { useSelector } from "react-redux";
 
 const UserProfile = () => {
+  const userLogin = useSelector(state => state.user.user)
   const urlParam = useParams();
+  console.log(userLogin);
+  console.log(urlParam);
   const [userProfile, setUserProfile] = useState({
     email: "",
     fullName: "",
@@ -27,7 +31,6 @@ const UserProfile = () => {
     const fetchUserData = async () => {
       try {
         const response = await getUserById(urlParam.userId);
-        console.log(response);
         setUserProfile(response.data.findUser);
         setShowComponent("topic");
       } catch (error) {
@@ -82,14 +85,15 @@ const UserProfile = () => {
               >
                 My topics
               </button>
-              <button
+              {userLogin._id === urlParam.userId &&               <button
                 onClick={() => setShowComponent("saved")}
                 className={`relative px-[10px] py-[5px] ${
                   showComponent === "saved" ? "before:w-full" : ""
                 } before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-current before:transition-all before:duration-300 before:ease-in-out hover:before:w-full focus:before:w-full`}
               >
                 Saved topics
-              </button>
+              </button>}
+
               <button
                 onClick={() => setShowComponent("follower")}
                 className={`relative px-[10px] py-[5px] ${

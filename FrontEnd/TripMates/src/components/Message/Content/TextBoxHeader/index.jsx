@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // import { useSelector } from "react-redux";
 // import { useNavigate } from "react-router";
 // import { FaCircle } from "react-icons/fa";
@@ -42,11 +43,10 @@
 
 // export default Header;
 
-import { FaCircle } from "react-icons/fa";
 
-const Header = ({ selectedFriend }) => {
+const TextBoxHeader = ({ selectedFriend }) => {
   return (
-    <div className="border-b-2">
+    <div className="border-b-2 sticky top-0">
       <div className="flex items-center btn_all cursor-pointer gap-4">
         <div className="avatar">
           <div className="rounded-full w-[40px]">
@@ -73,4 +73,4 @@ const Header = ({ selectedFriend }) => {
   );
 };
 
-export default Header;
+export default TextBoxHeader;

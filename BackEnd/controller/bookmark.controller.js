@@ -108,9 +108,9 @@ export const getBookmarkTopic = async (req, res) => {
     });
 
     if (!findBookmarkTopicByUserId) {
-      return res.status(404).json({
-        message: "Bookmark Topic Not Found",
-        bookmarkTopic: [],
+      return res.status(200).json({
+        message: "No Bookmark Topics",
+        bookmarksTopic: [],
       });
     }
 
